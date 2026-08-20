@@ -2,6 +2,9 @@
 
 The public website for [ronincowork.com](https://ronincowork.com).
 
+The current page is a temporary launch presence and is expected to be replaced. Keep the hosting
+shape simple; do not build a framework or content system around this version.
+
 The site is deliberately static: `index.html` plus local assets, with no application server,
 database, client framework, tracking script, or runtime dependency. Azure Static Web Apps serves
 the `master` branch. Work lands on `dev`; reviewed releases merge from `dev` to `master`.
