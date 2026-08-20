@@ -1,0 +1,873 @@
+<title>Ronin Cowork — a co-working space for agents</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A browser tab full of terminal tiles. Each tile is an AI agent, running on a machine you own.">
+
+<!--
+  The page at ronincowork.com. One file, no external requests.
+  Source lives in the ronin-site repository and deploys as an Azure Static Web App.
+-->
+
+<style>
+  /* ---------- tokens: light is the base, unstamped default ---------- */
+  :root {
+    --paper:      #F3F4F0;
+    --panel:      #FFFFFF;
+    --ink:        #17191B;
+    --ink-soft:   #565B54;
+    --ink-faint:  #868B80;
+    --rule:       #D2D6CB;
+    --rule-soft:  #E3E6DE;
+    --seal:       #A93528;
+    --status-bg:  #7C8C5A;
+    --status-ink: #14160F;
+    --term-bg:    #1C1F1B;
+    --term-ink:   #C9CFC0;
+    --term-dim:   #6E7568;
+
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --serif: ui-serif, "New York", Iowan Old Style, Georgia, serif;
+
+    --measure: 34rem;
+    --wide: 60rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #131512;
+      --panel:      #1A1D19;
+      --ink:        #E4E7DE;
+      --ink-soft:   #9CA294;
+      --ink-faint:  #6E7468;
+      --rule:       #2C302A;
+      --rule-soft:  #23261F;
+      --seal:       #D6604F;
+      --status-bg:  #63713F;
+      --status-ink: #0D0F09;
+      --term-bg:    #0D0F0C;
+      --term-ink:   #C9CFC0;
+      --term-dim:   #5E6558;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #131512;
+    --panel:      #1A1D19;
+    --ink:        #E4E7DE;
+    --ink-soft:   #9CA294;
+    --ink-faint:  #6E7468;
+    --rule:       #2C302A;
+    --rule-soft:  #23261F;
+    --seal:       #D6604F;
+    --status-bg:  #63713F;
+    --status-ink: #0D0F09;
+    --term-bg:    #0D0F0C;
+    --term-ink:   #C9CFC0;
+    --term-dim:   #5E6558;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 0 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ---------- the tmux status bar ---------- */
+  .status {
+    background: var(--status-bg);
+    color: var(--status-ink);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .02em;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .38rem .9rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .status b { font-weight: 700; }
+  .status .right { opacity: .72; }
+
+  /* ---------- band scaffolding: hairline pane rules ---------- */
+  .band {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .band + .band { margin-top: 4.5rem; }
+
+  .panetitle {
+    border-top: 1px solid var(--rule);
+    margin-bottom: 2rem;
+  }
+  .panetitle span {
+    display: inline-block;
+    transform: translateY(-50%);
+    background: var(--paper);
+    padding-right: .75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- masthead ---------- */
+  .mast {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 5rem 1.5rem 0;
+  }
+  .seal {
+    width: 76px; height: 76px;
+    border: 2px solid var(--seal);
+    border-radius: 3px;
+    color: var(--seal);
+    display: grid;
+    place-content: center;
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.05;
+    text-align: center;
+    letter-spacing: -.02em;
+    margin-bottom: 1.75rem;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.1rem, 6vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .tagline {
+    font-family: var(--mono);
+    font-size: clamp(1.05rem, 3vw, 1.5rem);
+    font-weight: 400;
+    color: var(--ink-soft);
+    letter-spacing: -.02em;
+    margin: .5rem 0 0;
+  }
+  .thesis {
+    font-family: var(--mono);
+    font-size: .93rem;
+    line-height: 1.55;
+    border-left: 2px solid var(--seal);
+    padding-left: 1rem;
+    margin: 2.5rem 0 0;
+    max-width: 40rem;
+  }
+  .under {
+    font-size: 1.12rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: var(--measure);
+    margin: 1.5rem 0 0;
+  }
+
+  /* ---------- the screenshot ---------- */
+  .frame {
+    border: 1px solid var(--rule);
+    background: var(--term-bg);
+    padding: .35rem;
+    border-radius: 3px;
+    overflow-x: auto;
+    box-shadow: 0 20px 46px -30px rgba(0,0,0,.75);
+  }
+  .frame img {
+    display: block;
+    width: 100%;
+    min-width: 660px;
+    height: auto;
+    border-radius: 2px;
+  }
+  figcaption {
+    font-size: .95rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: var(--measure);
+    margin: 1.25rem 0 0;
+  }
+  figcaption b { color: var(--ink); font-weight: 600; }
+  figure { margin: 0; }
+
+  /* ---------- the layer diagram ---------- */
+  .figscroll { overflow-x: auto; }
+  .figscroll svg {
+    display: block;
+    width: 100%;
+    min-width: 660px;
+    height: auto;
+  }
+  .dmachine { fill: none; stroke: currentColor; stroke-opacity: .3; stroke-dasharray: 4 4; }
+  .dagent { fill: currentColor; fill-opacity: .07; stroke: currentColor; stroke-opacity: .3; }
+  .dours { fill: var(--seal); fill-opacity: .16; stroke: var(--seal); stroke-opacity: .9; }
+  .dwire { stroke: currentColor; stroke-opacity: .45; stroke-width: 1.2; fill: none; }
+  .dstem { stroke: var(--seal); stroke-opacity: .55; stroke-width: 1.2; }
+  .dyou { fill: currentColor; fill-opacity: .16; stroke: currentColor; stroke-opacity: .55; }
+  .dhead { fill: currentColor; font-family: var(--mono); font-size: 13px; font-weight: 600; }
+  .dhead.us { fill: var(--seal); }
+  .dsub { fill: currentColor; fill-opacity: .55; font-family: var(--mono); font-size: 11px; }
+  .dtiny { fill: currentColor; fill-opacity: .5; font-family: var(--mono); font-size: 11px; }
+  .dcell { font-family: var(--mono); font-size: 12px; fill: currentColor; }
+  .dcell.on { fill-opacity: .85; }
+  .dcell.us { fill: var(--seal); fill-opacity: 1; font-weight: 600; }
+
+  /* ---------- the level slider ---------- */
+  .levels > input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .switchwrap { max-width: var(--measure); }
+  .switchlead {
+    font-family: var(--mono);
+    font-size: .9rem;
+    color: var(--ink-soft);
+    margin: 0 0 .85rem;
+  }
+  .switch {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    background: var(--panel);
+    padding: 3px;
+    isolation: isolate;
+  }
+  .switch .thumb {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc((100% - 6px) / 3);
+    background: var(--seal);
+    border-radius: 3px;
+    transition: transform .18s ease;
+    z-index: 0;
+  }
+  .switch label {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: .88rem;
+    letter-spacing: -.01em;
+    padding: .6rem .3rem;
+    cursor: pointer;
+    color: var(--ink-soft);
+    border-radius: 3px;
+    transition: color .18s ease;
+    user-select: none;
+  }
+  .switch label:hover { color: var(--ink); }
+  .switchnote {
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--ink-faint);
+    margin: .7rem 0 0;
+  }
+
+  #lvl2:checked ~ * .thumb { transform: translateX(100%); }
+  #lvl3:checked ~ * .thumb { transform: translateX(200%); }
+
+  #lvl1:checked ~ * label[for="lvl1"],
+  #lvl2:checked ~ * label[for="lvl2"],
+  #lvl3:checked ~ * label[for="lvl3"] { color: #fff; font-weight: 600; }
+
+  #lvl1:focus-visible ~ * .switch,
+  #lvl2:focus-visible ~ * .switch,
+  #lvl3:focus-visible ~ * .switch {
+    outline: 2px solid var(--seal);
+    outline-offset: 3px;
+  }
+
+  .lv { display: none; }
+  #lvl1:checked ~ * div.lv1,
+  #lvl2:checked ~ * div.lv2,
+  #lvl3:checked ~ * div.lv3 { display: block; }
+  /* the bullet lists are grids — reveal them as grids, or the gap collapses */
+  #lvl1:checked ~ * ul.lv1,
+  #lvl2:checked ~ * ul.lv2,
+  #lvl3:checked ~ * ul.lv3 { display: grid; }
+  #lvl1:checked ~ * p.lv1,
+  #lvl2:checked ~ * p.lv2,
+  #lvl3:checked ~ * p.lv3 { display: block; }
+
+  /* the masthead's copy of the switch sits tighter */
+  .restate { margin: 0 0 2.5rem; }
+  .restate .switchlead b { color: var(--ink); font-weight: 600; }
+  .mastswitch { max-width: 26rem; margin: 2.5rem 0 0; }
+  .mastswitch .switchlead { font-size: .82rem; margin-bottom: .6rem; }
+  .mastswitch .switch label { font-size: .82rem; padding: .5rem .3rem; }
+
+  .gloss { margin-top: 2.25rem; max-width: var(--measure); }
+  .gloss p {
+    font-size: 1rem;
+    line-height: 1.62;
+    color: var(--ink-soft);
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .gloss b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- the objection block ---------- */
+  .objections { max-width: var(--measure); display: grid; gap: 1.35rem; margin-top: 2.5rem; }
+  .objections h3 {
+    font-family: var(--mono);
+    font-size: .95rem;
+    font-weight: 600;
+    margin: 0 0 .35rem;
+    color: var(--ink);
+  }
+  .objections p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.6; }
+
+  /* ---------- bullets ---------- */
+  ul.plain { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.15rem; }
+  ul.plain li { max-width: var(--measure); }
+  ul.plain b {
+    font-family: var(--mono);
+    font-size: .95rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    display: block;
+  }
+  code {
+    font-family: var(--mono);
+    font-size: .88em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- decisions ---------- */
+  ol.decisions { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.5rem; }
+  ol.decisions li { max-width: var(--measure); }
+  ol.decisions b {
+    font-family: var(--mono);
+    font-size: .95rem;
+    font-weight: 600;
+    display: block;
+  }
+  ol.decisions em { color: var(--ink-soft); }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: clamp(1.15rem, 3.2vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.25;
+    margin: 0 0 1rem;
+    max-width: 30rem;
+    text-wrap: balance;
+  }
+
+  /* ---------- the note ---------- */
+  .why { max-width: var(--measure); }
+  .why p { font-size: 1.12rem; line-height: 1.62; margin: 0 0 1.25rem; }
+  .why p:last-of-type { margin-bottom: 0; }
+  .why .sig {
+    font-family: var(--mono);
+    font-size: .9rem;
+    color: var(--ink-faint);
+    margin-top: 1.75rem;
+  }
+
+  .lede { color: var(--ink-soft); max-width: var(--measure); margin: 0 0 2rem; }
+
+  /* ---------- coda ---------- */
+  .close {
+    font-family: var(--mono);
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1.2;
+    color: var(--seal);
+    margin: 0;
+    max-width: 30rem;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 620px) {
+    body { font-size: 16px; }
+    .mast { padding-top: 3rem; }
+    .band + .band { margin-top: 3.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="status">
+  <span><b>[ronin]</b> 0:cowork* 1:claude 2:codex 3:home</span>
+  <span class="right">浪人 · dohyo</span>
+</div>
+
+<div class="levels">
+<input type="radio" name="lvl" id="lvl1" checked>
+<input type="radio" name="lvl" id="lvl2">
+<input type="radio" name="lvl" id="lvl3">
+
+<header class="mast">
+  <div class="seal" aria-label="Ronin seal">浪人</div>
+  <h1>Ronin Cowork</h1>
+  <p class="tagline">A co-working space for agents.</p>
+
+  <div class="switchwrap mastswitch">
+    <p class="switchlead">Explain it to me as&#8230;</p>
+    <div class="switch" role="group" aria-label="How much detail to show">
+      <div class="thumb" aria-hidden="true"></div>
+      <label for="lvl1">TLDR</label>
+      <label for="lvl2">Vibe coder</label>
+      <label for="lvl3">Technical</label>
+    </div>
+  </div>
+
+  <div class="lv lv1">
+    <p class="thesis">You've heard of AI agents.<br>Actually running a few of them is the part nobody explains.</p>
+    <p class="under">Ronin is where they work. One browser tab, a space each, on a computer
+    you own — sharing the same files and passing work to each other. If you know
+    <b>Zapier</b>, it's the same idea: Zapier doesn't replace your apps, it connects them.</p>
+  </div>
+
+  <div class="lv lv2">
+    <p class="thesis">A browser tab full of terminal tiles.<br>Each tile is an agent, running on a machine you own.</p>
+    <p class="under">They share the same files, they can hand work to each other, and you can
+    see what all of them are doing on one screen — from a desk or a phone.</p>
+  </div>
+
+  <div class="lv lv3">
+    <p class="thesis">A browser front end for tmux.<br>Any agent CLI in any pane, one working tree, one roster.</p>
+    <p class="under">Ronin reads terminal output and nothing else — no vendor APIs, no
+    adapters, no per-vendor code paths. Sessions outlive the tab because tmux owns them.</p>
+  </div>
+</header>
+
+<section class="band" style="margin-top:4.5rem">
+  <div class="panetitle"><span>Why I built it</span></div>
+  <div class="why">
+    <div class="lv lv1">
+      <p>I kept logging into my home computer to check on agents I'd left running. It got
+      old, and when I was out I couldn't check on them at all.</p>
+      <p>So I put them in a browser tab. Then I added a way to see how each one was doing,
+      because once you have six of them you can't tell.</p>
+      <p class="sig">— Glen</p>
+    </div>
+
+    <div class="lv lv2">
+      <p>I was SSHing into my home server so my agents could keep working while I was away.
+      It got old. Every time I wanted to check one I opened another terminal, and I couldn't
+      get to any of them when I was out.</p>
+      <p>So I put the terminals in a browser tab. Mac, phone, anywhere.</p>
+      <p>Then I added a few things. A way for the agents to work together. A way to see how
+      far along each one is, because with six running you can't tell. And macros — shortcuts
+      for stuff I was typing all the time anyway. Quicker, and the agent knows where to go.</p>
+      <p class="sig">— Glen</p>
+    </div>
+
+    <div class="lv lv3">
+      <p>I was SSHing into my home server so my agents could keep working while I was away.
+      Every check meant another terminal, and none of it was reachable from outside the
+      house.</p>
+      <p>So I put the panes in a browser tab. The sessions stay in tmux; the tab is only a
+      view, which is why it can be closed, crashed or opened on a different device without
+      the work noticing.</p>
+      <p>Then the things that only matter once you're running several at once: a shared file
+      the agents read and write so they coordinate without going through me, per-session
+      progress so I can see who's blocked, and saved instruction sets for the things I was
+      typing constantly.</p>
+      <p class="sig">— Glen</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>This is the product</span></div>
+
+  <div class="lv lv1">
+    <h2>Run six agents and you can't tell which one is stuck.</h2>
+    <p class="lede">So each one keeps a short list: what it finished, what it's on, what it's
+    waiting for. Something keeps that list up to date — so you look, instead of asking.</p>
+  </div>
+  <div class="lv lv2">
+    <h2>With six running, you can't tell which one needs you.</h2>
+    <p class="lede">So each session keeps its own list — what it has finished, what it is on
+    now, and what it is waiting for. A watcher keeps that list current. You don't ask them.</p>
+  </div>
+  <div class="lv lv3">
+    <h2>Per-session state, kept current without polling the agent.</h2>
+    <p class="lede">Each session maintains its own record: completed work, current leg, and
+    the gate it is blocked at. A watcher process keeps it fresh, so the roster is a read
+    rather than a round-trip to every agent in the grid.</p>
+  </div>
+
+  <figure>
+    <div class="frame">
+      <img src="assets/roster.png" alt="Ronin's session roster: 22 sessions grouped by tag, each row showing the session name, the phase and leg it is on or a gate it is waiting at, how long it has been quiet, whether it is ready or thinking, and how full its context is.">
+    </div>
+    <figcaption>
+      <div class="lv lv1">Every agent, and how far it has got. Some are working. Eleven of
+      these have stopped and are waiting for a person to answer something — you can see that
+      at a glance instead of opening each one.</div>
+      <div class="lv lv2">Every session, and where each one is up to. <b>tmux</b> is on phase
+      3, leg 2 of 2. <b>koshi-api</b> is on phase 1, leg 6 of 7. Eleven of these are sitting
+      at a gate, waiting on a person. Each row also says how long it has been quiet and how
+      full its context is.</div>
+      <div class="lv lv3">22 sessions, grouped by tag. <b>tmux</b> phase 3, leg 2 of 2.
+      <b>koshi-api</b> phase 1, leg 6 of 7. Eleven parked at a gate awaiting input. Each row
+      also carries idle time and context-window occupancy, so you can see what is about to
+      need compaction before it does.</div>
+    </figcaption>
+  </figure>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>Run what you want</span></div>
+
+  <div class="lv lv1">
+    <h2>Use any agent you like. Mix them.</h2>
+    <p class="lede">Claude in one space, Codex in the next, both working on the same files.
+    Swap whenever you feel like it — nothing has to move, and nothing is set up for one
+    company.</p>
+  </div>
+  <div class="lv lv2">
+    <h2>Two vendors, the same files, one browser tab.</h2>
+    <p class="lede">Nothing in Ronin depends on which agent you run. Claude in one tile,
+    Codex in the next, Hermes or something you wrote yourself in a third — same machine, same
+    files. Ronin never reaches inside any of them, and when you switch, your work stays where
+    it is.</p>
+  </div>
+  <div class="lv lv3">
+    <h2>Two vendors, one working tree, concurrently.</h2>
+    <p class="lede">Nothing in Ronin branches on which agent is running. Claude in one pane,
+    Codex in the next, a shell script in a third, same checkout. There is no adapter layer to
+    maintain and therefore none to break when a vendor ships a change.</p>
+  </div>
+
+  <figure>
+    <div class="frame">
+      <img src="assets/grid.png" alt="Ronin's 2x2 grid in a browser: a Claude session at top left, an OpenAI Codex session at top right, the home panel at bottom left offering plan, cut, maintenance, code review and manage others' work, and a second Claude session on the macro system at bottom right.">
+    </div>
+    <figcaption>
+      <div class="lv lv1">Four agents in one browser tab, on a computer I own. Top left is
+      <b>Claude</b>. Top right is <b>Codex</b>, made by a different company, working on the
+      same files. Bottom left is where you start a new one.</div>
+      <div class="lv lv2">Four terminals in a browser tab, on a machine I own. Top left,
+      <b>Claude</b>. Top right, <b>OpenAI Codex</b> — same grid, same files, a different
+      vendor. Bottom left, the <b>Home panel</b>: put a session out to work. Bottom right, a
+      second Claude working on macros.</div>
+      <div class="lv lv3">Top left, <b>Claude</b>. Top right, <b>OpenAI Codex</b> — same
+      grid, same working tree, different vendor, running at the same time. Bottom left, the
+      home panel: spawn a session against a project root. Bottom right, a second Claude on
+      the macro system.</div>
+    </figcaption>
+  </figure>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>What Ronin adds</span></div>
+
+  <div class="lv lv1">
+    <h2>Your agents don't talk to each other. This is where they do.</h2>
+    <p class="lede">If you run more than one, you are the go-between: you read what one did,
+    then tell the next about it. Ronin puts them in the same place so they can pass work
+    directly, and so you can watch all of them at once.</p>
+  </div>
+  <div class="lv lv2">
+    <h2>You already have the agents. What you don't have is somewhere they can work together.</h2>
+    <p class="lede">Run two or three agents on one machine today and they are strangers. They
+    can't see what the others are doing, and you are the only thing joining them up — a tab
+    each, one at a time. Ronin is the thin layer underneath that turns them into a co-working
+    space.</p>
+  </div>
+  <div class="lv lv3">
+    <h2>One thin layer over tmux. Nothing above it, nothing below it.</h2>
+    <p class="lede">Agents already coexist on a box; what they lack is a shared surface and a
+    supervisor view. Ronin adds exactly that — a shared file surface for handoff, a session
+    roster with per-session state, and a grid over the panes — and deliberately nothing else.
+    The agent, the model and the machine stay yours.</p>
+  </div>
+
+  <figure>
+    <div class="figscroll">
+      <svg viewBox="0 0 880 330" role="img" aria-label="Two pictures side by side. On the left, today: three agents — Claude, Codex and Hermes — sit in the same machine but are strangers to each other, and you reach up to each one separately, one tab at a time. On the right, with Ronin: the same machine and the same three agents, plus one thin band beneath them, the co-working space, that all three sit on and share. You reach it with a single arrow instead of three.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <!-- ============ LEFT · today ============ -->
+        <text class="dhead" x="217" y="22" text-anchor="middle">Today</text>
+        <text class="dsub"  x="217" y="41" text-anchor="middle">same machine, strangers to each other</text>
+
+        <rect class="dmachine" x="20" y="54" width="395" height="152" rx="3"/>
+        <text class="dtiny" x="32" y="72">your machine</text>
+
+        <rect class="dagent" x="35"  y="86" width="110" height="64" rx="2"/>
+        <text class="dcell on" x="90"  y="122" text-anchor="middle">Claude</text>
+        <rect class="dagent" x="165" y="86" width="110" height="64" rx="2"/>
+        <text class="dcell on" x="220" y="122" text-anchor="middle">Codex</text>
+        <rect class="dagent" x="295" y="86" width="110" height="64" rx="2"/>
+        <text class="dcell on" x="350" y="122" text-anchor="middle">Hermes</text>
+
+        <line class="dwire" x1="211" y1="252" x2="95"  y2="158" marker-end="url(#ar)"/>
+        <line class="dwire" x1="217" y1="252" x2="220" y2="158" marker-end="url(#ar)"/>
+        <line class="dwire" x1="223" y1="252" x2="345" y2="158" marker-end="url(#ar)"/>
+
+        <circle class="dyou" cx="217" cy="262" r="9"/>
+        <text class="dcell on" x="217" y="292" text-anchor="middle">you</text>
+        <text class="dtiny" x="217" y="312" text-anchor="middle">one tab each &#183; one at a time</text>
+
+        <!-- ============ RIGHT · with Ronin ============ -->
+        <text class="dhead us" x="665" y="22" text-anchor="middle">With Ronin</text>
+        <text class="dsub"     x="665" y="41" text-anchor="middle">same machine, same agents, one thin layer</text>
+
+        <rect class="dmachine" x="465" y="54" width="395" height="152" rx="3"/>
+        <text class="dtiny" x="477" y="72">your machine</text>
+
+        <rect class="dagent" x="480" y="86" width="110" height="52" rx="2"/>
+        <text class="dcell on" x="535" y="116" text-anchor="middle">Claude</text>
+        <rect class="dagent" x="610" y="86" width="110" height="52" rx="2"/>
+        <text class="dcell on" x="665" y="116" text-anchor="middle">Codex</text>
+        <rect class="dagent" x="740" y="86" width="110" height="52" rx="2"/>
+        <text class="dcell on" x="795" y="116" text-anchor="middle">Hermes</text>
+
+        <line class="dstem" x1="535" y1="138" x2="535" y2="152"/>
+        <line class="dstem" x1="665" y1="138" x2="665" y2="152"/>
+        <line class="dstem" x1="795" y1="138" x2="795" y2="152"/>
+
+        <rect class="dours" x="480" y="152" width="370" height="26" rx="2"/>
+        <text class="dcell us" x="665" y="169" text-anchor="middle">Ronin &#183; the co-working space</text>
+        <text class="dtiny" x="665" y="196" text-anchor="middle">one shared board &#183; one roster &#183; they can see each other&#8217;s work</text>
+
+        <line class="dwire" x1="665" y1="252" x2="665" y2="184" marker-end="url(#ar)"/>
+        <circle class="dyou" cx="665" cy="262" r="9"/>
+        <text class="dcell on" x="665" y="292" text-anchor="middle">you</text>
+        <text class="dtiny" x="665" y="312" text-anchor="middle">one tab &#183; all of them</text>
+      </svg>
+    </div>
+    <figcaption>
+      <div class="lv lv1">Nothing on the left goes away. Same computer, same agents, same
+      files — Ronin is the thin strip that appears underneath them. Without it you are the
+      only thing joining your agents up, and you reach them one at a time. With it they share
+      a board, so they can hand work to each other instead of through you.</div>
+      <div class="lv lv2"><b>Nothing on the left gets replaced.</b> Same machine, same agents,
+      same files — Ronin is the thin band that appears underneath them. Without it you are
+      the only thing connecting your agents, and you reach them one at a time. With it they
+      share a desk, a board and a roster, so they can hand work to each other instead of
+      through you. It is a small piece, deliberately, and that is why leaving costs you
+      nothing.</div>
+      <div class="lv lv3"><b>Nothing on the left is replaced.</b> Same host, same agent
+      processes, same working tree. Ronin adds one layer — a shared file surface and a
+      session roster over the panes — and the arrows from the operator collapse from N to 1.
+      Small on purpose: there is nothing of ours to migrate off.</div>
+    </figcaption>
+  </figure>
+
+  <div class="objections lv lv1">
+    <div>
+      <h3>I already use Claude or ChatGPT.</h3>
+      <p>Then you already have an agent, and it runs <i>inside</i> Ronin rather than instead
+      of it. Keep using whichever one you like.</p>
+    </div>
+    <div>
+      <h3>Do I need my own computer for this?</h3>
+      <p>Yes — one you own, or one you rent for a few pounds a month. It doesn't run on ours,
+      and that's the point: your files stay yours.</p>
+    </div>
+    <div>
+      <h3>I use Replit or Lovable.</h3>
+      <p>Those hand you everything at once, which is why they're so quick to start. The catch
+      is that all of it belongs to one company, so leaving means moving everything. This is
+      the other trade: slower to set up, nothing to move.</p>
+    </div>
+    <div>
+      <h3>I just leave my laptop open so it doesn't stop.</h3>
+      <p>That's the thing this was built to fix. Shut the lid — the work carries on, because
+      it was never happening in the browser.</p>
+    </div>
+  </div>
+
+  <div class="objections lv lv2">
+    <div>
+      <h3>But I already use Claude Code. Or Codex. Or Hermes.</h3>
+      <p>Good — keep using it. That is an agent, and it runs <i>inside</i> Ronin, in a tile.
+      Ronin doesn't replace the one you like; it gives you several at once and lets you tell
+      at a glance which one is stuck.</p>
+    </div>
+    <div>
+      <h3>But Replit and Lovable already do this.</h3>
+      <p>They give you all of it at once, which is the fastest possible start and the reason
+      they're good. The trade is that the space, the agent, the model and the machine all
+      belong to one company, so leaving means moving everything. Ronin is the other trade:
+      slower to set up, nothing to move.</p>
+    </div>
+    <div>
+      <h3>But I already have a DigitalOcean droplet.</h3>
+      <p>Then you have the machine, and Ronin doesn't compete with it. Ronin is what you put
+      on it.</p>
+    </div>
+    <div>
+      <h3>But I just leave my laptop open so the agent doesn't die.</h3>
+      <p>That's the one this was built to stop. Close the lid and the work carries on,
+      because the work was never happening in the browser tab.</p>
+    </div>
+  </div>
+
+  <div class="objections lv lv3">
+    <div>
+      <h3>I already run Claude Code, Codex or Hermes.</h3>
+      <p>Those are tenants, not competitors. Ronin supplies the pane and the coordination
+      surface; it never supplies the agent, and it has no code path that knows which one you
+      launched.</p>
+    </div>
+    <div>
+      <h3>Replit, Lovable and the hosted builders.</h3>
+      <p>They own all four layers — space, agent, model, machine. Fastest possible start, and
+      the exit cost is a full migration. Ronin owns one layer, so the exit cost is zero by
+      construction rather than by policy.</p>
+    </div>
+    <div>
+      <h3>I have a droplet, a Hetzner box, a homelab.</h3>
+      <p>That's the box layer, and Ronin installs onto it. It isn't an alternative to your
+      host; it's what you run on it.</p>
+    </div>
+    <div>
+      <h3>I run agents on my laptop and keep it awake.</h3>
+      <p>tmux on an always-on host removes the constraint rather than working around it. The
+      browser tab becomes disposable, and the phone becomes a real client instead of a
+      compromise.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>What it does</span></div>
+
+  <div class="switchwrap restate">
+    <p class="switchlead">Still reading as&#8230; <b>everything below changes with this.</b></p>
+    <div class="switch" role="group" aria-label="How much detail to show">
+      <div class="thumb" aria-hidden="true"></div>
+      <label for="lvl1">TLDR</label>
+      <label for="lvl2">Vibe coder</label>
+      <label for="lvl3">Technical</label>
+    </div>
+    <p class="switchnote">Nothing is hidden at any setting &#8212; it's the same product, described three ways.</p>
+  </div>
+
+  <ul class="plain lv lv1">
+    <li><b>All your agents in one browser tab.</b> Instead of a window each.</li>
+    <li><b>Close your laptop. They keep working.</b> The work isn't happening in the browser.</li>
+    <li><b>Check on them from your phone.</b> Same tab, same agents, anywhere.</li>
+    <li><b>See who's stuck without asking.</b> One list shows what each one is doing.</li>
+    <li><b>Use whichever agent you like.</b> Swap any time. Your work stays put.</li>
+    <li><b>They can leave notes for each other.</b> So they stop going through you.</li>
+    <li><b>Talk to them instead of typing.</b> If you'd rather.</li>
+    <li><b>It runs on a computer you own.</b> Not ours.</li>
+  </ul>
+
+  <ul class="plain lv lv2">
+    <li><b>Several agents at once, each in its own tile.</b> Claude in one, Codex in the next, the same files underneath.</li>
+    <li><b>Any agent.</b> Claude, Codex, Hermes, or something you wrote yourself. Nothing depends on which.</li>
+    <li><b>It works on a phone.</b> Same tab, same sessions.</li>
+    <li><b>Close the lid and nothing dies.</b> The grid is a view. The sessions run on the machine.</li>
+    <li><b>Switch vendors without moving anything.</b> Your files, your history and your setup stay where they are. The tile changes; your work doesn't.</li>
+    <li><b>A wipeboard.</b> One page a set of agents read and write, so they talk to each other instead of through you.</li>
+    <li><b>Macros.</b> Saved instructions you'd have typed anyway — <code>+forkit: build the login page</code>.</li>
+    <li><b>Every tile is recorded.</b> Everything printed, written to disk as it happens.</li>
+    <li><b>Dictation.</b> Talk to a session instead of typing. The audio never leaves the box.</li>
+  </ul>
+
+  <ul class="plain lv lv3">
+    <li><b>Each tile is a tmux pane, streamed to the browser.</b> One session per pane, one socket per tile. tmux owns the process; the browser owns nothing.</li>
+    <li><b>Ronin reads terminal output and nothing else.</b> No agent APIs, no vendor private state. That is why any binary that runs in a shell runs here — and why some features are harder than a direct integration would make them.</li>
+    <li><b>Vendor-agnostic by construction, not by adapter.</b> There is no per-vendor code path to maintain or to break.</li>
+    <li><b>Per-session state tracking.</b> Each session keeps what it has finished, what it is on, and what it is blocked by; a watcher process keeps that current without polling the agent.</li>
+    <li><b>A shared file surface for inter-agent handoff.</b> A set of sessions read and write one page — deliberate posting and reading, not a broadcast bus.</li>
+    <li><b>Parameterised macros.</b> Saved instruction sets that expand with arguments and a working directory.</li>
+    <li><b>Full-fidelity tile recording.</b> Everything printed, appended to disk as it happens.</li>
+    <li><b>Dictation via host-side faster-whisper</b>, open weights, on your machine. Audio never leaves it.</li>
+    <li><b>Runs on your hardware.</b> Your files, your remotes, your keys, ordinary directories.</li>
+  </ul>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>Your box, your data</span></div>
+
+  <div class="lv lv1">
+    <h2>It runs on your computer, not ours.</h2>
+    <p class="lede">We don't get your work, because there's nowhere for it to go. What you
+    send to an agent is between you and the company that makes it, exactly as it is today.</p>
+  </div>
+
+  <div class="lv lv2">
+    <h2>Ronin runs on a machine you own, and holds nothing of its own.</h2>
+    <p class="lede">No account, no sync, no server of ours it reports to. What leaves is
+    whatever your agent sends to its model — your business with that vendor, on the terms you
+    already agreed with them. Ronin is never in the path.</p>
+  </div>
+
+  <div class="lv lv3">
+    <h2>No account, no telemetry, no egress that isn't yours.</h2>
+    <p class="lede">Ronin is a process on your machine with file-backed state. The open build
+    emits nothing by default. The only traffic leaving is what the agent in the tile
+    initiates to its own provider, under your credentials and your agreement with them.</p>
+    <p class="lede"><b>So we don't claim your prompts never leave your box.</b> They do —
+    that's what a model is for, and any product claiming otherwise is describing a setup it
+    doesn't ship. The claim scoped to what we do ship: <b>Ronin is never in the path</b>, and
+    nothing here stops you pointing a tile at a model on the same machine, at which point
+    nothing leaves at all.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>What it all stands on</span></div>
+  <ol class="decisions">
+    <li><b>tmux is the truth.</b> The grid is a view. Restart it, upgrade it, close the lid — no agent dies.</li>
+    <li><b>Terminal view only.</b> Never a vendor's private state. <em>It cost us a scrollback feature and a working set of dials to learn.</em></li>
+    <li><b>Vendor neutral by construction.</b> Claude in one tile, Codex in the next, same working tree.</li>
+    <li><b>Sessions are mortal; files are the memory.</b> Spawn with curated context, distill, kill. The conversation is the one place knowledge rots.</li>
+  </ol>
+
+  <div class="lv lv1 gloss">
+    <p>In plain words: the work happens on your computer, not in the browser — so breaking
+    the browser breaks nothing. We only look at what's on the screen, the same as you. Two
+    different companies' agents can work on the same files at once. And long chats get worse,
+    not better, so anything worth keeping gets written down in a file.</p>
+  </div>
+
+  <div class="lv lv2 gloss">
+    <p><b>tmux is the truth.</b> The real work runs on your machine; the browser is a window
+    onto it. <b>Terminal view only</b> means Ronin reads what an agent prints and never digs
+    into a vendor's internals for more — that costs features, and we'd rather pay it than
+    break every time a vendor changes their mind. <b>Vendor neutral</b> is not "supported":
+    no part of Ronin knows which agent you're running. <b>Sessions are mortal</b> is a working
+    habit — start an agent with what it needs, have it write down what it learned, let it go.</p>
+  </div>
+
+  <div class="lv lv3 gloss">
+    <p>Each of these was bought. Terminal-only cost a scrollback feature and a working set of
+    dials, and the phrasing stays wounded on purpose — a principle that names its price is
+    worth more than one that doesn't. Vendor neutrality is why there is no adapter layer to
+    rot. And session mortality is the operational consequence of context degradation:
+    long-lived sessions accumulate noise faster than signal, so the durable artefact is a file
+    on disk, never the transcript.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="panetitle"><span>&nbsp;</span></div>
+  <div class="lv lv1"><p class="close">Somewhere for your agents to work. That's all it is.</p></div>
+  <div class="lv lv2"><p class="close">Ronin's scope ends where promises begin.</p></div>
+  <div class="lv lv3"><p class="close">Ronin's scope ends where promises begin.</p></div>
+</section>
+
+</div>
