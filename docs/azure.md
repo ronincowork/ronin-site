@@ -25,9 +25,10 @@ or place Azure credentials in this document.
 ## Domain routing
 
 GoDaddy remains authoritative DNS because the existing Google mail, SHIWAKE, and Mailgun records
-already live there. `www` is a CNAME to the generated Azure hostname. The apex uses GoDaddy's
-permanent forwarding service to redirect `ronincowork.com` to `https://www.ronincowork.com`.
-Do not replace the nameservers or disturb the MX, `hq`, or Mailgun records when changing the site.
+already live there. `www` is a CNAME to the generated Azure hostname. The apex is bound directly
+to the same Static Web App using Azure's TXT validation token and the app's stable inbound address,
+`40.67.153.174`; it must not use GoDaddy parking or forwarding. Do not replace the nameservers or
+disturb the MX, `hq`, or Mailgun records when changing the site.
 
 ## Verify the payload before release
 
