@@ -2,9 +2,9 @@
 
 The public website for [ronincowork.com](https://ronincowork.com).
 
-The site carries the public Ronin Cowork story, the installation handoff, and a preview of the
-owner journey into Cowork. Keep the hosting shape simple; do not build a framework or content
-system around it.
+The site carries the public Ronin Cowork story and the installation handoff. Cowork setup and
+application screens belong to the installed local application, not this public domain. Keep the
+hosting shape simple; do not build a framework or content system around it.
 
 The site is deliberately static HTML, CSS, JavaScript, and SVG, with no application server,
 database, client framework, tracking script, or runtime dependency. Azure Static Web Apps serves
