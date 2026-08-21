@@ -107,6 +107,13 @@ button, input { font: inherit; }
 .button--primary { border-color: var(--kaki); background: var(--kaki); color: var(--bg); }
 .button--primary:hover { background: transparent; color: var(--kaki); }
 .section-label { margin: 0; color: var(--muted); font: var(--text-2)/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+.session-brief { max-width: 920px; margin: 0 0 72px; padding: clamp(24px, 4vw, 40px); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
+.session-brief__head { display: grid; grid-template-columns: 1fr auto; gap: var(--space-9); align-items: start; margin-bottom: var(--space-9); }
+.session-brief__head h2 { margin: var(--space-4) 0 0; font: 500 var(--text-10)/1.25 var(--font-ui); }
+.session-brief__head p { max-width: var(--measure); margin: var(--space-6) 0 0; color: var(--muted-2); }
+.session-brief__copy { min-width: 62px; border: var(--edge) solid var(--line-3); border-radius: var(--radius-xs); background: var(--raise); color: var(--fg-strong); padding: var(--space-5) var(--space-7); font: var(--text-2) var(--font-mono); cursor: pointer; }
+.session-brief__copy:hover { border-color: var(--kaki); color: var(--kaki); }
+.session-brief pre { max-height: 320px; margin: 0; padding: var(--space-9); border-radius: var(--radius-sm); background: var(--term-bg); color: var(--term-fg); font: var(--text-4)/1.65 var(--font-term); white-space: pre-wrap; overflow: auto; }
 .site-footer { width: min(var(--page), calc(100% - 40px)); margin: auto; padding: var(--space-10) 0 48px; border-top: var(--edge) solid var(--line); display: flex; justify-content: space-between; gap: var(--space-8); color: var(--muted); font: var(--text-2)/1.6 var(--font-mono); }
 @media (max-width: 640px) {
   .site-header__inner, .page, .site-footer { width: min(100% - 28px, var(--page)); }
@@ -115,6 +122,8 @@ button, input { font: inherit; }
   .site-nav a:not(.button) { display: none; }
   .page { padding: 52px 0 72px; }
   .display { font-size: clamp(38px, 13vw, 58px); }
+  .session-brief__head { grid-template-columns: 1fr; }
+  .session-brief__copy { justify-self: start; }
   .site-footer { flex-direction: column; }
 }
 

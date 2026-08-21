@@ -19,7 +19,10 @@ installed `ronin-cowork` application and must not be published here.
 
 Supporting explainers answer a real question someone may search for, explain the underlying
 technology in the context of AI agent work, and lead back to Ronin. They are not artificial stops
-in the owner journey and they must not read as hidden setup requirements.
+in the owner journey and they must not read as hidden setup requirements. When an explanation can
+be grounded in the user's own machine, lead with a copyable brief for a Ronin Cowork session. The
+agent should inspect first, preserve owner approvals, and use read-only checks when no change is
+required.
 
 The names are deliberate. Plain `setup` and `landing` are too ambiguous across a public site,
 an installer, and an installed application.
