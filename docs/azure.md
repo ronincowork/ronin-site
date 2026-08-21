@@ -25,17 +25,22 @@ or place Azure credentials in this document.
 ## Domain routing
 
 GoDaddy remains authoritative DNS because the existing Google mail, SHIWAKE, and Mailgun records
-already live there. `www` is a CNAME to the generated Azure hostname. The apex uses GoDaddy's
-permanent forwarding service to redirect `ronincowork.com` to `https://www.ronincowork.com`.
-Do not replace the nameservers or disturb the MX, `hq`, or Mailgun records when changing the site.
+already live there. `www` is a CNAME to the generated Azure hostname. The apex is bound directly
+to the same Static Web App using Azure's TXT validation token and the app's stable inbound address,
+`40.67.153.174`; it must not use GoDaddy parking or forwarding. Do not replace the nameservers or
+disturb the MX, `hq`, or Mailgun records when changing the site.
 
 ## Verify the payload before release
 
 ```bash
 test -f index.html
-test -f assets/roster.png
-test -f assets/grid.png
-rg -n 'src="assets/' index.html
+test -f load-ronin.html
+test -f setup-journey.html
+test -f cowork-setup.html
+test -f cowork-after-save.html
+test -f ronin-tokens.css
+test -f site-shell.js
+test -f nin-mark.svg
 ```
 
 Preview locally and inspect both light and dark modes before merging `dev` to `master`.
@@ -53,7 +58,8 @@ curl -fsSI https://ronincowork.com/
 curl -fsSI https://www.ronincowork.com/
 ```
 
-Confirm HTTPS, a successful response, and both local images in a browser. DNS changes must preserve
+Confirm HTTPS, successful responses for the landing page and subpages, and the local mark in a
+browser. DNS changes must preserve
 the existing Google MX records, `hq` SHIWAKE records, and `mg` Mailgun records.
 
 ## Rollback
@@ -63,5 +69,5 @@ redeploy. Do not rewrite `master` or deploy an unrecorded local directory.
 
 ## Azure CLI access
 
-Shared authentication and safety instructions live at
-`ronin-lab/landing/azure/README.md` on the dohyo workspace.
+Use the installed Azure CLI only after confirming the active identity and subscription. Keep
+project-specific commands and live resource facts in this document.

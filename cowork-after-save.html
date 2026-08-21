@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cowork</title>
+    <link rel="stylesheet" href="ronin-tokens.css" />
+    <style>
+      body {
+        min-height: 100vh;
+      }
+      .cowork-bar {
+        height: 58px;
+        border-bottom: var(--edge) solid var(--line);
+        display: flex;
+        align-items: center;
+        padding: 0 var(--space-8);
+        gap: var(--space-7);
+        background: var(--bg-2);
+      }
+      .cowork-bar img {
+        width: 28px;
+      }
+      .cowork-bar b {
+        color: var(--kaki);
+        font: var(--text-4) var(--font-mono);
+      }
+      .cowork-bar span {
+        margin-left: auto;
+        color: var(--muted);
+        font: var(--text-2) var(--font-mono);
+      }
+      .preview-bar {
+        display: none;
+        padding: var(--space-5) var(--space-8);
+        background: var(--aiiro);
+        color: var(--fg-strong);
+        font: var(--text-3) var(--font-mono);
+        text-align: center;
+      }
+      .preview-bar a {
+        margin-left: var(--space-7);
+      }
+      body.preview .preview-bar {
+        display: block;
+      }
+      .room {
+        width: min(1120px, calc(100% - 40px));
+        margin: auto;
+        padding: 42px 0;
+      }
+      .room-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: var(--space-8);
+      }
+      .room h1 {
+        margin: var(--space-4) 0 0;
+        font: 500 clamp(30px, 4vw, 44px) / 1.1 var(--font-ui);
+        letter-spacing: -0.035em;
+      }
+      .room-head > p {
+        max-width: 520px;
+        margin: 0;
+        color: var(--muted-2);
+      }
+      .tiles {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-7);
+        margin-top: 38px;
+      }
+      .tile {
+        min-height: 300px;
+        padding: var(--space-8);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+      }
+      .tile-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .status {
+        color: var(--warn);
+        font: var(--text-2) var(--font-mono);
+      }
+      .terminal {
+        margin: 32px 0 var(--space-8);
+        padding: var(--space-7);
+        border-radius: var(--radius-sm);
+        background: var(--term-bg);
+        color: var(--term-fg);
+        font: var(--text-3) / 1.8 var(--font-term);
+        flex: 1;
+      }
+      .terminal .dim {
+        color: var(--muted);
+      }
+      .tile-foot {
+        color: var(--muted);
+        font: var(--text-3) var(--font-mono);
+      }
+      .new {
+        min-height: 170px;
+        border-style: dashed;
+        background: transparent;
+      }
+      .new h2 {
+        margin: 32px 0 var(--space-4);
+        font: 500 var(--text-9) var(--font-ui);
+      }
+      .new p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .empty {
+        grid-column: 1/-1;
+        padding: var(--space-10);
+        border: var(--edge) dashed var(--line-2);
+        border-radius: var(--radius-md);
+        color: var(--muted-2);
+      }
+      @media (max-width: 680px) {
+        .room {
+          width: min(100% - 28px, 1120px);
+        }
+        .room-head {
+          align-items: start;
+          flex-direction: column;
+        }
+        .tiles {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-bar">
+      Preview only. Save goes directly to this Cowork state.<a
+        href="cowork-setup.html"
+        >Return to setup</a
+      >
+    </div>
+    <header class="cowork-bar">
+      <img src="nin-mark.svg" alt="" /><b>COWORK</b
+      ><span>your machine · private</span>
+    </header>
+    <main class="room">
+      <header class="room-head">
+        <div>
+          <p class="eyebrow">Your Cowork</p>
+          <h1>Setup is becoming work.</h1>
+        </div>
+        <p>
+          Each agent you chose has its own tile. Installation and sign-in happen
+          here; nothing asks you to choose the same thing again.
+        </p>
+      </header>
+      <section class="tiles" id="tiles"></section>
+    </main>
+    <script>
+      var params = new URLSearchParams(location.search);
+      if (params.has("preview")) document.body.classList.add("preview");
+      var labels = {
+        claude: "Claude Code",
+        codex: "Codex",
+        gemini: "Gemini CLI",
+        opencode: "OpenCode",
+      };
+      var selected = (params.get("agents") || "claude,codex")
+        .split(",")
+        .filter(Boolean);
+      var host = document.querySelector("#tiles");
+      selected.forEach(function (id) {
+        var article = document.createElement("article");
+        article.className = "tile";
+        article.innerHTML =
+          '<div class="tile-top"><p class="section-label">' +
+          (labels[id] || id) +
+          '</p><span class="status">● installing</span></div><div class="terminal"><span class="dim">setup / ' +
+          id +
+          '</span><br>Checking this machine…<br>Fetching the agent…<br><span class="dim">This tile will become the agent\'s own sign-in.</span></div><div class="tile-foot">project · your first project</div>';
+        host.append(article);
+      });
+      if (!selected.length) {
+        var empty = document.createElement("div");
+        empty.className = "empty";
+        empty.innerHTML =
+          "<strong>No setup work is waiting.</strong><br>Cowork is ready for your first session.";
+        host.append(empty);
+      }
+      var fresh = document.createElement("article");
+      fresh.className = "tile new";
+      fresh.innerHTML =
+        '<p class="section-label">Always available</p><h2>＋ New session</h2><p>Start work now; setup tiles do not block the room.</p>';
+      host.append(fresh);
+    </script>
+  </body>
+</html>

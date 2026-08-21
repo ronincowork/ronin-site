@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Make this Cowork yours</title>
+    <link rel="stylesheet" href="ronin-tokens.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        background: radial-gradient(
+          circle at 82% 8%,
+          var(--raise) 0,
+          var(--bg) 25%
+        );
+      }
+      .setup-shell {
+        width: min(1080px, calc(100% - 40px));
+        margin: auto;
+        padding: 34px 0 80px;
+      }
+      .setup-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-8);
+      }
+      .setup-top .brand img {
+        width: 42px;
+      }
+      .peek {
+        color: var(--muted-2);
+        font: var(--text-3) var(--font-mono);
+      }
+      .peek:hover {
+        color: var(--kaki);
+      }
+      .intro {
+        display: grid;
+        grid-template-columns: 0.8fr 1.6fr;
+        gap: 8vw;
+        margin: 68px 0 54px;
+      }
+      .intro h1 {
+        margin: var(--space-6) 0 var(--space-7);
+        font: 500 clamp(40px, 6vw, 66px) / 1 var(--font-ui);
+        letter-spacing: -0.05em;
+      }
+      .intro-copy {
+        align-self: end;
+        color: var(--muted-2);
+        font-size: var(--text-8);
+      }
+      .intro-copy strong {
+        color: var(--fg-strong);
+      }
+      .machine {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-5) var(--space-9);
+        padding: var(--space-7) var(--space-8);
+        border: var(--edge) solid var(--line);
+        border-radius: var(--radius-sm);
+        background: var(--panel);
+        color: var(--muted);
+        font: var(--text-3) var(--font-mono);
+      }
+      .machine strong {
+        color: var(--ok);
+      }
+      .setup-body {
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 6vw;
+        margin-top: var(--space-10);
+      }
+      .contents {
+        position: sticky;
+        top: 34px;
+        align-self: start;
+      }
+      .contents p {
+        margin: 0 0 var(--space-6);
+      }
+      .contents a {
+        display: block;
+        padding: var(--space-4) 0;
+        color: var(--muted);
+        font: var(--text-3) var(--font-mono);
+        text-decoration: none;
+      }
+      .contents a:hover {
+        color: var(--kaki);
+      }
+      .form {
+        display: grid;
+        gap: var(--space-8);
+      }
+      .form-section {
+        scroll-margin-top: 30px;
+        padding: clamp(24px, 5vw, 48px);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-lg);
+        background: color-mix(in srgb, var(--panel) 94%, transparent);
+      }
+      .section-head {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: var(--space-7);
+        margin-bottom: 34px;
+      }
+      .section-num {
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .section-head h2 {
+        margin: 0 0 var(--space-4);
+        font: 500 var(--text-10) var(--font-ui);
+      }
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+      .optional {
+        display: inline-block;
+        margin-left: var(--space-4);
+        color: var(--muted);
+        font: var(--text-2) var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8);
+      }
+      .field {
+        display: block;
+      }
+      .field--wide {
+        grid-column: 1/-1;
+      }
+      .field span {
+        display: block;
+        margin-bottom: var(--space-4);
+        color: var(--muted-2);
+        font: var(--text-3) var(--font-mono);
+      }
+      .field small {
+        display: block;
+        margin-top: var(--space-3);
+        color: var(--muted);
+      }
+      .field input,
+      .field select {
+        width: 100%;
+        min-height: 48px;
+        padding: var(--space-6);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-sm);
+        background: var(--well);
+        color: var(--fg-strong);
+      }
+      .field input:focus,
+      .field select:focus {
+        border-color: var(--kaki);
+        outline: 0;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-5);
+      }
+      .choice {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--space-6);
+        padding: var(--space-7);
+        border: var(--edge) solid var(--line);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+      }
+      .choice:has(input:checked) {
+        border-color: var(--aiiro);
+        background: var(--raise);
+      }
+      .choice input {
+        accent-color: var(--kaki);
+      }
+      .choice b,
+      .choice small {
+        display: block;
+      }
+      .choice small {
+        margin-top: var(--space-2);
+        color: var(--muted);
+      }
+      .services-disclosure {
+        margin-top: var(--space-7);
+        padding: var(--space-7);
+        border-left: var(--edge-2) solid var(--kaki);
+        background: var(--raise);
+        color: var(--muted-2);
+      }
+      .services-fields {
+        margin-top: var(--space-8);
+      }
+      .save {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-8);
+        padding: var(--space-9) 0;
+      }
+      .save p {
+        margin: 0;
+        color: var(--muted);
+      }
+      @media (max-width: 760px) {
+        .setup-shell {
+          width: min(100% - 28px, 1080px);
+        }
+        .intro {
+          grid-template-columns: 1fr;
+          margin-top: 48px;
+        }
+        .setup-body {
+          grid-template-columns: 1fr;
+        }
+        .contents {
+          position: static;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0 var(--space-7);
+        }
+        .contents p {
+          width: 100%;
+        }
+        .fields,
+        .choices {
+          grid-template-columns: 1fr;
+        }
+        .field--wide {
+          grid-column: auto;
+        }
+        .save {
+          align-items: flex-start;
+          flex-direction: column-reverse;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="setup-shell">
+      <header class="setup-top">
+        <a class="brand" href="index.html"
+          ><img src="nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        ><button
+          class="peek"
+          style="border: 0; background: none; padding: 0; cursor: pointer"
+          type="button"
+          onclick="openCowork(event,true)"
+        >
+          Preview Cowork after Save →
+        </button>
+      </header>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">Cowork setup</p>
+          <h1>Make this space yours.</h1>
+        </div>
+        <p class="intro-copy">
+          <strong>Everything Ronin wants to ask is on this page.</strong> Read
+          ahead, answer in any order, and skip anything marked optional. Every
+          answer stays editable inside Cowork.
+        </p>
+      </section>
+      <div class="machine">
+        <strong>● Ronin is running</strong><span>this box · workstation</span
+        ><span>8 cores</span><span>32 GB memory</span
+        ><span>access · private network</span>
+      </div>
+      <div class="setup-body">
+        <nav class="contents" aria-label="Setup questions">
+          <p class="section-label">On this page</p>
+          <a href="#machine">01 · This machine</a><a href="#you">02 · You</a
+          ><a href="#project">03 · First project</a
+          ><a href="#agents">04 · Agents</a><a href="#defaults">05 · Defaults</a
+          ><a href="#services">06 · Services</a>
+        </nav>
+        <form class="form" onsubmit="return openCowork(event)">
+          <section class="form-section" id="machine">
+            <div class="section-head">
+              <span class="section-num">01</span>
+              <div>
+                <h2>This machine</h2>
+                <p>
+                  The name you will see in the roster. It does not change the
+                  computer’s hostname.
+                </p>
+              </div>
+            </div>
+            <div class="fields">
+              <label class="field field--wide"
+                ><span>What do you want to call this machine?</span
+                ><input name="machine" placeholder="the workshop"
+              /></label>
+            </div>
+          </section>
+          <section class="form-section" id="you">
+            <div class="section-head">
+              <span class="section-num">02</span>
+              <div>
+                <h2>You</h2>
+                <p>
+                  One name used when the assistant, roster, or an agent
+                  addresses you.
+                </p>
+              </div>
+            </div>
+            <div class="fields">
+              <label class="field field--wide"
+                ><span>What should we call you?</span
+                ><input
+                  name="owner"
+                  autocomplete="name"
+                  placeholder="Your name"
+              /></label>
+            </div>
+          </section>
+          <section class="form-section" id="project">
+            <div class="section-head">
+              <span class="section-num">03</span>
+              <div>
+                <h2>Your first project</h2>
+                <p>
+                  A directory Ronin can work in, plus one line telling agents
+                  what it is for.
+                </p>
+              </div>
+            </div>
+            <div class="fields">
+              <label class="field"
+                ><span>Name</span
+                ><input name="project_name" placeholder="ronin" /><small
+                  >Short and lowercase.</small
+                ></label
+              ><label class="field"
+                ><span>Where does it live?</span
+                ><input name="project_dir" placeholder="~/code/my-app" /></label
+              ><label class="field field--wide"
+                ><span>What is it for?</span
+                ><input
+                  name="project_remit"
+                  placeholder="The browser grid of live agent sessions"
+                /><small
+                  >Agents read this when they enter the project.</small
+                ></label
+              >
+            </div>
+          </section>
+          <section class="form-section" id="agents">
+            <div class="section-head">
+              <span class="section-num">04</span>
+              <div>
+                <h2>Agents <span class="optional">optional</span></h2>
+                <p>
+                  Installed agents are facts. Tick a missing one only if you
+                  want Ronin to install it in a visible tile. Sign-in happens
+                  inside the agent.
+                </p>
+              </div>
+            </div>
+            <div class="choices">
+              <label class="choice"
+                ><input
+                  type="checkbox"
+                  name="agent"
+                  value="claude"
+                  checked
+                /><span
+                  ><b>Claude Code</b
+                  ><small>not installed · selected to fetch</small></span
+                ></label
+              ><label class="choice"
+                ><input
+                  type="checkbox"
+                  name="agent"
+                  value="codex"
+                  checked
+                /><span
+                  ><b>Codex</b
+                  ><small>not installed · selected to fetch</small></span
+                ></label
+              ><label class="choice"
+                ><input type="checkbox" name="agent" value="gemini" /><span
+                  ><b>Gemini CLI</b
+                  ><small>not installed · tick to fetch</small></span
+                ></label
+              ><label class="choice"
+                ><input type="checkbox" name="agent" value="opencode" /><span
+                  ><b>OpenCode</b
+                  ><small>not installed · tick to fetch</small></span
+                ></label
+              >
+            </div>
+          </section>
+          <section class="form-section" id="defaults">
+            <div class="section-head">
+              <span class="section-num">05</span>
+              <div>
+                <h2>Defaults for new sessions</h2>
+                <p>
+                  Starting choices, never restrictions. Every launch can choose
+                  something else.
+                </p>
+              </div>
+            </div>
+            <div class="fields">
+              <label class="field"
+                ><span>Model</span
+                ><select name="model">
+                  <option>Choose from detected models</option>
+                  <option>Claude Sonnet</option>
+                  <option>Codex</option></select
+                ><small>Any session can launch with another.</small></label
+              ><label class="field"
+                ><span>Which model answers Mika?</span
+                ><select name="mika">
+                  <option>A light detected model</option>
+                  <option>Same as new sessions</option></select
+                ><small>Mika is Ronin’s own assistant.</small></label
+              ><label class="field"
+                ><span>How many agents at once?</span
+                ><input name="cap" type="number" min="0" value="5" /><small
+                  >About 700 MB each. 0 means no limit.</small
+                ></label
+              >
+            </div>
+          </section>
+          <section class="form-section" id="services">
+            <div class="section-head">
+              <span class="section-num">06</span>
+              <div>
+                <h2>Ronin Services <span class="optional">optional</span></h2>
+                <p>
+                  Base Cowork remains free and local whether or not you add
+                  Services.
+                </p>
+              </div>
+            </div>
+            <label class="choice"
+              ><input
+                type="checkbox"
+                id="services-toggle"
+                name="services"
+              /><span
+                ><b>Add Ronin Services</b
+                ><small>A separate download, on separate terms.</small></span
+              ></label
+            >
+            <div class="services-fields">
+              <p class="services-disclosure">
+                <strong>What leaves this machine:</strong> If selected, Save
+                sends your email address, the Services terms version, and this
+                install’s activation request to Ronin. Ronin sends a
+                confirmation email and issues the entitlement after you confirm.
+                Declining Services sends none of this.
+              </p>
+              <div class="fields">
+                <label class="field field--wide"
+                  ><span
+                    >Email for confirmation
+                    <span class="optional">only if selected</span></span
+                  ><input
+                    type="email"
+                    name="email"
+                    placeholder="you@example.com"
+                /></label>
+              </div>
+            </div>
+          </section>
+          <div class="save">
+            <p>
+              Save opens Cowork immediately. Each chosen agent starts in its own
+              visible tile.
+            </p>
+            <div>
+              <button
+                class="button"
+                type="button"
+                onclick="openCowork(event,true)"
+              >
+                Preview Cowork
+              </button>
+              <button class="button button--primary" type="submit">
+                Save and open Cowork →
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script>
+      function openCowork(event, preview) {
+        event.preventDefault();
+        var agents = Array.from(
+          document.querySelectorAll("input[name=agent]:checked"),
+        )
+          .map(function (x) {
+            return x.value;
+          })
+          .join(",");
+        location.href =
+          "cowork-after-save.html?agents=" +
+          encodeURIComponent(agents) +
+          (preview ? "&preview=1" : "");
+        return false;
+      }
+    </script>
+  </body>
+</html>
