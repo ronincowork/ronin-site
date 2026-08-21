@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="How Ronin uses a tmux server to keep AI agent terminal sessions running and reconnect the same live terminal from a browser."
+    />
+    <meta
+      name="keywords"
+      content="AI agents tmux, persistent AI agent sessions, persistent terminals, tmux server, terminal agents"
+    />
+    <title>AI agents, persistent terminals, and the tmux server | Ronin Cowork</title>
+    <link rel="stylesheet" href="../ronin-tokens.css" />
+    <style>
+      .tmux-head {
+        max-width: 920px;
+        margin-bottom: 64px;
+      }
+      .tmux-head .display {
+        max-width: 900px;
+      }
+      .no-setup {
+        max-width: 820px;
+        margin: 0 0 72px;
+        padding: var(--space-10);
+        border-left: 3px solid var(--kaki);
+        background: var(--raise);
+      }
+      .no-setup h2,
+      .no-setup p {
+        margin: 0;
+      }
+      .no-setup h2 {
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .no-setup p {
+        margin-top: var(--space-6);
+        color: var(--muted-2);
+      }
+      .explainers {
+        border-top: var(--edge) solid var(--line);
+      }
+      .explainer {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(32px, 5vw, 58px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .explainer .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .explainer h2 {
+        margin: 0 0 var(--space-8);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .explainer p,
+      .explainer li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .explainer p {
+        margin: 0 0 var(--space-8);
+      }
+      .explainer ul {
+        max-width: var(--measure);
+        margin: 0;
+        padding-left: 1.4em;
+      }
+      .explainer li + li {
+        margin-top: var(--space-6);
+      }
+      .terms {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 820px;
+        margin-top: var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .term-card {
+        padding: var(--space-9);
+        background: var(--panel);
+      }
+      .term-card:nth-child(even) {
+        border-left: var(--edge) solid var(--line-2);
+      }
+      .term-card:nth-child(n + 3) {
+        border-top: var(--edge) solid var(--line-2);
+      }
+      .term-card strong {
+        display: block;
+        margin-bottom: var(--space-4);
+        color: var(--kaki);
+        font: 600 var(--text-4) var(--font-mono);
+      }
+      .term-card span {
+        color: var(--muted-2);
+      }
+      .faq {
+        padding: 72px 0 0;
+      }
+      .faq > h2 {
+        margin: 0 0 var(--space-10);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .faq details {
+        max-width: 820px;
+        border-top: var(--edge) solid var(--line);
+      }
+      .faq details:last-of-type {
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .faq summary {
+        padding: var(--space-9) 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .faq details p {
+        max-width: var(--measure);
+        margin: 0 0 var(--space-9);
+        color: var(--muted-2);
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 72px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      @media (max-width: 640px) {
+        .explainer {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .terms,
+        .finish {
+          grid-template-columns: 1fr;
+        }
+        .term-card:nth-child(even) {
+          border-left: 0;
+        }
+        .term-card:nth-child(n + 2) {
+          border-top: var(--edge) solid var(--line-2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../index.html"
+          ><img src="../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="tmux-head">
+        <p class="eyebrow">AI agents and persistent terminals</p>
+        <h1 class="display">The browser can close. The agent keeps working.</h1>
+        <p class="lede">
+          Ronin runs each terminal agent inside tmux on your machine. tmux keeps
+          the live terminal separate from the browser that happens to be viewing
+          it, so you can leave and reconnect to the same session later.
+        </p>
+      </section>
+
+      <section class="no-setup">
+        <h2>You do not need to set up tmux.</h2>
+        <p>
+          Ronin includes and manages the tmux layer it needs. This page explains
+          what that layer does and why it matters when several AI agents are
+          working at once.
+        </p>
+      </section>
+
+      <section class="explainers" aria-label="How tmux works in Ronin">
+        <article class="explainer">
+          <span class="num">01</span>
+          <div>
+            <h2>A terminal window is usually temporary</h2>
+            <p>
+              Claude Code, Codex, Gemini CLI, and other terminal agents run as
+              interactive programs. In an ordinary terminal, the program is
+              tied closely to that terminal connection. Close a remote shell,
+              lose a network connection, or close the terminal window, and the
+              work can be interrupted.
+            </p>
+            <p>
+              tmux puts a durable terminal layer between the program and the
+              screen used to view it. The agent runs in the tmux-managed
+              terminal on the Ronin machine. Your browser is a viewer and input
+              device, not the owner of the agent process.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">02</span>
+          <div>
+            <h2>The tmux server owns the live terminals</h2>
+            <p>
+              A tmux server is one background process on the Ronin machine. It
+              holds the sessions, manages their terminals, and keeps track of
+              what is running inside them. It does not run at Ronin HQ and it
+              does not move your terminal into the cloud.
+            </p>
+            <p>
+              Ronin deliberately runs the tmux server separately from the
+              Cowork web application. Updating or restarting Cowork can replace
+              the browser-facing application without taking the active agent
+              sessions with it.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">03</span>
+          <div>
+            <h2>A Ronin session is a named tmux session</h2>
+            <p>
+              tmux groups terminals into named sessions. Ronin uses those names
+              to discover running work, show it in the Roster, and place a
+              session into a Cowork tile. The tile is not a copy of the
+              terminal. It is a way into the existing session.
+            </p>
+            <div class="terms" aria-label="tmux terms in Ronin">
+              <div class="term-card">
+                <strong>server</strong>
+                <span>The background process that owns all tmux state.</span>
+              </div>
+              <div class="term-card">
+                <strong>session</strong>
+                <span>A named group of terminal work. Ronin lists it in the Roster.</span>
+              </div>
+              <div class="term-card">
+                <strong>window</strong>
+                <span>A group of one or more panes inside a session.</span>
+              </div>
+              <div class="term-card">
+                <strong>pane</strong>
+                <span>The terminal area containing the running agent program.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">04</span>
+          <div>
+            <h2>Disconnecting is not ending the session</h2>
+            <p>
+              When you close a Ronin browser tab, the browser disconnects from
+              the tmux session. The tmux server, terminal, and agent remain on
+              the Ronin machine. Open Cowork again and Ronin reconnects the tile
+              to that same session.
+            </p>
+            <p>
+              This is useful for long-running AI agent work and remote machines.
+              You can start a session from a laptop, close the laptop, and later
+              inspect the same live terminal from another computer or a phone.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">05</span>
+          <div>
+            <h2>What persistence does and does not mean</h2>
+            <ul>
+              <li>Closing the browser does not stop the agent.</li>
+              <li>A dropped browser or VPN connection does not stop the agent.</li>
+              <li>Restarting the Cowork web application does not stop the tmux server.</li>
+              <li>Ending the session in Ronin does stop that session.</li>
+              <li>If the agent exits by itself, its terminal work has ended.</li>
+              <li>Turning off or rebooting the host ends the live processes. tmux is not a virtual machine or checkpoint system.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">06</span>
+          <div>
+            <h2>Why tmux works well for several AI agents</h2>
+            <p>
+              Terminal agents already know how to run as CLI programs. tmux
+              gives each one a stable place to run without replacing the agent,
+              provider, account, or project directory. Ronin adds the shared
+              edges around those sessions: the Roster, tiles, jobs, groups,
+              handoffs, macros, and coordination.
+            </p>
+            <p>
+              That is the division of work. tmux maintains the live terminals.
+              Ronin makes several of those terminals manageable as a coworking
+              space.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="faq">
+        <p class="eyebrow">Common questions</p>
+        <h2>Persistent AI agent sessions with tmux</h2>
+        <details>
+          <summary>Does an AI agent keep running after I close Ronin?</summary>
+          <p>
+            Yes, if you only close the browser. The agent continues in its tmux
+            session on the Ronin machine. The machine must remain on and the
+            agent process must still be running.
+          </p>
+        </details>
+        <details>
+          <summary>Does tmux keep sessions through a reboot?</summary>
+          <p>
+            No. tmux keeps programs alive across disconnected terminals, not
+            across a machine shutdown or reboot. A reboot ends the processes
+            running in memory.
+          </p>
+        </details>
+        <details>
+          <summary>Do I have to learn tmux commands to use Ronin?</summary>
+          <p>
+            No. Ronin installs and operates its tmux layer. Cowork gives you the
+            Roster, session launcher, tiles, and controls in the browser.
+          </p>
+        </details>
+        <details>
+          <summary>Is the browser showing a copy of the terminal?</summary>
+          <p>
+            In Ronin's standard locked mode, the tile is connected to the live
+            tmux terminal. Input goes back to that terminal and screen changes
+            come from it. Ronin Services can optionally add an unlocked recorded
+            text view for independent scrolling, summaries, and voice.
+          </p>
+        </details>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Give terminal agents a place to stay.</h2>
+          <p>Install Ronin on the machine that will host the sessions.</p>
+        </div>
+        <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="https://github.com/tmux/tmux/wiki/Getting-Started">Official tmux guide</a>
+    </footer>
+  </body>
+</html>

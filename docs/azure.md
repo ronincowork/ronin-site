@@ -36,6 +36,7 @@ disturb the MX, `hq`, or Mailgun records when changing the site.
 test -f index.html
 test -f load-ronin.html
 test -f vpn_tailscale/index.html
+test -f tmux_serve/index.html
 test -f ronin-tokens.css
 test -f site-shell.js
 test -f nin-mark.svg
@@ -59,9 +60,9 @@ curl -fsSI https://ronincowork.com/
 curl -fsSI https://www.ronincowork.com/
 ```
 
-Confirm HTTPS, successful responses for the landing page, Load Ronin, and the Tailscale guide, and
-the local mark in a browser. Confirm the lab and local-application pages are not publicly served.
-DNS changes must preserve
+Confirm HTTPS, successful responses for the landing page, Load Ronin, the Tailscale guide, and the
+tmux explainer, and the local mark in a browser. Confirm the lab and local-application pages are not
+publicly served. DNS changes must preserve
 the existing Google MX records, `hq` SHIWAKE records, and `mg` Mailgun records.
 
 ## Rollback

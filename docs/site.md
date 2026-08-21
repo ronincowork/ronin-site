@@ -12,10 +12,14 @@ The complete owner journey is discussed as five named surfaces:
 landing_page → load_ronin → install_ronin → cowork_setup → cowork
 ```
 
-This repository serves `landing_page`, `load_ronin`, and the supporting `vpn_tailscale` guide.
-`install_ronin` is the terminal handoff into the released Cowork installer. Journey studies remain
-in `ronin-lab`; `cowork_setup` and `cowork` belong to the installed `ronin-cowork` application and
-must not be published here.
+This repository serves `landing_page`, `load_ronin`, and supporting explainers such as
+`vpn_tailscale` and `tmux_serve`. `install_ronin` is the terminal handoff into the released Cowork
+installer. Journey studies remain in `ronin-lab`; `cowork_setup` and `cowork` belong to the
+installed `ronin-cowork` application and must not be published here.
+
+Supporting explainers answer a real question someone may search for, explain the underlying
+technology in the context of AI agent work, and lead back to Ronin. They are not artificial stops
+in the owner journey and they must not read as hidden setup requirements.
 
 The names are deliberate. Plain `setup` and `landing` are too ambiguous across a public site,
 an installer, and an installed application.
