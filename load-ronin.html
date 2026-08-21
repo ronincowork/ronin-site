@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Load Ronin</title>
+    <link rel="stylesheet" href="ronin-tokens.css" />
+    <style>
+      .install-head {
+        display: grid;
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 8vw;
+        align-items: end;
+        margin-bottom: 72px;
+      }
+      .install-head .step {
+        justify-self: end;
+        color: var(--muted);
+        font: var(--text-3) var(--font-mono);
+      }
+      .doors {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: var(--edge) solid var(--line);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background: var(--panel);
+      }
+      .door {
+        display: flex;
+        flex-direction: column;
+        padding: clamp(24px, 4vw, 48px);
+      }
+      .door + .door {
+        border-left: var(--edge) solid var(--line);
+      }
+      .door h2 {
+        margin: var(--space-5) 0 var(--space-7);
+        font: 500 var(--text-10) / 1.2 var(--font-ui);
+      }
+      .door p {
+        color: var(--muted-2);
+      }
+      .command {
+        position: relative;
+        margin: auto 0 0;
+        margin-top: var(--space-9);
+        padding: var(--space-9);
+        padding-right: 82px;
+        border-radius: var(--radius-sm);
+        background: var(--term-bg);
+        color: var(--term-fg);
+        font: var(--text-4) / 1.7 var(--font-term);
+        overflow: auto;
+      }
+      .command code {
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+      .copy {
+        position: absolute;
+        right: var(--space-5);
+        top: var(--space-5);
+        border: var(--edge) solid var(--line-3);
+        border-radius: var(--radius-xs);
+        background: var(--raise);
+        color: var(--muted-2);
+        padding: var(--space-4) var(--space-6);
+        font: var(--text-2) var(--font-mono);
+        cursor: pointer;
+      }
+      .after {
+        display: grid;
+        grid-template-columns: 0.7fr 2fr;
+        gap: 8vw;
+        padding: 88px 0;
+      }
+      .after ol {
+        margin: 0;
+        padding-left: 42px;
+        list-style: decimal-leading-zero;
+      }
+      .after li {
+        padding: var(--space-5) 0;
+        border-top: var(--edge) solid var(--line);
+        color: var(--muted-2);
+        line-height: 1.45;
+      }
+      .after li::marker {
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .remote {
+        padding: var(--space-9);
+        background: var(--raise);
+        border-radius: var(--radius-md);
+        color: var(--muted-2);
+      }
+      @media (max-width: 760px) {
+        .install-head,
+        .doors,
+        .after {
+          grid-template-columns: 1fr;
+        }
+        .install-head .step {
+          justify-self: start;
+        }
+        .door + .door {
+          border-left: 0;
+          border-top: var(--edge) solid var(--line);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html"
+          ><img src="nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="setup-journey.html">The walk</a
+          ><a href="https://github.com/ronincowork/ronin-cowork">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main class="page">
+      <section class="install-head">
+        <div>
+          <p class="eyebrow">Surface 02 · Load Ronin</p>
+          <h1 class="display">Put Ronin where your agents work.</h1>
+          <p class="lede">
+            Use either door below on the machine that will host Cowork. Both
+            lead to the same private installation.
+          </p>
+        </div>
+        <p class="step">landing → <strong>load</strong> → terminal → setup</p>
+      </section>
+      <section class="doors">
+        <article class="door">
+          <p class="section-label">I have the terminal</p>
+          <h2>Run one command</h2>
+          <p>Paste this into a terminal on the target machine.</p>
+          <div class="command">
+            <button
+              class="copy"
+              data-copy-target="#install-command"
+              data-copy-value="curl -fsSL https://raw.githubusercontent.com/ronincowork/ronin-cowork/master/scripts/get-ronin | sh"
+              onclick="copyText(this,this.dataset.copyValue)"
+            >
+              copy</button
+            ><code id="install-command"
+              >curl -fsSL
+              https://raw.githubusercontent.com/ronincowork/ronin-cowork/master/scripts/get-ronin
+              | sh</code
+            >
+          </div>
+        </article>
+        <article class="door">
+          <p class="section-label">My agent has the terminal</p>
+          <h2>Hand it the guide</h2>
+          <p>
+            Send this link to an agent already running on the target machine.
+            Ask it to install Ronin and return the address.
+          </p>
+          <div class="command">
+            <button
+              class="copy"
+              data-copy-target="#agent-guide"
+              data-copy-value="https://github.com/ronincowork/ronin-cowork/blob/master/docs/install.md"
+              onclick="copyText(this,this.dataset.copyValue)"
+            >
+              copy</button
+            ><code id="agent-guide"
+              >https://github.com/ronincowork/ronin-cowork/blob/master/docs/install.md</code
+            >
+          </div>
+        </article>
+      </section>
+      <section class="after">
+        <p class="section-label">What happens next</p>
+        <div>
+          <ol>
+            <li>Choose the machine you want to install Ronin Cowork on.</li>
+            <li>
+              Copy and paste the command into your terminal, or give the
+              instructions link to an agent on your machine.
+            </li>
+            <li>
+              The installer checks the machine and selects the right release.
+            </li>
+            <li>Ronin loads and starts locally.</li>
+            <li>
+              Check your terminal for the private address to open in your
+              browser.
+            </li>
+            <li>Your browser opens the Cowork setup form.</li>
+            <li>Save and submit.</li>
+            <li>
+              If you selected Ronin Services, you will confirm your email.
+            </li>
+            <li>Your browser at the same address shows your Cowork Space.</li>
+            <li>
+              Bookmark it for use on this machine or any device on your
+              Tailscale VPN.
+            </li>
+            <li>Good luck, and let us know how it is going.</li>
+          </ol>
+          <p class="remote">
+            <strong>Remote machine?</strong> Keep Ronin private. Open its Cowork
+            address from any device connected to the same VPN. No public port
+            required.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a href="index.html">← Back to Ronin</a
+      ><span>Next: the terminal hands you a private address</span>
+    </footer>
+    <script src="site-shell.js"></script>
+  </body>
+</html>

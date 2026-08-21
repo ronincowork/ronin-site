@@ -34,9 +34,13 @@ disturb the MX, `hq`, or Mailgun records when changing the site.
 
 ```bash
 test -f index.html
-test -f assets/roster.png
-test -f assets/grid.png
-rg -n 'src="assets/' index.html
+test -f load-ronin.html
+test -f setup-journey.html
+test -f cowork-setup.html
+test -f cowork-after-save.html
+test -f ronin-tokens.css
+test -f site-shell.js
+test -f nin-mark.svg
 ```
 
 Preview locally and inspect both light and dark modes before merging `dev` to `master`.
@@ -54,7 +58,8 @@ curl -fsSI https://ronincowork.com/
 curl -fsSI https://www.ronincowork.com/
 ```
 
-Confirm HTTPS, a successful response, and both local images in a browser. DNS changes must preserve
+Confirm HTTPS, successful responses for the landing page and subpages, and the local mark in a
+browser. DNS changes must preserve
 the existing Google MX records, `hq` SHIWAKE records, and `mg` Mailgun records.
 
 ## Rollback
@@ -64,5 +69,5 @@ redeploy. Do not rewrite `master` or deploy an unrecorded local directory.
 
 ## Azure CLI access
 
-Shared authentication and safety instructions live at
-`ronin-lab/landing/azure/README.md` on the dohyo workspace.
+Use the installed Azure CLI only after confirming the active identity and subscription. Keep
+project-specific commands and live resource facts in this document.
