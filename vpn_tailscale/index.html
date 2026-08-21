@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Connect your Ronin machine, computer, and iPhone with Tailscale."
+    />
+    <title>Use Ronin with Tailscale</title>
+    <link rel="stylesheet" href="../ronin-tokens.css" />
+    <style>
+      .vpn-head {
+        max-width: 860px;
+        margin-bottom: 72px;
+      }
+      .vpn-head .display {
+        max-width: 760px;
+      }
+      .setup-list {
+        border-top: var(--edge) solid var(--line);
+      }
+      .setup-step {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(30px, 5vw, 56px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .setup-step .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .setup-step h2 {
+        margin: 0 0 var(--space-8);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .setup-step p,
+      .setup-step li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .setup-step p {
+        margin: 0 0 var(--space-8);
+      }
+      .setup-step ol,
+      .setup-step ul {
+        max-width: var(--measure);
+        margin: 0;
+        padding-left: 1.4em;
+      }
+      .setup-step li + li {
+        margin-top: var(--space-6);
+      }
+      .setup-step a:not(.button) {
+        color: var(--kaki);
+        text-underline-offset: 3px;
+      }
+      .command-line {
+        max-width: var(--measure);
+        margin: var(--space-9) 0;
+        padding: var(--space-8) var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-sm);
+        background: var(--term-bg);
+        color: var(--term-fg);
+        font: var(--text-4) / 1.7 var(--font-term);
+        overflow-wrap: anywhere;
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 72px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      @media (max-width: 640px) {
+        .setup-step {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .finish {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../index.html"
+          ><img src="../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="vpn-head">
+        <p class="eyebrow">Private remote access</p>
+        <h1 class="display">Reach your Ronin machine with Tailscale.</h1>
+        <p class="lede">
+          Put the Ronin machine, your computer, and your iPhone on the same
+          private Tailscale network. Then each device can open Cowork without
+          putting Cowork on the public internet.
+        </p>
+      </section>
+
+      <section class="setup-list" aria-label="Tailscale setup steps">
+        <article class="setup-step">
+          <span class="num">01</span>
+          <div>
+            <h2>Start one Tailscale network</h2>
+            <p>
+              Go to the official
+              <a href="https://login.tailscale.com/start">Tailscale sign-up page</a>
+              and sign in. Use this same Tailscale account when you add each
+              device below. Tailscale calls this private network a tailnet.
+            </p>
+          </div>
+        </article>
+
+        <article class="setup-step">
+          <span class="num">02</span>
+          <div>
+            <h2>Add the machine running Ronin</h2>
+            <p>
+              This is the computer, home server, or cloud virtual machine that
+              hosts your agent sessions. For a Linux machine, open its terminal
+              and run Tailscale's installer:
+            </p>
+            <div class="command-line">
+              curl -fsSL https://tailscale.com/install.sh | sh
+            </div>
+            <p>Then connect it:</p>
+            <div class="command-line">sudo tailscale up</div>
+            <p>
+              Open the sign-in link printed in the terminal and use the same
+              Tailscale account. If the Ronin machine uses macOS or Windows,
+              install the matching app from the
+              <a href="https://tailscale.com/download">official download page</a>
+              and sign in there instead.
+            </p>
+          </div>
+        </article>
+
+        <article class="setup-step">
+          <span class="num">03</span>
+          <div>
+            <h2>Add the computer you use</h2>
+            <ol>
+              <li>
+                Download Tailscale for macOS, Windows, or Linux from
+                <a href="https://tailscale.com/download">tailscale.com/download</a>.
+              </li>
+              <li>Install and open the app.</li>
+              <li>Sign in with the same Tailscale account.</li>
+              <li>Leave Tailscale connected while using Cowork.</li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="setup-step">
+          <span class="num">04</span>
+          <div>
+            <h2>Add your iPhone</h2>
+            <ol>
+              <li>
+                Install
+                <a href="https://apps.apple.com/us/app/tailscale/id1470499037"
+                  >Tailscale from the App Store</a
+                >.
+              </li>
+              <li>Open it and sign in with the same Tailscale account.</li>
+              <li>Allow iOS to add the VPN configuration when asked.</li>
+              <li>Turn Tailscale on before opening Cowork in your browser.</li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="setup-step">
+          <span class="num">05</span>
+          <div>
+            <h2>Open Cowork</h2>
+            <p>
+              Run or restart Ronin on the host machine after Tailscale is
+              connected. Ronin prints the private address for Cowork in that
+              machine's terminal. Open that address from your computer or
+              iPhone and bookmark it.
+            </p>
+            <p>
+              All three devices must appear in the same Tailscale network. If
+              the address does not open, first check that Tailscale shows as
+              connected on both the device you are holding and the Ronin host.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Ronin stays private.</h2>
+          <p>
+            Tailscale supplies the private network. Ronin does not require a
+            public Cowork address or an additional Ronin login on that network.
+          </p>
+        </div>
+        <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="https://tailscale.com/kb/1017/install">Official Tailscale guide</a>
+    </footer>
+  </body>
+</html>
