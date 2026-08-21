@@ -4,18 +4,17 @@ This repository is the deployable public site for `ronincowork.com`. It owns wha
 serves. `ronin-lab/landing/` is the workshop: positioning, journey discussion, page concepts,
 identity studies, and alternatives stay there until the owner chooses one to ship.
 
-## The site walk
+## The public site
 
-The public journey is discussed as five named surfaces:
+The complete owner journey is discussed as five named surfaces:
 
 ```text
 landing_page → load_ronin → install_ronin → cowork_setup → cowork
 ```
 
-This repository serves `landing_page`, `load_ronin`, and the public owner-walk preview.
-`install_ronin` is the terminal handoff into the released Cowork installer. The
-`cowork_setup` and `cowork` pages here are clearly marked previews of surfaces that belong to
-the installed `ronin-cowork` application.
+This repository serves only `landing_page` and `load_ronin`. `install_ronin` is the terminal
+handoff into the released Cowork installer. Journey studies remain in `ronin-lab`; `cowork_setup`
+and `cowork` belong to the installed `ronin-cowork` application and must not be published here.
 
 The names are deliberate. Plain `setup` and `landing` are too ambiguous across a public site,
 an installer, and an installed application.

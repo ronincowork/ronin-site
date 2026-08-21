@@ -35,12 +35,12 @@ disturb the MX, `hq`, or Mailgun records when changing the site.
 ```bash
 test -f index.html
 test -f load-ronin.html
-test -f setup-journey.html
-test -f cowork-setup.html
-test -f cowork-after-save.html
 test -f ronin-tokens.css
 test -f site-shell.js
 test -f nin-mark.svg
+test ! -e setup-journey.html
+test ! -e cowork-setup.html
+test ! -e cowork-after-save.html
 ```
 
 Preview locally and inspect both light and dark modes before merging `dev` to `master`.
@@ -58,8 +58,8 @@ curl -fsSI https://ronincowork.com/
 curl -fsSI https://www.ronincowork.com/
 ```
 
-Confirm HTTPS, successful responses for the landing page and subpages, and the local mark in a
-browser. DNS changes must preserve
+Confirm HTTPS, successful responses for the landing page and Load Ronin, and the local mark in a
+browser. Confirm the lab and local-application pages are not publicly served. DNS changes must preserve
 the existing Google MX records, `hq` SHIWAKE records, and `mg` Mailgun records.
 
 ## Rollback
