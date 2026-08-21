@@ -57,17 +57,6 @@
         color: var(--kaki);
         text-underline-offset: 3px;
       }
-      .command-line {
-        max-width: var(--measure);
-        margin: var(--space-9) 0;
-        padding: var(--space-8) var(--space-9);
-        border: var(--edge) solid var(--line-2);
-        border-radius: var(--radius-sm);
-        background: var(--term-bg);
-        color: var(--term-fg);
-        font: var(--text-4) / 1.7 var(--font-term);
-        overflow-wrap: anywhere;
-      }
       .finish {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -122,6 +111,41 @@
         </p>
       </section>
 
+      <section class="session-brief" aria-labelledby="tailscale-brief-title">
+        <div class="session-brief__head">
+          <div>
+            <p class="section-label">Start in Ronin Cowork</p>
+            <h2 id="tailscale-brief-title">Hand the setup to a session</h2>
+            <p>
+              Copy this brief into an agent session running on the Ronin
+              machine. The agent can inspect the actual host, do the machine
+              work, and bring the sign-in step back to you.
+            </p>
+          </div>
+          <button
+            class="session-brief__copy"
+            data-copy-target="#tailscale-session-brief"
+            onclick="copyText(this,document.querySelector('#tailscale-session-brief').innerText)"
+          >
+            copy
+          </button>
+        </div>
+        <pre id="tailscale-session-brief">Help me connect this Ronin machine to Tailscale so I can reach Cowork privately from my other devices.
+
+Work on the machine where this Ronin session is running.
+
+1. Inspect the operating system, whether Tailscale is installed and running, and the current Ronin Cowork address. Do not change anything yet.
+2. Tell me what you found and the exact plan.
+3. If Tailscale is missing, use the official Tailscale distribution for this operating system. Ask before any sudo, administrator, or package-install action.
+4. Start or connect Tailscale. Do not sign into an account for me. Give me the official authentication link and wait for me to complete it.
+5. After I confirm the login, verify Tailscale status, identify this machine's private Tailscale address, and confirm Ronin is using it. Restart Ronin only if needed and tell me first.
+6. Give me the private Cowork URL to open.
+7. Do not change the firewall, public ports, SSH, DNS, exit nodes, subnet routes, or existing network configuration unless I explicitly approve it.
+8. Explain how to add my computer and iPhone to the same Tailscale account, then give me a short final checklist.
+
+Never print or store authentication keys or tokens in the session.</pre>
+      </section>
+
       <section class="setup-list" aria-label="Tailscale setup steps">
         <article class="setup-step">
           <span class="num">01</span>
@@ -142,20 +166,15 @@
             <h2>Add the machine running Ronin</h2>
             <p>
               This is the computer, home server, or cloud virtual machine that
-              hosts your agent sessions. For a Linux machine, open its terminal
-              and run Tailscale's installer:
+              hosts your agent sessions. Paste the brief above into a Ronin
+              session on that machine. The agent will inspect the operating
+              system, use Tailscale's official installer if needed, and return
+              the sign-in link for you to open. You keep control of the account
+              login and any administrator approval.
             </p>
-            <div class="command-line">
-              curl -fsSL https://tailscale.com/install.sh | sh
-            </div>
-            <p>Then connect it:</p>
-            <div class="command-line">sudo tailscale up</div>
             <p>
-              Open the sign-in link printed in the terminal and use the same
-              Tailscale account. If the Ronin machine uses macOS or Windows,
-              install the matching app from the
-              <a href="https://tailscale.com/download">official download page</a>
-              and sign in there instead.
+              If you prefer to do it by hand, use Tailscale's
+              <a href="https://tailscale.com/download">official download page</a>.
             </p>
           </div>
         </article>
@@ -229,5 +248,6 @@
       <span>Ronin Cowork · open source · runs on your machine</span>
       <a href="https://tailscale.com/kb/1017/install">Official Tailscale guide</a>
     </footer>
+    <script src="../site-shell.js"></script>
   </body>
 </html>

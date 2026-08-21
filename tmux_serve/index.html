@@ -196,6 +196,39 @@
         </p>
       </section>
 
+      <section class="session-brief" aria-labelledby="tmux-brief-title">
+        <div class="session-brief__head">
+          <div>
+            <p class="section-label">Ask the session you are in</p>
+            <h2 id="tmux-brief-title">See how your own session works</h2>
+            <p>
+              Copy this into any Ronin agent session. The agent will inspect its
+              own tmux context without changing it, then explain the result using
+              your real session instead of an abstract example.
+            </p>
+          </div>
+          <button
+            class="session-brief__copy"
+            data-copy-target="#tmux-session-brief"
+            onclick="copyText(this,document.querySelector('#tmux-session-brief').innerText)"
+          >
+            copy
+          </button>
+        </div>
+        <pre id="tmux-session-brief">Explain how tmux is keeping this exact Ronin session alive.
+
+Use read-only checks only. Do not create, kill, restart, detach, rename, or modify sessions. Do not send keys to any pane.
+
+1. Identify this session's tmux server, session, window, and pane using the current environment and read-only tmux commands.
+2. Explain each of those four terms in plain language using the values you found here.
+3. Explain how this session appears in Ronin's Roster and how a Cowork tile connects to it.
+4. Tell me what happens to this agent if I close the browser, lose the VPN connection, restart the Cowork web application, end the session, or reboot the host machine.
+5. Explain the difference between the live tmux terminal and Ronin Services' optional unlocked recorded-text view.
+6. If a read-only check reveals a health or ownership problem, report it but do not fix it.
+
+Finish with a short summary of what tmux owns and what Ronin Cowork adds around it.</pre>
+      </section>
+
       <section class="explainers" aria-label="How tmux works in Ronin">
         <article class="explainer">
           <span class="num">01</span>
@@ -370,5 +403,6 @@
       <span>Ronin Cowork · open source · runs on your machine</span>
       <a href="https://github.com/tmux/tmux/wiki/Getting-Started">Official tmux guide</a>
     </footer>
+    <script src="../site-shell.js"></script>
   </body>
 </html>
