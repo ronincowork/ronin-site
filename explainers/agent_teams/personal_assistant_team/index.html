@@ -98,6 +98,30 @@
       .term-card span {
         color: var(--muted-2);
       }
+      .sources {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-6);
+        max-width: 860px;
+        margin: var(--space-9) 0;
+      }
+      .source-card {
+        padding: var(--space-8) var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-left: var(--edge-2) solid var(--kaki);
+        border-radius: var(--radius-sm);
+        background: var(--panel);
+      }
+      .source-card strong {
+        display: block;
+        margin-bottom: var(--space-3);
+        color: var(--kaki);
+        font: 600 var(--text-4) var(--font-mono);
+      }
+      .source-card span {
+        color: var(--muted-2);
+        font-size: var(--text-6);
+      }
       .related {
         margin-top: 72px;
       }
@@ -133,6 +157,7 @@
           gap: var(--space-8);
         }
         .terms,
+        .sources,
         .finish {
           grid-template-columns: 1fr;
         }
@@ -241,6 +266,55 @@
 
         <article class="explainer">
           <span class="num">03</span>
+          <div>
+            <h2>Where the brain gets its information</h2>
+            <p>
+              gbrain ships connection recipes for the places your life already
+              writes itself down. Each one is set up on the brain with your own
+              accounts and keys — start with none, and add the ones you
+              actually use:
+            </p>
+            <div class="sources" aria-label="gbrain information sources">
+              <div class="source-card">
+                <strong>what you tell it</strong>
+                <span>"Remember this" in any connected session files it straight into the brain. Works from day one, no setup.</span>
+              </div>
+              <div class="source-card">
+                <strong>your notes</strong>
+                <span>Markdown you already have — bulk-import a folder of notes and the brain indexes it.</span>
+              </div>
+              <div class="source-card">
+                <strong>Gmail</strong>
+                <span>Email flows into brain pages, so the assistant recalls who wrote what and what is still open.</span>
+              </div>
+              <div class="source-card">
+                <strong>Google Calendar</strong>
+                <span>Events become searchable pages — attendees, locations, and meeting-prep context by day.</span>
+              </div>
+              <div class="source-card">
+                <strong>meeting transcripts</strong>
+                <span>Circleback meeting notes auto-import, with attendee detection built in.</span>
+              </div>
+              <div class="source-card">
+                <strong>X (Twitter)</strong>
+                <span>Timeline, mentions, and keyword monitoring flow into the brain as pages.</span>
+              </div>
+              <div class="source-card">
+                <strong>voice</strong>
+                <span>Talk to the brain out loud — conversations land as pages it can recall later.</span>
+              </div>
+            </div>
+            <p>
+              The recipes live in gbrain's own library and are documented
+              there — see
+              <a href="https://github.com/garrytan/gbrain">the gbrain
+              repository</a> for the full, current list.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">04</span>
           <div>
             <h2>Narrow by design</h2>
             <p>
