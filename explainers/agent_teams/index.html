@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="How AI agent teams work in Ronin Cowork: a job role is who your agent is, session tasks are what it is doing right now, and one session moves between tasks without changing who it is."
+      content="How AI agent teams work in Ronin Cowork: a family role is who your agent is, session tasks are what it is doing right now, and one session moves between tasks without changing who it is."
     />
     <meta
       name="keywords"
-      content="AI agent teams, AI agent roles, agent job role, agent session tasks, multi-agent coordination"
+      content="AI agent teams, AI agent roles, agent family role, agent session tasks, multi-agent coordination"
     />
-    <title>How AI agent teams work: job roles and session tasks | Ronin Cowork</title>
+    <title>How AI agent teams work: family roles and session tasks | Ronin Cowork</title>
     <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../../ronin-tokens.css" />
     <style>
@@ -27,7 +27,7 @@
       }
       .usecase-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: var(--space-7);
       }
       .usecase {
@@ -203,7 +203,7 @@
         <p class="eyebrow">Agent teams</p>
         <h1 class="display">A role is who your agent is. A task is what it is doing now.</h1>
         <p class="lede">
-          In Ronin, a session is launched into a job role it keeps for its whole
+          In Ronin, a session is launched into a family role it keeps for its whole
           life, and moves between session tasks as the work changes. One agent,
           one durable identity, many kinds of work — and several sessions
           working side by side make a team.
@@ -216,8 +216,8 @@
           <a class="usecase" href="developer_team/">
             <h2>The Developer team</h2>
             <p>
-              One developer that riffs, plans, cuts code, chases bugs, and
-              checks work — and can run as quarterback over the other sessions.
+              One developer that riffs, plans, cuts code, chases bugs, checks
+              work, and quarter backs — six tasks in one family role.
             </p>
             <span>Read the use case →</span>
           </a>
@@ -237,6 +237,15 @@
             </p>
             <span>Read the use case →</span>
           </a>
+          <a class="usecase" href="personal_assistant_team/">
+            <h2>The personal assistant team</h2>
+            <p>
+              A narrow team with a long memory: an assistant powered by gbrain
+              that recalls your facts before answering and keeps what you ask
+              it to keep.
+            </p>
+            <span>Read the use case →</span>
+          </a>
         </div>
       </section>
 
@@ -247,7 +256,7 @@
             <h2>Every session is launched on three coordinates</h2>
             <p>
               When Ronin starts an agent session, three things describe it: a
-              project root, a job role, and a session task. The project root is
+              project root, a family role, and a session task. The project root is
               always required — a session has to be born somewhere. The role and
               the task are optional; a session can run with either or both left
               blank.
@@ -258,7 +267,7 @@
                 <span>Where it works — the directory the session is born into. Required.</span>
               </div>
               <div class="term-card">
-                <strong>job role</strong>
+                <strong>family role</strong>
                 <span>Who it is — chosen at launch, fixed for the life of the session.</span>
               </div>
               <div class="term-card">
@@ -272,10 +281,10 @@
         <article class="explainer">
           <span class="num">02</span>
           <div>
-            <h2>The job role is the durable hat</h2>
+            <h2>The family role is the durable hat</h2>
             <p>
               A role is the professional identity a session keeps: Developer,
-              Personal Assistant, Head Coach. It carries its own briefing —
+              Assistant, Head Coach. It carries its own briefing —
               the reading that tells the agent how someone in that seat behaves
               — and its own launch defaults, so every session in that role
               starts set up the right way.
@@ -329,11 +338,11 @@
           <div>
             <h2>Tasks are shared; roles organize them</h2>
             <p>
-              A task is not owned by a role. The same task can sit on several
-              roles' shelves — planning is planning whether a Developer or a
-              House Manager is doing it. The role decides which tasks appear on
-              its shelf; moving a task between roles changes the shelf, not the
-              task.
+              A task is not owned by a role. The same task can sit in several
+              roles' families — planning is planning whether a Developer or a
+              House Manager is doing it. The role decides which tasks belong to
+              its family; moving a task between roles changes the family, not
+              the task.
             </p>
             <p>
               That is why the use cases below are teams rather than org charts:
@@ -347,7 +356,7 @@
 
       <section class="faq">
         <p class="eyebrow">Common questions</p>
-        <h2>Job roles and session tasks</h2>
+        <h2>Family roles and session tasks</h2>
         <details>
           <summary>Can a session change its role?</summary>
           <p>
