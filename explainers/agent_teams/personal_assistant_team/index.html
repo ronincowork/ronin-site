@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="The fitness team in Ronin Cowork: a Head Coach agent that stays your coach while the work moves between nutrition, workouts, recovery, equipment, and race planning."
+      content="The personal assistant team in Ronin Cowork: an assistant powered by gbrain that searches its memory before answering, captures what you ask it to keep, and works for you — not a codebase."
     />
     <meta
       name="keywords"
-      content="AI personal trainer, AI fitness coach, AI training assistant, agent fitness planning, AI race planning"
+      content="AI personal assistant, gbrain, agent memory, AI assistant with memory, personal AI agent"
     />
-    <title>The fitness team | Ronin Cowork</title>
+    <title>The personal assistant team | Ronin Cowork</title>
     <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../../../ronin-tokens.css" />
     <style>
@@ -69,32 +69,33 @@
       .explainer p {
         margin: 0 0 var(--space-8);
       }
-      .tasks {
+      .explainer a {
+        color: var(--kaki);
+        text-underline-offset: 3px;
+      }
+      .terms {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         max-width: 860px;
         margin-top: var(--space-9);
         border: var(--edge) solid var(--line-2);
         border-radius: var(--radius-md);
         overflow: hidden;
       }
-      .task-card {
+      .term-card {
         padding: var(--space-9);
         background: var(--panel);
       }
-      .task-card:nth-child(even) {
+      .term-card + .term-card {
         border-left: var(--edge) solid var(--line-2);
       }
-      .task-card:nth-child(n + 3) {
-        border-top: var(--edge) solid var(--line-2);
-      }
-      .task-card strong {
+      .term-card strong {
         display: block;
         margin-bottom: var(--space-4);
         color: var(--kaki);
         font: 600 var(--text-4) var(--font-mono);
       }
-      .task-card span {
+      .term-card span {
         color: var(--muted-2);
       }
       .related {
@@ -131,14 +132,12 @@
           grid-template-columns: 34px minmax(0, 1fr);
           gap: var(--space-8);
         }
-        .tasks,
+        .terms,
         .finish {
           grid-template-columns: 1fr;
         }
-        .task-card:nth-child(even) {
+        .term-card + .term-card {
           border-left: 0;
-        }
-        .task-card:nth-child(n + 2) {
           border-top: var(--edge) solid var(--line-2);
         }
       }
@@ -162,36 +161,41 @@
     <main class="page">
       <section class="case-head">
         <p class="eyebrow">Use case · Agent teams</p>
-        <h1 class="display">The fitness team.</h1>
+        <h1 class="display">The personal assistant team.</h1>
         <p class="lede">
-          Have your agent be a head coach. It stays your coach across every
-          session — what changes is the work in front of it: today's meal plan,
-          this week's workouts, a recovery day, new shoes, the spring race.
+          A deliberately narrow team: one assistant that works for you — your
+          questions, your facts, your day. What makes it worth a seat is the
+          brain behind it: gbrain remembers what you tell it, across every
+          session, so you never start from zero.
         </p>
       </section>
 
       <section class="composition" aria-label="The composition">
-        <p class="pair"><b>family role:</b> Head Coach — who the agent remains, all season long</p>
-        <p class="pair"><b>session task:</b> race planning — what it is doing at this moment</p>
+        <p class="pair"><b>family role:</b> Assistant — the seats that answer rather than build</p>
+        <p class="pair"><b>session task:</b> personal assistant — powered by gbrain</p>
         <p>
-          Head Coach is a role you define in your own Ronin — the same way the
-          built-in Developer role is defined, but yours. See
-          <a href="../../customization/">Make Ronin your own</a>.
+          Both ship with Ronin Cowork. The memory comes from
+          <a href="https://github.com/garrytan/gbrain">gbrain</a>, Garry Tan's
+          open-source agent brain, connected through Ronin Services.
         </p>
       </section>
 
-      <section class="explainers" aria-label="How the fitness team works">
+      <section class="explainers" aria-label="How the personal assistant team works">
         <article class="explainer">
           <span class="num">01</span>
           <div>
-            <h2>The role: a coach that stays your coach</h2>
+            <h2>It works for a person, not a codebase</h2>
             <p>
-              The Head Coach's briefing is where your training philosophy
-              lives: how you like to train, what your history is, what the
-              coach should push on and what it should leave alone. Because the
-              role is fixed for the session's life, that grounding never
-              drifts — the agent answering about tomorrow's intervals is the
-              same coach that planned your season.
+              Every other team on this site points at work — a repository, a
+              training plan, a household. This one points at you. Ask it who
+              somebody is, what you decided last month, when the car is due,
+              what to get your sister — the assistant's whole job is your
+              questions, your facts, your day.
+            </p>
+            <p>
+              It answers rather than builds: it checks what it can actually
+              check, names what it used, and says it does not know rather than
+              guessing.
             </p>
           </div>
         </article>
@@ -199,50 +203,49 @@
         <article class="explainer">
           <span class="num">02</span>
           <div>
-            <h2>The tasks: one coach, five kinds of work</h2>
+            <h2>The integration: gbrain is the memory</h2>
             <p>
-              Each task carries its own working notes — how you track meals,
-              where the training log lives, what gear you already own. The
-              coach switches task as the conversation moves, and picks up the
-              right notes each time:
+              An assistant without memory is a search box. This one works
+              brain-first, against gbrain — an open-source agent brain that
+              stores what you choose to keep and hands it back to any connected
+              session:
             </p>
-            <div class="tasks" aria-label="Fitness team tasks">
-              <div class="task-card">
-                <strong>nutrition</strong>
-                <span>Meal planning and fueling, matched to the training load.</span>
+            <div class="terms" aria-label="How the brain is used">
+              <div class="term-card">
+                <strong>search first</strong>
+                <span>Before answering, it searches gbrain — your facts beat its guesses.</span>
               </div>
-              <div class="task-card">
-                <strong>workouts</strong>
-                <span>Design the sessions — intervals, strength, long days.</span>
+              <div class="term-card">
+                <strong>capture on request</strong>
+                <span>"Remember this" stores it. Never secrets, credentials, or others' work.</span>
               </div>
-              <div class="task-card">
-                <strong>recovery</strong>
-                <span>Manage rest, sleep, and the easy days that make hard days work.</span>
-              </div>
-              <div class="task-card">
-                <strong>equipment</strong>
-                <span>Choose and track gear — shoes, bike fit, what to replace when.</span>
-              </div>
-              <div class="task-card">
-                <strong>race planning</strong>
-                <span>Pick the goal race and build the season backward from it.</span>
+              <div class="term-card">
+                <strong>outlives sessions</strong>
+                <span>Sessions are mortal; the brain is not. Tomorrow's assistant knows what you told today's.</span>
               </div>
             </div>
+            <p>
+              The seat is born connected to its brain — an assistant defined by
+              its memory is never launched with the door to it closed. Anything
+              that opens an outside connection happens one confirmed step at a
+              time, and if gbrain is unreachable it says so plainly and carries
+              on as a plain assistant.
+            </p>
           </div>
         </article>
 
         <article class="explainer">
           <span class="num">03</span>
           <div>
-            <h2>Why the split matters</h2>
+            <h2>Narrow by design</h2>
             <p>
-              A single "fitness assistant" prompt goes stale the moment the
-              conversation changes subject. Splitting who the coach is from
-              what it is doing right now keeps both sharp: the role holds what
-              is always true about your training, and each task brings only the
-              notes that kind of work needs. The same task can even serve
-              another role later — planning is planning, whichever hat is
-              worn.
+              A team does not have to be big to earn its place. This one is a
+              single seat with a single task, and that is the point: the
+              assistant sits on your Roster beside the developer team and the
+              rest, always the same seat, accumulating your context instead of
+              resetting it. The same model that runs six developer tasks runs
+              one assistant — a family role, its task, and the briefing that
+              makes it yours.
             </p>
           </div>
         </article>
@@ -253,16 +256,16 @@
         <p>
           The same model runs
           <a href="../developer_team/">the Developer team</a>,
-          <a href="../home_management_team/">the home management team</a>, and
-          <a href="../personal_assistant_team/">the personal assistant team</a>.
+          <a href="../fitness_team/">the fitness team</a>, and
+          <a href="../home_management_team/">the home management team</a>.
           Or go back to <a href="../">how agent teams work</a>.
         </p>
       </section>
 
       <section class="finish">
         <div>
-          <h2>Give your coach a place to work.</h2>
-          <p>Install Ronin Cowork and define the roles that fit your life.</p>
+          <h2>Give your assistant a memory.</h2>
+          <p>Install Ronin Cowork, and connect gbrain through Ronin Services.</p>
         </div>
         <a class="button button--primary" href="../../../load-ronin.html">Load Ronin →</a>
       </section>
@@ -270,7 +273,7 @@
 
     <footer class="site-footer">
       <span>Ronin Cowork · open source · runs on your machine</span>
-      <a href="../">How agent teams work</a>
+      <a href="https://github.com/garrytan/gbrain">gbrain on GitHub</a>
     </footer>
   </body>
 </html>

@@ -42,6 +42,7 @@ test -f explainers/agent_teams/index.html
 test -f explainers/agent_teams/developer_team/index.html
 test -f explainers/agent_teams/fitness_team/index.html
 test -f explainers/agent_teams/home_management_team/index.html
+test -f explainers/agent_teams/personal_assistant_team/index.html
 test -f explainers/customization/index.html
 test -f staticwebapp.config.json
 test -f ronin-tokens.css

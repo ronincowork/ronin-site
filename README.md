@@ -3,7 +3,7 @@
 The public website for [ronincowork.com](https://ronincowork.com).
 
 The site carries the public Ronin Cowork story, the installation handoff, and an explainer
-library (`explainers/`): how agent teams work with family roles and session tasks plus three
+library (`explainers/`): how agent teams work with family roles and session tasks plus the
 use-case pages, customization, Tailscale private access, and tmux-backed persistent agent
 terminals. Cowork setup and application screens belong to the installed local application,
 not this public domain. Keep the
