@@ -12,8 +12,11 @@ The complete owner journey is discussed as five named surfaces:
 landing_page → load_ronin → install_ronin → cowork_setup → cowork
 ```
 
-This repository serves `landing_page`, `load_ronin`, and supporting explainers such as
-`vpn_tailscale` and `tmux_serve`. `install_ronin` is the terminal handoff into the released Cowork
+This repository serves `landing_page`, `load_ronin`, and the explainer library. The library
+lives at `explainers/` (linked from the root footer) and its members are `explainers/agent_teams/`
+with three use-case pages (`developer_team`, `fitness_team`, `home_management_team`),
+`explainers/customization/`, and the standalone `vpn_tailscale` and `tmux_serve` guides at their
+original root paths. `install_ronin` is the terminal handoff into the released Cowork
 installer. Journey studies remain in `ronin-lab`; `cowork_setup` and `cowork` belong to the
 installed `ronin-cowork` application and must not be published here.
 
