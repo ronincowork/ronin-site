@@ -161,6 +161,11 @@
           border-top: var(--edge) solid var(--line-2);
         }
       }
+      .finish-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+      }
     </style>
   </head>
   <body>
@@ -397,7 +402,7 @@ Finish with a short summary of what tmux owns and what Ronin Cowork adds around 
           <h2>Give terminal agents a place to stay.</h2>
           <p>Install Ronin on the machine that will host the sessions.</p>
         </div>
-        <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+        <div class="finish-actions"><a class="button" href="../index.html">Tell me more about Ronin</a><a class="button button--primary" href="../load-ronin.html">Load Ronin →</a></div>
       </section>
     </main>
 

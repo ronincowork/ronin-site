@@ -85,6 +85,11 @@
           grid-template-columns: 1fr;
         }
       }
+      .finish-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+      }
     </style>
   </head>
   <body>
@@ -242,7 +247,7 @@ Never print or store authentication keys or tokens in the session.</pre>
             public Cowork address or an additional Ronin login on that network.
           </p>
         </div>
-        <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+        <div class="finish-actions"><a class="button" href="../index.html">Tell me more about Ronin</a><a class="button button--primary" href="../load-ronin.html">Load Ronin →</a></div>
       </section>
     </main>
 
