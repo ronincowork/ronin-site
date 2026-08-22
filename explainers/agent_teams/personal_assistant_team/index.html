@@ -122,6 +122,18 @@
         color: var(--muted-2);
         font-size: var(--text-6);
       }
+      .source-card--soon {
+        opacity: 0.5;
+        border-left-color: var(--line-3);
+      }
+      .source-card--soon .soon-tag {
+        display: block;
+        margin-top: var(--space-4);
+        color: var(--muted);
+        font: 600 var(--text-2) var(--font-mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
       .related {
         margin-top: 72px;
       }
@@ -269,10 +281,12 @@
           <div>
             <h2>Where the brain gets its information</h2>
             <p>
-              gbrain ships connection recipes for the places your life already
-              writes itself down. Each one is set up on the brain with your own
-              accounts and keys — start with none, and add the ones you
-              actually use:
+              In Ronin you talk to the brain through your agent — every recall
+              and every capture goes via the session. The brain itself is
+              filled from the sides: gbrain ships connection recipes for the
+              places your life already writes itself down, each set up on the
+              brain with your own accounts and keys. Start with none, and add
+              the ones you actually use:
             </p>
             <div class="sources" aria-label="gbrain information sources">
               <div class="source-card">
@@ -299,9 +313,10 @@
                 <strong>X (Twitter)</strong>
                 <span>Timeline, mentions, and keyword monitoring flow into the brain as pages.</span>
               </div>
-              <div class="source-card">
+              <div class="source-card source-card--soon">
                 <strong>voice</strong>
                 <span>Talk to the brain out loud — conversations land as pages it can recall later.</span>
+                <span class="soon-tag">a gbrain capability · not yet wired into Ronin</span>
               </div>
             </div>
             <p>
