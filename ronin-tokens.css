@@ -127,6 +127,18 @@ button, input { font: inherit; }
   .site-footer { flex-direction: column; }
 }
 
+/* Compact sticky CTA strip on explainer pages: both cultural CTAs stay reachable
+ * while scrolling. Sticky, so it pushes content rather than covering it. */
+.cta-strip { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: var(--edge) solid var(--line); }
+.cta-strip__inner { width: min(var(--page), calc(100% - 40px)); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) 0; }
+.cta-strip__label { color: var(--muted); font: 600 var(--text-2)/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+.cta-strip__actions { display: flex; gap: var(--space-5); }
+.cta-strip .button { min-height: 36px; padding: var(--space-4) var(--space-7); font-size: var(--text-3); }
+@media (max-width: 640px) {
+  .cta-strip__inner { width: min(100% - 28px, var(--page)); justify-content: center; }
+  .cta-strip__label { display: none; }
+}
+
 /* Command cards keep the action visible while only the command itself scrolls. */
 .door { min-width: 0; }
 .command { overflow: hidden; }
