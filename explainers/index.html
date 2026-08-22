@@ -46,6 +46,8 @@
         color: var(--muted-2);
       }
       .member .go {
+        display: inline-block;
+        margin-right: var(--space-10);
         color: var(--kaki);
         text-decoration: none;
         text-underline-offset: 3px;
@@ -79,6 +81,11 @@
         .finish {
           grid-template-columns: 1fr;
         }
+      }
+      .finish-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
       }
     </style>
   </head>
@@ -114,11 +121,12 @@
             <h2><a href="agent_teams/">How agent teams work</a></h2>
             <p>
               A family role is who your agent is. Session tasks are what it is
-              doing right now. The model behind the session launcher, and three
-              teams that show it live: a developer team, a fitness team, and a
-              home management team.
+              doing right now. The model behind the session launcher, and four
+              teams that show it live: a developer team, a fitness team, a home
+              management team, and a gbrain-powered personal assistant.
             </p>
             <a class="go" href="agent_teams/">Read the explainer →</a>
+            <a class="go" href="agent_teams/#examples">See examples of teams at work →</a>
           </div>
         </article>
 
@@ -167,7 +175,7 @@
           <h2>Ready to see it running?</h2>
           <p>Install Ronin Cowork on the machine that will host the sessions.</p>
         </div>
-        <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+        <div class="finish-actions"><a class="button" href="../index.html">Tell me more about Ronin</a><a class="button button--primary" href="../load-ronin.html">Load Ronin →</a></div>
       </section>
     </main>
 
