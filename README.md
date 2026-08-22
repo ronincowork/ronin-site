@@ -2,9 +2,11 @@
 
 The public website for [ronincowork.com](https://ronincowork.com).
 
-The site carries the public Ronin Cowork story, the installation handoff, and supporting guides
-about Tailscale private access and tmux-backed persistent agent terminals. Cowork setup and
-application screens belong to the installed local application, not this public domain. Keep the
+The site carries the public Ronin Cowork story, the installation handoff, and an explainer
+library (`explainers/`): how agent teams work with job roles and session tasks plus three
+use-case pages, customization, Tailscale private access, and tmux-backed persistent agent
+terminals. Cowork setup and application screens belong to the installed local application,
+not this public domain. Keep the
 hosting shape simple; do not build a framework or content system around it.
 
 The site is deliberately static HTML, CSS, JavaScript, and SVG, with no application server,
