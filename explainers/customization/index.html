@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Customize Ronin Cowork: define your own job roles, session tasks, macros, SOPs, and skins by telling your agent what you want. Your definitions survive every update."
+    />
+    <meta
+      name="keywords"
+      content="customize AI agents, custom agent roles, custom agent tasks, agent macros, AI agent customization"
+    />
+    <title>Make Ronin your own | Ronin Cowork</title>
+    <link rel="stylesheet" href="../../ronin-tokens.css" />
+    <style>
+      .custom-head {
+        max-width: 920px;
+        margin-bottom: 64px;
+      }
+      .no-setup {
+        max-width: 820px;
+        margin: 0 0 72px;
+        padding: var(--space-10);
+        border-left: 3px solid var(--kaki);
+        background: var(--raise);
+      }
+      .no-setup h2,
+      .no-setup p {
+        margin: 0;
+      }
+      .no-setup h2 {
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .no-setup p {
+        margin-top: var(--space-6);
+        color: var(--muted-2);
+      }
+      .explainers {
+        border-top: var(--edge) solid var(--line);
+      }
+      .explainer {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(32px, 5vw, 58px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .explainer .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .explainer h2 {
+        margin: 0 0 var(--space-8);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .explainer p,
+      .explainer li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .explainer p {
+        margin: 0 0 var(--space-8);
+      }
+      .explainer ul {
+        max-width: var(--measure);
+        margin: 0;
+        padding-left: 1.4em;
+      }
+      .explainer li + li {
+        margin-top: var(--space-6);
+      }
+      .explainer a {
+        color: var(--kaki);
+        text-underline-offset: 3px;
+      }
+      .terms {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 820px;
+        margin-top: var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .term-card {
+        padding: var(--space-9);
+        background: var(--panel);
+      }
+      .term-card:nth-child(even) {
+        border-left: var(--edge) solid var(--line-2);
+      }
+      .term-card:nth-child(n + 3) {
+        border-top: var(--edge) solid var(--line-2);
+      }
+      .term-card strong {
+        display: block;
+        margin-bottom: var(--space-4);
+        color: var(--kaki);
+        font: 600 var(--text-4) var(--font-mono);
+      }
+      .term-card span {
+        color: var(--muted-2);
+      }
+      .related {
+        margin-top: 72px;
+      }
+      .related p {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .related a {
+        color: var(--kaki);
+        text-underline-offset: 3px;
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 48px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      @media (max-width: 640px) {
+        .explainer {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .terms,
+        .finish {
+          grid-template-columns: 1fr;
+        }
+        .term-card:nth-child(even) {
+          border-left: 0;
+        }
+        .term-card:nth-child(n + 2) {
+          border-top: var(--edge) solid var(--line-2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../index.html"
+          ><img src="../../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../">Explainers</a>
+          <a href="../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="custom-head">
+        <p class="eyebrow">Customization</p>
+        <h1 class="display">Make Ronin your own.</h1>
+        <p class="lede">
+          The Developer team and the fitness team are starting points, not the
+          menu. Roles, tasks, macros, SOPs, and skins are all definitions you
+          can add to, replace, or hide — so your Ronin works the way you do.
+        </p>
+      </section>
+
+      <section class="no-setup">
+        <h2>You do not edit configuration by hand.</h2>
+        <p>
+          You tell your agent. Describe the role, task, macro, SOP, or skin you
+          want to any Ronin session; it drafts the definition, shows it to you,
+          and writes it once you approve. Customizing Ronin is a conversation.
+        </p>
+      </section>
+
+      <section class="session-brief" aria-labelledby="custom-brief-title">
+        <div class="session-brief__head">
+          <div>
+            <p class="section-label">Ask the session you are in</p>
+            <h2 id="custom-brief-title">Hand the customization to a session</h2>
+            <p>
+              Copy this into any Ronin agent session. The agent reads how
+              customization works on your actual install, drafts your
+              definition, and waits for your approval before writing anything.
+            </p>
+          </div>
+          <button
+            class="session-brief__copy"
+            data-copy-target="#custom-session-brief"
+            onclick="copyText(this,document.querySelector('#custom-session-brief').innerText)"
+          >
+            copy
+          </button>
+        </div>
+        <pre id="custom-session-brief">Help me customize this Ronin with my own job role, session task, macro, SOP, or skin.
+
+Work on the machine where this session is running, and propose before you write.
+
+1. Read this install's own guidance first: the README files in its catalogs and its shadowing documentation.
+2. Ask me what I want — who the agent should be (a job role), what work it should do (its session tasks), or which macro, SOP, or skin I want changed — and how it should behave.
+3. Draft each definition and show it to me in full before writing anything.
+4. Write approved definitions only into my own catalogs store, never into Ronin's shipped files.
+5. Confirm the result appears where it should (the launcher for roles and tasks), and tell me how to use it.
+6. Do not change or remove any existing definition unless I explicitly ask.</pre>
+      </section>
+
+      <section class="explainers" aria-label="What you can customize">
+        <article class="explainer">
+          <span class="num">01</span>
+          <div>
+            <h2>What you can customize</h2>
+            <p>
+              Everything an agent session is shaped by is a definition, and
+              every kind has the same open door:
+            </p>
+            <div class="terms" aria-label="Customizable definitions">
+              <div class="term-card">
+                <strong>job roles</strong>
+                <span>Who an agent is — a Head Coach, a House Manager, whatever hat your work needs.</span>
+              </div>
+              <div class="term-card">
+                <strong>session tasks</strong>
+                <span>The kinds of work on a role's shelf, each with its own briefing.</span>
+              </div>
+              <div class="term-card">
+                <strong>macros</strong>
+                <span>The shortcuts agents use to communicate and coordinate.</span>
+              </div>
+              <div class="term-card">
+                <strong>SOPs &amp; skins</strong>
+                <span>How work is done in your house, and how your coworkspace looks.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">02</span>
+          <div>
+            <h2>Yours and ours</h2>
+            <p>
+              Ronin ships with a working set — the Developer role, its tasks,
+              the stock macros. Your definitions live separately, in your own
+              store, and there are three moves:
+            </p>
+            <ul>
+              <li><b>Add</b> a new definition under a new name — a role or task of your own.</li>
+              <li><b>Replace</b> one of ours whole, by defining your own version of it.</li>
+              <li><b>Hide</b> one of ours you never use, without deleting anything.</li>
+            </ul>
+            <p>
+              Because yours live in your own store, a Ronin update refreshes the
+              stock set and never touches your definitions. Your Head Coach
+              survives every upgrade.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">03</span>
+          <div>
+            <h2>Start from a team, keep what fits</h2>
+            <p>
+              The easiest customization is an edit: take
+              <a href="../agent_teams/">a team you have seen</a>, keep the
+              shape, and change the words — your training history in the
+              coach's briefing, your stores in the house manager's notes, your
+              review standards in the developer's posture. The teams are worked
+              examples of definitions you already have permission to change.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="related">
+        <p class="section-label">Keep reading</p>
+        <p>
+          New to roles and tasks? Start with
+          <a href="../agent_teams/">how agent teams work</a>, or see a custom
+          role in action in <a href="../agent_teams/fitness_team/">the fitness
+          team</a> and <a href="../agent_teams/home_management_team/">the home
+          management team</a>.
+        </p>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Shape it to your work.</h2>
+          <p>Install Ronin Cowork, then tell your first session what you want.</p>
+        </div>
+        <a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="../">All explainers</a>
+    </footer>
+    <script src="../../site-shell.js"></script>
+  </body>
+</html>
