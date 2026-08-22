@@ -59,6 +59,10 @@ Keep production static and inspectable: HTML, CSS, and local assets. Add no fram
 system, analytics, account gate, or external asset request without a decision that changes this
 document first.
 
+The one piece of hosting configuration is `staticwebapp.config.json`, which returns 404 for
+`/wip/*` so working documents committed to the repository are never publicly served (owner,
+2026-08-22). It adds no build step and changes nothing else about serving.
+
 ## Syncthing
 
 The dohyo checkout at `/home/glen3/dohyo/ronin-site` is a configured Syncthing send/receive

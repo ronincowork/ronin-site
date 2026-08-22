@@ -37,6 +37,12 @@ test -f index.html
 test -f load-ronin.html
 test -f vpn_tailscale/index.html
 test -f tmux_serve/index.html
+test -f explainers/index.html
+test -f explainers/agent_teams/index.html
+test -f explainers/agent_teams/developer_team/index.html
+test -f explainers/agent_teams/fitness_team/index.html
+test -f explainers/agent_teams/home_management_team/index.html
+test -f staticwebapp.config.json
 test -f ronin-tokens.css
 test -f site-shell.js
 test -f nin-mark.svg
