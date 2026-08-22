@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {
+      "route": "/wip/*",
+      "statusCode": 404
+    }
+  ]
+}

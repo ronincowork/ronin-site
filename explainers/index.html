@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Explainers from Ronin Cowork: how agent teams work with job roles and session tasks, how tmux keeps AI agent sessions running, and private access with Tailscale."
+    />
+    <title>Ronin Cowork Explainers</title>
+    <link rel="stylesheet" href="../ronin-tokens.css" />
+    <style>
+      .library-head {
+        max-width: 860px;
+        margin-bottom: 64px;
+      }
+      .members {
+        border-top: var(--edge) solid var(--line);
+      }
+      .member {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(30px, 5vw, 52px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .member .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .member h2 {
+        margin: 0 0 var(--space-5);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .member h2 a {
+        text-decoration: none;
+      }
+      .member h2 a:hover {
+        color: var(--kaki);
+      }
+      .member p {
+        max-width: var(--measure);
+        margin: 0 0 var(--space-6);
+        color: var(--muted-2);
+      }
+      .member .go {
+        color: var(--kaki);
+        text-decoration: none;
+        text-underline-offset: 3px;
+      }
+      .member .go:hover {
+        text-decoration: underline;
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 72px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      @media (max-width: 640px) {
+        .member {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .finish {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../index.html"
+          ><img src="../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow">Explainer library</p>
+        <h1 class="display">How Ronin works, one piece at a time.</h1>
+        <p class="lede">
+          These pages explain the ideas and technology Ronin Cowork builds on.
+          Each one answers a real question on its own; together they map the
+          machine.
+        </p>
+      </section>
+
+      <section class="members" aria-label="Explainers">
+        <article class="member">
+          <span class="num">01</span>
+          <div>
+            <h2><a href="agent_teams/">How agent teams work</a></h2>
+            <p>
+              A job role is who your agent is. Session tasks are what it is
+              doing right now. The model behind the session launcher, and three
+              teams that show it live: a developer team, a fitness team, and a
+              home management team.
+            </p>
+            <a class="go" href="agent_teams/">Read the explainer →</a>
+          </div>
+        </article>
+
+        <article class="member">
+          <span class="num">02</span>
+          <div>
+            <h2><a href="../tmux_serve/">AI agents and persistent terminals</a></h2>
+            <p>
+              The browser can close; the agent keeps working. How Ronin uses a
+              tmux server to keep live agent terminals running on your machine
+              and reconnect the same session later.
+            </p>
+            <a class="go" href="../tmux_serve/">Read the explainer →</a>
+          </div>
+        </article>
+
+        <article class="member">
+          <span class="num">03</span>
+          <div>
+            <h2><a href="../vpn_tailscale/">Use Ronin with Tailscale</a></h2>
+            <p>
+              Put the Ronin machine, your computer, and your phone on the same
+              private network, and open Cowork from anywhere without exposing it
+              to the public internet.
+            </p>
+            <a class="go" href="../vpn_tailscale/">Read the guide →</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Ready to see it running?</h2>
+          <p>Install Ronin Cowork on the machine that will host the sessions.</p>
+        </div>
+        <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="../index.html">ronincowork.com</a>
+    </footer>
+  </body>
+</html>

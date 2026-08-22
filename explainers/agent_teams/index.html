@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="How AI agent teams work in Ronin Cowork: a job role is who your agent is, session tasks are what it is doing right now, and one session moves between tasks without changing who it is."
+    />
+    <meta
+      name="keywords"
+      content="AI agent teams, AI agent roles, agent job role, agent session tasks, multi-agent coordination"
+    />
+    <title>How AI agent teams work: job roles and session tasks | Ronin Cowork</title>
+    <link rel="stylesheet" href="../../ronin-tokens.css" />
+    <style>
+      .teams-head {
+        max-width: 920px;
+        margin-bottom: 64px;
+      }
+      .usecases {
+        margin: 0 0 72px;
+      }
+      .usecases .section-label {
+        margin-bottom: var(--space-8);
+      }
+      .usecase-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-7);
+      }
+      .usecase {
+        display: block;
+        padding: var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-left: var(--edge-2) solid var(--kaki);
+        border-radius: var(--radius-md);
+        background: var(--panel);
+        text-decoration: none;
+        transition: border-color var(--motion-quick);
+      }
+      .usecase:hover {
+        border-color: var(--kaki);
+      }
+      .usecase h2 {
+        margin: 0 0 var(--space-4);
+        font: 500 var(--text-9) var(--font-ui);
+      }
+      .usecase p {
+        margin: 0 0 var(--space-6);
+        color: var(--muted-2);
+        font-size: var(--text-7);
+      }
+      .usecase span {
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .explainers {
+        border-top: var(--edge) solid var(--line);
+      }
+      .explainer {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(32px, 5vw, 58px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .explainer .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .explainer h2 {
+        margin: 0 0 var(--space-8);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .explainer p,
+      .explainer li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .explainer p {
+        margin: 0 0 var(--space-8);
+      }
+      .explainer ul {
+        max-width: var(--measure);
+        margin: 0;
+        padding-left: 1.4em;
+      }
+      .explainer li + li {
+        margin-top: var(--space-6);
+      }
+      .terms {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 860px;
+        margin-top: var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .term-card {
+        padding: var(--space-9);
+        background: var(--panel);
+      }
+      .term-card + .term-card {
+        border-left: var(--edge) solid var(--line-2);
+      }
+      .term-card strong {
+        display: block;
+        margin-bottom: var(--space-4);
+        color: var(--kaki);
+        font: 600 var(--text-4) var(--font-mono);
+      }
+      .term-card span {
+        color: var(--muted-2);
+      }
+      .faq {
+        padding: 72px 0 0;
+      }
+      .faq > h2 {
+        margin: 0 0 var(--space-10);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .faq details {
+        max-width: 820px;
+        border-top: var(--edge) solid var(--line);
+      }
+      .faq details:last-of-type {
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .faq summary {
+        padding: var(--space-9) 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .faq details p {
+        max-width: var(--measure);
+        margin: 0 0 var(--space-9);
+        color: var(--muted-2);
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 72px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      @media (max-width: 820px) {
+        .usecase-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .explainer {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .terms,
+        .finish {
+          grid-template-columns: 1fr;
+        }
+        .term-card + .term-card {
+          border-left: 0;
+          border-top: var(--edge) solid var(--line-2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../index.html"
+          ><img src="../../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../">Explainers</a>
+          <a href="../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="teams-head">
+        <p class="eyebrow">Agent teams</p>
+        <h1 class="display">A role is who your agent is. A task is what it is doing now.</h1>
+        <p class="lede">
+          In Ronin, a session is launched into a job role it keeps for its whole
+          life, and moves between session tasks as the work changes. One agent,
+          one durable identity, many kinds of work — and several sessions
+          working side by side make a team.
+        </p>
+      </section>
+
+      <section class="usecases" aria-label="Use cases">
+        <p class="section-label">See it live</p>
+        <div class="usecase-grid">
+          <a class="usecase" href="developer_team/">
+            <h2>The Developer team</h2>
+            <p>
+              One developer that riffs, plans, cuts code, chases bugs, and
+              checks work — and can run as quarterback over the other sessions.
+            </p>
+            <span>Read the use case →</span>
+          </a>
+          <a class="usecase" href="fitness_team/">
+            <h2>The fitness team</h2>
+            <p>
+              A Head Coach that stays your coach while the work moves between
+              nutrition, workouts, recovery, equipment, and race planning.
+            </p>
+            <span>Read the use case →</span>
+          </a>
+          <a class="usecase" href="home_management_team/">
+            <h2>The home management team</h2>
+            <p>
+              A House Manager that keeps meals, groceries, maintenance, and the
+              household budget moving — one assistant, four kinds of errand.
+            </p>
+            <span>Read the use case →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="explainers" aria-label="How agent teams work">
+        <article class="explainer">
+          <span class="num">01</span>
+          <div>
+            <h2>Every session is launched on three coordinates</h2>
+            <p>
+              When Ronin starts an agent session, three things describe it: a
+              project root, a job role, and a session task. The project root is
+              always required — a session has to be born somewhere. The role and
+              the task are optional; a session can run with either or both left
+              blank.
+            </p>
+            <div class="terms" aria-label="The three coordinates">
+              <div class="term-card">
+                <strong>project root</strong>
+                <span>Where it works — the directory the session is born into. Required.</span>
+              </div>
+              <div class="term-card">
+                <strong>job role</strong>
+                <span>Who it is — chosen at launch, fixed for the life of the session.</span>
+              </div>
+              <div class="term-card">
+                <strong>session task</strong>
+                <span>What it is doing right now — changes as the work moves.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">02</span>
+          <div>
+            <h2>The job role is the durable hat</h2>
+            <p>
+              A role is the professional identity a session keeps: Developer,
+              Personal Assistant, Head Coach. It carries its own briefing —
+              the reading that tells the agent how someone in that seat behaves
+              — and its own launch defaults, so every session in that role
+              starts set up the right way.
+            </p>
+            <p>
+              A role is fixed at launch. A Developer session never becomes a
+              Personal Assistant halfway through; if you need a different hat,
+              you start a different session. That stability is what makes a role
+              worth briefing deeply.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">03</span>
+          <div>
+            <h2>Session tasks move with the work</h2>
+            <p>
+              A task is what the session is doing at this moment: planning,
+              building, debugging, reviewing. When the work changes, the task
+              changes — the session itself can switch it, or you can from the
+              session's tile. A committed task change hands the agent that
+              task's own briefing, so it knows how the new kind of work is done
+              here.
+            </p>
+            <p>
+              The current task is also the mark you see next to the session in
+              the Roster — a glance tells you what each agent is doing right
+              now, not just what it was hired as.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">04</span>
+          <div>
+            <h2>Settings cascade from role to task</h2>
+            <p>
+              Both a role and a task can carry launch settings — which model to
+              prefer, what permissions to start with, how the session opens.
+              They layer in a fixed order: the system default, then the role,
+              then the task, then whatever you choose explicitly for this one
+              launch. Each layer overrides only what it actually states;
+              everything else is inherited.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">05</span>
+          <div>
+            <h2>Tasks are shared; roles organize them</h2>
+            <p>
+              A task is not owned by a role. The same task can sit on several
+              roles' shelves — planning is planning whether a Developer or a
+              House Manager is doing it. The role decides which tasks appear on
+              its shelf; moving a task between roles changes the shelf, not the
+              task.
+            </p>
+            <p>
+              That is why the use cases below are teams rather than org charts:
+              a team is a role plus the tasks it works through, and several
+              sessions running side by side — each with its own role and its own
+              current task — cover a whole workload together.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="faq">
+        <p class="eyebrow">Common questions</p>
+        <h2>Job roles and session tasks</h2>
+        <details>
+          <summary>Can a session change its role?</summary>
+          <p>
+            No. The role is chosen at launch and fixed for the session's life.
+            The task is the part that moves. If the role itself is wrong, start
+            a new session in the right one.
+          </p>
+        </details>
+        <details>
+          <summary>Do I have to pick a role or a task?</summary>
+          <p>
+            No. Both are optional. A blank role or task simply means no extra
+            briefing for that axis — the session runs on what you type.
+          </p>
+        </details>
+        <details>
+          <summary>Is a role a different AI model?</summary>
+          <p>
+            No. The same agent programs — Claude Code, Codex, Gemini, and the
+            others — run in every role. A role is briefing and defaults around
+            the agent, not a different brain. A role or task can prefer a
+            model, but your agent and your account stay your own.
+          </p>
+        </details>
+        <details>
+          <summary>Can I make my own roles and tasks?</summary>
+          <p>
+            Yes — roles and tasks are definitions you can add to your Ronin and
+            share. The fitness and home management teams below are exactly
+            that: roles an owner defines for their own use.
+          </p>
+        </details>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Put a team on your machine.</h2>
+          <p>Install Ronin Cowork where your agents will work.</p>
+        </div>
+        <a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="../">All explainers</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="The Developer team in Ronin Cowork: one developer session that riffs, plans, cuts code, chases bugs, and checks work — and can run as quarterback over the other sessions."
+    />
+    <meta
+      name="keywords"
+      content="AI developer agent, AI coding agent team, agent code review, multi-agent development, AI pair programming"
+    />
+    <title>The Developer team | Ronin Cowork</title>
+    <link rel="stylesheet" href="../../../ronin-tokens.css" />
+    <style>
+      .case-head {
+        max-width: 920px;
+        margin-bottom: 56px;
+      }
+      .composition {
+        max-width: 820px;
+        margin: 0 0 72px;
+        padding: var(--space-10);
+        border-left: 3px solid var(--kaki);
+        background: var(--raise);
+      }
+      .composition p {
+        margin: 0 0 var(--space-5);
+        color: var(--muted-2);
+      }
+      .composition .pair {
+        color: var(--fg-strong);
+        font: var(--text-4) var(--font-mono);
+      }
+      .composition .pair b {
+        color: var(--kaki);
+        font-weight: 600;
+      }
+      .explainers {
+        border-top: var(--edge) solid var(--line);
+      }
+      .explainer {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(32px, 5vw, 58px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .explainer .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .explainer h2 {
+        margin: 0 0 var(--space-8);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .explainer p,
+      .explainer li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .explainer p {
+        margin: 0 0 var(--space-8);
+      }
+      .tasks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 860px;
+        margin-top: var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .task-card {
+        padding: var(--space-9);
+        background: var(--panel);
+      }
+      .task-card:nth-child(even) {
+        border-left: var(--edge) solid var(--line-2);
+      }
+      .task-card:nth-child(n + 3) {
+        border-top: var(--edge) solid var(--line-2);
+      }
+      .task-card strong {
+        display: block;
+        margin-bottom: var(--space-4);
+        color: var(--kaki);
+        font: 600 var(--text-4) var(--font-mono);
+      }
+      .task-card span {
+        color: var(--muted-2);
+      }
+      .related {
+        margin-top: 72px;
+      }
+      .related p {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .related a {
+        color: var(--kaki);
+        text-underline-offset: 3px;
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 48px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      @media (max-width: 640px) {
+        .explainer {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .tasks,
+        .finish {
+          grid-template-columns: 1fr;
+        }
+        .task-card:nth-child(even) {
+          border-left: 0;
+        }
+        .task-card:nth-child(n + 2) {
+          border-top: var(--edge) solid var(--line-2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../../index.html"
+          ><img src="../../../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../">Agent teams</a>
+          <a href="../../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="case-head">
+        <p class="eyebrow">Use case · Agent teams</p>
+        <h1 class="display">The Developer team.</h1>
+        <p class="lede">
+          One developer session moves through a whole feature: work out what it
+          is, plan it, build it, chase what broke, check the result. Add more
+          developer sessions to work in parallel, and set one to run as
+          quarterback over the rest.
+        </p>
+      </section>
+
+      <section class="composition" aria-label="The composition">
+        <p class="pair"><b>job role:</b> Developer — who the agent remains, all session long</p>
+        <p class="pair"><b>session task:</b> cut code — what it is doing at this moment</p>
+        <p>
+          The role and its tasks below ship with Ronin Cowork, ready on a fresh
+          install.
+        </p>
+      </section>
+
+      <section class="explainers" aria-label="How the Developer team works">
+        <article class="explainer">
+          <span class="num">01</span>
+          <div>
+            <h2>The role: Developer</h2>
+            <p>
+              The Developer role is the ordinary coding hat. Its briefing sets
+              the working posture — verify before you claim, say what you did
+              not do, bring decisions to the owner instead of guessing — and its
+              defaults apply across every task on its shelf, so each launch
+              starts the same reliable way.
+            </p>
+            <p>
+              The session keeps this role for its whole life. What changes is
+              the task.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">02</span>
+          <div>
+            <h2>The tasks, as the work moves</h2>
+            <p>
+              A feature rarely stays one kind of work. The Developer's shelf
+              covers the arc, and the session switches task as it goes — each
+              switch hands the agent that task's own briefing:
+            </p>
+            <div class="tasks" aria-label="Developer tasks">
+              <div class="task-card">
+                <strong>riff on it · RiffOnIt</strong>
+                <span>Work out what a thing is and what we mean by it — a definition, not a plan.</span>
+              </div>
+              <div class="task-card">
+                <strong>draft plan · DraftPlan</strong>
+                <span>Plan a known piece of work as a doc. No code yet.</span>
+              </div>
+              <div class="task-card">
+                <strong>cut code · CutCode</strong>
+                <span>Build from an approved plan. The plan is the contract.</span>
+              </div>
+              <div class="task-card">
+                <strong>chase bug · ChaseBug</strong>
+                <span>Chase a fault to its cause and fix the cause, not the symptom.</span>
+              </div>
+              <div class="task-card">
+                <strong>check work · CheckWork</strong>
+                <span>Read-only findings on a session's output or a sweep of the code.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">03</span>
+          <div>
+            <h2>Running as quarterback</h2>
+            <p>
+              With several developer sessions working in parallel, one of them
+              can run as quarterback: it reads the field instead of running the
+              ball — dispatching work, unblocking what is stuck, and reporting
+              upward what is yours to decide. It coordinates the team; it does
+              not do the team's work for it.
+            </p>
+            <p>
+              The quarterback is still a Developer wearing a different task,
+              not a different kind of agent — the same session model that lets
+              one developer move from planning to building lets another move
+              into coordinating.
+            </p>
+          </div>
+        </article>
+
+        <article class="explainer">
+          <span class="num">04</span>
+          <div>
+            <h2>Why a team, not one big session</h2>
+            <p>
+              Sessions are cheap and mortal; the work is what survives. Running
+              the plan, the build, and the review as separate sessions keeps
+              each agent's context small and its briefing sharp — and the
+              Roster shows each session's current task at a glance, so you can
+              see the whole team's state without opening a single terminal.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="related">
+        <p class="section-label">More teams</p>
+        <p>
+          The same model runs teams that never touch code:
+          <a href="../fitness_team/">the fitness team</a> and
+          <a href="../home_management_team/">the home management team</a>.
+          Or go back to <a href="../">how agent teams work</a>.
+        </p>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Put a developer team on your repo.</h2>
+          <p>Install Ronin Cowork on the machine where your code lives.</p>
+        </div>
+        <a class="button button--primary" href="../../../load-ronin.html">Load Ronin →</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="../">How agent teams work</a>
+    </footer>
+  </body>
+</html>
