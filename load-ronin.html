@@ -28,8 +28,8 @@
         background: var(--panel);
       }
       .door {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto minmax(2.4em, auto) 1fr auto;
         padding: clamp(24px, 4vw, 48px);
       }
       .door + .door {
@@ -37,6 +37,7 @@
       }
       .door h2 {
         margin: var(--space-5) 0 var(--space-7);
+        min-height: 2.4em;
         font: 500 var(--text-10) / 1.2 var(--font-ui);
       }
       .door p {
@@ -44,7 +45,6 @@
       }
       .command {
         position: relative;
-        margin: auto 0 0;
         margin-top: var(--space-9);
         padding: var(--space-9);
         padding-right: 82px;
@@ -109,6 +109,12 @@
         .door + .door {
           border-left: 0;
           border-top: var(--edge) solid var(--line);
+        }
+        .door {
+          grid-template-rows: auto auto auto auto;
+        }
+        .door h2 {
+          min-height: 0;
         }
       }
     </style>
