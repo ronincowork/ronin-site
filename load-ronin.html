@@ -21,7 +21,7 @@
       }
       .doors {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         border: var(--edge) solid var(--line);
         border-radius: var(--radius-md);
         overflow: hidden;
@@ -132,8 +132,8 @@
           <p class="eyebrow">Surface 02 · Load Ronin</p>
           <h1 class="display">Put Ronin where your agents work.</h1>
           <p class="lede">
-            Use either door below on the machine that will host Cowork. Both
-            lead to the same private installation.
+            Choose how you want to begin. All three paths lead to the same
+            private installation.
           </p>
         </div>
         <p class="step">landing → <strong>load</strong> → terminal → setup</p>
@@ -159,23 +159,28 @@
           </div>
         </article>
         <article class="door">
-          <p class="section-label">My agent has the terminal</p>
-          <h2>Hand it the guide</h2>
+          <p class="section-label">I have the machine</p>
+          <h2>Hand your agent the install</h2>
           <p>
-            Send this link to an agent already running on the target machine.
-            Ask it to install Ronin and return the address.
+            Send this to an agent already running on the machine or VM where
+            you want Ronin. It installs Ronin and returns the private address.
           </p>
           <div class="command">
-            <button
-              class="copy"
-              data-copy-target="#agent-guide"
-              data-copy-value="https://github.com/ronincowork/ronin-cowork/blob/master/docs/install.md"
-              onclick="copyText(this,this.dataset.copyValue)"
-            >
-              copy</button
-            ><code id="agent-guide"
-              >https://github.com/ronincowork/ronin-cowork/blob/master/docs/install.md</code
-            >
+            <button class="copy" data-copy-target="#agent-guide" data-copy-value="https://github.com/ronincowork/ronin-cowork/blob/master/docs/install.md" onclick="copyText(this,this.dataset.copyValue)">copy</button
+            ><code id="agent-guide">https://github.com/ronincowork/ronin-cowork/blob/master/docs/install.md</code>
+          </div>
+        </article>
+        <article class="door">
+          <p class="section-label">I need a virtual machine</p>
+          <h2>Set up a Hetzner VM first</h2>
+          <p>
+            Send this to an agent on the computer in front of you. It walks you
+            through the VM choices and purchase, prepares the new machine, and
+            hands it to the Ronin installer.
+          </p>
+          <div class="command">
+            <button class="copy" data-copy-target="#hetzner-guide" data-copy-value="https://github.com/ronincowork/ronin-cowork/blob/master/docs/hetzner-vm.md" onclick="copyText(this,this.dataset.copyValue)">copy</button
+            ><code id="hetzner-guide">https://github.com/ronincowork/ronin-cowork/blob/master/docs/hetzner-vm.md</code>
           </div>
         </article>
       </section>
@@ -183,7 +188,7 @@
         <p class="section-label">What happens next</p>
         <div>
           <ol>
-            <li>Choose the machine you want to install Ronin Cowork on.</li>
+            <li>Choose a machine you have, or let your agent help set up a Hetzner VM.</li>
             <li>
               Copy and paste the command into your terminal, or give the
               instructions link to an agent on your machine.
