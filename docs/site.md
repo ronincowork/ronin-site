@@ -17,7 +17,8 @@ lives at `explainers/` (linked from the root header) and its members are `explai
 with its use-case pages (`developer_team`, `fitness_team`, `home_management_team`,
 `personal_assistant_team`),
 `explainers/customization/`, and the standalone `vpn_tailscale` and `tmux_serve` guides at their
-original root paths. `install_ronin` is the terminal handoff into the released Cowork
+original root paths. `explainers/ai-agents-virtual-machine/` explains provider-neutral VM sizing,
+private access, and the path into the agent-relayed Hetzner guide. `install_ronin` is the terminal handoff into the released Cowork
 installer. Journey studies remain in `ronin-lab`; `cowork_setup` and `cowork` belong to the
 installed `ronin-cowork` application and must not be published here.
 

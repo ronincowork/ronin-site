@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="How to run a team of AI coding agents on a cloud virtual machine: provider choices, recommended VM specifications, private access, and a practical setup path."
+    />
+    <meta
+      name="keywords"
+      content="run AI agents on virtual machine, AI agent VM, cloud server for AI agents, multiple AI coding agents, remote AI agents, AI agent team"
+    />
+    <title>Run a team of AI agents on a virtual machine | Ronin Cowork</title>
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../ronin-tokens.css" />
+    <style>
+      .vm-head {
+        max-width: 960px;
+        margin-bottom: 64px;
+      }
+      .answer {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-bottom: 72px;
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .answer-card {
+        padding: var(--space-9);
+        background: var(--panel);
+      }
+      .answer-card + .answer-card {
+        border-left: var(--edge) solid var(--line-2);
+      }
+      .answer-card strong {
+        display: block;
+        margin-bottom: var(--space-4);
+        color: var(--kaki);
+        font: 600 var(--text-3) var(--font-mono);
+      }
+      .answer-card span {
+        color: var(--muted-2);
+      }
+      .steps {
+        border-top: var(--edge) solid var(--line);
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(32px, 5vw, 58px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .step .num {
+        padding-top: 5px;
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .step h2 {
+        margin: 0 0 var(--space-8);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .step h3 {
+        margin: var(--space-9) 0 var(--space-5);
+        font: 600 var(--text-7) var(--font-ui);
+      }
+      .step p,
+      .step li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .step p {
+        margin: 0 0 var(--space-8);
+      }
+      .step ul,
+      .step ol {
+        max-width: var(--measure);
+        margin: 0;
+        padding-left: 1.4em;
+      }
+      .step li + li {
+        margin-top: var(--space-6);
+      }
+      .step a:not(.button) {
+        color: var(--kaki);
+        text-underline-offset: 3px;
+      }
+      .provider-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 880px;
+        gap: var(--space-7);
+      }
+      .provider {
+        padding: var(--space-9);
+        border: var(--edge) solid var(--line-2);
+        border-left: var(--edge-2) solid var(--kaki);
+        border-radius: var(--radius-md);
+        background: var(--panel);
+      }
+      .provider h3 {
+        margin: 0 0 var(--space-4);
+      }
+      .provider p {
+        margin: 0;
+      }
+      .callout {
+        max-width: var(--measure);
+        margin-top: var(--space-9);
+        padding: var(--space-9);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+        color: var(--muted-2);
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 72px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      .finish-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+      }
+      @media (max-width: 820px) {
+        .answer,
+        .provider-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .answer-card:nth-child(3) {
+          border-left: 0;
+        }
+        .answer-card:nth-child(n + 3) {
+          border-top: var(--edge) solid var(--line-2);
+        }
+      }
+      @media (max-width: 640px) {
+        .answer,
+        .provider-grid,
+        .finish {
+          grid-template-columns: 1fr;
+        }
+        .answer-card + .answer-card {
+          border-left: 0;
+          border-top: var(--edge) solid var(--line-2);
+        }
+        .step {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../index.html"
+          ><img src="../../nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../">Explainers</a>
+          <a href="../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="cta-strip">
+      <div class="cta-strip__inner">
+        <span class="cta-strip__label">Ronin Cowork · explainers</span>
+        <div class="cta-strip__actions">
+          <a class="button" href="../../index.html">Tell me more about Ronin</a>
+          <a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="page">
+      <section class="vm-head">
+        <p class="eyebrow">AI agents on a cloud VM</p>
+        <h1 class="display">Run a team of AI agents on a virtual machine.</h1>
+        <p class="lede">
+          Give your coding agents one always-on Linux machine, reach it privately
+          from anywhere, and keep several sessions working when your laptop closes.
+          You do not need a GPU or a dedicated AI server.
+        </p>
+      </section>
+
+      <section class="answer" aria-label="Recommended virtual machine">
+        <div class="answer-card"><strong>CPU</strong><span>8 shared x86 vCPU</span></div>
+        <div class="answer-card"><strong>MEMORY</strong><span>16 GB RAM</span></div>
+        <div class="answer-card"><strong>STORAGE</strong><span>100–160 GB SSD</span></div>
+        <div class="answer-card"><strong>SYSTEM</strong><span>Current Ubuntu LTS</span></div>
+      </section>
+
+      <section class="session-brief" aria-labelledby="vm-brief-title">
+        <div class="session-brief__head">
+          <div>
+            <p class="section-label">Have an agent help</p>
+            <h2 id="vm-brief-title">Relay the setup through an agent</h2>
+            <p>
+              Give this brief to an agent on the computer in front of you. You
+              keep control of provider login, billing, credentials, and approval.
+            </p>
+          </div>
+          <button
+            class="session-brief__copy"
+            data-copy-target="#vm-session-brief"
+            onclick="copyText(this,document.querySelector('#vm-session-brief').innerText)"
+          >copy</button>
+        </div>
+        <pre id="vm-session-brief">Help me set up a cloud virtual machine for a team of AI agents and Ronin Cowork.
+
+Start by opening and following this agent-facing guide:
+https://github.com/ronincowork/ronin-cowork/blob/master/docs/hetzner-vm.md
+
+Explain each choice before acting. I will handle provider login, billing, passwords, authentication, and final purchase approval. Never ask me to paste a private key, password, token, recovery code, or payment detail into chat. Finish by handing the remote agent to docs/install.md and return the private Ronin address.</pre>
+      </section>
+
+      <section class="steps" aria-label="How to run AI agents on a virtual machine">
+        <article class="step">
+          <span class="num">01</span>
+          <div>
+            <h2>Use an ordinary cloud VM—not a GPU box</h2>
+            <p>
+              Claude Code, Codex, Gemini CLI, and similar agents send model work
+              to their providers. The VM runs their terminal applications,
+              repositories, tools, and sessions; it usually does not run the
+              foundation model itself. That makes RAM and reliable storage more
+              useful than a local GPU.
+            </p>
+            <p>
+              Shared CPU is normally the economical choice. Dedicated CPU is
+              useful only when your own builds, tests, databases, or local models
+              need sustained compute—not merely because the workload involves AI.
+            </p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="num">02</span>
+          <div>
+            <h2>Choose a provider</h2>
+            <p>
+              Any reputable provider that offers an x86 Ubuntu VM, SSH access,
+              persistent SSD storage, and a region you can reach will work. Compare
+              the complete live price, including IPv4 and backups, before buying.
+            </p>
+            <div class="provider-grid">
+              <div class="provider">
+                <h3><a href="https://www.hetzner.com/cloud/">Hetzner Cloud</a></h3>
+                <p>
+                  Ronin's proved value choice is Shared Cost-Optimized x86 CX43:
+                  8 vCPU, 16 GB RAM, and 160 GB disk. Capacity is limited and can
+                  disappear temporarily. CPX22 is a smaller Regular Performance
+                  x86 bridge that can later rescale to CX43.
+                </p>
+              </div>
+              <div class="provider">
+                <h3><a href="https://docs.digitalocean.com/products/droplets/concepts/choosing-a-plan/">DigitalOcean</a></h3>
+                <p>
+                  Choose a Basic shared-CPU x86 Droplet near the same memory and
+                  storage target. DigitalOcean's control panel is approachable;
+                  its dedicated General Purpose plans are usually unnecessary for
+                  terminal agents.
+                </p>
+              </div>
+              <div class="provider">
+                <h3><a href="https://techdocs.akamai.com/cloud-computing/docs/shared-cpu-compute-instances">Akamai Cloud / Linode</a></h3>
+                <p>
+                  A Shared CPU Linode is the comparable family. Match the RAM and
+                  disk target rather than shopping by provider-specific plan name.
+                </p>
+              </div>
+              <div class="provider">
+                <h3><a href="https://docs.vultr.com/products/compute/instances/cloud-compute/provisioning">Vultr</a></h3>
+                <p>
+                  Vultr Cloud Compute is another shared-CPU VM option. Select an
+                  x86 Ubuntu image, then size memory and storage to the team you
+                  expect to keep active.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="num">03</span>
+          <div>
+            <h2>Size for concurrent agents</h2>
+            <p>
+              A useful planning allowance is roughly 700 MB for each live agent,
+              plus memory for Ubuntu, Ronin, tmux, Node, editors, builds, and any
+              services. The 8-vCPU / 16-GB recommendation leaves room for a real
+              team; a 2-vCPU / 4-GB VM is a starter box for setup and a few light
+              sessions, not the same capacity.
+            </p>
+            <ul>
+              <li><strong>Small start:</strong> 2–4 vCPU, 4–8 GB RAM, at least 80 GB disk.</li>
+              <li><strong>Recommended team:</strong> 8 vCPU, 16 GB RAM, 100–160 GB disk.</li>
+              <li><strong>Large team or heavy builds:</strong> 16 vCPU, 32 GB RAM, 200+ GB disk.</li>
+            </ul>
+            <p class="callout">
+              Set a maximum number of concurrent sessions. When RAM is exhausted,
+              Linux may end an existing process; it does not politely queue the next agent.
+            </p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="num">04</span>
+          <div>
+            <h2>Set up access without exposing the agents</h2>
+            <ol>
+              <li>Select your SSH public key when the VM is created.</li>
+              <li>Use the initial root login only to create an ordinary sudo account.</li>
+              <li>Run every agent, repository, tmux session, and Ronin under that account.</li>
+              <li>Put the VM and your devices on the same private Tailscale network.</li>
+              <li>Never open the Ronin application port directly to the public internet.</li>
+            </ol>
+            <p class="callout">
+              Adding an SSH key to a provider account after creation may not install
+              it on an existing VM. Keep the provider console as a recovery route until
+              direct SSH and private-network access are both proved.
+            </p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="num">05</span>
+          <div>
+            <h2>Install the agents, then give them a coworking space</h2>
+            <p>
+              Install each agent CLI under the ordinary account and authenticate it
+              directly with its own provider. Ronin Cowork then gives those terminal
+              sessions a Roster, roles, tasks, handoffs, persistent tmux sessions, and
+              one private browser workspace.
+            </p>
+            <p>
+              The agent-facing VM guide hands the remote agent directly to Ronin's
+              installation guide. When setup finishes, it returns the private Cowork
+              address for you to open from your computer or phone.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Start with the machine you have—or let an agent set one up.</h2>
+          <p>Load Ronin offers the command, the existing-machine guide, and the VM setup guide.</p>
+        </div>
+        <div class="finish-actions">
+          <a class="button" href="../">More explainers</a>
+          <a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+      <a href="../../load-ronin.html">Set up the machine →</a>
+    </footer>
+    <script src="../../site-shell.js"></script>
+  </body>
+</html>
