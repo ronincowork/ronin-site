@@ -28,6 +28,25 @@ be grounded in the user's own machine, lead with a copyable brief for a Ronin Co
 agent should inspect first, preserve owner approvals, and use read-only checks when no change is
 required.
 
+## Explainer page contract
+
+New explainers start from `wip/explainer-template/index.html`. The hosting configuration returns
+404 for `/wip/*`, so the scaffold can be reviewed locally without becoming a public destination.
+Copy its semantic structure into the approved public route; do not publish the scaffold itself.
+
+Every explainer follows the same reading order: the question, a short answer, the visual or
+demonstration, what to notice, an appropriately detailed explanation, an explicit boundary on
+what Ronin does not claim, one useful action, and one related explanation. The shared classes in
+`ronin-tokens.css` provide breadcrumbs, hero, sections, accessible media framing, claim boundary,
+actions, and related-next treatment. A page adds local CSS only for evidence-specific diagrams or
+layouts.
+
+Essential content is HTML, not JavaScript output. A page must retain a useful reading route when
+scripts or images do not load, use descriptive alt text and captions or transcripts for media,
+and work by keyboard at phone and desktop widths. Public pages also carry a unique title and
+description plus their production canonical URL. Social metadata is added only when an approved
+asset and claim exist.
+
 The names are deliberate. Plain `setup` and `landing` are too ambiguous across a public site,
 an installer, and an installed application.
 
