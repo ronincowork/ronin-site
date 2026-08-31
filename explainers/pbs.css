@@ -38,8 +38,18 @@
 .map-card h3 { margin: 0 0 var(--space-5); font: 600 var(--text-8) var(--font-ui); }
 .map-card .map-kind { color: var(--muted); font: var(--text-2) var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
 .map-card ul { margin: var(--space-8) 0 0; padding-left: 1.2em; color: var(--muted-2); }
+.ownership-map { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); margin: var(--space-10) 0; }
+.shadow-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.25fr); gap: var(--space-6); align-items: center; margin: var(--space-10) 0; }
+.shadow-source, .shadow-result { min-height: 112px; padding: var(--space-8); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
+.shadow-source--owner { border-top: 3px solid var(--kaki); }
+.shadow-result { border-top: 3px solid var(--ok); }
+.shadow-source strong, .shadow-source span, .shadow-result strong, .shadow-result span { display: block; }
+.shadow-source span, .shadow-result span { margin-top: var(--space-4); color: var(--muted-2); }
+.shadow-plus, .shadow-arrow { color: var(--kaki); font: 600 var(--text-8) var(--font-mono); }
 @media (max-width: 760px) {
-  .pbs-points, .map, .coord-branch { grid-template-columns: 1fr; }
+  .pbs-points, .map, .coord-branch, .ownership-map { grid-template-columns: 1fr; }
+  .shadow-flow { grid-template-columns: 1fr; }
+  .shadow-plus, .shadow-arrow { text-align: center; transform: rotate(90deg); }
   .pbs-related { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
