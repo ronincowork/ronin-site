@@ -76,12 +76,13 @@
         "ronin-cowork/README.md",
         "ronin-cowork/docs/model-providers.md",
         "ronin-cowork/docs/routines.md",
-        "ronin-cowork/docs/stores.md"
+        "ronin-cowork/docs/stores.md",
+        "ronin-cowork/docs/services-activation.md"
       ],
       "alt_text": "An ownership map separating the Agent providers, repositories, files, terminals, and Git workflow you keep from the lightweight coworkspace Ronin adds.",
       "capture_source_id": "no-platform-lock-in-v1",
       "asset_checksum": null,
-      "review_trigger": "Provider launch, repository storage, user stores, or bare-Agent behavior changes",
+      "review_trigger": "Provider launch, repository storage, user stores, Services measurement consent, or bare-Agent behavior changes",
       "status": "public"
     },
     {
