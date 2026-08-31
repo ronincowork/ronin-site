@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="See Claude and Codex working side by side in Ronin's locally run Workbench." />
+  <title>Claude and Codex side by side | Ronin</title>
+  <link rel="canonical" href="https://ronincowork.com/explainers/workbench/" />
+  <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../ronin-tokens.css" /><link rel="stylesheet" href="../pbs.css" />
+</head>
+<body>
+  <header class="site-header"><div class="site-header__inner"><a class="brand" href="../../index.html"><img src="../../nin-mark.svg" alt="Ronin" /><span class="brand-name">RONIN</span></a><nav class="site-nav" aria-label="Primary"><a href="../">Explainers</a><a href="../../load-ronin.html">Load Ronin</a></nav></div></header>
+  <div class="cta-strip"><div class="cta-strip__inner"><span class="cta-strip__label">Ronin · Workbench</span><div class="cta-strip__actions"><a class="button" href="../">Explainers</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></div></div>
+  <main class="page">
+    <nav class="explainer-breadcrumbs" aria-label="Breadcrumb"><a href="../">Explainers</a> / <span aria-current="page">Workbench</span></nav>
+    <section class="pbs-hero"><p class="pbs-kicker">What does working in Ronin look like?</p><h1 class="display">Claude and Codex, side by side.</h1><p class="lede">Ronin is not another IDE for your Agents. It is a lightweight, locally run coworkspace around the Agents, accounts, tools, and documents you already use.</p></section>
+    <section class="pbs-section" aria-labelledby="scene-title"><p class="section-label">The Workbench</p><h2 id="scene-title">Two Agents. Two workspaces. One place to work.</h2>
+      <figure class="visual-frame"><div class="workbench-scene" role="img" aria-label="A Ronin Workbench with a Claude session in workspace one, a session roster in the middle, and a Codex session in workspace two.">
+        <section class="scene-workspace"><div class="scene-head"><span>Workspace 1</span><span class="scene-provider">Claude</span></div><div class="scene-terminal"><strong>paper-garden / content worktree</strong><br />Reviewing the content structure…<br />Drafting the seasonal checklist.<br /><br /><strong>Next:</strong> hand the layout notes across.</div></section>
+        <aside class="scene-roster"><h3>Roster</h3><div class="scene-card">Claude<span>writing</span></div><div class="scene-card">Codex<span>building</span></div><div class="scene-card">Team commons<span>shared docs</span></div></aside>
+        <section class="scene-workspace"><div class="scene-head"><span>Workspace 2</span><span class="scene-provider">Codex</span></div><div class="scene-terminal"><strong>paper-garden / site worktree</strong><br />Building the responsive layout…<br />Checking narrow-width behavior.<br /><br /><strong>Next:</strong> return the rendered page.</div></section>
+      </div><figcaption>A seeded demonstration scene: Claude and Codex are visible together, each doing a different part of the same harmless project.</figcaption></figure>
+      <p>With Ronin Control and a reviewed repository arrangement, Claude and Codex can run side by side, each in its own worktree. Without that arrangement, the Workbench still places their sessions side by side; it does not invent repository isolation.</p>
+      <ul class="pbs-points"><li><strong>Bring your providers</strong>Ronin works around the Agent CLIs and accounts already on your machine.</li><li><strong>Place work deliberately</strong>Each numbered workspace holds one surface chosen from the discovery column.</li><li><strong>Keep local view state</strong>Each workspace keeps its own tabs, scroll, and presentation choices.</li></ul>
+    </section>
+    <section class="pbs-section" aria-labelledby="how-title"><p class="section-label">How it works</p><h2 id="how-title">The workspace is the place. The surface is what you put there.</h2><p>Select a workspace, then choose a session or shared surface from the discovery column. Or drag it directly where you want it. Opening another surface replaces only that workspace. Ronin remembers the arrangement when you return.</p><p>The scene shows provider coexistence and the Workbench layout. The independent view behavior is established by the <a href="https://github.com/ronincowork/ronin-cowork/blob/master/docs/workbench.md">Workbench contract</a>, not by a still image alone.</p></section>
+    <aside class="pbs-boundary" aria-labelledby="boundary-title"><h2 id="boundary-title">What Ronin does not take over</h2><p>Ronin does not merge Claude and Codex into one Agent, one account, or one stream of reasoning. Provider authentication and billing remain with the providers you choose. Ronin supplies the locally run coworkspace around them.</p></aside>
+    <section class="pbs-related"><div><p class="section-label">Next explanation</p><h2>Choose how closely the Agents coordinate.</h2><p>They can stay independent or use optional coordination when the work benefits from it.</p></div><div class="pbs-actions"><a class="button" href="../agent-coordination/">Agent coordination</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></section>
+  </main>
+  <footer class="site-footer"><span>Ronin · a coworkspace that runs on your machine</span><a href="../">All explainers</a></footer>
+</body></html>
