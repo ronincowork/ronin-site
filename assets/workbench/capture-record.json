@@ -1,0 +1,35 @@
+{
+  "source_id": "workbench-paper-garden-v1",
+  "fixture_schema": 1,
+  "capture_source": "capture/workbench/capture.mjs",
+  "source_sha256": "326ab63e2436c4ab9dcea56b9ed9f58e0b6f1b52f1cd98a4b7988a9fbd4bb0df",
+  "playwright": "1.62.1",
+  "chromium": "151.0.7922.34",
+  "locale": "en-US",
+  "timezone": "UTC",
+  "color_scheme": "dark",
+  "reduced_motion": "reduce",
+  "device_scale_factor": 1,
+  "exports": [
+    {
+      "id": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 32238,
+      "sha256": "28591d2a3e25915e68a4d296b54105fea9b62d1b192a8469d46175b7b5c2cb77",
+      "file": "assets/workbench/workbench-desktop.webp"
+    },
+    {
+      "id": "narrow",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 20956,
+      "sha256": "131cde2366dd44b450421b27f2fe0e457ea7592ec4f7c533d09f1e4e8098bffb",
+      "file": "assets/workbench/workbench-narrow.webp"
+    }
+  ]
+}

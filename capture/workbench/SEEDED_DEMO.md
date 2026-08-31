@@ -43,7 +43,8 @@ public-safe labels and outcomes:
 
 - session `claude-demo`, provider label `Claude`, task `Group the four sample flowers`;
 - session `codex-demo`, provider label `Codex`, task `Format the field guide`;
-- root label `paper-garden`, with no absolute or home-relative path;
+- project label `paper-garden` and worktree labels `paper-garden-claude` and
+  `paper-garden-codex`, with no absolute or home-relative path;
 - synthetic success lines that refer only to the three fixture filenames above.
 
 Do not launch Claude, Codex, a shell with inherited history, or any real Ronin session to
@@ -98,8 +99,8 @@ path.
 
 Proposed alt text:
 
-> Ronin Workbench with Claude in Workspace 1 and Codex in Workspace 2, each showing a
-> separate task in the disposable paper-garden demonstration.
+> Ronin Workbench with Claude and Codex side by side in separate workspaces, each showing
+> a task in its own disposable paper-garden worktree.
 
 Proposed adjacent-link sentence (destination remains gated by the site owner):
 
