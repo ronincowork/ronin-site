@@ -47,7 +47,7 @@
     },
     {
       "id": "cowork-and-services",
-      "readme_headline": "Base, Control, and Services",
+      "readme_headline": "Four coordination choices and Services",
       "readme_anchor": "understand-the-shape",
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/cowork-and-services/",
@@ -58,10 +58,10 @@
         "ronin-cowork/README.md",
         "ronin-cowork/KOTOBA_GLOSSARY.md"
       ],
-      "alt_text": "A map showing Ronin Base and Ronin Control as selectable Routines and Services as additional installed capabilities.",
+      "alt_text": "A map comparing a bare Agent, the Cowork floor, Ronin Base, managed file coordination, and Services as a separate axis.",
       "capture_source_id": "base-control-services-map-v1",
       "asset_checksum": null,
-      "review_trigger": "Routine manifests, Services offering, or availability semantics change",
+      "review_trigger": "Bare or Cowork launch, Routine manifests, managed file coordination, Services offering, or availability semantics change",
       "status": "public"
     }
   ]
