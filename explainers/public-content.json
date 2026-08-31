@@ -22,7 +22,7 @@
         "assets/workbench/workbench-narrow.webp": "131cde2366dd44b450421b27f2fe0e457ea7592ec4f7c533d09f1e4e8098bffb"
       },
       "review_trigger": "Workbench layout, workspace independence contract, provider labels, or capture fixture changes",
-      "status": "staged"
+      "status": "public"
     },
     {
       "id": "agent-coordination",
@@ -43,7 +43,7 @@
       "capture_source_id": "agent-coordination-loop-v1",
       "asset_checksum": null,
       "review_trigger": "Routine, messaging, wipeboard, Team, or session-control contracts change",
-      "status": "staged"
+      "status": "public"
     },
     {
       "id": "cowork-and-services",
@@ -62,7 +62,7 @@
       "capture_source_id": "base-control-services-map-v1",
       "asset_checksum": null,
       "review_trigger": "Routine manifests, Services offering, or availability semantics change",
-      "status": "staged"
+      "status": "public"
     }
   ]
 }
