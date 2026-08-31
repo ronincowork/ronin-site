@@ -66,11 +66,11 @@
     },
     {
       "id": "no-platform-lock-in",
-      "readme_headline": "No platform lock-in",
+      "readme_headline": "Your work stays yours",
       "readme_anchor": "coordination-without-control-a-coworkspace-without-lock-in",
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/no-platform-lock-in/",
-      "question": "Does Ronin take ownership of my Agents or work?",
+      "question": "Where do my data, code, and Agent relationships live?",
       "audience": ["person", "outside-agent"],
       "evidence_authorities": [
         "ronin-cowork/README.md",
