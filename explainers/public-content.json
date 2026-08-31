@@ -5,16 +5,24 @@
       "id": "workbench",
       "readme_headline": "Claude and Codex, side by side",
       "readme_anchor": "work-side-by-side",
-      "readme_asset_path": null,
+      "readme_asset_path": "docs/assets/readme/workbench/workbench-desktop.webp",
+      "readme_narrow_asset_path": "docs/assets/readme/workbench/workbench-narrow.webp",
       "public_url": "https://ronincowork.com/explainers/workbench/",
       "question": "What does working in Ronin look like?",
       "audience": ["person", "outside-agent"],
-      "evidence_owner": "ronin-cowork/docs/workbench.md",
-      "alt_text": "A Ronin Workbench with Claude in workspace one, a session roster in the middle, and Codex in workspace two.",
-      "capture_source_id": "paper-garden-workbench-v1",
-      "asset_checksum": null,
+      "evidence_authorities": [
+        "ronin-cowork/docs/workbench.md",
+        "ronin-cowork/docs/routines.md",
+        "ronin-cowork/docs/worktrees.md"
+      ],
+      "alt_text": "Ronin Workbench with Claude and Codex side by side in separate workspaces, each showing a task in its own disposable paper-garden worktree.",
+      "capture_source_id": "workbench-paper-garden-v1",
+      "asset_checksums": {
+        "assets/workbench/workbench-desktop.webp": "28591d2a3e25915e68a4d296b54105fea9b62d1b192a8469d46175b7b5c2cb77",
+        "assets/workbench/workbench-narrow.webp": "131cde2366dd44b450421b27f2fe0e457ea7592ec4f7c533d09f1e4e8098bffb"
+      },
       "review_trigger": "Workbench layout, workspace independence contract, provider labels, or capture fixture changes",
-      "status": "staged"
+      "status": "public"
     },
     {
       "id": "agent-coordination",
@@ -24,7 +32,13 @@
       "public_url": "https://ronincowork.com/explainers/agent-coordination/",
       "question": "Do my Agents have to work as a team?",
       "audience": ["person", "outside-agent"],
-      "evidence_owner": "ronin-cowork/docs/routines.md",
+      "evidence_authorities": [
+        "ronin-cowork/docs/routines.md",
+        "ronin-cowork/ronin_catalogs/TOOLS.md",
+        "ronin-cowork/docs/wipeboards.md",
+        "ronin-cowork/docs/session-control-dials.md",
+        "ronin-cowork/docs/worktrees.md"
+      ],
       "alt_text": "An optional loop from independent work through focused messages and the team wipeboard to durable results.",
       "capture_source_id": "agent-coordination-loop-v1",
       "asset_checksum": null,
@@ -39,7 +53,10 @@
       "public_url": "https://ronincowork.com/explainers/cowork-and-services/",
       "question": "What is included, and what is additional?",
       "audience": ["person", "outside-agent"],
-      "evidence_owner": "ronin-cowork/docs/routines.md",
+      "evidence_authorities": [
+        "ronin-cowork/docs/routines.md",
+        "ronin-cowork/README.md"
+      ],
       "alt_text": "A map showing Ronin Base and Ronin Control as selectable Routines and Services as additional installed capabilities.",
       "capture_source_id": "base-control-services-map-v1",
       "asset_checksum": null,
