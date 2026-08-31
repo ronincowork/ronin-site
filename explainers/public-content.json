@@ -51,7 +51,7 @@
       "readme_anchor": "understand-the-shape",
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/cowork-and-services/",
-      "question": "What is included, and what is additional?",
+      "question": "What can I add after a bare Agent?",
       "audience": ["person", "outside-agent"],
       "evidence_authorities": [
         "ronin-cowork/docs/routines.md",
