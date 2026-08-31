@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "workbench",
+      "readme_headline": "Claude and Codex, side by side",
+      "readme_anchor": "work-side-by-side",
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/workbench/",
+      "question": "What does working in Ronin look like?",
+      "audience": ["person", "outside-agent"],
+      "evidence_owner": "ronin-cowork/docs/workbench.md",
+      "alt_text": "A Ronin Workbench with Claude in workspace one, a session roster in the middle, and Codex in workspace two.",
+      "capture_source_id": "paper-garden-workbench-v1",
+      "asset_checksum": null,
+      "review_trigger": "Workbench layout, workspace independence contract, provider labels, or capture fixture changes",
+      "status": "staged"
+    },
+    {
+      "id": "agent-coordination",
+      "readme_headline": "Coordinate when it helps",
+      "readme_anchor": "coordinate-when-useful",
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/agent-coordination/",
+      "question": "Do my Agents have to work as a team?",
+      "audience": ["person", "outside-agent"],
+      "evidence_owner": "ronin-cowork/docs/routines.md",
+      "alt_text": "An optional loop from independent work through focused messages and the team wipeboard to durable results.",
+      "capture_source_id": "agent-coordination-loop-v1",
+      "asset_checksum": null,
+      "review_trigger": "Routine, messaging, wipeboard, Team, or session-control contracts change",
+      "status": "staged"
+    },
+    {
+      "id": "cowork-and-services",
+      "readme_headline": "Base, Control, and Services",
+      "readme_anchor": "understand-the-shape",
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/cowork-and-services/",
+      "question": "What is included, and what is additional?",
+      "audience": ["person", "outside-agent"],
+      "evidence_owner": "ronin-cowork/docs/routines.md",
+      "alt_text": "A map showing Ronin Base and Ronin Control as selectable Routines and Services as additional installed capabilities.",
+      "capture_source_id": "base-control-services-map-v1",
+      "asset_checksum": null,
+      "review_trigger": "Routine manifests, Services offering, or availability semantics change",
+      "status": "staged"
+    }
+  ]
+}
