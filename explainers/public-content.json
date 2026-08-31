@@ -51,7 +51,7 @@
       "readme_anchor": "understand-the-shape",
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/cowork-and-services/",
-      "question": "What is included, and what is additional?",
+      "question": "What can I add after a bare Agent?",
       "audience": ["person", "outside-agent"],
       "evidence_authorities": [
         "ronin-cowork/docs/routines.md",
@@ -62,6 +62,67 @@
       "capture_source_id": "base-control-services-map-v1",
       "asset_checksum": null,
       "review_trigger": "Bare or Cowork launch, Routine manifests, managed file coordination, Services offering, or availability semantics change",
+      "status": "public"
+    },
+    {
+      "id": "no-platform-lock-in",
+      "readme_headline": "Your work stays yours",
+      "readme_anchor": "coordination-without-control-a-coworkspace-without-lock-in",
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/no-platform-lock-in/",
+      "question": "Where do my data, code, and Agent relationships live?",
+      "audience": ["person", "outside-agent"],
+      "evidence_authorities": [
+        "ronin-cowork/README.md",
+        "ronin-cowork/docs/model-providers.md",
+        "ronin-cowork/docs/routines.md",
+        "ronin-cowork/docs/stores.md",
+        "ronin-cowork/docs/services-activation.md"
+      ],
+      "alt_text": "An ownership map separating the Agent providers, repositories, files, terminals, and Git workflow you keep from the lightweight coworkspace Ronin adds.",
+      "capture_source_id": "no-platform-lock-in-v1",
+      "asset_checksum": null,
+      "review_trigger": "Provider launch, repository storage, user stores, Services measurement consent, or bare-Agent behavior changes",
+      "status": "public"
+    },
+    {
+      "id": "no-behavioral-takeover",
+      "readme_headline": "No behavioral takeover",
+      "readme_anchor": "coordination-without-control-a-coworkspace-without-lock-in",
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/no-behavioral-takeover/",
+      "question": "Does Ronin tell my Agents how to work?",
+      "audience": ["person", "outside-agent"],
+      "evidence_authorities": [
+        "ronin-cowork/docs/routines.md",
+        "ronin-cowork/ronin_catalogs/routines/ronin_base.md",
+        "ronin-cowork/ronin_catalogs/routines/ronin_control.md",
+        "ronin-cowork/docs/session-control-dials.md"
+      ],
+      "alt_text": "Four optional cooperation tools: direct messages, a team wipeboard, Agent launch, and managed file coordination.",
+      "capture_source_id": "no-behavioral-takeover-v1",
+      "asset_checksum": null,
+      "review_trigger": "Routine delivery, coordination tools, session-control, or bare-Agent behavior changes",
+      "status": "public"
+    },
+    {
+      "id": "editable-coordination",
+      "readme_headline": "Editable coordination",
+      "readme_anchor": "coordination-without-control-a-coworkspace-without-lock-in",
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/editable-coordination/",
+      "question": "Can I change Ronin's coordination materials without losing my changes on update?",
+      "audience": ["person", "outside-agent"],
+      "evidence_authorities": [
+        "ronin-cowork/docs/shadowing.md",
+        "ronin-cowork/docs/stores.md",
+        "ronin-cowork/docs/SHELVES.md",
+        "ronin-cowork/docs/routines.md"
+      ],
+      "alt_text": "Ronin stock and owner material resolving into the reading, SOPs, Macros, Actions, tools, connections, and Routines offered to a new Agent.",
+      "capture_source_id": "editable-coordination-v1",
+      "asset_checksum": null,
+      "review_trigger": "Shadow precedence, user-store placement, Routine selection, or update behavior changes",
       "status": "public"
     }
   ]
