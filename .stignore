@@ -1,0 +1,3 @@
+// git syncs through GitHub, not Syncthing — two peers writing .git corrupts it (see ronin-lab/.stignore)
+.git
+node_modules
