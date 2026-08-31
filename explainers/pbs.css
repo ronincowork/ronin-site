@@ -29,6 +29,8 @@
 .coord-steps li::before { content: counter(coord, decimal-leading-zero); position: absolute; left: var(--space-7); color: var(--kaki); font: 600 var(--text-2) var(--font-mono); }
 .coord-note { display: block; margin-top: var(--space-4); color: var(--muted); font-size: var(--text-3); }
 .map { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); margin: var(--space-10) 0; }
+.map--four { grid-template-columns: repeat(2, 1fr); }
+.map--one { grid-template-columns: minmax(0, 1fr); max-width: 620px; }
 .map-card { padding: var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
 .map-card--base { border-top: 3px solid var(--ok); }
 .map-card--control { border-top: 3px solid var(--kaki); }
