@@ -6,6 +6,7 @@
 .pbs-section a, .pbs-boundary a { color: var(--kaki); text-underline-offset: 3px; }
 .pbs-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); margin: var(--space-10) 0; padding: 0; list-style: none; }
 .pbs-points li { padding: var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
+.pbs-points--four { grid-template-columns: repeat(2, 1fr); }
 .pbs-points strong { display: block; margin-bottom: var(--space-4); color: var(--fg-strong); }
 .pbs-boundary { max-width: 860px; margin: var(--space-10) 0; padding: var(--space-10); border-left: 3px solid var(--kaki); background: var(--raise); }
 .pbs-boundary h2 { margin: 0 0 var(--space-5); font: 500 var(--text-10)/1.25 var(--font-ui); }
@@ -27,11 +28,18 @@
 .scene-roster h3 { margin: 0 0 var(--space-7); font: 600 var(--text-3) var(--font-mono); }
 .scene-card { margin-bottom: var(--space-5); padding: var(--space-6); border: var(--edge) solid var(--line-2); border-radius: var(--radius-sm); font-size: var(--text-3); }
 .scene-card span { display: block; color: var(--muted-2); }
-.loop { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-7); align-items: stretch; margin: var(--space-10) 0; }
-.loop-step { position: relative; padding: var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
-.loop-step:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: calc(var(--space-7) * -1 - .5em); color: var(--kaki); }
-.loop-step b { display: block; margin-bottom: var(--space-5); color: var(--kaki); font: 600 var(--text-3) var(--font-mono); }
-.loop-step p { margin: 0; color: var(--muted-2); font-size: var(--text-5); }
+.coord-flow { margin: var(--space-10) 0; }
+.coord-start, .coord-return { max-width: 520px; margin: auto; padding: var(--space-8); border: var(--edge-2) solid var(--kaki); border-radius: var(--radius-md); background: var(--raise); text-align: center; }
+.coord-branch { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.6fr); gap: var(--space-8); margin: var(--space-10) 0; }
+.coord-path { padding: var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
+.coord-path h3 { margin: 0 0 var(--space-5); font: 600 var(--text-8) var(--font-ui); }
+.coord-path > p { color: var(--muted-2); }
+.coord-steps { margin: var(--space-8) 0 0; padding: 0; list-style: none; counter-reset: coord; }
+.coord-steps li { counter-increment: coord; position: relative; margin-top: var(--space-5); padding: var(--space-7) var(--space-7) var(--space-7) 42px; border-left: var(--edge-2) solid var(--line-3); color: var(--muted-2); }
+.coord-steps li::before { content: counter(coord, decimal-leading-zero); position: absolute; left: var(--space-7); color: var(--kaki); font: 600 var(--text-2) var(--font-mono); }
+.coord-note { display: block; margin-top: var(--space-4); color: var(--muted); font-size: var(--text-3); }
+.map-floor { margin: 0 0 var(--space-10); padding: var(--space-7) var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); color: var(--muted-2); background: var(--well); }
+.map-floor strong { color: var(--fg-strong); }
 .map { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); margin: var(--space-10) 0; }
 .map-card { padding: var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
 .map-card--base { border-top: 3px solid var(--ok); }
@@ -41,12 +49,10 @@
 .map-card .map-kind { color: var(--muted); font: var(--text-2) var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
 .map-card ul { margin: var(--space-8) 0 0; padding-left: 1.2em; color: var(--muted-2); }
 @media (max-width: 760px) {
-  .pbs-points, .map { grid-template-columns: 1fr; }
+  .pbs-points, .map, .coord-branch { grid-template-columns: 1fr; }
   .workbench-scene { grid-template-columns: 1fr; }
   .scene-roster { order: -1; border: 0; border-bottom: var(--edge) solid var(--line-2); }
   .scene-workspace + .scene-workspace { border-left: 0; border-top: var(--edge) solid var(--line-2); }
-  .loop { grid-template-columns: 1fr; }
-  .loop-step:not(:last-child)::after { content: '↓'; top: auto; right: 50%; bottom: calc(var(--space-7) * -1 - .8em); }
   .pbs-related { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
