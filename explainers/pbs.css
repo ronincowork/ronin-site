@@ -16,6 +16,7 @@
 .pbs-related p { margin-top: var(--space-5); color: var(--muted-2); }
 .pbs-actions { display: flex; flex-wrap: wrap; gap: var(--space-6); }
 .visual-frame { margin: var(--space-10) 0; padding: clamp(14px, 2vw, 24px); border: var(--edge) solid var(--line-2); border-radius: var(--radius-lg); background: var(--bg-2); overflow: hidden; }
+.visual-frame img { display: block; width: 100%; height: auto; }
 .visual-frame figcaption { margin-top: var(--space-7); color: var(--muted-2); font-size: var(--text-5); }
 .coord-flow { margin: var(--space-10) 0; }
 .coord-start, .coord-return { max-width: 520px; margin: auto; padding: var(--space-8); border: var(--edge-2) solid var(--kaki); border-radius: var(--radius-md); background: var(--raise); text-align: center; }
