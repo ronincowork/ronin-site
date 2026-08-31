@@ -1,0 +1,7 @@
+# RONIN_REPO — this repository's declared arrangement. Read by tools; not inferred.
+# Format and meaning: ronin-cowork/RONIN_REPO. Declared 2026-08-28 per the control-surface
+# audit's disposition table; the owner may change it.
+mode=reviewed
+working=dev
+stable=master
+desks=managed

@@ -13,21 +13,43 @@ landing_page → load_ronin → install_ronin → cowork_setup → cowork
 ```
 
 This repository serves `landing_page`, `load_ronin`, and the explainer library. The library
-lives at `explainers/` (linked from the root header) and its members are `explainers/agent_teams/`
-with its use-case pages (`developer_team`, `fitness_team`, `home_management_team`,
-`personal_assistant_team`),
-`explainers/customization/`, and the standalone `vpn_tailscale` and `tmux_serve` guides at their
-original root paths. `explainers/ai-agents-virtual-machine/` explains provider-neutral VM sizing,
-private access, and the path into the agent-relayed Hetzner guide. `install_ronin` is the terminal handoff into the released Cowork
+lives at `explainers/` (linked from the root header). Its currently indexed members are the
+Workbench, Agent coordination, Cowork-and-Services, and AI-agents-on-a-virtual-machine
+explainers, plus the standalone `vpn_tailscale` and `tmux_serve` guides at their original root
+paths. The PBS routes and their evidence/freshness ownership are recorded in
+`explainers/public-content.json`. `explainers/agent_teams/` and its use-case pages
+(`developer_team`, `fitness_team`, `home_management_team`, `personal_assistant_team`), plus
+`explainers/customization/`, remain reachable at their published URLs but are unlinked migration
+debt: their retired role vocabulary must be reconciled with current product truth before the
+index promotes them again. `install_ronin` is the terminal handoff into the released Cowork
 installer. Journey studies remain in `ronin-lab`; `cowork_setup` and `cowork` belong to the
 installed `ronin-cowork` application and must not be published here.
 
 Supporting explainers answer a real question someone may search for, explain the underlying
 technology in the context of AI agent work, and lead back to Ronin. They are not artificial stops
 in the owner journey and they must not read as hidden setup requirements. When an explanation can
-be grounded in the user's own machine, lead with a copyable brief for a Ronin Cowork session. The
-agent should inspect first, preserve owner approvals, and use read-only checks when no change is
-required.
+be grounded in the user's own machine, lead with a copyable brief for a session in their
+coworkspace. The agent should inspect first, preserve owner approvals, and use read-only checks
+when no change is required.
+
+## Explainer page contract
+
+New explainers start from `wip/explainer-template/index.html`. The hosting configuration returns
+404 for `/wip/*`, so the scaffold can be reviewed locally without becoming a public destination.
+Copy its semantic structure into the approved public route; do not publish the scaffold itself.
+
+Every explainer follows the same reading order: the question, a short answer, the visual or
+demonstration, what to notice, an appropriately detailed explanation, an explicit boundary on
+what Ronin does not claim, one useful action, and one related explanation. The shared classes in
+`ronin-tokens.css` provide breadcrumbs, hero, sections, accessible media framing, claim boundary,
+actions, and related-next treatment. A page adds local CSS only for evidence-specific diagrams or
+layouts.
+
+Essential content is HTML, not JavaScript output. A page must retain a useful reading route when
+scripts or images do not load, use descriptive alt text and captions or transcripts for media,
+and work by keyboard at phone and desktop widths. Public pages also carry a unique title and
+description plus their production canonical URL. Social metadata is added only when an approved
+asset and claim exist.
 
 The names are deliberate. Plain `setup` and `landing` are too ambiguous across a public site,
 an installer, and an installed application.

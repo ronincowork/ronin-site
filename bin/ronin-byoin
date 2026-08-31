@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Site repository proof used by coordinated team promotion.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+node scripts/check-site.mjs
+printf '\nBYOIN: the static site is clean (4 ok).\n'
