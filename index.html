@@ -258,33 +258,6 @@
       .tech-body li + li {
         margin-top: var(--space-4);
       }
-      .community {
-        display: grid;
-        grid-template-columns: 0.7fr 2fr;
-        gap: 8vw;
-        align-items: start;
-      }
-      .community-copy {
-        max-width: 760px;
-      }
-      .community-copy h2 {
-        margin: 0;
-        font: 500 clamp(34px, 5vw, 58px) / 1.02 var(--font-ui);
-        letter-spacing: -0.045em;
-      }
-      .community-copy p {
-        color: var(--muted-2);
-        font-size: var(--text-8);
-      }
-      .community-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-6);
-        margin-top: var(--space-9);
-      }
-      .community-note {
-        font-size: var(--text-5) !important;
-      }
       .final {
         display: grid;
         grid-template-columns: 1.5fr 0.5fr;
@@ -311,7 +284,6 @@
         .section-head,
         .principle,
         .roadmap,
-        .community,
         .final {
           grid-template-columns: 1fr;
         }
@@ -390,7 +362,7 @@
         >
         <nav class="site-nav">
           <a href="#cowork">Ronin Cowork</a><a href="#services">Services</a
-          ><a href="#community">Community</a><a href="#tech">Tech Talk</a
+          ><a href="#tech">Tech Talk</a
           ><a class="button" href="explainers/">Explainers</a
           ><a class="button button--primary" href="load-ronin.html">Load Ronin</a>
         </nav>
@@ -627,40 +599,6 @@
               Removing Ronin does not require an export or migration. Your
               provider accounts still work, and your repositories and documents
               remain ordinary files where you put them.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="community">
-        <div class="community">
-          <p class="section-label">Ronin community</p>
-          <div class="community-copy">
-            <h2>A home for people who want freedom to choose their Agents.</h2>
-            <p>
-              Ronin is for developers and builders who use Claude, Codex, Gemini,
-              and whatever comes next—without locking their work into one model
-              provider or somebody else's platform. Keep the work on a machine you
-              control, switch providers when it helps, and help shape the coworkspace
-              around that way of working.
-            </p>
-            <p>
-              Share your email to stay connected, tell us what is missing, and hear
-              about new releases and ways to contribute.
-            </p>
-            <div class="community-actions">
-              <a
-                class="button button--primary"
-                href="mailto:support@ronincowork.com?subject=Join%20the%20Ronin%20community&amp;body=Please%20add%20me%20to%20the%20Ronin%20community.%0A%0AThe%20Agent%20providers%20I%20use%3A%20"
-                >Join the community</a
-              >
-              <a class="button" href="https://github.com/ronincowork/ronin-cowork"
-                >View Ronin on GitHub</a
-              >
-            </div>
-            <p class="community-note">
-              The community link opens an email to Ronin. Nothing is submitted
-              merely by visiting this page.
             </p>
           </div>
         </div>
