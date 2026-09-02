@@ -10,6 +10,24 @@
   <main class="page"><nav class="explainer-breadcrumbs" aria-label="Breadcrumb"><a href="../">Explainers</a> / <span aria-current="page">Ronin Worktrees</span></nav>
     <section class="pbs-hero"><p class="pbs-kicker">How do several Agents share one repository without stepping on each other?</p><h1 class="display">Each Agent in its own worktree. One reviewed path back.</h1><p class="lede">Ronin Worktrees gives a coding Agent a private working folder and branch inside your repository. Agents work in parallel without file collisions, and finished work returns through a hand-in the Team lead reviews — never by landing directly on the shared branch.</p></section>
 
+
+    <section class="session-brief session-brief--compact" aria-labelledby="wt-brief-title">
+      <div class="session-brief__head">
+        <div>
+          <p class="section-label">Ask your agent</p>
+          <h2 id="wt-brief-title">The fastest route: hand this to your agent.</h2>
+          <p>Copy this brief to an agent in your Ronin and it sets Worktrees up with you — you keep approval of every repository change. Read on below if you want to understand the mechanism yourself first.</p>
+        </div>
+        <button class="session-brief__copy" data-copy-target="#wt-session-brief" onclick="copyText(this,document.querySelector('#wt-session-brief').innerText)">copy</button>
+      </div>
+      <pre id="wt-session-brief">Help me set up Ronin Worktrees so several agents can work in my repository without file collisions.
+
+Start by opening and following this agent-facing guide:
+https://github.com/ronincowork/ronin-cowork/blob/master/docs/worktrees.md
+
+Check both sides of the switch: enable Worktrees on the repository's Project Root (Use Ronin Worktrees), and make sure new Agents carry the Worktrees Routine through my Campaign or Team defaults. Explain the working loop to me — commit, hand-in, and the Team lead's merge — before changing anything, and make no repository change without my approval.</pre>
+    </section>
+
     <section class="pbs-section" aria-labelledby="keys-title"><p class="section-label">The whole idea in three keys</p><h2 id="keys-title">What it does, when it works, what it costs.</h2>
       <ul class="pbs-points">
         <li><strong>What it does</strong>Isolated working folders and branches keep parallel Agents from colliding in the same files. Two Agents can edit the same repository at once; neither sees the other's half-finished state.</li>
@@ -26,23 +44,6 @@
       </ul>
     </section>
 
-
-    <section class="session-brief" aria-labelledby="wt-brief-title">
-      <div class="session-brief__head">
-        <div>
-          <p class="section-label">Have an agent help</p>
-          <h2 id="wt-brief-title">Set this up through your agent</h2>
-          <p>Give this brief to an agent working in your Ronin. It reads the same guide the machinery follows; you keep approval of every repository change.</p>
-        </div>
-        <button class="session-brief__copy" data-copy-target="#wt-session-brief" onclick="copyText(this,document.querySelector('#wt-session-brief').innerText)">copy</button>
-      </div>
-      <pre id="wt-session-brief">Help me set up Ronin Worktrees so several agents can work in my repository without file collisions.
-
-Start by opening and following this agent-facing guide:
-https://github.com/ronincowork/ronin-cowork/blob/master/docs/worktrees.md
-
-Check both sides of the switch: enable Worktrees on the repository's Project Root (Use Ronin Worktrees), and make sure new Agents carry the Worktrees Routine through my Campaign or Team defaults. Explain the working loop to me — commit, hand-in, and the Team lead's merge — before changing anything, and make no repository change without my approval.</pre>
-    </section>
 
     <section class="pbs-section" aria-labelledby="loop-title"><p class="section-label">The working loop</p><h2 id="loop-title">Commit preserves. Hand-in shares. The lead's merge publishes.</h2>
       <div class="coord-flow" aria-label="An Agent works in a private worktree, commits, hands in to the team line, the Team lead reviews and promotes, and the shared branch advances.">
