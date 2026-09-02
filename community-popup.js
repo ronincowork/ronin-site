@@ -16,25 +16,7 @@
 
   popup.querySelector('.community-popup__close').addEventListener('click', dismiss);
   popup.querySelector('[data-community-dismiss]').addEventListener('click', dismiss);
-  popup.querySelector('[data-community-form]').addEventListener('submit', function (event) {
-    event.preventDefault();
-    var data = new FormData(event.currentTarget);
-    var email = String(data.get('email') || '').trim();
-    var agents = data.getAll('agents');
-    var interests = data.getAll('interests');
-    var note = String(data.get('note') || '').trim();
-    var body = [
-      'Please add me to the Ronin community.',
-      '',
-      'Email: ' + email,
-      'Agents I use: ' + (agents.length ? agents.join(', ') : 'Not specified'),
-      'I am interested in: ' + (interests.length ? interests.join(', ') : 'Not specified'),
-      'Anything else: ' + (note || '—')
-    ].join('\n');
-    window.location.href = 'mailto:support@ronincowork.com?subject=' +
-      encodeURIComponent('Join the Ronin community') + '&body=' + encodeURIComponent(body);
-    dismiss();
-  });
+  popup.querySelector('[data-community-join]').addEventListener('click', dismiss);
   popup.addEventListener('cancel', function (event) {
     event.preventDefault();
     dismiss();

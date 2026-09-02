@@ -286,7 +286,7 @@
         font-size: var(--text-5) !important;
       }
       .community-popup {
-        width: min(680px, calc(100% - 28px));
+        width: min(560px, calc(100% - 28px));
         padding: 0;
         border: var(--edge) solid var(--line-3);
         border-radius: var(--radius-md);
@@ -322,46 +322,6 @@
       .community-popup p {
         margin: var(--space-9) 0;
         color: var(--muted-2);
-      }
-      .community-popup__form {
-        display: grid;
-        gap: var(--space-9);
-        margin-top: var(--space-9);
-      }
-      .community-popup__field,
-      .community-popup fieldset {
-        display: grid;
-        gap: var(--space-5);
-        margin: 0;
-        padding: 0;
-        border: 0;
-      }
-      .community-popup label,
-      .community-popup legend {
-        color: var(--muted-2);
-        font: 600 var(--text-3) / 1.4 var(--font-mono);
-      }
-      .community-popup input[type="email"],
-      .community-popup input[type="text"] {
-        width: 100%;
-        min-height: 44px;
-        padding: var(--space-6) var(--space-7);
-        border: var(--edge) solid var(--line-3);
-        border-radius: var(--radius-sm);
-        background: var(--well);
-        color: var(--fg-strong);
-      }
-      .community-popup__choices {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-5) var(--space-9);
-      }
-      .community-popup__choices label {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-4);
-        color: var(--fg);
-        font: var(--text-5) / 1.4 var(--font-ui);
       }
       .community-popup__actions {
         display: flex;
@@ -961,46 +921,18 @@
         <h2 id="community-popup-title">Hey, join the community, bitch.</h2>
         <p>
           Use Claude, Codex, Gemini, or whatever comes next without giving one
-          provider a permanent claim on your work. Tell us what you use and what
-          you care about, then help us build the provider-independent coworkspace
-          together.
+          provider a permanent claim on your work. Share your email and help us
+          build the provider-independent coworkspace together.
         </p>
-        <form class="community-popup__form" data-community-form>
-          <label class="community-popup__field">
-            Your email
-            <input name="email" type="email" autocomplete="email" required />
-          </label>
-          <fieldset>
-            <legend>Which Agents do you use?</legend>
-            <div class="community-popup__choices">
-              <label><input type="checkbox" name="agents" value="Claude" /> Claude</label>
-              <label><input type="checkbox" name="agents" value="Codex" /> Codex</label>
-              <label><input type="checkbox" name="agents" value="Gemini" /> Gemini</label>
-              <label><input type="checkbox" name="agents" value="Other" /> Other</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>What are you interested in?</legend>
-            <div class="community-popup__choices">
-              <label><input type="checkbox" name="interests" value="Release updates" /> Release updates</label>
-              <label><input type="checkbox" name="interests" value="Sharing feedback" /> Sharing feedback</label>
-              <label><input type="checkbox" name="interests" value="Contributing" /> Contributing</label>
-              <label><input type="checkbox" name="interests" value="Provider-independent workflows" /> Agent workflows</label>
-            </div>
-          </fieldset>
-          <label class="community-popup__field">
-            Anything else? <span class="section-label">optional</span>
-            <input name="note" type="text" />
-          </label>
-          <div class="community-popup__actions">
-            <button class="button button--primary" type="submit">Join the community</button>
-            <button class="button" type="button" data-community-dismiss>Not now</button>
-          </div>
-          <p class="community-note">
-            No spam—just occasional progress on Ronin. Submit opens a prepared
-            message in your email app; nothing is shared until you send it.
-          </p>
-        </form>
+        <div class="community-popup__actions">
+          <a
+            class="button button--primary"
+            data-community-join
+            href="mailto:support@ronincowork.com?subject=Join%20the%20Ronin%20community&amp;body=Please%20add%20me%20to%20the%20Ronin%20community.%0A%0AThe%20Agent%20providers%20I%20use%3A%20"
+            >I'm in</a
+          >
+          <button class="button" type="button" data-community-dismiss>Not now</button>
+        </div>
       </div>
     </dialog>
     <script src="community-popup.js"></script>
