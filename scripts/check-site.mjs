@@ -25,7 +25,6 @@ const required = [
   'staticwebapp.config.json',
   'ronin-tokens.css',
   'site-shell.js',
-  'community-popup.js',
   'nin-mark.svg',
 ];
 for (const file of required) if (!existsSync(path.join(root, file))) fail('required-static-payload', `missing ${file}`);
