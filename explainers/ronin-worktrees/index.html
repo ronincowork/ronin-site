@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="How several Agents work in one repository without collisions: Ronin Worktrees, hand-in, and the Team lead's review." />
+  <title>Ronin Worktrees | Ronin</title><link rel="canonical" href="https://ronincowork.com/explainers/ronin-worktrees/" />
+  <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" /><link rel="stylesheet" href="../../ronin-tokens.css" /><link rel="stylesheet" href="../pbs.css" />
+</head><body>
+  <header class="site-header"><div class="site-header__inner"><a class="brand" href="../../index.html"><img src="../../nin-mark.svg" alt="Ronin" /><span class="brand-name">RONIN</span></a><nav class="site-nav" aria-label="Primary"><a href="../">Explainers</a><a href="../../load-ronin.html">Load Ronin</a></nav></div></header>
+  <div class="cta-strip"><div class="cta-strip__inner"><span class="cta-strip__label">Ronin · parallel work</span><div class="cta-strip__actions"><a class="button" href="../">Explainers</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></div></div>
+  <main class="page"><nav class="explainer-breadcrumbs" aria-label="Breadcrumb"><a href="../">Explainers</a> / <span aria-current="page">Ronin Worktrees</span></nav>
+    <section class="pbs-hero"><p class="pbs-kicker">How do several Agents share one repository without stepping on each other?</p><h1 class="display">Each Agent in its own worktree. One reviewed path back.</h1><p class="lede">Ronin Worktrees gives a coding Agent a private working folder and branch inside your repository. Agents work in parallel without file collisions, and finished work returns through a hand-in the Team lead reviews — never by landing directly on the shared branch.</p></section>
+
+
+    <section class="session-brief session-brief--compact" aria-labelledby="wt-brief-title">
+      <div class="session-brief__head">
+        <div>
+          <p class="section-label">Ask your agent</p>
+          <h2 id="wt-brief-title">The fastest route: hand this to your agent.</h2>
+          <p>Copy this brief to an agent in your Ronin and it sets Worktrees up with you — you keep approval of every repository change. Read on below if you want to understand the mechanism yourself first.</p>
+        </div>
+        <button class="session-brief__copy" data-copy-target="#wt-session-brief" onclick="copyText(this,document.querySelector('#wt-session-brief').innerText)">copy</button>
+      </div>
+      <pre id="wt-session-brief">Help me set up Ronin Worktrees so several agents can work in my repository without file collisions.
+
+Start by opening and following this agent-facing guide:
+https://github.com/ronincowork/ronin-cowork/blob/master/docs/worktrees.md
+
+Check both sides of the switch: enable Worktrees on the repository's Project Root (Use Ronin Worktrees), and make sure new Agents carry the Worktrees Routine through my Campaign or Team defaults. Explain the working loop to me — commit, hand-in, and the Team lead's merge — before changing anything, and make no repository change without my approval.</pre>
+    </section>
+
+    <section class="pbs-section" aria-labelledby="keys-title"><p class="section-label">The whole idea in three keys</p><h2 id="keys-title">What it does, when it works, what it costs.</h2>
+      <ul class="pbs-points">
+        <li><strong>What it does</strong>Isolated working folders and branches keep parallel Agents from colliding in the same files. Two Agents can edit the same repository at once; neither sees the other's half-finished state.</li>
+        <li><strong>When it works</strong>Both sides must say yes. The repository's Project Root enables Worktrees — one tick in its editor — and the Agent carries the Worktrees Routine. Either side off means the Agent simply uses the ordinary checkout and ordinary Git.</li>
+        <li><strong>The tradeoff</strong>Work leaves a private worktree through the managed path: commit, hand-in, and the Team lead's merge. That is a review step between an Agent and your shared branch — deliberate friction, and the point.</li>
+      </ul>
+    </section>
+
+    <section class="pbs-section" aria-labelledby="setup-title"><p class="section-label">Setup is two ticks</p><h2 id="setup-title">The repository opts in. The Agent opts in. That's it.</h2>
+      <ul class="pbs-points">
+        <li><strong>The repository side</strong>In the Project Root editor, the Worktrees setting offers two answers: <em>Use Ronin Worktrees</em> or <em>Use the checkout</em>. Tick the first and the repository accepts managed worktrees from capable Agents. Nothing moves when you save — the setting shapes future launches, not running work.</li>
+        <li><strong>The Agent side</strong>The Worktrees Routine travels the ordinary defaults path: the Campaign sets a default, a Team may override it, and the New Agent form shows the resolved answer for each launch. An Agent born with it on knows the workflow from its first breath — the Routine hands the working method over at birth, so you never have to teach it.</li>
+        <li><strong>Per repository, not all-or-nothing</strong>The answer resolves separately for every repository in an assignment. One Agent can hold a managed worktree in the repository that wants review and an ordinary checkout in the one that doesn't.</li>
+      </ul>
+    </section>
+
+
+    <section class="pbs-section" aria-labelledby="loop-title"><p class="section-label">The working loop</p><h2 id="loop-title">Commit preserves. Hand-in shares. The lead's merge publishes.</h2>
+      <div class="coord-flow" aria-label="An Agent works in a private worktree, commits, hands in to the team line, the Team lead reviews and promotes, and the shared branch advances.">
+        <div class="coord-start"><strong>A private worktree at birth</strong><br />The Agent starts on its own branch, in its own folder, inside your repository.</div>
+        <div class="coord-branch">
+          <article class="coord-path"><h3>The Agent's half</h3><ol class="coord-steps"><li><strong>Commit</strong> — preserves work on the private branch. Private means private: nothing reaches anyone else yet.</li><li><strong>Hand in</strong> — publishes the committed work to the team's shared line. Admission is mechanical; a receipt records exactly what arrived and from whom.</li></ol></article>
+          <article class="coord-path"><h3>The Team lead's half</h3><ol class="coord-steps"><li><strong>Review the line</strong> — the lead reads the assembled candidate: every hand-in, with its receipts, as one coherent state.</li><li><strong>Promote</strong> — the full verification runs once, on the exact candidate. Only a passing candidate advances the shared branch, and the receipt proves which commit passed.<span class="coord-note">Publishing beyond the machine — a push, a release — remains a person's deliberate act.</span></li></ol></article>
+        </div>
+        <div class="coord-return"><strong>The shared branch advances</strong><br />Everyone's next worktree grows from the accepted state, and the loop begins again.</div>
+      </div>
+      <p>Every step leaves a receipt, so a failure is attributable: the lead can see which hand-in broke the candidate and send it back, without unwinding anyone else's work.</p>
+    </section>
+
+    <aside class="pbs-boundary" aria-labelledby="boundary-title"><h2 id="boundary-title">Coordination, not confinement</h2><p>Worktrees prevent accidental collisions; they are not a security boundary, and <em>Use the checkout</em> remains a complete, first-class way to work — many repositories never need review machinery. An Agent's authority on the machine is governed by the machine, not by which folder it works in. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p></aside>
+
+    <section class="pbs-related"><div><p class="section-label">Next explanation</p><h2>See where Worktrees sit among the coordination choices.</h2><p>Messages, the team wipeboard, and Worktrees are separate, optional Routines — take only what the job needs.</p><p>Ronin Cowork is free and open source. Loading it joins a community of people who run their Agents on their own machines, with their own provider accounts — never locked into one.</p></div><div class="pbs-actions"><a class="button" href="../agent-coordination/">Agent coordination</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></section>
+  </main><script src="../../site-shell.js"></script><footer class="site-footer"><span>Ronin · parallel work without collisions</span><a href="../">All explainers</a></footer>
+</body></html>

@@ -53,3 +53,6 @@
   .pbs-related { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* A brief you hand over, not one you read: a few visible lines, scroll for the rest. */
+.session-brief--compact pre { max-height: 128px; }
