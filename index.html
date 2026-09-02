@@ -285,6 +285,49 @@
       .community-note {
         font-size: var(--text-5) !important;
       }
+      .community-popup {
+        width: min(560px, calc(100% - 28px));
+        padding: 0;
+        border: var(--edge) solid var(--line-3);
+        border-radius: var(--radius-md);
+        background: var(--panel);
+        color: var(--fg-strong);
+        box-shadow: 0 24px 80px rgb(0 0 0 / 0.5);
+      }
+      .community-popup::backdrop {
+        background: rgb(5 7 11 / 0.76);
+      }
+      .community-popup__inner {
+        position: relative;
+        padding: clamp(28px, 6vw, 48px);
+      }
+      .community-popup__close {
+        position: absolute;
+        top: var(--space-7);
+        right: var(--space-7);
+        width: 40px;
+        height: 40px;
+        border: 0;
+        background: transparent;
+        color: var(--muted-2);
+        cursor: pointer;
+        font-size: var(--text-9);
+      }
+      .community-popup h2 {
+        max-width: 440px;
+        margin: 0;
+        font: 600 clamp(30px, 7vw, 46px) / 1.05 var(--font-ui);
+        letter-spacing: -0.04em;
+      }
+      .community-popup p {
+        margin: var(--space-9) 0;
+        color: var(--muted-2);
+      }
+      .community-popup__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+      }
       .final {
         display: grid;
         grid-template-columns: 1.5fr 0.5fr;
@@ -871,5 +914,27 @@
     <footer class="site-footer">
       <span>Ronin Cowork · open source · runs on your machine</span>
     </footer>
+    <dialog class="community-popup" id="community-popup" aria-labelledby="community-popup-title">
+      <div class="community-popup__inner">
+        <button class="community-popup__close" type="button" aria-label="Close community invitation">×</button>
+        <p class="eyebrow">Ronin community</p>
+        <h2 id="community-popup-title">Hey, join the community, bitch.</h2>
+        <p>
+          Use Claude, Codex, Gemini, or whatever comes next without giving one
+          provider a permanent claim on your work. Share your email and help us
+          build the provider-independent coworkspace together.
+        </p>
+        <div class="community-popup__actions">
+          <a
+            class="button button--primary"
+            data-community-join
+            href="mailto:support@ronincowork.com?subject=Join%20the%20Ronin%20community&amp;body=Please%20add%20me%20to%20the%20Ronin%20community.%0A%0AThe%20Agent%20providers%20I%20use%3A%20"
+            >I'm in</a
+          >
+          <button class="button" type="button" data-community-dismiss>Not now</button>
+        </div>
+      </div>
+    </dialog>
+    <script src="community-popup.js"></script>
   </body>
 </html>
