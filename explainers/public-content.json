@@ -9,7 +9,10 @@
       "readme_narrow_asset_path": "docs/assets/readme/workbench/workbench-narrow.webp",
       "public_url": "https://ronincowork.com/explainers/workbench/",
       "question": "What does working in Ronin look like?",
-      "audience": ["person", "outside-agent"],
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
       "evidence_authorities": [
         "ronin-cowork/docs/workbench.md",
         "ronin-cowork/docs/routines.md",
@@ -31,7 +34,10 @@
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/agent-coordination/",
       "question": "Do my Agents have to work as a team?",
-      "audience": ["person", "outside-agent"],
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
       "evidence_authorities": [
         "ronin-cowork/docs/routines.md",
         "ronin-cowork/ronin_catalogs/TOOLS.md",
@@ -52,7 +58,10 @@
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/cowork-and-services/",
       "question": "What can I add after a bare Agent?",
-      "audience": ["person", "outside-agent"],
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
       "evidence_authorities": [
         "ronin-cowork/docs/routines.md",
         "ronin-cowork/README.md",
@@ -71,7 +80,10 @@
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/no-platform-lock-in/",
       "question": "Where do my data, code, and Agent relationships live?",
-      "audience": ["person", "outside-agent"],
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
       "evidence_authorities": [
         "ronin-cowork/README.md",
         "ronin-cowork/docs/model-providers.md",
@@ -92,7 +104,10 @@
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/no-behavioral-takeover/",
       "question": "Does Ronin tell my Agents how to work?",
-      "audience": ["person", "outside-agent"],
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
       "evidence_authorities": [
         "ronin-cowork/docs/routines.md",
         "ronin-cowork/ronin_catalogs/routines/ronin_base.md",
@@ -112,7 +127,10 @@
       "readme_asset_path": null,
       "public_url": "https://ronincowork.com/explainers/editable-coordination/",
       "question": "Can I change Ronin's coordination materials without losing my changes on update?",
-      "audience": ["person", "outside-agent"],
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
       "evidence_authorities": [
         "ronin-cowork/docs/shadowing.md",
         "ronin-cowork/docs/stores.md",
@@ -123,6 +141,29 @@
       "capture_source_id": "editable-coordination-v1",
       "asset_checksum": null,
       "review_trigger": "Shadow precedence, user-store placement, Routine selection, or update behavior changes",
+      "status": "public"
+    },
+    {
+      "id": "ronin-worktrees",
+      "readme_headline": null,
+      "readme_anchor": null,
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/ronin-worktrees/",
+      "question": "How do several Agents share one repository without stepping on each other?",
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
+      "evidence_authorities": [
+        "ronin-cowork/docs/worktrees.md",
+        "ronin-cowork/docs/team-promotion.md",
+        "ronin-cowork/docs/desks.md",
+        "ronin-cowork/docs/routines.md"
+      ],
+      "alt_text": "A loop from a private worktree through commit and hand-in to the Team lead's review and the shared branch advancing.",
+      "capture_source_id": null,
+      "asset_checksum": null,
+      "review_trigger": "Worktrees resolution, hand-in, promotion, or Project Root profile contracts change",
       "status": "public"
     }
   ]
