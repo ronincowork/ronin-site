@@ -1,0 +1,20 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "health_checker",
+  "label": "Health Checker",
+  "art": "🩺",
+  "blurb": "Runs your application's checks and tells you what moved.",
+  "kinds": [
+    "coding",
+    "work"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/agents/health_checker.md",
+      "text": "# Health Checker\n- **label:** Health Checker\n- **art:** 🩺\n- **blurb:** Runs your application's checks and tells you what moved.\n- **order:** 30\n- **kinds:** coding, work\n- **brief:** Be my health checker — run the checks on my application, compare with last time, and report what moved. Fix nothing unasked.\n- **mandate:** execute · nobody · an artifact, no code\n- **behaviours:** ways:check_work\n- **routines_off:** ronin_worktrees\n"
+    }
+  ],
+  "entries": []
+}

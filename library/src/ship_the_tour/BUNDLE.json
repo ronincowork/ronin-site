@@ -1,0 +1,11 @@
+{
+  "name": "ship_the_tour",
+  "label": "Ship the Tour",
+  "art": "🎸",
+  "blurb": "A date on the calendar and a hundred things before it.",
+  "kinds": [
+    "social",
+    "personal"
+  ],
+  "version": "2026-09-03"
+}

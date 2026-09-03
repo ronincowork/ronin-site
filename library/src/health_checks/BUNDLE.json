@@ -1,0 +1,11 @@
+{
+  "name": "health_checks",
+  "label": "Health Checks",
+  "art": "📈",
+  "blurb": "Your application's checks, run on a rhythm, judged, and reported.",
+  "kinds": [
+    "coding",
+    "work"
+  ],
+  "version": "2026-09-03"
+}

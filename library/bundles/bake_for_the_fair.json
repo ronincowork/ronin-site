@@ -1,0 +1,21 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "bake_for_the_fair",
+  "label": "Bake for the Fair",
+  "art": "🥧",
+  "blurb": "Forty entries, one oven, one morning.",
+  "kinds": [
+    "household",
+    "social",
+    "school"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/bake_for_the_fair.md",
+      "text": "# Bake for the Fair\n- **label:** Bake for the Fair\n- **art:** 🥧\n- **blurb:** Forty entries, one oven, one morning.\n- **order:** 70\n- **kinds:** household, social, school\n- **objective:** Forty entries, one oven, one morning. Precision, not luck.\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### run the bake\n- **team_lead:** yes\n- **instructions:** Hold the oven plan and the timings; the morning runs to the minute.\n- **mandate:** execute · nobody · an artifact\n\n### entries and recipes\n- **instructions:** Keep the entry list and every recipe ready — quantities scaled, shopping done.\n- **mandate:** execute · nobody · an artifact\n"
+    }
+  ],
+  "entries": []
+}

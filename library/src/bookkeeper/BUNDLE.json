@@ -1,0 +1,12 @@
+{
+  "name": "bookkeeper",
+  "label": "Bookkeeper",
+  "art": "📒",
+  "blurb": "Every receipt, every account, reconciled and filed.",
+  "kinds": [
+    "work",
+    "household",
+    "school"
+  ],
+  "version": "2026-09-03"
+}

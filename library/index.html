@@ -3,143 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta
-      name="description"
-      content="Template bundles for Ronin Cowork: a Chief of Staff team, a weekly review, a dinner party and more — a team, its agents, and the SOPs, macros and tools they read, as one download you install into your own stores."
-    />
+    <meta name="description" content="Templates for Ronin Cowork — a team, its agents, and the SOPs, macros and tools they read. See them here; get them inside your Ronin." />
     <title>Ronin Template Library</title>
-    <link rel="canonical" href="https://www.ronincowork.com/library/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Ronin Cowork" />
-    <meta property="og:title" content="Ronin Template Library" />
-    <meta property="og:description" content="Team templates with everything they read, as one download for your Ronin coworkspace." />
-    <meta property="og:url" content="https://www.ronincowork.com/library/" />
-    <meta property="og:image" content="https://www.ronincowork.com/social/ronin-agent-team.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1730" />
-    <meta property="og:image:height" content="909" />
-    <meta property="og:image:alt" content="Three connected AI agent terminal workspaces" />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="../ronin-tokens.css" />
-    <style>
-      .library-head {
-        max-width: 860px;
-        margin-bottom: 64px;
-      }
-      .members {
-        border-top: var(--edge) solid var(--line);
-      }
-      .member {
-        display: grid;
-        grid-template-columns: 56px minmax(0, 1fr);
-        gap: clamp(20px, 5vw, 64px);
-        padding: clamp(30px, 5vw, 52px) 0;
-        border-bottom: var(--edge) solid var(--line);
-      }
-      .member .art {
-        padding-top: 2px;
-        font-size: var(--text-8);
-        line-height: 1;
-      }
-      .member h2 {
-        margin: 0 0 var(--space-5);
-        font: 500 var(--text-10) / 1.25 var(--font-ui);
-      }
-      .member p {
-        max-width: var(--measure);
-        margin: 0 0 var(--space-6);
-        color: var(--muted-2);
-      }
-      .member .holds {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-3) var(--space-6);
-        margin: 0 0 var(--space-6);
-        padding: 0;
-        list-style: none;
-        color: var(--muted);
-        font: var(--text-2) var(--font-mono);
-      }
-      .member .holds li::before {
-        content: "▸ ";
-        color: var(--kaki);
-      }
-      .member .go {
-        display: inline-block;
-        margin-right: var(--space-10);
-        color: var(--kaki);
-        text-decoration: none;
-        text-underline-offset: 3px;
-      }
-      .member .go:hover {
-        text-decoration: underline;
-      }
-      .member .version {
-        color: var(--dim);
-        font: var(--text-2) var(--font-mono);
-      }
-      .how {
-        margin-top: 72px;
-        padding: var(--space-10);
-        border-radius: var(--radius-md);
-        background: var(--raise);
-      }
-      .how h2 {
-        margin: 0 0 var(--space-5);
-      }
-      .how p,
-      .how li {
-        max-width: var(--measure);
-        color: var(--muted-2);
-      }
-      .how ol {
-        padding-left: var(--space-8);
-      }
-      .how code,
-      .how pre {
-        font: var(--text-2) var(--font-mono);
-      }
-      .how pre {
-        margin: var(--space-5) 0 0;
-        padding: var(--space-5);
-        border-radius: var(--radius-sm);
-        background: var(--bg-2);
-        overflow-x: auto;
-      }
-      .finish {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: var(--space-10);
-        align-items: center;
-        margin-top: 48px;
-        padding: var(--space-10);
-        border-radius: var(--radius-md);
-        background: var(--raise);
-      }
-      .finish h2,
-      .finish p {
-        margin: 0;
-      }
-      .finish p {
-        margin-top: var(--space-5);
-        color: var(--muted-2);
-      }
-      .finish-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-6);
-      }
-      @media (max-width: 640px) {
-        .member {
-          grid-template-columns: 34px minmax(0, 1fr);
-          gap: var(--space-8);
-        }
-        .finish {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="../library/library.css" />
   </head>
   <body>
     <header class="site-header">
@@ -150,127 +18,396 @@
           ></a
         >
         <nav class="site-nav">
-          <a href="../explainers/">Explainers</a><a href="../load-ronin.html">Load Ronin</a>
+          <a href="../library/">Templates</a><a href="../explainers/">Explainers</a><a href="../load-ronin.html">Load Ronin</a>
         </nav>
       </div>
     </header>
 
-    <div class="cta-strip">
-      <div class="cta-strip__inner">
-        <span class="cta-strip__label">Ronin · template library</span>
-        <div class="cta-strip__actions">
-          <a class="button" href="../index.html">Tell me more about Ronin</a>
-          <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
-        </div>
-      </div>
-    </div>
-
     <main class="page">
       <section class="library-head">
         <p class="eyebrow">Template library</p>
-        <h1 class="display">A team, and everything it reads, as one download.</h1>
+        <h1 class="display">A team, and everything it reads.</h1>
         <p class="lede">
-          A template bundle holds a team template, the agent templates beside it,
-          and the SOPs, Routines, macros and tools they name. This page is the
-          shelf: what is on it and what each one holds. The download happens inside
-          your Ronin coworkspace — press <strong>Check the library</strong> on the
-          Templates card, and Ronin fetches this shelf, shows you the plan, and
-          installs what you choose into your own stores.
+          A template is a cast that delivers a project, or a person you assign, with the
+          SOPs, Routines, macros and tools they name. A handful ship inside Ronin; the rest
+          are here. See what each one holds, then get it inside your Ronin —
+          <strong>Templates → Check the library</strong> — where it lands on your own shelf.
         </p>
       </section>
 
-      <section class="members" aria-label="Template bundles">
+      <section class="members" aria-label="Code">
+        <p class="eyebrow">Code</p>
+        <article class="member" data-bundle="designer">
+          <span class="art" aria-hidden="true">🎨</span>
+          <div>
+            <h2>Designer</h2>
+            <p>Shape the thing before anyone builds it — looks, flow, feel.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/designer/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="front_end">
+          <span class="art" aria-hidden="true">🖥</span>
+          <div>
+            <h2>Front-End Developer</h2>
+            <p>Build the surface against an agreed design.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/front_end/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="health_checker">
+          <span class="art" aria-hidden="true">🩺</span>
+          <div>
+            <h2>Health Checker</h2>
+            <p>Runs your application's checks and tells you what moved.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/health_checker/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="health_checks">
+          <span class="art" aria-hidden="true">📈</span>
+          <div>
+            <h2>Health Checks</h2>
+            <p>Your application's checks, run on a rhythm, judged, and reported.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/health_checks/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="raid_my_codebase">
+          <span class="art" aria-hidden="true">🛠</span>
+          <div>
+            <h2>Raid My Codebase</h2>
+            <p>Work on what is already there. Faster, cleaner, fixed.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/raid_my_codebase/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="researcher">
+          <span class="art" aria-hidden="true">🧭</span>
+          <div>
+            <h2>Researcher</h2>
+            <p>Research, compare, decide. No building — yet.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/researcher/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="ship_an_app">
+          <span class="art" aria-hidden="true">🏗</span>
+          <div>
+            <h2>Ship an App</h2>
+            <p>Build a thing that does not exist yet, end to end.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/ship_an_app/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="technical_writer">
+          <span class="art" aria-hidden="true">📗</span>
+          <div>
+            <h2>Technical Writer</h2>
+            <p>Says what the thing is, for someone who was not here.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/technical_writer/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="members" aria-label="Work">
+        <p class="eyebrow">Work</p>
+        <article class="member" data-bundle="bookkeeper">
+          <span class="art" aria-hidden="true">📒</span>
+          <div>
+            <h2>Bookkeeper</h2>
+            <p>Every receipt, every account, reconciled and filed.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/bookkeeper/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
         <article class="member" data-bundle="chief_of_staff">
           <span class="art" aria-hidden="true">🗂</span>
           <div>
             <h2>Chief of Staff</h2>
-            <p>
-              The always-on bot-team shape — a chief of staff on top, a specialist
-              per lane — on your own machine and any provider. A coordinator who
-              writes no code, inbox triage, meeting prep, money and admin, pipeline
-              research, one macro per lane and a morning brief read from the team's
-              own records. Lanes work from folders you own and produce drafts;
-              nothing leaves the house without your yes.
-            </p>
-            <ul class="holds">
-              <li>1 team</li><li>1 agent</li><li>1 Routine</li><li>1 SOP</li><li>5 macros</li><li>1 action</li><li>1 tool</li>
-            </ul>
-            <span class="version">in Ronin: Templates → Check the library → chief_of_staff · 2026-09-03</span>
+            <p>The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends.</p>
+            <ul class="holds"><li>1 Routine</li><li>1 agent</li><li>1 team</li><li>1 SOP</li><li>2 tools</li><li>1 action</li><li>5 macros</li></ul>
+            <a class="go" href="view/chief_of_staff/">View →</a>
+            <span class="version">2026-09-03</span>
           </div>
         </article>
-
-        <article class="member" data-bundle="weekly_review">
-          <span class="art" aria-hidden="true">🗓</span>
+        <article class="member" data-bundle="designer">
+          <span class="art" aria-hidden="true">🎨</span>
           <div>
-            <h2>Weekly Review</h2>
-            <p>
-              A review lead, a record reader and a next-week planner. The book says
-              how this house reviews a week; the <code>+review:</code> macro is the
-              procedure; <code>tejun-week</code> measures the dates. Everything a
-              bundle can carry, in one small one.
-            </p>
-            <ul class="holds">
-              <li>1 team</li><li>1 Routine</li><li>1 SOP</li><li>1 macro</li><li>1 action</li><li>1 tool</li>
-            </ul>
-            <span class="version">in Ronin: Templates → Check the library → weekly_review · 2026-09-03</span>
+            <h2>Designer</h2>
+            <p>Shape the thing before anyone builds it — looks, flow, feel.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/designer/">View →</a>
+            <span class="version">2026-09-03</span>
           </div>
         </article>
-
-        <article class="member" data-bundle="dinner_party">
-          <span class="art" aria-hidden="true">🕯</span>
+        <article class="member" data-bundle="health_checker">
+          <span class="art" aria-hidden="true">🩺</span>
           <div>
-            <h2>Dinner Party, with the menu book</h2>
-            <p>
-              The shipped Dinner Party cast plus a standing menu book the
-              menu-and-shopping agent reads at birth — the worked example from the
-              templates page, done for you. Your copy of the template replaces the
-              shipped one; delete it and the shipped box is back.
-            </p>
-            <ul class="holds">
-              <li>1 team</li><li>1 SOP</li>
-            </ul>
-            <span class="version">in Ronin: Templates → Check the library → dinner_party · 2026-09-03</span>
+            <h2>Health Checker</h2>
+            <p>Runs your application's checks and tells you what moved.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/health_checker/">View →</a>
+            <span class="version">2026-09-03</span>
           </div>
         </article>
-
+        <article class="member" data-bundle="health_checks">
+          <span class="art" aria-hidden="true">📈</span>
+          <div>
+            <h2>Health Checks</h2>
+            <p>Your application's checks, run on a rhythm, judged, and reported.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/health_checks/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
         <article class="member" data-bundle="newsletter">
           <span class="art" aria-hidden="true">📰</span>
           <div>
             <h2>Ship the Newsletter</h2>
-            <p>
-              An editor, a writer, a fact checker and a sender, all reading the
-              same house style guide — and a Copy Editor you can add to any team.
-              Replace the style guide with yours and the whole cast follows it.
-            </p>
-            <ul class="holds">
-              <li>1 team</li><li>1 agent</li><li>1 SOP</li>
-            </ul>
-            <span class="version">in Ronin: Templates → Check the library → newsletter · 2026-09-03</span>
+            <p>An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.</p>
+            <ul class="holds"><li>1 agent</li><li>1 team</li><li>1 SOP</li></ul>
+            <a class="go" href="view/newsletter/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="researcher">
+          <span class="art" aria-hidden="true">🧭</span>
+          <div>
+            <h2>Researcher</h2>
+            <p>Research, compare, decide. No building — yet.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/researcher/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="technical_writer">
+          <span class="art" aria-hidden="true">📗</span>
+          <div>
+            <h2>Technical Writer</h2>
+            <p>Says what the thing is, for someone who was not here.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/technical_writer/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="weekly_review">
+          <span class="art" aria-hidden="true">🗓</span>
+          <div>
+            <h2>Weekly Review</h2>
+            <p>A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.</p>
+            <ul class="holds"><li>1 Routine</li><li>1 team</li><li>1 SOP</li><li>2 tools</li><li>1 action</li><li>1 macro</li></ul>
+            <a class="go" href="view/weekly_review/">View →</a>
+            <span class="version">2026-09-03</span>
           </div>
         </article>
       </section>
 
-      <section class="how" aria-label="How a bundle gets in">
-        <h2>How a bundle gets in</h2>
-        <ol>
-          <li>Open the Campaign page in your Ronin coworkspace and place <strong>Templates</strong> in a workspace.</li>
-          <li>Press <strong>Check the library</strong>. Ronin asks this site for the shelf — only when you press, never on a timer — and shows the same bundles you see here.</li>
-          <li>Pick one. Ronin shows the plan first: every file, the shelf it lands on, and whether it is new, replaces a shipped copy, or would replace one of yours. Nothing is written yet.</li>
-          <li>Press <strong>Install</strong>. Every copy lands in your own stores on your machine, where an update never touches it. A file you already own is kept unless you choose the second button.</li>
-        </ol>
-        <p>
-          There is no file to move from the internet to your computer to the app: the
-          app does the fetching, checks each bundle against the hash this shelf publishes,
-          and a tool in a bundle never replaces one of Ronin's own.
-        </p>
+      <section class="members" aria-label="Yourself">
+        <p class="eyebrow">Yourself</p>
+        <article class="member" data-bundle="chief_of_staff">
+          <span class="art" aria-hidden="true">🗂</span>
+          <div>
+            <h2>Chief of Staff</h2>
+            <p>The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends.</p>
+            <ul class="holds"><li>1 Routine</li><li>1 agent</li><li>1 team</li><li>1 SOP</li><li>2 tools</li><li>1 action</li><li>5 macros</li></ul>
+            <a class="go" href="view/chief_of_staff/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="researcher">
+          <span class="art" aria-hidden="true">🧭</span>
+          <div>
+            <h2>Researcher</h2>
+            <p>Research, compare, decide. No building — yet.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/researcher/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="ship_the_tour">
+          <span class="art" aria-hidden="true">🎸</span>
+          <div>
+            <h2>Ship the Tour</h2>
+            <p>A date on the calendar and a hundred things before it.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/ship_the_tour/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="weekly_review">
+          <span class="art" aria-hidden="true">🗓</span>
+          <div>
+            <h2>Weekly Review</h2>
+            <p>A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.</p>
+            <ul class="holds"><li>1 Routine</li><li>1 team</li><li>1 SOP</li><li>2 tools</li><li>1 action</li><li>1 macro</li></ul>
+            <a class="go" href="view/weekly_review/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
       </section>
 
-      <section class="finish">
-        <div>
-          <h2>Have a team worth sharing?</h2>
-          <p>Any team template on your machine, with the books and Routines you gave it, packs into the same shape from its card on the Templates page — for a shelf of your own, or for this one.</p>
-        </div>
-        <div class="finish-actions"><a class="button" href="../explainers/">Read the explainers</a><a class="button button--primary" href="../load-ronin.html">Load Ronin →</a></div>
+      <section class="members" aria-label="The house">
+        <p class="eyebrow">The house</p>
+        <article class="member" data-bundle="bake_for_the_fair">
+          <span class="art" aria-hidden="true">🥧</span>
+          <div>
+            <h2>Bake for the Fair</h2>
+            <p>Forty entries, one oven, one morning.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/bake_for_the_fair/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="bookkeeper">
+          <span class="art" aria-hidden="true">📒</span>
+          <div>
+            <h2>Bookkeeper</h2>
+            <p>Every receipt, every account, reconciled and filed.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/bookkeeper/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="dinner_party">
+          <span class="art" aria-hidden="true">🕯</span>
+          <div>
+            <h2>Dinner Party, with the menu book</h2>
+            <p>The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.</p>
+            <ul class="holds"><li>1 team</li><li>1 SOP</li></ul>
+            <a class="go" href="view/dinner_party/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="put_the_garden_right">
+          <span class="art" aria-hidden="true">🌿</span>
+          <div>
+            <h2>Put the Garden Right</h2>
+            <p>A season of work, done in order.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/put_the_garden_right/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="redo_the_study">
+          <span class="art" aria-hidden="true">🪑</span>
+          <div>
+            <h2>Redo the Study</h2>
+            <p>Fabric, finish, fittings — and a budget that holds.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/redo_the_study/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="members" aria-label="Friends and family">
+        <p class="eyebrow">Friends and family</p>
+        <article class="member" data-bundle="bake_for_the_fair">
+          <span class="art" aria-hidden="true">🥧</span>
+          <div>
+            <h2>Bake for the Fair</h2>
+            <p>Forty entries, one oven, one morning.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/bake_for_the_fair/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="dinner_party">
+          <span class="art" aria-hidden="true">🕯</span>
+          <div>
+            <h2>Dinner Party, with the menu book</h2>
+            <p>The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.</p>
+            <ul class="holds"><li>1 team</li><li>1 SOP</li></ul>
+            <a class="go" href="view/dinner_party/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="newsletter">
+          <span class="art" aria-hidden="true">📰</span>
+          <div>
+            <h2>Ship the Newsletter</h2>
+            <p>An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.</p>
+            <ul class="holds"><li>1 agent</li><li>1 team</li><li>1 SOP</li></ul>
+            <a class="go" href="view/newsletter/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="ship_the_tour">
+          <span class="art" aria-hidden="true">🎸</span>
+          <div>
+            <h2>Ship the Tour</h2>
+            <p>A date on the calendar and a hundred things before it.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/ship_the_tour/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="members" aria-label="School">
+        <p class="eyebrow">School</p>
+        <article class="member" data-bundle="bake_for_the_fair">
+          <span class="art" aria-hidden="true">🥧</span>
+          <div>
+            <h2>Bake for the Fair</h2>
+            <p>Forty entries, one oven, one morning.</p>
+            <ul class="holds"><li>1 team</li></ul>
+            <a class="go" href="view/bake_for_the_fair/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="bookkeeper">
+          <span class="art" aria-hidden="true">📒</span>
+          <div>
+            <h2>Bookkeeper</h2>
+            <p>Every receipt, every account, reconciled and filed.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/bookkeeper/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="researcher">
+          <span class="art" aria-hidden="true">🧭</span>
+          <div>
+            <h2>Researcher</h2>
+            <p>Research, compare, decide. No building — yet.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/researcher/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+        <article class="member" data-bundle="technical_writer">
+          <span class="art" aria-hidden="true">📗</span>
+          <div>
+            <h2>Technical Writer</h2>
+            <p>Says what the thing is, for someone who was not here.</p>
+            <ul class="holds"><li>1 agent</li></ul>
+            <a class="go" href="view/technical_writer/">View →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="how" aria-label="How a template gets into Ronin">
+        <h2>How one gets into your Ronin</h2>
+        <p>
+          Not from here. Open the Campaign page in your Ronin coworkspace, place
+          <strong>Templates</strong> in a workspace, press <strong>Check the library</strong>,
+          and Ronin shows this same shelf. Pick one; Ronin shows what it would write into your
+          stores and writes nothing until you press <strong>Install</strong>. There is no file
+          to move from the internet to your computer to the app.
+        </p>
       </section>
     </main>
 

@@ -1,0 +1,19 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "raid_my_codebase",
+  "label": "Raid My Codebase",
+  "art": "🛠",
+  "blurb": "Work on what is already there. Faster, cleaner, fixed.",
+  "kinds": [
+    "coding"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/raid_my_codebase.md",
+      "text": "# Raid My Codebase\n- **label:** Raid My Codebase\n- **art:** 🛠\n- **blurb:** Work on what is already there. Faster, cleaner, fixed.\n- **order:** 20\n- **kinds:** coding\n- **objective:** Improve the codebase that already exists — faster, cleaner, and the faults gone.\n- **behaviours:** sops:github, sops:ronin_methodology\n- **routines_on:** ronin_worktrees\n\nYour own reading belongs on the line above: save your conventions or runbook as an SOP\nin your own store, shadow this file, and add the book (docs/templates.md).\n\n## agents\n\n### lead\n- **team_lead:** yes\n- **instructions:** Decide what is worth doing and in what order; keep the raid moving.\n- **mandate:** plan · propose agents · a plan\n\n### chase the faults\n- **instructions:** Reproduce each fault, find its cause, and fix that cause.\n- **mandate:** execute · nobody · code\n\n### cut the improvements\n- **instructions:** Make it faster and cleaner without changing what it does.\n- **mandate:** execute · nobody · code\n\n### check the work\n- **instructions:** Review what lands against what it claims; report findings, fix nothing.\n- **mandate:** execute · nobody · an artifact\n"
+    }
+  ],
+  "entries": []
+}

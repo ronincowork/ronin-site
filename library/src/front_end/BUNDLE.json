@@ -1,0 +1,10 @@
+{
+  "name": "front_end",
+  "label": "Front-End Developer",
+  "art": "🖥",
+  "blurb": "Build the surface against an agreed design.",
+  "kinds": [
+    "coding"
+  ],
+  "version": "2026-09-03"
+}

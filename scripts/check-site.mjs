@@ -22,6 +22,7 @@ const required = [
   'explainers/public-content.json',
   'library/index.html',
   'library/index.json',
+  'library/library.css',
   'assets/workbench/workbench-desktop.webp',
   'assets/workbench/workbench-narrow.webp',
   'staticwebapp.config.json',
@@ -83,7 +84,7 @@ if (!failures.some((x) => x.startsWith('public-content-manifest:'))) ok('public-
 try {
   const { buildLibrary } = await import('./pack-library.mjs');
   const built = buildLibrary(root);
-  const outputs = [['library/index.json', built.index], ...[...built.bundles].map(([name, text]) => [`library/bundles/${name}.json`, text])];
+  const outputs = [['library/index.json', built.index], ...[...built.bundles].map(([name, text]) => [`library/bundles/${name}.json`, text]), ...built.pages];
   for (const [rel, text] of outputs) {
     const full = path.join(root, rel);
     if (!existsSync(full)) fail('template-library', `${rel} missing — node scripts/pack-library.mjs --write`);
@@ -98,13 +99,20 @@ try {
     const actual = createHash('sha256').update(readFileSync(full, 'utf8')).digest('hex');
     if (actual !== card.sha256) fail('template-library', `${card.name}: sha256 ${actual} != ${card.sha256}`);
     if (!page.includes(`data-bundle="${card.name}"`)) fail('template-library', `library/index.html does not show ${card.name}`);
-    if (page.includes(`href="${card.url}"`)) fail('template-library', `library/index.html hands out ${card.url} — the download happens inside Ronin (owner, 2026-09-03)`);
+    if (!existsSync(path.join(root, 'library/view', card.name, 'index.html'))) fail('template-library', `${card.name} has no view page`);
     if (JSON.parse(readFileSync(full, 'utf8')).format !== 'ronin-bundle/1') fail('template-library', `${card.url} is not ronin-bundle/1`);
   }
 } catch (error) {
   fail('template-library', error instanceof Error ? error.message : String(error));
 }
 if (!failures.some((x) => x.startsWith('template-library:'))) ok('template-library');
+
+// THE SITE HANDS OUT NO BUNDLE FILE (owner, 2026-09-03): a person sees the shelf here and
+// gets a template inside Ronin. Any page linking a bundle document is a door we do not have.
+for (const file of htmlFiles) {
+  if (/href="[^"]*bundles\/[a-z0-9_-]+\.json"/.test(readFileSync(path.join(root, file), 'utf8'))) fail('template-library', `${file} hands out a bundle file`);
+}
+if (!failures.some((x) => x.includes('hands out'))) ok('no-bundle-downloads');
 
 for (const file of tracked.filter((name) => /\.(?:html|css|js|json|md|yml|yaml|sh)$/.test(name))) {
   const body = readFileSync(path.join(root, file), 'utf8');

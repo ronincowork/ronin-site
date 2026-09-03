@@ -1,0 +1,13 @@
+{
+  "name": "researcher",
+  "label": "Researcher",
+  "art": "🧭",
+  "blurb": "Research, compare, decide. No building — yet.",
+  "kinds": [
+    "coding",
+    "work",
+    "personal",
+    "school"
+  ],
+  "version": "2026-09-03"
+}

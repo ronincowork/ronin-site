@@ -1,0 +1,11 @@
+{
+  "name": "designer",
+  "label": "Designer",
+  "art": "🎨",
+  "blurb": "Shape the thing before anyone builds it — looks, flow, feel.",
+  "kinds": [
+    "coding",
+    "work"
+  ],
+  "version": "2026-09-03"
+}

@@ -2,6 +2,42 @@
   "format": "ronin-library/1",
   "bundles": [
     {
+      "name": "bake_for_the_fair",
+      "label": "Bake for the Fair",
+      "art": "🥧",
+      "blurb": "Forty entries, one oven, one morning.",
+      "kinds": [
+        "household",
+        "social",
+        "school"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/bake_for_the_fair.json",
+      "sha256": "6f7d2e7479c7ef0463931065d478f0ba530534fcd18df76615de3c3b73836ba5",
+      "bytes": 1063,
+      "holds": {
+        "teams": 1
+      }
+    },
+    {
+      "name": "bookkeeper",
+      "label": "Bookkeeper",
+      "art": "📒",
+      "blurb": "Every receipt, every account, reconciled and filed.",
+      "kinds": [
+        "work",
+        "household",
+        "school"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/bookkeeper.json",
+      "sha256": "8c8aea97d8e7a0211268b16b14fe711f6303cecb3059d22d763225b65d4f36c9",
+      "bytes": 809,
+      "holds": {
+        "agents": 1
+      }
+    },
+    {
       "name": "chief_of_staff",
       "label": "Chief of Staff",
       "art": "🗂",
@@ -25,6 +61,23 @@
       }
     },
     {
+      "name": "designer",
+      "label": "Designer",
+      "art": "🎨",
+      "blurb": "Shape the thing before anyone builds it — looks, flow, feel.",
+      "kinds": [
+        "coding",
+        "work"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/designer.json",
+      "sha256": "2087dbc10b7a3b6e460f2cb879ea508e563a1bc3aef8324c8097a5efd80071da",
+      "bytes": 822,
+      "holds": {
+        "agents": 1
+      }
+    },
+    {
       "name": "dinner_party",
       "label": "Dinner Party, with the menu book",
       "art": "🕯",
@@ -40,6 +93,56 @@
       "holds": {
         "teams": 1,
         "sops": 1
+      }
+    },
+    {
+      "name": "front_end",
+      "label": "Front-End Developer",
+      "art": "🖥",
+      "blurb": "Build the surface against an agreed design.",
+      "kinds": [
+        "coding"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/front_end.json",
+      "sha256": "ae4e7a484e7b434f7615da91b9bc400e41c96def9c6b7ba53ffc13de5ed0d47a",
+      "bytes": 740,
+      "holds": {
+        "agents": 1
+      }
+    },
+    {
+      "name": "health_checker",
+      "label": "Health Checker",
+      "art": "🩺",
+      "blurb": "Runs your application's checks and tells you what moved.",
+      "kinds": [
+        "coding",
+        "work"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/health_checker.json",
+      "sha256": "88ffb9133a07915a4a58934b6ce926275be77258336d038df27c249d47eb63ff",
+      "bytes": 841,
+      "holds": {
+        "agents": 1
+      }
+    },
+    {
+      "name": "health_checks",
+      "label": "Health Checks",
+      "art": "📈",
+      "blurb": "Your application's checks, run on a rhythm, judged, and reported.",
+      "kinds": [
+        "coding",
+        "work"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/health_checks.json",
+      "sha256": "a1bae9529aaaf63ab25ff3f7243008d6cfedd5a9e772500ff5ecd6292c923cb7",
+      "bytes": 1152,
+      "holds": {
+        "teams": 1
       }
     },
     {
@@ -59,6 +162,124 @@
         "agents": 1,
         "teams": 1,
         "sops": 1
+      }
+    },
+    {
+      "name": "put_the_garden_right",
+      "label": "Put the Garden Right",
+      "art": "🌿",
+      "blurb": "A season of work, done in order.",
+      "kinds": [
+        "household"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/put_the_garden_right.json",
+      "sha256": "b656a8648af298a304f2fb72d8d1a7f2fd6d281637e01a2c75e1d3d85746fc7f",
+      "bytes": 1163,
+      "holds": {
+        "teams": 1
+      }
+    },
+    {
+      "name": "raid_my_codebase",
+      "label": "Raid My Codebase",
+      "art": "🛠",
+      "blurb": "Work on what is already there. Faster, cleaner, fixed.",
+      "kinds": [
+        "coding"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/raid_my_codebase.json",
+      "sha256": "e51d6d09d9014100ba4cb3afdf320dccc063806c5206ae70a4ce2c926e7fa0a5",
+      "bytes": 1558,
+      "holds": {
+        "teams": 1
+      }
+    },
+    {
+      "name": "redo_the_study",
+      "label": "Redo the Study",
+      "art": "🪑",
+      "blurb": "Fabric, finish, fittings — and a budget that holds.",
+      "kinds": [
+        "household"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/redo_the_study.json",
+      "sha256": "f8d5e68366f4e2e40586e5fc27eabe00b69aeaa2b7086cd2843805eb79a501e7",
+      "bytes": 1070,
+      "holds": {
+        "teams": 1
+      }
+    },
+    {
+      "name": "researcher",
+      "label": "Researcher",
+      "art": "🧭",
+      "blurb": "Research, compare, decide. No building — yet.",
+      "kinds": [
+        "coding",
+        "work",
+        "personal",
+        "school"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/researcher.json",
+      "sha256": "8502df7cf27cb52aa13bfed95a4004abc5befe267eae92594d9fdc037b47e76b",
+      "bytes": 774,
+      "holds": {
+        "agents": 1
+      }
+    },
+    {
+      "name": "ship_an_app",
+      "label": "Ship an App",
+      "art": "🏗",
+      "blurb": "Build a thing that does not exist yet, end to end.",
+      "kinds": [
+        "coding"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/ship_an_app.json",
+      "sha256": "07aea8dd11e5021ab25497a28ab629e55ec13f9421229c03db5cd8431210f414",
+      "bytes": 1751,
+      "holds": {
+        "teams": 1
+      }
+    },
+    {
+      "name": "ship_the_tour",
+      "label": "Ship the Tour",
+      "art": "🎸",
+      "blurb": "A date on the calendar and a hundred things before it.",
+      "kinds": [
+        "social",
+        "personal"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/ship_the_tour.json",
+      "sha256": "e56523019807916bf1056ff34f4d3f05827499c4ec4826a7919308ebaad551dd",
+      "bytes": 1351,
+      "holds": {
+        "teams": 1
+      }
+    },
+    {
+      "name": "technical_writer",
+      "label": "Technical Writer",
+      "art": "📗",
+      "blurb": "Says what the thing is, for someone who was not here.",
+      "kinds": [
+        "coding",
+        "work",
+        "school"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/technical_writer.json",
+      "sha256": "ff66ff492762bede0e7338e87dd7b92c1da730b26e606be322f8183c13270bb2",
+      "bytes": 796,
+      "holds": {
+        "agents": 1
       }
     },
     {

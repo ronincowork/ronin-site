@@ -1,0 +1,20 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "health_checks",
+  "label": "Health Checks",
+  "art": "📈",
+  "blurb": "Your application's checks, run on a rhythm, judged, and reported.",
+  "kinds": [
+    "coding",
+    "work"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/health_checks.md",
+      "text": "# Health Checks\n- **label:** Health Checks\n- **art:** 📈\n- **blurb:** Your application's checks, run on a rhythm, judged, and reported.\n- **order:** 25\n- **kinds:** coding, work\n- **objective:** The frequent health checks on your application — run on a rhythm, compared with last time, and what moved reported.\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### check lead\n- **team_lead:** yes\n- **instructions:** Decide what gets checked and how often; judge the results; report what moved and what it means.\n- **mandate:** execute · nobody · an artifact\n\n### checker\n- **instructions:** Run the checks, compare with last time, and report the deltas. Fix nothing unasked.\n- **mandate:** execute · nobody · an artifact, no code\n"
+    }
+  ],
+  "entries": []
+}

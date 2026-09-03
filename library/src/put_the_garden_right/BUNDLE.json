@@ -1,0 +1,10 @@
+{
+  "name": "put_the_garden_right",
+  "label": "Put the Garden Right",
+  "art": "🌿",
+  "blurb": "A season of work, done in order.",
+  "kinds": [
+    "household"
+  ],
+  "version": "2026-09-03"
+}

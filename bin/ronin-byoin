@@ -6,4 +6,4 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 node scripts/check-site.mjs
-printf '\nBYOIN: the static site is clean (5 ok).\n'
+printf '\nBYOIN: the static site is clean (6 ok).\n'

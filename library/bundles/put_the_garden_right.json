@@ -1,0 +1,19 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "put_the_garden_right",
+  "label": "Put the Garden Right",
+  "art": "🌿",
+  "blurb": "A season of work, done in order.",
+  "kinds": [
+    "household"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/put_the_garden_right.md",
+      "text": "# Put the Garden Right\n- **label:** Put the Garden Right\n- **art:** 🌿\n- **blurb:** A season of work, done in order.\n- **order:** 60\n- **kinds:** household\n- **objective:** Beds, borders and cutting rows — a season of work, done in order.\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### season planner\n- **team_lead:** yes\n- **instructions:** Decide what goes where and in what order through the season.\n- **mandate:** plan · propose agents · a plan\n\n### beds and borders\n- **instructions:** Do the season's work bed by bed, in the planned order.\n- **mandate:** execute · nobody · open\n\n### sourcing\n- **instructions:** Find the plants, the materials and the prices; have them there when they are needed.\n- **mandate:** execute · nobody · an artifact\n"
+    }
+  ],
+  "entries": []
+}

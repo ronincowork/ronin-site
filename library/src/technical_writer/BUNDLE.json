@@ -1,0 +1,12 @@
+{
+  "name": "technical_writer",
+  "label": "Technical Writer",
+  "art": "📗",
+  "blurb": "Says what the thing is, for someone who was not here.",
+  "kinds": [
+    "coding",
+    "work",
+    "school"
+  ],
+  "version": "2026-09-03"
+}

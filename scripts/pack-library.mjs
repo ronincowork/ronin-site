@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * pack-library — library/src/<name>/ → library/bundles/<name>.json + library/index.json
+ *                                       + library/index.html + library/view/<name>/index.html
  *
  *   node scripts/pack-library.mjs           # print what would change; exit 1 if stale
  *   node scripts/pack-library.mjs --write   # regenerate the committed output
@@ -92,6 +93,116 @@ export function buildBundle(srcDir) {
   };
 }
 
+const KIND_WORDS = { coding: 'Code', work: 'Work', personal: 'Yourself', household: 'The house', social: 'Friends and family', school: 'School' };
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const holdsWords = (holds) => Object.entries(holds).map(([k, n]) => `${n} ${({ teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way', library: 'page', macros: 'macro', actions: 'action', tools: 'tool' })[k] ?? k}${n === 1 ? '' : (k === 'routines' ? 's' : 's')}`).join(' · ');
+
+const HEAD = (title, description, depth) => `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="${esc(description)}" />
+    <title>${esc(title)}</title>
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="${depth}ronin-tokens.css" />
+    <link rel="stylesheet" href="${depth}library/library.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="${depth}index.html"
+          ><img src="${depth}nin-mark.svg" alt="Ronin" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="${depth}library/">Templates</a><a href="${depth}explainers/">Explainers</a><a href="${depth}load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+`;
+const FOOT = (depth) => `
+    <footer class="site-footer">
+      <span>Ronin · a coworkspace that runs on your machine</span>
+      <a href="${depth}index.html">ronincowork.com</a>
+    </footer>
+  </body>
+</html>
+`;
+const HOW = `      <section class="how" aria-label="How a template gets into Ronin">
+        <h2>How one gets into your Ronin</h2>
+        <p>
+          Not from here. Open the Campaign page in your Ronin coworkspace, place
+          <strong>Templates</strong> in a workspace, press <strong>Check the library</strong>,
+          and Ronin shows this same shelf. Pick one; Ronin shows what it would write into your
+          stores and writes nothing until you press <strong>Install</strong>. There is no file
+          to move from the internet to your computer to the app.
+        </p>
+      </section>`;
+
+/** The shelf: one article per bundle, grouped by kind, each with a View link and nothing else. */
+function indexPage(cards) {
+  const groups = new Map();
+  for (const c of cards) for (const k of (c.kinds.length ? c.kinds : ['work'])) { if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
+  const sections = [...Object.keys(KIND_WORDS)].filter((k) => groups.has(k)).map((k) => `      <section class="members" aria-label="${esc(KIND_WORDS[k])}">
+        <p class="eyebrow">${esc(KIND_WORDS[k])}</p>
+${groups.get(k).map((c) => `        <article class="member" data-bundle="${c.name}">
+          <span class="art" aria-hidden="true">${esc(c.art)}</span>
+          <div>
+            <h2>${esc(c.label)}</h2>
+            <p>${esc(c.blurb)}</p>
+            <ul class="holds">${Object.entries(c.holds).map(([hk, n]) => `<li>${n} ${esc(({ teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way of working', library: 'reference page', macros: 'macro', actions: 'action', tools: 'tool' })[hk] ?? hk)}${n === 1 ? '' : 's'}</li>`).join('')}</ul>
+            <a class="go" href="view/${c.name}/">View →</a>
+            <span class="version">${esc(c.version)}</span>
+          </div>
+        </article>`).join('\n')}
+      </section>`).join('\n\n');
+  return `${HEAD('Ronin Template Library', 'Templates for Ronin Cowork — a team, its agents, and the SOPs, macros and tools they read. See them here; get them inside your Ronin.', '../')}
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow">Template library</p>
+        <h1 class="display">A team, and everything it reads.</h1>
+        <p class="lede">
+          A template is a cast that delivers a project, or a person you assign, with the
+          SOPs, Routines, macros and tools they name. A handful ship inside Ronin; the rest
+          are here. See what each one holds, then get it inside your Ronin —
+          <strong>Templates → Check the library</strong> — where it lands on your own shelf.
+        </p>
+      </section>
+
+${sections}
+
+${HOW}
+    </main>
+${FOOT('../')}`;
+}
+
+/** One bundle, readable: its face, then every file and entry it carries, as written. */
+function viewPage(bundle, card) {
+  const part = (title, body) => `      <section class="part">
+        <h2>${esc(title)}</h2>
+        <pre>${esc(body)}</pre>
+      </section>`;
+  const parts = [
+    ...bundle.files.map((f) => part(`${f.store}/${f.path}${f.executable ? '  (executable)' : ''}`, f.text)),
+    ...bundle.entries.map((e) => part(`${e.catalog} · ${e.name}`, e.text)),
+  ];
+  return `${HEAD(`${bundle.label} — Ronin Template Library`, bundle.blurb, '../../')}
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow"><a href="../../library/">Template library</a> · ${esc(KIND_WORDS[bundle.kinds[0]] ?? 'Templates')}</p>
+        <h1 class="display">${esc(bundle.art)} ${esc(bundle.label)}</h1>
+        <p class="lede">${esc(bundle.blurb)}</p>
+        <p class="holds-line">${esc(holdsWords(card.holds))} · version ${esc(bundle.version)}</p>
+        <p class="get">Get it inside your Ronin: <strong>Templates → Check the library → ${esc(bundle.label)}</strong>. Nothing here is a file to save.</p>
+      </section>
+
+${parts.join('\n\n')}
+    </main>
+${FOOT('../../')}`;
+}
+
 /** Every bundle under library/src, and the index that lists them — as the texts the site serves. */
 export function buildLibrary(root) {
   const srcRoot = path.join(root, 'library', 'src');
@@ -109,14 +220,16 @@ export function buildLibrary(root) {
     });
   }
   const index = `${JSON.stringify({ format: LIBRARY_FORMAT, bundles: cards }, null, 2)}\n`;
-  return { index, bundles };
+  const pages = new Map([['library/index.html', indexPage(cards)]]);
+  for (const [name, text] of bundles) pages.set(`library/view/${name}/index.html`, viewPage(JSON.parse(text), cards.find((c) => c.name === name)));
+  return { index, bundles, pages };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
   const write = process.argv.includes('--write');
-  const { index, bundles } = buildLibrary(root);
-  const outputs = [['library/index.json', index], ...[...bundles].map(([name, text]) => [`library/bundles/${name}.json`, text])];
+  const { index, bundles, pages } = buildLibrary(root);
+  const outputs = [['library/index.json', index], ...[...bundles].map(([name, text]) => [`library/bundles/${name}.json`, text]), ...pages];
   let stale = 0;
   for (const [rel, text] of outputs) {
     const full = path.join(root, rel);
