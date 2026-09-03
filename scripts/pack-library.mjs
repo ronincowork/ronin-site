@@ -188,10 +188,11 @@ function viewPage(bundle, card) {
     ...bundle.files.map((f) => part(`${f.store}/${f.path}${f.executable ? '  (executable)' : ''}`, f.text)),
     ...bundle.entries.map((e) => part(`${e.catalog} · ${e.name}`, e.text)),
   ];
-  return `${HEAD(`${bundle.label} — Ronin Template Library`, bundle.blurb, '../../')}
+  // A view page sits at library/view/<name>/index.html: three levels below the root.
+  return `${HEAD(`${bundle.label} — Ronin Template Library`, bundle.blurb, '../../../')}
     <main class="page">
       <section class="library-head">
-        <p class="eyebrow"><a href="../../library/">Template library</a> · ${esc(KIND_WORDS[bundle.kinds[0]] ?? 'Templates')}</p>
+        <p class="eyebrow"><a href="../../">Template library</a> · ${esc(KIND_WORDS[bundle.kinds[0]] ?? 'Templates')}</p>
         <h1 class="display">${esc(bundle.art)} ${esc(bundle.label)}</h1>
         <p class="lede">${esc(bundle.blurb)}</p>
         <p class="holds-line">${esc(holdsWords(card.holds))} · version ${esc(bundle.version)}</p>
@@ -200,7 +201,7 @@ function viewPage(bundle, card) {
 
 ${parts.join('\n\n')}
     </main>
-${FOOT('../../')}`;
+${FOOT('../../../')}`;
 }
 
 /** Every bundle under library/src, and the index that lists them — as the texts the site serves. */
