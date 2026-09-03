@@ -19,8 +19,7 @@
 
 .shelf { margin-bottom: var(--space-7); border-top: var(--edge) solid var(--line); }
 .shelf h2 { margin: var(--space-4) 0 var(--space-2); font: var(--text-2) var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.row { display: grid; grid-template-columns: 1.6em minmax(160px, 220px) minmax(0, 1fr) auto auto; gap: var(--space-4); align-items: center; padding: var(--space-2) var(--space-2); border-bottom: var(--edge) solid var(--line); color: var(--fg); text-decoration: none; font-size: var(--text-3); }
-.row:hover { background: var(--raise); }
+.row { cursor: default; display: grid; grid-template-columns: 1.6em minmax(160px, 220px) minmax(0, 1fr) auto auto; gap: var(--space-4); align-items: center; padding: var(--space-2) var(--space-2); border-bottom: var(--edge) solid var(--line); color: var(--fg); text-decoration: none; font-size: var(--text-3); }
 .row i { font-style: normal; font-size: var(--text-4); line-height: 1; text-align: center; }
 .row b { font-weight: 500; color: var(--fg-strong); }
 .row .blurb { color: var(--muted-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

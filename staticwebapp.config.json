@@ -3,6 +3,10 @@
     {
       "route": "/wip/*",
       "statusCode": 404
+    },
+    {
+      "route": "/dist/*",
+      "statusCode": 404
     }
   ]
 }

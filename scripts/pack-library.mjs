@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * pack-library — library/src/<name>/ → library/bundles/<name>.json + library/index.json
- *                                       + library/index.html + library/view/<name>/index.html
+ * pack-library — library/src/<name>/ → dist/library/index.json + dist/library/bundles/<name>.json (HQ's)
+ *                                       + library/index.html (the site's shop window)
  *
  *   node scripts/pack-library.mjs           # print what would change; exit 1 if stale
  *   node scripts/pack-library.mjs --write   # regenerate the committed output
@@ -133,11 +133,13 @@ const FOOT = (depth) => `
 const HOW = `      <section class="how" aria-label="How a template gets into Ronin">
         <h2>How one gets into your Ronin</h2>
         <p>
-          Not from here. Open the Campaign page in your Ronin coworkspace, place
-          <strong>Templates</strong> in a workspace, press <strong>Check the library</strong>,
-          and Ronin shows this same shelf. Pick one; Ronin shows what it would write into your
-          stores and writes nothing until you press <strong>Install</strong>. There is no file
-          to move from the internet to your computer to the app.
+          Not from here. With Ronin Services on, open the Campaign page in your Ronin
+          coworkspace, place <strong>Templates</strong> in a workspace, press
+          <strong>Check the library</strong>, and Ronin shows this same shelf. Pick one;
+          Ronin shows everything it holds and what it would write into your stores, and
+          writes nothing until you press <strong>Install</strong>. Without Services the
+          shelf is there but opaque; the handful of templates that ship inside Ronin are
+          yours either way, and so is making your own.
         </p>
       </section>`;
 
@@ -157,13 +159,13 @@ function indexPage(cards) {
   const shapes = [['all', '○', 'All'], ['team', '⛩', 'Teams'], ['agent', '人', 'Agents']]
     .map(([k, icon, word]) => `        <button type="button" class="chip" data-shape="${k}" aria-pressed="${k === 'all'}"><i>${icon}</i>${word}</button>`).join('\n');
   const isTeam = (c) => !!c.holds.teams;
-  const row = (c) => `        <a class="row" href="view/${c.name}/" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}">
+  const row = (c) => `        <div class="row" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}">
           <i>${esc(c.art || '▤')}</i>
           <b>${esc(c.label)}</b>
           <span class="blurb">${esc(c.blurb)}</span>
           <span class="holds">${Object.entries(c.holds).map(([hk, n]) => `${n} ${HOLD_WORD[hk] ?? hk}${n === 1 ? '' : 's'}`).join(' · ')}</span>
           <span class="kinds">${c.kinds.map((k) => `${KIND_ICONS[k] ?? ''} ${esc(KIND_WORDS[k] ?? k)}`).join(' · ')}</span>
-        </a>`;
+        </div>`;
   const shelf = (heading, rows, shapeKey) => rows.length ? `      <section class="shelf" data-shape="${shapeKey}">
         <h2>${esc(heading)}</h2>
 ${rows.map(row).join('\n')}
@@ -195,9 +197,10 @@ ${rows.map(row).join('\n')}
           they read. A handful ship inside Ronin; the rest live on this shelf.
         </p>
         <p class="lede lede--how">
-          Browse by kind, click one to see everything it holds, then get it inside your own
-          Ronin: <strong>Campaign → Templates → Check the library</strong>. Nothing here is a
-          file to save; Ronin fetches it and installs it into your own stores.
+          The library is a <strong>Ronin Services</strong> feature: Ronin keeps it and grows
+          it. Browse by kind here; inside your own Ronin — <strong>Campaign → Templates →
+          Check the library</strong> — you see everything a template holds, then install it
+          into your own stores. Nothing here is a file to save.
         </p>
       </section>
 
@@ -214,32 +217,6 @@ ${HOW}
     </main>
 ${script}
 ${FOOT('../')}`;
-}
-
-/** One bundle, readable: its face, then every file and entry it carries, as written. */
-function viewPage(bundle, card) {
-  const part = (title, body) => `      <section class="part">
-        <h2>${esc(title)}</h2>
-        <pre>${esc(body)}</pre>
-      </section>`;
-  const parts = [
-    ...bundle.files.map((f) => part(`${f.store}/${f.path}${f.executable ? '  (executable)' : ''}`, f.text)),
-    ...bundle.entries.map((e) => part(`${e.catalog} · ${e.name}`, e.text)),
-  ];
-  // A view page sits at library/view/<name>/index.html: three levels below the root.
-  return `${HEAD(`${bundle.label} — Ronin Template Library`, bundle.blurb, '../../../')}
-    <main class="page">
-      <section class="library-head">
-        <p class="eyebrow"><a href="../../">Template library</a> · ${esc(KIND_WORDS[bundle.kinds[0]] ?? 'Templates')}</p>
-        <h1 class="display">${esc(bundle.art)} ${esc(bundle.label)}</h1>
-        <p class="lede">${esc(bundle.blurb)}</p>
-        <p class="holds-line">${esc(holdsWords(card.holds))} · version ${esc(bundle.version)}</p>
-        <p class="get">Get it inside your Ronin: <strong>Templates → Check the library → ${esc(bundle.label)}</strong>. Nothing here is a file to save.</p>
-      </section>
-
-${parts.join('\n\n')}
-    </main>
-${FOOT('../../../')}`;
 }
 
 /** Every bundle under library/src, and the index that lists them — as the texts the site serves. */
@@ -260,7 +237,6 @@ export function buildLibrary(root) {
   }
   const index = `${JSON.stringify({ format: LIBRARY_FORMAT, bundles: cards }, null, 2)}\n`;
   const pages = new Map([['library/index.html', indexPage(cards)]]);
-  for (const [name, text] of bundles) pages.set(`library/view/${name}/index.html`, viewPage(JSON.parse(text), cards.find((c) => c.name === name)));
   return { index, bundles, pages };
 }
 
@@ -268,7 +244,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
   const write = process.argv.includes('--write');
   const { index, bundles, pages } = buildLibrary(root);
-  const outputs = [['library/index.json', index], ...[...bundles].map(([name, text]) => [`library/bundles/${name}.json`, text]), ...pages];
+  // THE DOCUMENTS ARE HQ'S (owner, 2026-09-03): dist/library/ is what HQ serves to an entitled
+  // box; the site answers 404 for it (staticwebapp.config.json). The page is the shop window.
+  const outputs = [['dist/library/index.json', index], ...[...bundles].map(([name, text]) => [`dist/library/bundles/${name}.json`, text]), ...pages];
   let stale = 0;
   for (const [rel, text] of outputs) {
     const full = path.join(root, rel);
