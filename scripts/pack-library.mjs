@@ -153,6 +153,9 @@ const HOLD_WORD = { teams: 'team', agents: 'agent', routines: 'Routine', sops: '
 function indexPage(cards) {
   const chips = [['open', '○', 'All'], ...Object.entries(KIND_ICONS).map(([k, icon]) => [k, icon, KIND_WORDS[k]])]
     .map(([k, icon, word]) => `        <button type="button" class="chip" data-kind="${k}" aria-pressed="${k === 'open'}"><i>${icon}</i>${esc(word)}</button>`).join('\n');
+  // The second axis (owner, 2026-09-03): all, teams only, agents only.
+  const shapes = [['all', '○', 'All'], ['team', '⛩', 'Teams'], ['agent', '人', 'Agents']]
+    .map(([k, icon, word]) => `        <button type="button" class="chip" data-shape="${k}" aria-pressed="${k === 'all'}"><i>${icon}</i>${word}</button>`).join('\n');
   const isTeam = (c) => !!c.holds.teams;
   const row = (c) => `        <a class="row" href="view/${c.name}/" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}">
           <i>${esc(c.art || '▤')}</i>
@@ -161,21 +164,24 @@ function indexPage(cards) {
           <span class="holds">${Object.entries(c.holds).map(([hk, n]) => `${n} ${HOLD_WORD[hk] ?? hk}${n === 1 ? '' : 's'}`).join(' · ')}</span>
           <span class="kinds">${c.kinds.map((k) => `${KIND_ICONS[k] ?? ''} ${esc(KIND_WORDS[k] ?? k)}`).join(' · ')}</span>
         </a>`;
-  const shelf = (heading, rows) => rows.length ? `      <section class="shelf">
+  const shelf = (heading, rows, shapeKey) => rows.length ? `      <section class="shelf" data-shape="${shapeKey}">
         <h2>${esc(heading)}</h2>
 ${rows.map(row).join('\n')}
       </section>` : '';
-  const sections = [shelf('Teams — projects', cards.filter(isTeam)), shelf('Agents — people', cards.filter((c) => !isTeam(c)))].filter(Boolean).join('\n\n');
+  const sections = [shelf('Teams — projects', cards.filter(isTeam), 'team'), shelf('Agents — people', cards.filter((c) => !isTeam(c)), 'agent')].filter(Boolean).join('\n\n');
   const script = `    <script>
       (function () {
-        var chips = document.querySelectorAll('.chip');
-        var rows = document.querySelectorAll('.row');
-        chips.forEach(function (c) { c.addEventListener('click', function () {
-          var kind = c.getAttribute('data-kind');
-          chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+        var kind = 'open', shape = 'all';
+        var kinds = document.querySelectorAll('.chip[data-kind]'), shapes = document.querySelectorAll('.chip[data-shape]');
+        var rows = document.querySelectorAll('.row'), shelves = document.querySelectorAll('.shelf');
+        function paint() {
+          kinds.forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-kind') === kind)); });
+          shapes.forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-shape') === shape)); });
           rows.forEach(function (r) { r.hidden = kind !== 'open' && (r.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
-          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.row:not([hidden])'); });
-        }); });
+          shelves.forEach(function (s) { s.hidden = (shape !== 'all' && s.getAttribute('data-shape') !== shape) || !s.querySelector('.row:not([hidden])'); });
+        }
+        kinds.forEach(function (c) { c.addEventListener('click', function () { kind = c.getAttribute('data-kind'); paint(); }); });
+        shapes.forEach(function (c) { c.addEventListener('click', function () { shape = c.getAttribute('data-shape'); paint(); }); });
       })();
     </script>`;
   return `${HEAD('Ronin Template Library', 'Templates for Ronin Cowork — a team, its agents, and the SOPs, macros and tools they read. See them here; get them inside your Ronin.', '../')}
@@ -189,6 +195,9 @@ ${rows.map(row).join('\n')}
         </p>
       </section>
 
+      <section class="kinds" aria-label="Show">
+${shapes}
+      </section>
       <section class="kinds" aria-label="Kind">
 ${chips}
       </section>

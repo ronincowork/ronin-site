@@ -33,6 +33,11 @@
         </p>
       </section>
 
+      <section class="kinds" aria-label="Show">
+        <button type="button" class="chip" data-shape="all" aria-pressed="true"><i>○</i>All</button>
+        <button type="button" class="chip" data-shape="team" aria-pressed="false"><i>⛩</i>Teams</button>
+        <button type="button" class="chip" data-shape="agent" aria-pressed="false"><i>人</i>Agents</button>
+      </section>
       <section class="kinds" aria-label="Kind">
         <button type="button" class="chip" data-kind="open" aria-pressed="true"><i>○</i>All</button>
         <button type="button" class="chip" data-kind="coding" aria-pressed="false"><i>⌨</i>Code</button>
@@ -43,7 +48,7 @@
         <button type="button" class="chip" data-kind="school" aria-pressed="false"><i>🎓</i>School</button>
       </section>
 
-      <section class="shelf">
+      <section class="shelf" data-shape="team">
         <h2>Teams — projects</h2>
         <a class="row" href="view/bake_for_the_fair/" data-bundle="bake_for_the_fair" data-kinds="household social school">
           <i>🥧</i>
@@ -124,7 +129,7 @@
         </a>
       </section>
 
-      <section class="shelf">
+      <section class="shelf" data-shape="agent">
         <h2>Agents — people</h2>
         <a class="row" href="view/bookkeeper/" data-bundle="bookkeeper" data-kinds="work household school">
           <i>📒</i>
@@ -183,14 +188,17 @@
     </main>
     <script>
       (function () {
-        var chips = document.querySelectorAll('.chip');
-        var rows = document.querySelectorAll('.row');
-        chips.forEach(function (c) { c.addEventListener('click', function () {
-          var kind = c.getAttribute('data-kind');
-          chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+        var kind = 'open', shape = 'all';
+        var kinds = document.querySelectorAll('.chip[data-kind]'), shapes = document.querySelectorAll('.chip[data-shape]');
+        var rows = document.querySelectorAll('.row'), shelves = document.querySelectorAll('.shelf');
+        function paint() {
+          kinds.forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-kind') === kind)); });
+          shapes.forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-shape') === shape)); });
           rows.forEach(function (r) { r.hidden = kind !== 'open' && (r.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
-          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.row:not([hidden])'); });
-        }); });
+          shelves.forEach(function (s) { s.hidden = (shape !== 'all' && s.getAttribute('data-shape') !== shape) || !s.querySelector('.row:not([hidden])'); });
+        }
+        kinds.forEach(function (c) { c.addEventListener('click', function () { kind = c.getAttribute('data-kind'); paint(); }); });
+        shapes.forEach(function (c) { c.addEventListener('click', function () { shape = c.getAttribute('data-shape'); paint(); }); });
       })();
     </script>
 

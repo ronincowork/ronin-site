@@ -9,7 +9,8 @@
 .holds-line { margin: var(--space-2) 0 0; color: var(--muted); font: var(--text-2) var(--font-mono); }
 .get { margin: var(--space-2) 0 0; color: var(--muted-2); font-size: var(--text-3); }
 
-.kinds { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+.kinds { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
+.kinds + .shelf { margin-top: var(--space-6); }
 .chip { display: inline-flex; align-items: center; gap: var(--space-2); border: var(--edge) solid var(--line-2); border-radius: var(--radius-xs); background: var(--panel); color: var(--muted-2); padding: var(--space-1) var(--space-3); cursor: pointer; font: var(--text-2) var(--font-ui); }
 .chip:hover { border-color: var(--kaki); }
 .chip[aria-pressed='true'] { border-color: var(--kaki); background: var(--raise); color: var(--kaki); }
