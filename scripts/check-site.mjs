@@ -21,7 +21,7 @@ const required = [
   'explainers/ai-agents-virtual-machine/index.html',
   'explainers/public-content.json',
   'library/index.html',
-  'library/index.json',
+  'dist/library/index.json',
   'library/library.css',
   'assets/workbench/workbench-desktop.webp',
   'assets/workbench/workbench-narrow.webp',
@@ -84,22 +84,21 @@ if (!failures.some((x) => x.startsWith('public-content-manifest:'))) ok('public-
 try {
   const { buildLibrary } = await import('./pack-library.mjs');
   const built = buildLibrary(root);
-  const outputs = [['library/index.json', built.index], ...[...built.bundles].map(([name, text]) => [`library/bundles/${name}.json`, text]), ...built.pages];
+  const outputs = [['dist/library/index.json', built.index], ...[...built.bundles].map(([name, text]) => [`dist/library/bundles/${name}.json`, text]), ...built.pages];
   for (const [rel, text] of outputs) {
     const full = path.join(root, rel);
     if (!existsSync(full)) fail('template-library', `${rel} missing — node scripts/pack-library.mjs --write`);
     else if (readFileSync(full, 'utf8') !== text) fail('template-library', `${rel} is stale — node scripts/pack-library.mjs --write`);
   }
-  const index = JSON.parse(readFileSync(path.join(root, 'library/index.json'), 'utf8'));
+  const index = JSON.parse(readFileSync(path.join(root, 'dist/library/index.json'), 'utf8'));
   if (index.format !== 'ronin-library/1' || !Array.isArray(index.bundles) || !index.bundles.length) fail('template-library', 'index.json is not a non-empty ronin-library/1');
   const page = readFileSync(path.join(root, 'library/index.html'), 'utf8');
   for (const card of index.bundles ?? []) {
-    const full = path.join(root, 'library', card.url ?? '');
+    const full = path.join(root, 'dist/library', card.url ?? '');
     if (!card.url || !existsSync(full)) { fail('template-library', `${card.name}: url ${card.url} missing`); continue; }
     const actual = createHash('sha256').update(readFileSync(full, 'utf8')).digest('hex');
     if (actual !== card.sha256) fail('template-library', `${card.name}: sha256 ${actual} != ${card.sha256}`);
     if (!page.includes(`data-bundle="${card.name}"`)) fail('template-library', `library/index.html does not show ${card.name}`);
-    if (!existsSync(path.join(root, 'library/view', card.name, 'index.html'))) fail('template-library', `${card.name} has no view page`);
     if (JSON.parse(readFileSync(full, 'utf8')).format !== 'ronin-bundle/1') fail('template-library', `${card.url} is not ronin-bundle/1`);
   }
 } catch (error) {
@@ -107,8 +106,8 @@ try {
 }
 if (!failures.some((x) => x.startsWith('template-library:'))) ok('template-library');
 
-// THE SITE HANDS OUT NO BUNDLE FILE (owner, 2026-09-03): a person sees the shelf here and
-// gets a template inside Ronin. Any page linking a bundle document is a door we do not have.
+// THE SITE HANDS OUT NO BUNDLE FILE (owner, 2026-09-03): a person sees descriptions here and
+// gets a template inside Ronin, from HQ. Any page linking a bundle document is a door we do not have.
 for (const file of htmlFiles) {
   if (/href="[^"]*bundles\/[a-z0-9_-]+\.json"/.test(readFileSync(path.join(root, file), 'utf8'))) fail('template-library', `${file} hands out a bundle file`);
 }

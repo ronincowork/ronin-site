@@ -5,9 +5,10 @@ The public website for [ronincowork.com](https://ronincowork.com).
 The site carries the public Ronin Cowork story, the installation handoff, and an explainer
 library (`explainers/`): how agent teams work with family roles and session tasks plus the
 use-case pages, customization, Tailscale private access, and tmux-backed persistent agent
-terminals. It also carries the template library (`library/`): team template bundles the
-installed Cowork app downloads into an owner's own stores, generated from `library/src/` by
-`node scripts/pack-library.mjs --write` and checked at hand-in. Cowork setup and application
+terminals. It also carries the template library's shop window (`library/`) and its source
+(`library/src/`): the bundles Ronin HQ serves to Ronin Services boxes are generated into
+`dist/library/` by `node scripts/pack-library.mjs --write`, committed, checked at hand-in,
+and never served from this site. Cowork setup and application
 screens belong to the installed local application, not this public domain. Keep the
 hosting shape simple; do not build a framework or content system around it.
 
