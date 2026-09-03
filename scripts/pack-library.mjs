@@ -141,40 +141,63 @@ const HOW = `      <section class="how" aria-label="How a template gets into Ron
         </p>
       </section>`;
 
-/** The shelf: one article per bundle, grouped by kind, each with a View link and nothing else. */
+const KIND_ICONS = { coding: '⌨', work: '💼', personal: '🎩', household: '🏠', social: '🎪', school: '🎓' };
+const HOLD_WORD = { teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way', library: 'page', macros: 'macro', actions: 'action', tools: 'tool' };
+
+/**
+ * The shelf is a library utility, not a web page (owner, 2026-09-03): a compact list you
+ * scan and click, with the app's kinds as a row of chips above it. One row per bundle —
+ * art, name, what it holds, its kinds — opening its view page. A dozen lines of inline
+ * script hide rows not of the picked kind; with scripts off, every row shows.
+ */
 function indexPage(cards) {
-  const groups = new Map();
-  for (const c of cards) for (const k of (c.kinds.length ? c.kinds : ['work'])) { if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
-  const sections = [...Object.keys(KIND_WORDS)].filter((k) => groups.has(k)).map((k) => `      <section class="members" aria-label="${esc(KIND_WORDS[k])}">
-        <p class="eyebrow">${esc(KIND_WORDS[k])}</p>
-${groups.get(k).map((c) => `        <article class="member" data-bundle="${c.name}">
-          <span class="art" aria-hidden="true">${esc(c.art)}</span>
-          <div>
-            <h2>${esc(c.label)}</h2>
-            <p>${esc(c.blurb)}</p>
-            <ul class="holds">${Object.entries(c.holds).map(([hk, n]) => `<li>${n} ${esc(({ teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way of working', library: 'reference page', macros: 'macro', actions: 'action', tools: 'tool' })[hk] ?? hk)}${n === 1 ? '' : 's'}</li>`).join('')}</ul>
-            <a class="go" href="view/${c.name}/">View →</a>
-            <span class="version">${esc(c.version)}</span>
-          </div>
-        </article>`).join('\n')}
-      </section>`).join('\n\n');
+  const chips = [['open', '○', 'All'], ...Object.entries(KIND_ICONS).map(([k, icon]) => [k, icon, KIND_WORDS[k]])]
+    .map(([k, icon, word]) => `        <button type="button" class="chip" data-kind="${k}" aria-pressed="${k === 'open'}"><i>${icon}</i>${esc(word)}</button>`).join('\n');
+  const isTeam = (c) => !!c.holds.teams;
+  const row = (c) => `        <a class="row" href="view/${c.name}/" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}">
+          <i>${esc(c.art || '▤')}</i>
+          <b>${esc(c.label)}</b>
+          <span class="blurb">${esc(c.blurb)}</span>
+          <span class="holds">${Object.entries(c.holds).map(([hk, n]) => `${n} ${HOLD_WORD[hk] ?? hk}${n === 1 ? '' : 's'}`).join(' · ')}</span>
+          <span class="kinds">${c.kinds.map((k) => `${KIND_ICONS[k] ?? ''} ${esc(KIND_WORDS[k] ?? k)}`).join(' · ')}</span>
+        </a>`;
+  const shelf = (heading, rows) => rows.length ? `      <section class="shelf">
+        <h2>${esc(heading)}</h2>
+${rows.map(row).join('\n')}
+      </section>` : '';
+  const sections = [shelf('Teams — projects', cards.filter(isTeam)), shelf('Agents — people', cards.filter((c) => !isTeam(c)))].filter(Boolean).join('\n\n');
+  const script = `    <script>
+      (function () {
+        var chips = document.querySelectorAll('.chip');
+        var rows = document.querySelectorAll('.row');
+        chips.forEach(function (c) { c.addEventListener('click', function () {
+          var kind = c.getAttribute('data-kind');
+          chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+          rows.forEach(function (r) { r.hidden = kind !== 'open' && (r.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
+          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.row:not([hidden])'); });
+        }); });
+      })();
+    </script>`;
   return `${HEAD('Ronin Template Library', 'Templates for Ronin Cowork — a team, its agents, and the SOPs, macros and tools they read. See them here; get them inside your Ronin.', '../')}
-    <main class="page">
+    <main class="page page--library">
       <section class="library-head">
         <p class="eyebrow">Template library</p>
-        <h1 class="display">A team, and everything it reads.</h1>
+        <h1>A team, and everything it reads.</h1>
         <p class="lede">
-          A template is a cast that delivers a project, or a person you assign, with the
-          SOPs, Routines, macros and tools they name. A handful ship inside Ronin; the rest
-          are here. See what each one holds, then get it inside your Ronin —
-          <strong>Templates → Check the library</strong> — where it lands on your own shelf.
+          A handful ship inside Ronin; the rest are here. Click one to see what it holds.
+          To get it: in your Ronin, <strong>Templates → Check the library</strong>.
         </p>
+      </section>
+
+      <section class="kinds" aria-label="Kind">
+${chips}
       </section>
 
 ${sections}
 
 ${HOW}
     </main>
+${script}
 ${FOOT('../')}`;
 }
 
