@@ -12,8 +12,8 @@
       ],
       "version": "2026-09-03",
       "url": "bundles/chief_of_staff.json",
-      "sha256": "d8a834d19bb1d0f54e2b8c0052faa6efc775ecde6131865b030b5bf7b5e202a5",
-      "bytes": 19756,
+      "sha256": "1a3abd62e7ee21c5fb72d212689b84696b07cac7c422cc60c77e837ebc231b84",
+      "bytes": 19816,
       "holds": {
         "routines": 1,
         "agents": 1,

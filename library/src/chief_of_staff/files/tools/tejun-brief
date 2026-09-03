@@ -26,7 +26,7 @@ while read -r name dial lead; do
     continue
   fi
   json=$(read_tegami --session "$name" --json 2>/dev/null) || { printf '%s %-22s  no record\n' "$mark" "$name"; continue; }
-  printf '%s' "$json" | python3 -c '
+  printf '%s' "$json" | python3 -c "$(cat <<'PY'
 import json, sys
 name = sys.argv[1]; mark = sys.argv[2]
 try:
@@ -36,22 +36,25 @@ except Exception:
 obj = (d.get("objective") or "").strip() or "(no objective)"
 ladder = d.get("ladder") or []
 at = d.get("at") or {}
-now = ""
 def rungs():
     for i, r in enumerate(ladder, 1):
         yield f"{i}", r.get("gate") or r.get("title") or "", r.get("status") or ""
         for j, l in enumerate(r.get("legs") or [], 1):
             yield f"{i}.{j}", l.get("title") or l.get("leg") or "", l.get("status") or ""
+now = ""
 if isinstance(at, dict) and at.get("rung"):
-    key = f"{at['rung']}" + (f".{at['leg']}" if at.get("leg") else "")
+    key = str(at.get("rung")) + ("." + str(at.get("leg")) if at.get("leg") else "")
     for k, t, s in rungs():
-        if k == key: now = f"at {k} {t} [{s}]"; break
+        if k == key:
+            now = f"at {k} {t} [{s}]"; break
 if not now:
     for k, t, s in rungs():
-        if s.upper() == "ACTIVE": now = f"at {k} {t} [ACTIVE]"; break
+        if s.upper() == "ACTIVE":
+            now = f"at {k} {t} [ACTIVE]"; break
 done = sum(1 for _, _, s in rungs() if s.upper() == "DONE")
 total = sum(1 for _ in rungs())
 print(f"{mark} {name:<22}  {obj}")
 print(f"     {now or 'no rung active'}  ·  {done}/{total} rungs done")
-' "$name" "$mark"
+PY
+)" "$name" "$mark"
 done <<< "$roster"
