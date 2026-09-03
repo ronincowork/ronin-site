@@ -39,7 +39,9 @@ everything.
 
 ## With gbrain connected
 
-The Routine map turns gbrain on for every row; where the machine has no brain the lanes
+The team's Routine map turns gbrain on, and the money and pipeline rows turn it off for
+themselves — a ledger and a pipeline sheet gain nothing from the brain, and a session
+with no MCP at all is the cheaper birth. Where the machine has no brain the other lanes
 are simply born without it and use the folders — never a refusal, the birth receipt says
 so. When it is up:
 
