@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Template bundles for Ronin Cowork: a team, its agents, and the SOPs, macros and tools they read, as one download you install into your own stores."
+    />
+    <title>Ronin Template Library</title>
+    <link rel="canonical" href="https://www.ronincowork.com/library/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ronin Cowork" />
+    <meta property="og:title" content="Ronin Template Library" />
+    <meta property="og:description" content="Team templates with everything they read, as one download for your Ronin coworkspace." />
+    <meta property="og:url" content="https://www.ronincowork.com/library/" />
+    <meta property="og:image" content="https://www.ronincowork.com/social/ronin-agent-team.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1730" />
+    <meta property="og:image:height" content="909" />
+    <meta property="og:image:alt" content="Three connected AI agent terminal workspaces" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../ronin-tokens.css" />
+    <style>
+      .library-head {
+        max-width: 860px;
+        margin-bottom: 64px;
+      }
+      .members {
+        border-top: var(--edge) solid var(--line);
+      }
+      .member {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: clamp(20px, 5vw, 64px);
+        padding: clamp(30px, 5vw, 52px) 0;
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .member .art {
+        padding-top: 2px;
+        font-size: var(--text-8);
+        line-height: 1;
+      }
+      .member h2 {
+        margin: 0 0 var(--space-5);
+        font: 500 var(--text-10) / 1.25 var(--font-ui);
+      }
+      .member p {
+        max-width: var(--measure);
+        margin: 0 0 var(--space-6);
+        color: var(--muted-2);
+      }
+      .member .holds {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3) var(--space-6);
+        margin: 0 0 var(--space-6);
+        padding: 0;
+        list-style: none;
+        color: var(--muted);
+        font: var(--text-2) var(--font-mono);
+      }
+      .member .holds li::before {
+        content: "▸ ";
+        color: var(--kaki);
+      }
+      .member .go {
+        display: inline-block;
+        margin-right: var(--space-10);
+        color: var(--kaki);
+        text-decoration: none;
+        text-underline-offset: 3px;
+      }
+      .member .go:hover {
+        text-decoration: underline;
+      }
+      .member .version {
+        color: var(--dim);
+        font: var(--text-2) var(--font-mono);
+      }
+      .how {
+        margin-top: 72px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .how h2 {
+        margin: 0 0 var(--space-5);
+      }
+      .how p,
+      .how li {
+        max-width: var(--measure);
+        color: var(--muted-2);
+      }
+      .how ol {
+        padding-left: var(--space-8);
+      }
+      .how code,
+      .how pre {
+        font: var(--text-2) var(--font-mono);
+      }
+      .how pre {
+        margin: var(--space-5) 0 0;
+        padding: var(--space-5);
+        border-radius: var(--radius-sm);
+        background: var(--bg-2);
+        overflow-x: auto;
+      }
+      .finish {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-10);
+        align-items: center;
+        margin-top: 48px;
+        padding: var(--space-10);
+        border-radius: var(--radius-md);
+        background: var(--raise);
+      }
+      .finish h2,
+      .finish p {
+        margin: 0;
+      }
+      .finish p {
+        margin-top: var(--space-5);
+        color: var(--muted-2);
+      }
+      .finish-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+      }
+      @media (max-width: 640px) {
+        .member {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: var(--space-8);
+        }
+        .finish {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../index.html"
+          ><img src="../nin-mark.svg" alt="Ronin" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../explainers/">Explainers</a><a href="../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="cta-strip">
+      <div class="cta-strip__inner">
+        <span class="cta-strip__label">Ronin · template library</span>
+        <div class="cta-strip__actions">
+          <a class="button" href="../index.html">Tell me more about Ronin</a>
+          <a class="button button--primary" href="../load-ronin.html">Load Ronin →</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow">Template library</p>
+        <h1 class="display">A team, and everything it reads, as one download.</h1>
+        <p class="lede">
+          A template bundle holds a team template, the agent templates beside it,
+          and the SOPs, Routines, macros and tools they name — copies, in transit
+          only. Installing one lands every copy in your own stores on your Ronin
+          machine, where an update never touches them. Nothing here runs; it is
+          plain files you can read before you install.
+        </p>
+      </section>
+
+      <section class="members" aria-label="Template bundles">
+        <article class="member">
+          <span class="art" aria-hidden="true">🗓</span>
+          <div>
+            <h2>Weekly Review</h2>
+            <p>
+              A review lead, a record reader and a next-week planner. The book says
+              how this house reviews a week; the <code>+review:</code> macro is the
+              procedure; <code>tejun-week</code> measures the dates. Everything a
+              bundle can carry, in one small one.
+            </p>
+            <ul class="holds">
+              <li>1 team</li><li>1 Routine</li><li>1 SOP</li><li>1 macro</li><li>1 action</li><li>1 tool</li>
+            </ul>
+            <a class="go" href="bundles/weekly_review.json" download>Download weekly_review.json →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+
+        <article class="member">
+          <span class="art" aria-hidden="true">🕯</span>
+          <div>
+            <h2>Dinner Party, with the menu book</h2>
+            <p>
+              The shipped Dinner Party cast plus a standing menu book the
+              menu-and-shopping agent reads at birth — the worked example from the
+              templates page, done for you. Your copy of the template replaces the
+              shipped one; delete it and the shipped box is back.
+            </p>
+            <ul class="holds">
+              <li>1 team</li><li>1 SOP</li>
+            </ul>
+            <a class="go" href="bundles/dinner_party.json" download>Download dinner_party.json →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+
+        <article class="member">
+          <span class="art" aria-hidden="true">📰</span>
+          <div>
+            <h2>Ship the Newsletter</h2>
+            <p>
+              An editor, a writer, a fact checker and a sender, all reading the
+              same house style guide — and a Copy Editor you can add to any team.
+              Replace the style guide with yours and the whole cast follows it.
+            </p>
+            <ul class="holds">
+              <li>1 team</li><li>1 agent</li><li>1 SOP</li>
+            </ul>
+            <a class="go" href="bundles/newsletter.json" download>Download newsletter.json →</a>
+            <span class="version">2026-09-03</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="how" aria-label="How to install a bundle">
+        <h2>How a bundle gets in</h2>
+        <p>
+          From the coworkspace: open the Campaign page, place <strong>Templates</strong>
+          in a workspace, press <strong>Check the library</strong>, then pick a bundle.
+          Ronin shows the plan first — every file, the shelf it lands on, and whether it
+          is new, replaces a shipped copy, or would replace one of yours — and writes
+          nothing until you press <strong>Install</strong>. A file you already own is
+          kept unless you choose the second button.
+        </p>
+        <p>
+          By hand, with a file you downloaded here:
+        </p>
+        <pre>bin/ronin-bundle plan ~/Downloads/weekly_review.json      # what it would write
+bin/ronin-bundle install ~/Downloads/weekly_review.json   # the install, and its receipt</pre>
+        <p>
+          Three rules every install keeps: a copy identical to what ships is skipped; your
+          own file is written over only when you say replace; and a tool never replaces
+          one of Ronin's. The machine-readable index is
+          <a href="index.json">index.json</a>, with a sha256 per bundle that the install
+          checks before it writes.
+        </p>
+      </section>
+
+      <section class="finish">
+        <div>
+          <h2>Have a team worth sharing?</h2>
+          <p>Any team template on your machine packs the same way: <code>bin/ronin-bundle pack &lt;team&gt;</code>, or <em>Download as a bundle</em> on its card.</p>
+        </div>
+        <div class="finish-actions"><a class="button" href="../explainers/">Read the explainers</a><a class="button button--primary" href="../load-ronin.html">Load Ronin →</a></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin · a coworkspace that runs on your machine</span>
+      <a href="../index.html">ronincowork.com</a>
+    </footer>
+  </body>
+</html>

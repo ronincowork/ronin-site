@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# tejun-week — the Monday and Sunday of a week, measured. Implements `week-range`.
+#
+# Usage: tejun-week [YYYY-MM-DD]   → WEEK 2026-W36  2026-08-31 .. 2026-09-06
+#        No argument = the week containing today. Exit 2 = not a date.
+set -eu
+day=${1:-$(date +%F)}
+if ! epoch=$(date -d "$day" +%s 2>/dev/null); then
+  echo "BAD-DATE: $day is not YYYY-MM-DD" >&2
+  exit 2
+fi
+dow=$(date -d "@$epoch" +%u)             # 1 = Monday … 7 = Sunday
+monday=$(date -d "@$((epoch - (dow - 1) * 86400))" +%F)
+sunday=$(date -d "$monday +6 days" +%F)
+week=$(date -d "$monday" +%G-W%V)
+printf 'WEEK %s  %s .. %s\n' "$week" "$monday" "$sunday"

@@ -1,0 +1,25 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "dinner_party",
+  "label": "Dinner Party, with the menu book",
+  "art": "🕯",
+  "blurb": "The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.",
+  "kinds": [
+    "household",
+    "social"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/dinner_party.md",
+      "text": "# Dinner Party\n- **label:** Dinner Party\n- **art:** 🕯\n- **blurb:** A menu, a table, a good evening — with the house menu book.\n- **order:** 40\n- **kinds:** household, social\n- **objective:** A menu, a table and a good evening — planned well enough that the host enjoys it too.\n- **behaviours:** sops:dinner_party_menus\n- **routines_off:** ronin_worktrees\n\nThis copy replaces the shipped Dinner Party whole (it lives in your catalogs store) and\nadds one line: the menu book. Delete this file and the shipped box is back.\n\n## agents\n\n### run the evening\n- **team_lead:** yes\n- **instructions:** Run the evening and keep the timing, from the first ring at the door to the last coffee.\n- **mandate:** execute · staff agents · open\n\n### menu and shopping\n- **instructions:** Plan the menu from the house menu book, mind the allergies, and turn it into one shopping list.\n- **mandate:** execute · nobody · an artifact\n\n### table and room\n- **instructions:** The table, the seating and the room, set before anyone arrives.\n- **mandate:** execute · nobody · an artifact\n\n### entertainment\n- **instructions:** What happens between courses — music, games, and the conversation worth starting.\n- **mandate:** execute · nobody · ideas\n"
+    },
+    {
+      "store": "sops",
+      "path": "dinner_party_menus.md",
+      "text": "# dinner_party_menus — the house menu book\n\n> Installed from the template library. Your own copy in the sops store (`ronin-store sops`\n> → `dinner_party_menus.md`) replaces this file whole. Edit it: it is a starting book, and\n> the point of it is that yours differs.\n> **Voice: agent.** Written for the menu-and-shopping session, to follow itself.\n\nThree menus that have worked, and the rules that made them work. Pick one, adapt it to the\nguest list, and turn it into one shopping list in the order the shop is laid out.\n\n## Rules before menus\n\n- Ask for allergies and dislikes before choosing anything; write them at the top of the plan.\n- One course that is finished before the guests arrive, one that only needs heating, and at\n  most one that is cooked while they are there.\n- Nothing new on the night. A dish the host has not cooked before is for another evening.\n- The shopping list is one list, grouped as the shop is: produce, dairy, meat and fish, dry\n  goods, drink. Quantities per head, then multiplied, then rounded up.\n\n## Menu 1 — the reliable one (six to eight)\n\n- To start: roasted peppers with anchovy and good bread (done that morning).\n- Main: a slow braise — beef or mushroom — with a green salad and boiled potatoes.\n- To finish: a tart bought from a good baker, with cream. Nobody minds.\n\n## Menu 2 — the light one (four to six)\n\n- To start: a chilled soup, served in cups.\n- Main: whole baked fish with lemon and herbs, green beans, new potatoes.\n- To finish: fruit, cheese, and one thing sweet.\n\n## Menu 3 — the vegetarian one (any number)\n\n- To start: a plate of small things — olives, hummus, roasted vegetables, flatbread.\n- Main: a large baked dish that comes to the table whole — a lasagne, a gratin, a moussaka.\n- To finish: a cake made the day before.\n\n## Timing\n\nWork backwards from the first course at the table. Write the times on the plan as\n\"done by\", never \"start at\": a dish that is done by 19:00 can be started whenever the\ncook likes.\n"
+    }
+  ],
+  "entries": []
+}
