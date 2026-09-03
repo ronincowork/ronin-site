@@ -1,0 +1,12 @@
+# Chief of Staff
+- **label:** Chief of Staff
+- **blurb:** The office book, one macro per lane, the morning brief, and the tool that reads every teammate's record for it.
+- **reading:** —
+- **sops:** chief_of_staff
+- **macros:** brief, triage, prep, expenses, prospects
+- **actions:** team-brief
+- **tools:** tejun-brief
+- **mcp:** —
+- **requires:** ronin_base
+- **bundles:** —
+- **order:** 80

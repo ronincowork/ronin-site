@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Template bundles for Ronin Cowork: a team, its agents, and the SOPs, macros and tools they read, as one download you install into your own stores."
+      content="Template bundles for Ronin Cowork: a Chief of Staff team, a weekly review, a dinner party and more — a team, its agents, and the SOPs, macros and tools they read, as one download you install into your own stores."
     />
     <title>Ronin Template Library</title>
     <link rel="canonical" href="https://www.ronincowork.com/library/" />
@@ -171,15 +171,35 @@
         <h1 class="display">A team, and everything it reads, as one download.</h1>
         <p class="lede">
           A template bundle holds a team template, the agent templates beside it,
-          and the SOPs, Routines, macros and tools they name — copies, in transit
-          only. Installing one lands every copy in your own stores on your Ronin
-          machine, where an update never touches them. Nothing here runs; it is
-          plain files you can read before you install.
+          and the SOPs, Routines, macros and tools they name. This page is the
+          shelf: what is on it and what each one holds. The download happens inside
+          your Ronin coworkspace — press <strong>Check the library</strong> on the
+          Templates card, and Ronin fetches this shelf, shows you the plan, and
+          installs what you choose into your own stores.
         </p>
       </section>
 
       <section class="members" aria-label="Template bundles">
-        <article class="member">
+        <article class="member" data-bundle="chief_of_staff">
+          <span class="art" aria-hidden="true">🗂</span>
+          <div>
+            <h2>Chief of Staff</h2>
+            <p>
+              The always-on bot-team shape — a chief of staff on top, a specialist
+              per lane — on your own machine and any provider. A coordinator who
+              writes no code, inbox triage, meeting prep, money and admin, pipeline
+              research, one macro per lane and a morning brief read from the team's
+              own records. Lanes work from folders you own and produce drafts;
+              nothing leaves the house without your yes.
+            </p>
+            <ul class="holds">
+              <li>1 team</li><li>1 agent</li><li>1 Routine</li><li>1 SOP</li><li>5 macros</li><li>1 action</li><li>1 tool</li>
+            </ul>
+            <span class="version">in Ronin: Templates → Check the library → chief_of_staff · 2026-09-03</span>
+          </div>
+        </article>
+
+        <article class="member" data-bundle="weekly_review">
           <span class="art" aria-hidden="true">🗓</span>
           <div>
             <h2>Weekly Review</h2>
@@ -192,12 +212,11 @@
             <ul class="holds">
               <li>1 team</li><li>1 Routine</li><li>1 SOP</li><li>1 macro</li><li>1 action</li><li>1 tool</li>
             </ul>
-            <a class="go" href="bundles/weekly_review.json" download>Download weekly_review.json →</a>
-            <span class="version">2026-09-03</span>
+            <span class="version">in Ronin: Templates → Check the library → weekly_review · 2026-09-03</span>
           </div>
         </article>
 
-        <article class="member">
+        <article class="member" data-bundle="dinner_party">
           <span class="art" aria-hidden="true">🕯</span>
           <div>
             <h2>Dinner Party, with the menu book</h2>
@@ -210,12 +229,11 @@
             <ul class="holds">
               <li>1 team</li><li>1 SOP</li>
             </ul>
-            <a class="go" href="bundles/dinner_party.json" download>Download dinner_party.json →</a>
-            <span class="version">2026-09-03</span>
+            <span class="version">in Ronin: Templates → Check the library → dinner_party · 2026-09-03</span>
           </div>
         </article>
 
-        <article class="member">
+        <article class="member" data-bundle="newsletter">
           <span class="art" aria-hidden="true">📰</span>
           <div>
             <h2>Ship the Newsletter</h2>
@@ -227,40 +245,30 @@
             <ul class="holds">
               <li>1 team</li><li>1 agent</li><li>1 SOP</li>
             </ul>
-            <a class="go" href="bundles/newsletter.json" download>Download newsletter.json →</a>
-            <span class="version">2026-09-03</span>
+            <span class="version">in Ronin: Templates → Check the library → newsletter · 2026-09-03</span>
           </div>
         </article>
       </section>
 
-      <section class="how" aria-label="How to install a bundle">
+      <section class="how" aria-label="How a bundle gets in">
         <h2>How a bundle gets in</h2>
+        <ol>
+          <li>Open the Campaign page in your Ronin coworkspace and place <strong>Templates</strong> in a workspace.</li>
+          <li>Press <strong>Check the library</strong>. Ronin asks this site for the shelf — only when you press, never on a timer — and shows the same bundles you see here.</li>
+          <li>Pick one. Ronin shows the plan first: every file, the shelf it lands on, and whether it is new, replaces a shipped copy, or would replace one of yours. Nothing is written yet.</li>
+          <li>Press <strong>Install</strong>. Every copy lands in your own stores on your machine, where an update never touches it. A file you already own is kept unless you choose the second button.</li>
+        </ol>
         <p>
-          From the coworkspace: open the Campaign page, place <strong>Templates</strong>
-          in a workspace, press <strong>Check the library</strong>, then pick a bundle.
-          Ronin shows the plan first — every file, the shelf it lands on, and whether it
-          is new, replaces a shipped copy, or would replace one of yours — and writes
-          nothing until you press <strong>Install</strong>. A file you already own is
-          kept unless you choose the second button.
-        </p>
-        <p>
-          By hand, with a file you downloaded here:
-        </p>
-        <pre>bin/ronin-bundle plan ~/Downloads/weekly_review.json      # what it would write
-bin/ronin-bundle install ~/Downloads/weekly_review.json   # the install, and its receipt</pre>
-        <p>
-          Three rules every install keeps: a copy identical to what ships is skipped; your
-          own file is written over only when you say replace; and a tool never replaces
-          one of Ronin's. The machine-readable index is
-          <a href="index.json">index.json</a>, with a sha256 per bundle that the install
-          checks before it writes.
+          There is no file to move from the internet to your computer to the app: the
+          app does the fetching, checks each bundle against the hash this shelf publishes,
+          and a tool in a bundle never replaces one of Ronin's own.
         </p>
       </section>
 
       <section class="finish">
         <div>
           <h2>Have a team worth sharing?</h2>
-          <p>Any team template on your machine packs the same way: <code>bin/ronin-bundle pack &lt;team&gt;</code>, or <em>Download as a bundle</em> on its card.</p>
+          <p>Any team template on your machine, with the books and Routines you gave it, packs into the same shape from its card on the Templates page — for a shelf of your own, or for this one.</p>
         </div>
         <div class="finish-actions"><a class="button" href="../explainers/">Read the explainers</a><a class="button button--primary" href="../load-ronin.html">Load Ronin →</a></div>
       </section>

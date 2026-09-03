@@ -1,0 +1,1 @@
+| `tejun-brief` | team-brief | `tejun-brief [team]` → `BRIEF <team> — <date>`, then per member: name, 人, objective, the rung being worked, rungs done; a 👤 member is reported as not read. No argument = this session's team. Exit 2 = no or several teams (name one), 3 = no such team. Installed by the Chief of Staff bundle into your tools store. |

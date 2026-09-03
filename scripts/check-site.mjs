@@ -77,8 +77,9 @@ try {
 if (!failures.some((x) => x.startsWith('public-content-manifest:'))) ok('public-content-manifest');
 
 // THE TEMPLATE LIBRARY: the committed JSON is exactly what library/src/ packs to, every
-// card's url exists with the sha256 the index promises, and the human page links each
-// bundle the index lists — so the page and the machine index cannot drift apart.
+// card's url exists with the sha256 the index promises, and the human page SHOWS each
+// bundle the index lists without linking its file — the shelf is read here, the download
+// happens inside Ronin (owner, 2026-09-03) — so page and index cannot drift apart.
 try {
   const { buildLibrary } = await import('./pack-library.mjs');
   const built = buildLibrary(root);
@@ -96,7 +97,8 @@ try {
     if (!card.url || !existsSync(full)) { fail('template-library', `${card.name}: url ${card.url} missing`); continue; }
     const actual = createHash('sha256').update(readFileSync(full, 'utf8')).digest('hex');
     if (actual !== card.sha256) fail('template-library', `${card.name}: sha256 ${actual} != ${card.sha256}`);
-    if (!page.includes(`href="${card.url}"`)) fail('template-library', `library/index.html does not link ${card.url}`);
+    if (!page.includes(`data-bundle="${card.name}"`)) fail('template-library', `library/index.html does not show ${card.name}`);
+    if (page.includes(`href="${card.url}"`)) fail('template-library', `library/index.html hands out ${card.url} — the download happens inside Ronin (owner, 2026-09-03)`);
     if (JSON.parse(readFileSync(full, 'utf8')).format !== 'ronin-bundle/1') fail('template-library', `${card.url} is not ronin-bundle/1`);
   }
 } catch (error) {

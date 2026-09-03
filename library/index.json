@@ -2,6 +2,29 @@
   "format": "ronin-library/1",
   "bundles": [
     {
+      "name": "chief_of_staff",
+      "label": "Chief of Staff",
+      "art": "🗂",
+      "blurb": "The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends.",
+      "kinds": [
+        "work",
+        "personal"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/chief_of_staff.json",
+      "sha256": "d8a834d19bb1d0f54e2b8c0052faa6efc775ecde6131865b030b5bf7b5e202a5",
+      "bytes": 19756,
+      "holds": {
+        "routines": 1,
+        "agents": 1,
+        "teams": 1,
+        "sops": 1,
+        "tools": 2,
+        "actions": 1,
+        "macros": 5
+      }
+    },
+    {
       "name": "dinner_party",
       "label": "Dinner Party, with the menu book",
       "art": "🕯",

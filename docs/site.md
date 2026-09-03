@@ -93,8 +93,11 @@ and `scripts/check-site.mjs` fails when the committed output is stale, when a ca
 does not match its file, or when the page does not link a bundle the index lists.
 
 The installed app reads the index and a bundle from its own server through its one
-allowlisted client, never from the browser, so no CORS header is needed here; a person can
-also download a bundle from the page and install it by hand (`bin/ronin-bundle install`).
+allowlisted client, never from the browser, so no CORS header is needed here. **The page
+shows the shelf and hands out no files** (owner, 2026-09-03): a person sees what is there on
+ronincowork.com and downloads only inside Ronin — *Templates → Check the library* — so
+nobody has to move a file from the internet to a computer to an app. `check-site` fails a
+page that links a bundle file.
 The format and the install rules are the app's (`docs/templates.md` there); the source
 layout is `library/src/README.md` here.
 
