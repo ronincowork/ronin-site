@@ -23,58 +23,151 @@
       </div>
     </header>
 
-    <main class="page">
+    <main class="page page--library">
       <section class="library-head">
         <p class="eyebrow">Template library</p>
-        <h1 class="display">A team, and everything it reads.</h1>
+        <h1>A team, and everything it reads.</h1>
         <p class="lede">
-          A template is a cast that delivers a project, or a person you assign, with the
-          SOPs, Routines, macros and tools they name. A handful ship inside Ronin; the rest
-          are here. See what each one holds, then get it inside your Ronin —
-          <strong>Templates → Check the library</strong> — where it lands on your own shelf.
+          A handful ship inside Ronin; the rest are here. Click one to see what it holds.
+          To get it: in your Ronin, <strong>Templates → Check the library</strong>.
         </p>
       </section>
 
       <section class="kinds" aria-label="Kind">
-        <span class="gridlabel">Kind</span>
-        <div class="kindgrid">
-          <button type="button" class="kindtile" data-kind="coding" aria-pressed="false"><i>⌨</i><span>Code</span></button>
-          <button type="button" class="kindtile" data-kind="work" aria-pressed="false"><i>💼</i><span>Work</span></button>
-          <button type="button" class="kindtile" data-kind="personal" aria-pressed="false"><i>🎩</i><span>Yourself</span></button>
-          <button type="button" class="kindtile" data-kind="household" aria-pressed="false"><i>🏠</i><span>The house</span></button>
-          <button type="button" class="kindtile" data-kind="social" aria-pressed="false"><i>🎪</i><span>Friends and family</span></button>
-          <button type="button" class="kindtile" data-kind="school" aria-pressed="false"><i>🎓</i><span>School</span></button>
-        </div>
-        <button type="button" class="kindtile kindtile--open" data-kind="open" aria-pressed="true"><i>○</i><span>All</span></button>
+        <button type="button" class="chip" data-kind="open" aria-pressed="true"><i>○</i>All</button>
+        <button type="button" class="chip" data-kind="coding" aria-pressed="false"><i>⌨</i>Code</button>
+        <button type="button" class="chip" data-kind="work" aria-pressed="false"><i>💼</i>Work</button>
+        <button type="button" class="chip" data-kind="personal" aria-pressed="false"><i>🎩</i>Yourself</button>
+        <button type="button" class="chip" data-kind="household" aria-pressed="false"><i>🏠</i>The house</button>
+        <button type="button" class="chip" data-kind="social" aria-pressed="false"><i>🎪</i>Friends and family</button>
+        <button type="button" class="chip" data-kind="school" aria-pressed="false"><i>🎓</i>School</button>
       </section>
 
       <section class="shelf">
-        <p class="eyebrow">Teams — projects</p>
-        <div class="tmplgrid">
-          <a class="tmpl" href="view/bake_for_the_fair/" title="Forty entries, one oven, one morning." data-bundle="bake_for_the_fair" data-kinds="household social school"><i>🥧</i><div><b>Bake for the Fair</b></div></a>
-          <a class="tmpl" href="view/chief_of_staff/" title="The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends." data-bundle="chief_of_staff" data-kinds="work personal"><i>🗂</i><div><b>Chief of Staff</b></div></a>
-          <a class="tmpl" href="view/dinner_party/" title="The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page." data-bundle="dinner_party" data-kinds="household social"><i>🕯</i><div><b>Dinner Party, with the menu book</b></div></a>
-          <a class="tmpl" href="view/health_checks/" title="Your application's checks, run on a rhythm, judged, and reported." data-bundle="health_checks" data-kinds="coding work"><i>📈</i><div><b>Health Checks</b></div></a>
-          <a class="tmpl" href="view/newsletter/" title="An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team." data-bundle="newsletter" data-kinds="work social"><i>📰</i><div><b>Ship the Newsletter</b></div></a>
-          <a class="tmpl" href="view/put_the_garden_right/" title="A season of work, done in order." data-bundle="put_the_garden_right" data-kinds="household"><i>🌿</i><div><b>Put the Garden Right</b></div></a>
-          <a class="tmpl" href="view/raid_my_codebase/" title="Work on what is already there. Faster, cleaner, fixed." data-bundle="raid_my_codebase" data-kinds="coding"><i>🛠</i><div><b>Raid My Codebase</b></div></a>
-          <a class="tmpl" href="view/redo_the_study/" title="Fabric, finish, fittings — and a budget that holds." data-bundle="redo_the_study" data-kinds="household"><i>🪑</i><div><b>Redo the Study</b></div></a>
-          <a class="tmpl" href="view/ship_an_app/" title="Build a thing that does not exist yet, end to end." data-bundle="ship_an_app" data-kinds="coding"><i>🏗</i><div><b>Ship an App</b></div></a>
-          <a class="tmpl" href="view/ship_the_tour/" title="A date on the calendar and a hundred things before it." data-bundle="ship_the_tour" data-kinds="social personal"><i>🎸</i><div><b>Ship the Tour</b></div></a>
-          <a class="tmpl" href="view/weekly_review/" title="A week looked back on, and the next one shaped — with the book, the macro and the tool it uses." data-bundle="weekly_review" data-kinds="work personal"><i>🗓</i><div><b>Weekly Review</b></div></a>
-        </div>
+        <h2>Teams — projects</h2>
+        <a class="row" href="view/bake_for_the_fair/" data-bundle="bake_for_the_fair" data-kinds="household social school">
+          <i>🥧</i>
+          <b>Bake for the Fair</b>
+          <span class="blurb">Forty entries, one oven, one morning.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">🏠 The house · 🎪 Friends and family · 🎓 School</span>
+        </a>
+        <a class="row" href="view/chief_of_staff/" data-bundle="chief_of_staff" data-kinds="work personal">
+          <i>🗂</i>
+          <b>Chief of Staff</b>
+          <span class="blurb">The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends.</span>
+          <span class="holds">1 Routine · 1 agent · 1 team · 1 SOP · 2 tools · 1 action · 5 macros</span>
+          <span class="kinds">💼 Work · 🎩 Yourself</span>
+        </a>
+        <a class="row" href="view/dinner_party/" data-bundle="dinner_party" data-kinds="household social">
+          <i>🕯</i>
+          <b>Dinner Party, with the menu book</b>
+          <span class="blurb">The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.</span>
+          <span class="holds">1 team · 1 SOP</span>
+          <span class="kinds">🏠 The house · 🎪 Friends and family</span>
+        </a>
+        <a class="row" href="view/health_checks/" data-bundle="health_checks" data-kinds="coding work">
+          <i>📈</i>
+          <b>Health Checks</b>
+          <span class="blurb">Your application's checks, run on a rhythm, judged, and reported.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">⌨ Code · 💼 Work</span>
+        </a>
+        <a class="row" href="view/newsletter/" data-bundle="newsletter" data-kinds="work social">
+          <i>📰</i>
+          <b>Ship the Newsletter</b>
+          <span class="blurb">An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.</span>
+          <span class="holds">1 agent · 1 team · 1 SOP</span>
+          <span class="kinds">💼 Work · 🎪 Friends and family</span>
+        </a>
+        <a class="row" href="view/put_the_garden_right/" data-bundle="put_the_garden_right" data-kinds="household">
+          <i>🌿</i>
+          <b>Put the Garden Right</b>
+          <span class="blurb">A season of work, done in order.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">🏠 The house</span>
+        </a>
+        <a class="row" href="view/raid_my_codebase/" data-bundle="raid_my_codebase" data-kinds="coding">
+          <i>🛠</i>
+          <b>Raid My Codebase</b>
+          <span class="blurb">Work on what is already there. Faster, cleaner, fixed.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">⌨ Code</span>
+        </a>
+        <a class="row" href="view/redo_the_study/" data-bundle="redo_the_study" data-kinds="household">
+          <i>🪑</i>
+          <b>Redo the Study</b>
+          <span class="blurb">Fabric, finish, fittings — and a budget that holds.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">🏠 The house</span>
+        </a>
+        <a class="row" href="view/ship_an_app/" data-bundle="ship_an_app" data-kinds="coding">
+          <i>🏗</i>
+          <b>Ship an App</b>
+          <span class="blurb">Build a thing that does not exist yet, end to end.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">⌨ Code</span>
+        </a>
+        <a class="row" href="view/ship_the_tour/" data-bundle="ship_the_tour" data-kinds="social personal">
+          <i>🎸</i>
+          <b>Ship the Tour</b>
+          <span class="blurb">A date on the calendar and a hundred things before it.</span>
+          <span class="holds">1 team</span>
+          <span class="kinds">🎪 Friends and family · 🎩 Yourself</span>
+        </a>
+        <a class="row" href="view/weekly_review/" data-bundle="weekly_review" data-kinds="work personal">
+          <i>🗓</i>
+          <b>Weekly Review</b>
+          <span class="blurb">A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.</span>
+          <span class="holds">1 Routine · 1 team · 1 SOP · 2 tools · 1 action · 1 macro</span>
+          <span class="kinds">💼 Work · 🎩 Yourself</span>
+        </a>
       </section>
 
       <section class="shelf">
-        <p class="eyebrow">Agents — people</p>
-        <div class="tmplgrid">
-          <a class="tmpl" href="view/bookkeeper/" title="Every receipt, every account, reconciled and filed." data-bundle="bookkeeper" data-kinds="work household school"><i>📒</i><div><b>Bookkeeper</b></div></a>
-          <a class="tmpl" href="view/designer/" title="Shape the thing before anyone builds it — looks, flow, feel." data-bundle="designer" data-kinds="coding work"><i>🎨</i><div><b>Designer</b></div></a>
-          <a class="tmpl" href="view/front_end/" title="Build the surface against an agreed design." data-bundle="front_end" data-kinds="coding"><i>🖥</i><div><b>Front-End Developer</b></div></a>
-          <a class="tmpl" href="view/health_checker/" title="Runs your application's checks and tells you what moved." data-bundle="health_checker" data-kinds="coding work"><i>🩺</i><div><b>Health Checker</b></div></a>
-          <a class="tmpl" href="view/researcher/" title="Research, compare, decide. No building — yet." data-bundle="researcher" data-kinds="coding work personal school"><i>🧭</i><div><b>Researcher</b></div></a>
-          <a class="tmpl" href="view/technical_writer/" title="Says what the thing is, for someone who was not here." data-bundle="technical_writer" data-kinds="coding work school"><i>📗</i><div><b>Technical Writer</b></div></a>
-        </div>
+        <h2>Agents — people</h2>
+        <a class="row" href="view/bookkeeper/" data-bundle="bookkeeper" data-kinds="work household school">
+          <i>📒</i>
+          <b>Bookkeeper</b>
+          <span class="blurb">Every receipt, every account, reconciled and filed.</span>
+          <span class="holds">1 agent</span>
+          <span class="kinds">💼 Work · 🏠 The house · 🎓 School</span>
+        </a>
+        <a class="row" href="view/designer/" data-bundle="designer" data-kinds="coding work">
+          <i>🎨</i>
+          <b>Designer</b>
+          <span class="blurb">Shape the thing before anyone builds it — looks, flow, feel.</span>
+          <span class="holds">1 agent</span>
+          <span class="kinds">⌨ Code · 💼 Work</span>
+        </a>
+        <a class="row" href="view/front_end/" data-bundle="front_end" data-kinds="coding">
+          <i>🖥</i>
+          <b>Front-End Developer</b>
+          <span class="blurb">Build the surface against an agreed design.</span>
+          <span class="holds">1 agent</span>
+          <span class="kinds">⌨ Code</span>
+        </a>
+        <a class="row" href="view/health_checker/" data-bundle="health_checker" data-kinds="coding work">
+          <i>🩺</i>
+          <b>Health Checker</b>
+          <span class="blurb">Runs your application's checks and tells you what moved.</span>
+          <span class="holds">1 agent</span>
+          <span class="kinds">⌨ Code · 💼 Work</span>
+        </a>
+        <a class="row" href="view/researcher/" data-bundle="researcher" data-kinds="coding work personal school">
+          <i>🧭</i>
+          <b>Researcher</b>
+          <span class="blurb">Research, compare, decide. No building — yet.</span>
+          <span class="holds">1 agent</span>
+          <span class="kinds">⌨ Code · 💼 Work · 🎩 Yourself · 🎓 School</span>
+        </a>
+        <a class="row" href="view/technical_writer/" data-bundle="technical_writer" data-kinds="coding work school">
+          <i>📗</i>
+          <b>Technical Writer</b>
+          <span class="blurb">Says what the thing is, for someone who was not here.</span>
+          <span class="holds">1 agent</span>
+          <span class="kinds">⌨ Code · 💼 Work · 🎓 School</span>
+        </a>
       </section>
 
       <section class="how" aria-label="How a template gets into Ronin">
@@ -90,14 +183,14 @@
     </main>
     <script>
       (function () {
-        var tiles = document.querySelectorAll('.kindtile');
-        var boxes = document.querySelectorAll('.tmpl');
-        function pick(kind) {
-          tiles.forEach(function (t) { t.setAttribute('aria-pressed', String(t.getAttribute('data-kind') === kind)); });
-          boxes.forEach(function (b) { b.hidden = kind !== 'open' && (b.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
-          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.tmpl:not([hidden])'); });
-        }
-        tiles.forEach(function (t) { t.addEventListener('click', function () { pick(t.getAttribute('data-kind')); }); });
+        var chips = document.querySelectorAll('.chip');
+        var rows = document.querySelectorAll('.row');
+        chips.forEach(function (c) { c.addEventListener('click', function () {
+          var kind = c.getAttribute('data-kind');
+          chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+          rows.forEach(function (r) { r.hidden = kind !== 'open' && (r.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
+          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.row:not([hidden])'); });
+        }); });
       })();
     </script>
 

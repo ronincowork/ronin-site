@@ -141,60 +141,59 @@ const HOW = `      <section class="how" aria-label="How a template gets into Ron
         </p>
       </section>`;
 
-/** The kind tiles, as the app draws them (form-steps.js kindTiles): icon and word, ○ for all. */
 const KIND_ICONS = { coding: '⌨', work: '💼', personal: '🎩', household: '🏠', social: '🎪', school: '🎓' };
+const HOLD_WORD = { teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way', library: 'page', macros: 'macro', actions: 'action', tools: 'tool' };
 
 /**
- * The shelf, as the app's Templates page draws it (owner, 2026-09-03): the kind tiles across
- * the top, then every bundle as one box — art and name — that opens its view page. A tiny
- * inline script hides boxes not of the picked kind; with scripts off, every box shows.
+ * The shelf is a library utility, not a web page (owner, 2026-09-03): a compact list you
+ * scan and click, with the app's kinds as a row of chips above it. One row per bundle —
+ * art, name, what it holds, its kinds — opening its view page. A dozen lines of inline
+ * script hide rows not of the picked kind; with scripts off, every row shows.
  */
 function indexPage(cards) {
-  const tiles = Object.entries(KIND_ICONS).map(([k, icon]) => `          <button type="button" class="kindtile" data-kind="${k}" aria-pressed="false"><i>${icon}</i><span>${esc(KIND_WORDS[k])}</span></button>`).join('\n');
+  const chips = [['open', '○', 'All'], ...Object.entries(KIND_ICONS).map(([k, icon]) => [k, icon, KIND_WORDS[k]])]
+    .map(([k, icon, word]) => `        <button type="button" class="chip" data-kind="${k}" aria-pressed="${k === 'open'}"><i>${icon}</i>${esc(word)}</button>`).join('\n');
   const isTeam = (c) => !!c.holds.teams;
-  const box = (c) => `          <a class="tmpl" href="view/${c.name}/" title="${esc(c.blurb)}" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}"><i>${esc(c.art || '▤')}</i><div><b>${esc(c.label)}</b></div></a>`;
+  const row = (c) => `        <a class="row" href="view/${c.name}/" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}">
+          <i>${esc(c.art || '▤')}</i>
+          <b>${esc(c.label)}</b>
+          <span class="blurb">${esc(c.blurb)}</span>
+          <span class="holds">${Object.entries(c.holds).map(([hk, n]) => `${n} ${HOLD_WORD[hk] ?? hk}${n === 1 ? '' : 's'}`).join(' · ')}</span>
+          <span class="kinds">${c.kinds.map((k) => `${KIND_ICONS[k] ?? ''} ${esc(KIND_WORDS[k] ?? k)}`).join(' · ')}</span>
+        </a>`;
   const shelf = (heading, rows) => rows.length ? `      <section class="shelf">
-        <p class="eyebrow">${esc(heading)}</p>
-        <div class="tmplgrid">
-${rows.map(box).join('\n')}
-        </div>
+        <h2>${esc(heading)}</h2>
+${rows.map(row).join('\n')}
       </section>` : '';
   const sections = [shelf('Teams — projects', cards.filter(isTeam)), shelf('Agents — people', cards.filter((c) => !isTeam(c)))].filter(Boolean).join('\n\n');
   const script = `    <script>
       (function () {
-        var tiles = document.querySelectorAll('.kindtile');
-        var boxes = document.querySelectorAll('.tmpl');
-        function pick(kind) {
-          tiles.forEach(function (t) { t.setAttribute('aria-pressed', String(t.getAttribute('data-kind') === kind)); });
-          boxes.forEach(function (b) { b.hidden = kind !== 'open' && (b.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
-          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.tmpl:not([hidden])'); });
-        }
-        tiles.forEach(function (t) { t.addEventListener('click', function () { pick(t.getAttribute('data-kind')); }); });
+        var chips = document.querySelectorAll('.chip');
+        var rows = document.querySelectorAll('.row');
+        chips.forEach(function (c) { c.addEventListener('click', function () {
+          var kind = c.getAttribute('data-kind');
+          chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+          rows.forEach(function (r) { r.hidden = kind !== 'open' && (r.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
+          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.row:not([hidden])'); });
+        }); });
       })();
     </script>`;
-  const sectionsWithTiles = `      <section class="kinds" aria-label="Kind">
-        <span class="gridlabel">Kind</span>
-        <div class="kindgrid">
-${tiles}
-        </div>
-        <button type="button" class="kindtile kindtile--open" data-kind="open" aria-pressed="true"><i>○</i><span>All</span></button>
-      </section>
-
-${sections}`;
   return `${HEAD('Ronin Template Library', 'Templates for Ronin Cowork — a team, its agents, and the SOPs, macros and tools they read. See them here; get them inside your Ronin.', '../')}
-    <main class="page">
+    <main class="page page--library">
       <section class="library-head">
         <p class="eyebrow">Template library</p>
-        <h1 class="display">A team, and everything it reads.</h1>
+        <h1>A team, and everything it reads.</h1>
         <p class="lede">
-          A template is a cast that delivers a project, or a person you assign, with the
-          SOPs, Routines, macros and tools they name. A handful ship inside Ronin; the rest
-          are here. See what each one holds, then get it inside your Ronin —
-          <strong>Templates → Check the library</strong> — where it lands on your own shelf.
+          A handful ship inside Ronin; the rest are here. Click one to see what it holds.
+          To get it: in your Ronin, <strong>Templates → Check the library</strong>.
         </p>
       </section>
 
-${sectionsWithTiles}
+      <section class="kinds" aria-label="Kind">
+${chips}
+      </section>
+
+${sections}
 
 ${HOW}
     </main>
