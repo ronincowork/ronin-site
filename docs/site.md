@@ -89,7 +89,9 @@ owner's own stores. The shelf page `library/index.html`, one readable **view** p
 bundle under `library/view/<name>/`, the machine index `library/index.json`
 (`ronin-library/1`) and each `library/bundles/<name>.json` are all **generated from
 `library/src/<name>/`** by `node scripts/pack-library.mjs --write` and committed — one source,
-four faces, and `library/library.css` is their one stylesheet. That is not a build step at deploy — the output is a static file like any other —
+four faces, and `library/library.css` is their one stylesheet. The shelf is drawn as the app's
+Templates page draws it — the kind tiles, then a box per bundle — and a dozen lines of inline
+script on the shelf page hide boxes not of the picked kind; with scripts off every box shows. That is not a build step at deploy — the output is a static file like any other —
 and `scripts/check-site.mjs` fails when the committed output is stale, when a card's sha256
 does not match its file, or when the page does not link a bundle the index lists.
 

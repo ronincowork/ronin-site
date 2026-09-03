@@ -141,23 +141,46 @@ const HOW = `      <section class="how" aria-label="How a template gets into Ron
         </p>
       </section>`;
 
-/** The shelf: one article per bundle, grouped by kind, each with a View link and nothing else. */
+/** The kind tiles, as the app draws them (form-steps.js kindTiles): icon and word, ○ for all. */
+const KIND_ICONS = { coding: '⌨', work: '💼', personal: '🎩', household: '🏠', social: '🎪', school: '🎓' };
+
+/**
+ * The shelf, as the app's Templates page draws it (owner, 2026-09-03): the kind tiles across
+ * the top, then every bundle as one box — art and name — that opens its view page. A tiny
+ * inline script hides boxes not of the picked kind; with scripts off, every box shows.
+ */
 function indexPage(cards) {
-  const groups = new Map();
-  for (const c of cards) for (const k of (c.kinds.length ? c.kinds : ['work'])) { if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
-  const sections = [...Object.keys(KIND_WORDS)].filter((k) => groups.has(k)).map((k) => `      <section class="members" aria-label="${esc(KIND_WORDS[k])}">
-        <p class="eyebrow">${esc(KIND_WORDS[k])}</p>
-${groups.get(k).map((c) => `        <article class="member" data-bundle="${c.name}">
-          <span class="art" aria-hidden="true">${esc(c.art)}</span>
-          <div>
-            <h2>${esc(c.label)}</h2>
-            <p>${esc(c.blurb)}</p>
-            <ul class="holds">${Object.entries(c.holds).map(([hk, n]) => `<li>${n} ${esc(({ teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way of working', library: 'reference page', macros: 'macro', actions: 'action', tools: 'tool' })[hk] ?? hk)}${n === 1 ? '' : 's'}</li>`).join('')}</ul>
-            <a class="go" href="view/${c.name}/">View →</a>
-            <span class="version">${esc(c.version)}</span>
-          </div>
-        </article>`).join('\n')}
-      </section>`).join('\n\n');
+  const tiles = Object.entries(KIND_ICONS).map(([k, icon]) => `          <button type="button" class="kindtile" data-kind="${k}" aria-pressed="false"><i>${icon}</i><span>${esc(KIND_WORDS[k])}</span></button>`).join('\n');
+  const isTeam = (c) => !!c.holds.teams;
+  const box = (c) => `          <a class="tmpl" href="view/${c.name}/" title="${esc(c.blurb)}" data-bundle="${c.name}" data-kinds="${esc(c.kinds.join(' '))}"><i>${esc(c.art || '▤')}</i><div><b>${esc(c.label)}</b></div></a>`;
+  const shelf = (heading, rows) => rows.length ? `      <section class="shelf">
+        <p class="eyebrow">${esc(heading)}</p>
+        <div class="tmplgrid">
+${rows.map(box).join('\n')}
+        </div>
+      </section>` : '';
+  const sections = [shelf('Teams — projects', cards.filter(isTeam)), shelf('Agents — people', cards.filter((c) => !isTeam(c)))].filter(Boolean).join('\n\n');
+  const script = `    <script>
+      (function () {
+        var tiles = document.querySelectorAll('.kindtile');
+        var boxes = document.querySelectorAll('.tmpl');
+        function pick(kind) {
+          tiles.forEach(function (t) { t.setAttribute('aria-pressed', String(t.getAttribute('data-kind') === kind)); });
+          boxes.forEach(function (b) { b.hidden = kind !== 'open' && (b.getAttribute('data-kinds') || '').split(' ').indexOf(kind) === -1; });
+          document.querySelectorAll('.shelf').forEach(function (s) { s.hidden = !s.querySelector('.tmpl:not([hidden])'); });
+        }
+        tiles.forEach(function (t) { t.addEventListener('click', function () { pick(t.getAttribute('data-kind')); }); });
+      })();
+    </script>`;
+  const sectionsWithTiles = `      <section class="kinds" aria-label="Kind">
+        <span class="gridlabel">Kind</span>
+        <div class="kindgrid">
+${tiles}
+        </div>
+        <button type="button" class="kindtile kindtile--open" data-kind="open" aria-pressed="true"><i>○</i><span>All</span></button>
+      </section>
+
+${sections}`;
   return `${HEAD('Ronin Template Library', 'Templates for Ronin Cowork — a team, its agents, and the SOPs, macros and tools they read. See them here; get them inside your Ronin.', '../')}
     <main class="page">
       <section class="library-head">
@@ -171,10 +194,11 @@ ${groups.get(k).map((c) => `        <article class="member" data-bundle="${c.nam
         </p>
       </section>
 
-${sections}
+${sectionsWithTiles}
 
 ${HOW}
     </main>
+${script}
 ${FOOT('../')}`;
 }
 

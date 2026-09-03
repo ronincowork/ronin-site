@@ -21,3 +21,22 @@
 .part h2 { margin: 0 0 var(--space-4); font: var(--text-3) var(--font-mono); color: var(--kaki); }
 .part pre { margin: 0; padding: var(--space-6); border-radius: var(--radius-sm); background: var(--bg-2); color: var(--fg); font: var(--text-2) / 1.55 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
 @media (max-width: 640px) { .member { grid-template-columns: 34px minmax(0, 1fr); gap: var(--space-8); } }
+
+/* The shelf as the app draws it: the kind tiles, then boxes of art and name. */
+.kinds { display: flex; flex-direction: column; gap: var(--space-2); max-width: 720px; margin-bottom: 40px; }
+.gridlabel { color: var(--muted); font: var(--text-2) var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+.kindgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+.kindtile { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); align-items: center; border: var(--edge) solid var(--line-2); border-radius: var(--radius-xs); background: var(--panel); color: var(--muted-2); padding: var(--space-3) var(--space-4); cursor: pointer; text-align: left; font: inherit; }
+.kindtile:hover { border-color: var(--kaki); }
+.kindtile[aria-pressed='true'] { border-color: var(--kaki); background: var(--raise); }
+.kindtile[aria-pressed='true'] span { color: var(--kaki); }
+.kindtile i { font-style: normal; font-size: var(--text-4); line-height: 1; }
+.kindtile span { overflow: hidden; font-size: var(--text-2); text-overflow: ellipsis; white-space: nowrap; }
+.shelf { margin-bottom: 40px; }
+.shelf .eyebrow { margin-bottom: var(--space-4); }
+.tmplgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-2); }
+.tmpl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); align-items: center; border: var(--edge) solid var(--line-2); border-radius: var(--radius-xs); background: var(--panel); color: var(--fg); padding: var(--space-3) var(--space-4); text-decoration: none; }
+.tmpl:hover { border-color: var(--kaki); }
+.tmpl i { font-style: normal; font-size: var(--text-5); line-height: 1; }
+.tmpl b { font-weight: 500; }
+.tmpl[hidden], .shelf[hidden] { display: none; }
