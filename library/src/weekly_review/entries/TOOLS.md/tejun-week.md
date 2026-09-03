@@ -1,0 +1,1 @@
+| `tejun-week` | week-range | `tejun-week [YYYY-MM-DD]` → `WEEK <iso-week>  <monday> .. <sunday>`; no argument = this week. Exit 2 = not a date. Installed by the Weekly Review bundle into your tools store. |

@@ -1,0 +1,8 @@
+{
+  "name": "newsletter",
+  "label": "Ship the Newsletter",
+  "art": "📰",
+  "blurb": "An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.",
+  "kinds": ["work", "social"],
+  "version": "2026-09-03"
+}

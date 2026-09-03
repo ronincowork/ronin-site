@@ -1,0 +1,30 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "newsletter",
+  "label": "Ship the Newsletter",
+  "art": "📰",
+  "blurb": "An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.",
+  "kinds": [
+    "work",
+    "social"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/agents/copy_editor.md",
+      "text": "# Copy Editor\n- **label:** Copy Editor\n- **art:** ✏️\n- **blurb:** Tightens what others wrote — house style, no new claims.\n- **order:** 85\n- **kinds:** work, social, school\n- **brief:** Be my copy editor — take the draft I give you and return it tighter, in the house style, with every change visible and no new claims added. Fix nothing you are not sure of; mark it.\n- **mandate:** execute · nobody · an artifact\n- **behaviours:** sops:newsletter_style\n- **routines_off:** ronin_worktrees\n"
+    },
+    {
+      "store": "catalogs",
+      "path": "templates/teams/newsletter.md",
+      "text": "# Ship the Newsletter\n- **label:** Ship the Newsletter\n- **art:** 📰\n- **blurb:** One issue, from the list of what happened to the sent email.\n- **order:** 55\n- **kinds:** work, social\n- **objective:** Ship one issue of the newsletter: decide what goes in, write it in the house style, check every claim, and send it on the day.\n- **behaviours:** sops:newsletter_style\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### editor\n- **team_lead:** yes\n- **instructions:** Decide what goes in this issue and in what order, keep the writer to the style guide, and hold the send until the checker has signed off every claim.\n- **mandate:** execute · staff agents · an artifact\n\n### writer\n- **instructions:** Write the issue from the editor's list, in the house style — short, concrete, one idea per item.\n- **mandate:** execute · nobody · an artifact\n\n### fact checker\n- **instructions:** Check every claim, number, name and link in the draft against its source; mark each one confirmed or not, and say what would confirm it.\n- **mandate:** execute · nobody · an artifact\n\n### sender\n- **instructions:** Prepare the send: subject line, preview text, the list, the test send to the owner, and the scheduled time. Send only when the editor says so.\n- **mandate:** execute · nobody · an artifact\n"
+    },
+    {
+      "store": "sops",
+      "path": "newsletter_style.md",
+      "text": "# newsletter_style — how this house writes an issue\n\n> Installed from the template library. Your own copy in the sops store (`ronin-store sops`\n> → `newsletter_style.md`) replaces this file whole. Replace it with your own house style;\n> this one is a default that reads well until you do.\n> **Voice: agent.** Written for the sessions that write and edit, to follow themselves.\n\n## The issue\n\n- **Subject line:** under 50 characters, says what is in the issue, no exclamation marks.\n- **Opening:** two sentences at most. What this issue is about and why now.\n- **Items:** three to six. Each is a bold first line that stands alone, then two to four\n  sentences. One idea per item. A link goes on its own line, after the sentences.\n- **Closing:** one line, one ask. Reply, forward, or nothing — never three asks.\n\n## The sentences\n\n- Plain words. \"Use\", not \"utilise\"; \"start\", not \"commence\".\n- Numbers as digits, with the unit. \"3 days\", not \"three days\".\n- No claim without a source the checker can open. A number without a source is cut, not\n  softened.\n- Say who did the thing. \"We shipped\", \"Maria wrote\", never \"it was decided\".\n- Contractions are fine. Emoji are not.\n\n## The check\n\nEvery claim, number, name and link goes to the fact checker with its source beside it. The\nchecker marks each one confirmed or not. An unconfirmed claim is cut by the editor, not\nargued over by the writer.\n\n## The send\n\nA test send to the owner first, read on a phone. Subject, preview text and the first item\nare what most people will see; those three are checked twice.\n"
+    }
+  ],
+  "entries": []
+}

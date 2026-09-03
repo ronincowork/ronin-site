@@ -1,0 +1,52 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "weekly_review",
+  "label": "Weekly Review",
+  "art": "🗓",
+  "blurb": "A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.",
+  "kinds": [
+    "work",
+    "personal"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "routines/weekly_review.md",
+      "text": "# Weekly Review\n- **label:** Weekly Review\n- **blurb:** The review macro, the week tool, and the book that says how this house reviews a week.\n- **reading:** —\n- **sops:** weekly_review\n- **macros:** review\n- **actions:** week-range\n- **tools:** tejun-week\n- **mcp:** —\n- **requires:** ronin_base\n- **bundles:** —\n- **order:** 90\n"
+    },
+    {
+      "store": "catalogs",
+      "path": "templates/teams/weekly_review.md",
+      "text": "# Weekly Review\n- **label:** Weekly Review\n- **art:** 🗓\n- **blurb:** A week looked back on, and the next one shaped.\n- **order:** 45\n- **kinds:** work, personal\n- **objective:** Look back over the week's work records and documents, say plainly what moved and what stalled, and shape next week into a short list the owner agrees to.\n- **behaviours:** sops:weekly_review\n- **routines_on:** weekly_review\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### review lead\n- **team_lead:** yes\n- **instructions:** Run the review: gather what the reader and the planner produce, keep it to one page, and put it in front of the owner. `+review:` is the whole procedure.\n- **mandate:** execute · nobody · an artifact\n\n### record reader\n- **instructions:** Read every work record and document the week produced and report what moved, what stalled, and what was left half-done — facts, not judgement.\n- **mandate:** execute · nobody · an artifact\n\n### next week planner\n- **instructions:** From the reader's report and the owner's standing goals, draft next week as at most seven lines the owner can strike or keep.\n- **mandate:** plan · nobody · a plan\n"
+    },
+    {
+      "store": "sops",
+      "path": "weekly_review.md",
+      "text": "# weekly_review — how this house reviews a week\n\n> Installed from the template library. Your own copy in the sops store (`ronin-store sops`\n> → `weekly_review.md`) replaces this file whole — a default, not law.\n> **Voice: agent.** Written for the session that runs the review, to follow itself.\n\nA weekly review is one page. It is read on Monday morning by someone who was not in the\nroom, so it names things, it does not narrate them.\n\n## The shape\n\n1. **The week** — `tejun-week` gives the Monday and Sunday; put them in the heading.\n2. **What moved** — one line per thing that finished or visibly advanced, each naming the\n   document or record that proves it. No adjectives.\n3. **What stalled** — one line per thing that was started and not moved, with the reason\n   as the record states it, or \"no reason recorded\".\n4. **Left half-done** — anything with an open leg on a work record. These are next week's\n   first candidates.\n5. **Next week** — at most seven lines. Each is something one session can finish. The\n   owner strikes or keeps them; the review is not the plan until they have.\n\n## The rules\n\n- Read the records, not your memory. `read_tegami --session <name>` is the source; a\n  session that kept no record is reported as such, not guessed at.\n- One page. If it runs over, the review has become a report; cut the narration.\n- Post nothing to the wipeboard. The review is a document on the ▧ Docs tab; `+show_file:`\n  is how the owner reaches it.\n"
+    },
+    {
+      "store": "tools",
+      "path": "tejun-week",
+      "text": "#!/usr/bin/env bash\n# tejun-week — the Monday and Sunday of a week, measured. Implements `week-range`.\n#\n# Usage: tejun-week [YYYY-MM-DD]   → WEEK 2026-W36  2026-08-31 .. 2026-09-06\n#        No argument = the week containing today. Exit 2 = not a date.\nset -eu\nday=${1:-$(date +%F)}\nif ! epoch=$(date -d \"$day\" +%s 2>/dev/null); then\n  echo \"BAD-DATE: $day is not YYYY-MM-DD\" >&2\n  exit 2\nfi\ndow=$(date -d \"@$epoch\" +%u)             # 1 = Monday … 7 = Sunday\nmonday=$(date -d \"@$((epoch - (dow - 1) * 86400))\" +%F)\nsunday=$(date -d \"$monday +6 days\" +%F)\nweek=$(date -d \"$monday\" +%G-W%V)\nprintf 'WEEK %s  %s .. %s\\n' \"$week\" \"$monday\" \"$sunday\"\n",
+      "executable": true
+    }
+  ],
+  "entries": [
+    {
+      "catalog": "ACTIONS.md",
+      "name": "week-range",
+      "text": "## week-range — the Monday and Sunday of a week, measured\n`action_kind: mechanical` — run it, don't deliberate.\n> Tool: `tejun-week [date]` → `WEEK 2026-W36  2026-08-31 .. 2026-09-06`\nDates are measured, never worked out by hand: a review headed with the wrong week is\nfiled under the wrong week. One call, copy the line into the heading."
+    },
+    {
+      "catalog": "MACROS.md",
+      "name": "review",
+      "text": "## review\n- **class:** session_macro.workflow\n- **label:** +review:\n- **blurb:** Look back over the week's records and documents, say what moved and what stalled, and shape next week into a short list you can strike or keep.\nOwner-invoked. `+review:` runs the week just ended; `+review: 2026-08-24` runs the week\ncontaining that date. The book is `sops:weekly_review`; follow its shape exactly — one\npage, facts before plans, the owner strikes or keeps the last section.\n\nParams: `date` (optional — any day in the week to review; bare `+review:` is this week).\n\n| # | Action | With |\n|---|---|---|\n| 1 | week-range | `tejun-week [date]` — the Monday and Sunday go in the heading |\n| 2 | read-work-record | every session on this team, `read_tegami --session <name>`; note who kept no record |\n| 3 | list-doc | write the review as one document and list it, so ▧ Docs shows it |\n| 4 | report-outcome | one line: the week, how many things moved, and where the page is |"
+    },
+    {
+      "catalog": "TOOLS.md",
+      "name": "tejun-week",
+      "text": "| `tejun-week` | week-range | `tejun-week [YYYY-MM-DD]` → `WEEK <iso-week>  <monday> .. <sunday>`; no argument = this week. Exit 2 = not a date. Installed by the Weekly Review bundle into your tools store. |"
+    }
+  ]
+}

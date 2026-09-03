@@ -1,0 +1,12 @@
+# Weekly Review
+- **label:** Weekly Review
+- **blurb:** The review macro, the week tool, and the book that says how this house reviews a week.
+- **reading:** —
+- **sops:** weekly_review
+- **macros:** review
+- **actions:** week-range
+- **tools:** tejun-week
+- **mcp:** —
+- **requires:** ronin_base
+- **bundles:** —
+- **order:** 90

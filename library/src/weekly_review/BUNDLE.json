@@ -1,0 +1,8 @@
+{
+  "name": "weekly_review",
+  "label": "Weekly Review",
+  "art": "🗓",
+  "blurb": "A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.",
+  "kinds": ["work", "personal"],
+  "version": "2026-09-03"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "dinner_party",
+  "label": "Dinner Party, with the menu book",
+  "art": "🕯",
+  "blurb": "The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.",
+  "kinds": ["household", "social"],
+  "version": "2026-09-03"
+}

@@ -1,0 +1,64 @@
+{
+  "format": "ronin-library/1",
+  "bundles": [
+    {
+      "name": "dinner_party",
+      "label": "Dinner Party, with the menu book",
+      "art": "🕯",
+      "blurb": "The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.",
+      "kinds": [
+        "household",
+        "social"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/dinner_party.json",
+      "sha256": "9fba5dbcde287b2578f6664c0afbf417fb4b04486f334d18d2c5aa1d16a47889",
+      "bytes": 3890,
+      "holds": {
+        "teams": 1,
+        "sops": 1
+      }
+    },
+    {
+      "name": "newsletter",
+      "label": "Ship the Newsletter",
+      "art": "📰",
+      "blurb": "An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.",
+      "kinds": [
+        "work",
+        "social"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/newsletter.json",
+      "sha256": "d783ff2d49195426bafefc1e5ee13c69bfd0404b704361b754cd05a1ec9b5ee9",
+      "bytes": 4116,
+      "holds": {
+        "agents": 1,
+        "teams": 1,
+        "sops": 1
+      }
+    },
+    {
+      "name": "weekly_review",
+      "label": "Weekly Review",
+      "art": "🗓",
+      "blurb": "A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.",
+      "kinds": [
+        "work",
+        "personal"
+      ],
+      "version": "2026-09-03",
+      "url": "bundles/weekly_review.json",
+      "sha256": "5f969ceba8f9dd72ed430bfd3db668bcfa6d4263767eec86401a862cb9154c38",
+      "bytes": 6256,
+      "holds": {
+        "routines": 1,
+        "teams": 1,
+        "sops": 1,
+        "tools": 2,
+        "actions": 1,
+        "macros": 1
+      }
+    }
+  ]
+}
