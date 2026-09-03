@@ -1,0 +1,10 @@
+{
+  "name": "raid_my_codebase",
+  "label": "Raid My Codebase",
+  "art": "🛠",
+  "blurb": "Work on what is already there. Faster, cleaner, fixed.",
+  "kinds": [
+    "coding"
+  ],
+  "version": "2026-09-03"
+}

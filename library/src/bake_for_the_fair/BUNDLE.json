@@ -1,0 +1,12 @@
+{
+  "name": "bake_for_the_fair",
+  "label": "Bake for the Fair",
+  "art": "🥧",
+  "blurb": "Forty entries, one oven, one morning.",
+  "kinds": [
+    "household",
+    "social",
+    "school"
+  ],
+  "version": "2026-09-03"
+}

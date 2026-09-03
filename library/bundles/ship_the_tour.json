@@ -1,0 +1,20 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "ship_the_tour",
+  "label": "Ship the Tour",
+  "art": "🎸",
+  "blurb": "A date on the calendar and a hundred things before it.",
+  "kinds": [
+    "social",
+    "personal"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/ship_the_tour.md",
+      "text": "# Ship the Tour\n- **label:** Ship the Tour\n- **art:** 🎸\n- **blurb:** A date on the calendar and a hundred things before it.\n- **order:** 30\n- **kinds:** social, personal\n- **objective:** One date on the calendar, and a hundred things that must happen before it.\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### tour manager\n- **team_lead:** yes\n- **instructions:** Hold the date and the list; keep every thread moving toward it.\n- **mandate:** execute · staff agents · open\n\n### bookings and money\n- **instructions:** Venues, tickets, deposits, and a budget that survives contact.\n- **mandate:** execute · nobody · an artifact\n\n### logistics and gear\n- **instructions:** How everyone and everything gets there — and what happens when it does not.\n- **mandate:** execute · nobody · a plan\n\n### promotion\n- **instructions:** Make sure everyone who would come knows it is happening.\n- **mandate:** execute · nobody · open\n"
+    }
+  ],
+  "entries": []
+}

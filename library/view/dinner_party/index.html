@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page." />
+    <title>Dinner Party, with the menu book — Ronin Template Library</title>
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../ronin-tokens.css" />
+    <link rel="stylesheet" href="../../../library/library.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../../index.html"
+          ><img src="../../../nin-mark.svg" alt="Ronin" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../../../library/">Templates</a><a href="../../../explainers/">Explainers</a><a href="../../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow"><a href="../../">Template library</a> · The house</p>
+        <h1 class="display">🕯 Dinner Party, with the menu book</h1>
+        <p class="lede">The shipped Dinner Party cast, plus a standing menu book the menu agent reads at birth — the worked example from the templates page.</p>
+        <p class="holds-line">1 team · 1 SOP · version 2026-09-03</p>
+        <p class="get">Get it inside your Ronin: <strong>Templates → Check the library → Dinner Party, with the menu book</strong>. Nothing here is a file to save.</p>
+      </section>
+
+      <section class="part">
+        <h2>catalogs/templates/teams/dinner_party.md</h2>
+        <pre># Dinner Party
+- **label:** Dinner Party
+- **art:** 🕯
+- **blurb:** A menu, a table, a good evening — with the house menu book.
+- **order:** 40
+- **kinds:** household, social
+- **objective:** A menu, a table and a good evening — planned well enough that the host enjoys it too.
+- **behaviours:** sops:dinner_party_menus
+- **routines_off:** ronin_worktrees
+
+This copy replaces the shipped Dinner Party whole (it lives in your catalogs store) and
+adds one line: the menu book. Delete this file and the shipped box is back.
+
+## agents
+
+### run the evening
+- **team_lead:** yes
+- **instructions:** Run the evening and keep the timing, from the first ring at the door to the last coffee.
+- **mandate:** execute · staff agents · open
+
+### menu and shopping
+- **instructions:** Plan the menu from the house menu book, mind the allergies, and turn it into one shopping list.
+- **mandate:** execute · nobody · an artifact
+
+### table and room
+- **instructions:** The table, the seating and the room, set before anyone arrives.
+- **mandate:** execute · nobody · an artifact
+
+### entertainment
+- **instructions:** What happens between courses — music, games, and the conversation worth starting.
+- **mandate:** execute · nobody · ideas
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>sops/dinner_party_menus.md</h2>
+        <pre># dinner_party_menus — the house menu book
+
+&gt; Installed from the template library. Your own copy in the sops store (`ronin-store sops`
+&gt; → `dinner_party_menus.md`) replaces this file whole. Edit it: it is a starting book, and
+&gt; the point of it is that yours differs.
+&gt; **Voice: agent.** Written for the menu-and-shopping session, to follow itself.
+
+Three menus that have worked, and the rules that made them work. Pick one, adapt it to the
+guest list, and turn it into one shopping list in the order the shop is laid out.
+
+## Rules before menus
+
+- Ask for allergies and dislikes before choosing anything; write them at the top of the plan.
+- One course that is finished before the guests arrive, one that only needs heating, and at
+  most one that is cooked while they are there.
+- Nothing new on the night. A dish the host has not cooked before is for another evening.
+- The shopping list is one list, grouped as the shop is: produce, dairy, meat and fish, dry
+  goods, drink. Quantities per head, then multiplied, then rounded up.
+
+## Menu 1 — the reliable one (six to eight)
+
+- To start: roasted peppers with anchovy and good bread (done that morning).
+- Main: a slow braise — beef or mushroom — with a green salad and boiled potatoes.
+- To finish: a tart bought from a good baker, with cream. Nobody minds.
+
+## Menu 2 — the light one (four to six)
+
+- To start: a chilled soup, served in cups.
+- Main: whole baked fish with lemon and herbs, green beans, new potatoes.
+- To finish: fruit, cheese, and one thing sweet.
+
+## Menu 3 — the vegetarian one (any number)
+
+- To start: a plate of small things — olives, hummus, roasted vegetables, flatbread.
+- Main: a large baked dish that comes to the table whole — a lasagne, a gratin, a moussaka.
+- To finish: a cake made the day before.
+
+## Timing
+
+Work backwards from the first course at the table. Write the times on the plan as
+&quot;done by&quot;, never &quot;start at&quot;: a dish that is done by 19:00 can be started whenever the
+cook likes.
+</pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin · a coworkspace that runs on your machine</span>
+      <a href="../../../index.html">ronincowork.com</a>
+    </footer>
+  </body>
+</html>

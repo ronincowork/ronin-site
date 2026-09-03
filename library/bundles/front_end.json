@@ -1,0 +1,19 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "front_end",
+  "label": "Front-End Developer",
+  "art": "🖥",
+  "blurb": "Build the surface against an agreed design.",
+  "kinds": [
+    "coding"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/agents/front_end.md",
+      "text": "# Front-End Developer\n- **label:** Front-End Developer\n- **art:** 🖥\n- **blurb:** Build the surface against an agreed design.\n- **order:** 50\n- **kinds:** coding\n- **brief:** Build the front end against the agreed design, and keep it true to it.\n- **mandate:** execute · nobody · code\n- **behaviours:** ways:cut_code, sops:github\n- **routines_on:** ronin_worktrees\n"
+    }
+  ],
+  "entries": []
+}

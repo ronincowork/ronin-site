@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends." />
+    <title>Chief of Staff — Ronin Template Library</title>
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../ronin-tokens.css" />
+    <link rel="stylesheet" href="../../../library/library.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../../index.html"
+          ><img src="../../../nin-mark.svg" alt="Ronin" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../../../library/">Templates</a><a href="../../../explainers/">Explainers</a><a href="../../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow"><a href="../../">Template library</a> · Work</p>
+        <h1 class="display">🗂 Chief of Staff</h1>
+        <p class="lede">The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends.</p>
+        <p class="holds-line">1 Routine · 1 agent · 1 team · 1 SOP · 2 tools · 1 action · 5 macros · version 2026-09-03</p>
+        <p class="get">Get it inside your Ronin: <strong>Templates → Check the library → Chief of Staff</strong>. Nothing here is a file to save.</p>
+      </section>
+
+      <section class="part">
+        <h2>catalogs/routines/chief_of_staff.md</h2>
+        <pre># Chief of Staff
+- **label:** Chief of Staff
+- **blurb:** The office book, one macro per lane, the morning brief, and the tool that reads every teammate's record for it.
+- **reading:** —
+- **sops:** chief_of_staff
+- **macros:** brief, triage, prep, expenses, prospects
+- **actions:** team-brief
+- **tools:** tejun-brief
+- **mcp:** —
+- **requires:** ronin_base
+- **bundles:** —
+- **order:** 80
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>catalogs/templates/agents/chief_of_staff.md</h2>
+        <pre># Chief of Staff
+- **label:** Chief of Staff
+- **art:** 🗂
+- **blurb:** One coordinator, born into its own team, who staffs the lanes as they appear — the single-bot start.
+- **order:** 12
+- **kinds:** work, personal
+- **brief:** Be my chief of staff. Write no code. Read the office book, look at what gbrain can reach and what is in the project root, and staff one specialist per lane you find work for — inbox, meetings, money, pipeline — into this team. Run `+brief:` when I ask for the morning brief. Hold anything that would leave the house until I say go.
+- **mandate:** execute · staff agents · no code
+- **team_mode:** new
+- **behaviours:** sops:chief_of_staff
+- **routines_on:** chief_of_staff, gbrain
+- **routines_off:** ronin_worktrees
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>catalogs/templates/teams/chief_of_staff.md</h2>
+        <pre># Chief of Staff
+- **label:** Chief of Staff
+- **art:** 🗂
+- **blurb:** A coordinator and four lanes — inbox, meetings, money, pipeline — run the way an always-on bot team is, on any provider.
+- **order:** 12
+- **kinds:** work, personal
+- **objective:** Run the owner's working week the way a chief of staff would: triage what came in, prepare what is next, keep the money straight and the pipeline warm — one specialist per lane, one coordinator who writes no code, and nothing sent out of the house without the owner's yes.
+- **behaviours:** sops:chief_of_staff
+- **routines_on:** chief_of_staff, gbrain
+- **routines_off:** ronin_worktrees
+
+The cast is the fashionable one — a chief of staff on top, a specialist per lane — with
+one difference from a cloud bot: every lane produces documents and drafts, never a send.
+With gbrain connected the lead, inbox and calendar lanes read through it — the money and
+pipeline rows switch it off, since they gain nothing from it — and without it every lane
+works from folders you own under the project root. Each row can be born on
+a different provider; the book says which lanes suit a cheap model and which a strong one.
+
+## agents
+
+### chief of staff
+- **team_lead:** yes
+- **instructions:** Coordinate the lanes and write no code. Every morning `+brief:` reads what each lane did and puts one page in front of the owner. Delegate by lane, staff a new specialist when a new lane appears, and hold anything that would leave the house — a reply, a message, a payment — until the owner says go.
+- **mandate:** execute · staff agents · no code
+
+### inbox triage
+- **instructions:** Work the inbox — through gbrain when it is connected, else the inbox folder: sort what landed into reply now · delegate · later · ignore, draft the replies as documents, and hand anything that belongs to another lane to that lane through the lead. `+triage:` is the procedure. You never send.
+- **mandate:** execute · nobody · an artifact
+
+### meeting prep
+- **instructions:** For every meeting — read through gbrain when it is connected, else from the calendar folder — write one page: who, why now, what happened last time, the open threads, and the three questions worth asking. `+prep:` is the procedure. Nothing longer than a page.
+- **mandate:** execute · nobody · an artifact
+
+### money and admin
+- **instructions:** Turn the receipts folder into a categorised ledger, flag what is missing or odd, and at month end produce the report the accountant would ask for. Keep the recurring admin checklist ticked. `+expenses:` is the procedure. You move no money.
+- **mandate:** execute · nobody · an artifact
+- **routines_off:** gbrain
+
+### pipeline research
+- **instructions:** Score the accounts and contacts in the pipeline folder against the owner's ideal profile, draft one first-touch message per contact worth touching, and keep the pipeline sheet honest about stage and last contact. `+prospects:` is the procedure. Drafts go to the lead for approval; you never send.
+- **mandate:** execute · nobody · an artifact
+- **routines_off:** gbrain
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>sops/chief_of_staff.md</h2>
+        <pre># chief_of_staff — how this office runs
+
+&gt; Installed from the template library. Your own copy in the sops store (`ronin-store sops`
+&gt; → `chief_of_staff.md`) replaces this file whole. It is written to be replaced: the folders,
+&gt; the lanes and the approval rule are yours to change.
+&gt; **Voice: agent.** Written for the chief of staff and its lanes, to follow themselves.
+
+This is the &quot;chief of staff on top, a specialist per lane&quot; shape that always-on bot teams
+made fashionable, kept honest about what an Agent on this machine can do. Two facts shape
+everything below:
+
+- **A lane reads through gbrain when it is connected, and from folders the owner owns
+  when it is not — and produces documents either way.** gbrain (`sops:gbrain`) is the
+  house's brain: the owner's people, projects and meetings, and, once the owner has
+  authorised an integration recipe, the door to mail and calendar. Where the brain reaches,
+  a lane reads there first. Where it does not, what the owner drops into the project root
+  is the input. What a lane writes back is a document; a draft stays a document until the
+  owner sends it themselves.
+- **Nothing leaves the house without the owner's yes.** A reply, a message, an invoice, a
+  payment, a calendar change that other people see — every one is a `propose-and-confirm`,
+  in the tile, and the owner's word in the tile is the only yes that counts.
+
+## The office
+
+The project root is the office. The lead makes these folders on its first day if they are
+not there, and says so in the brief:
+
+```text
+&lt;project root&gt;/
+  inbox/        what came in — exported mail, pasted messages, forwarded threads, one file each
+  calendar/     the week ahead — an exported calendar, or one file per meeting
+  receipts/     receipts and statements, as they arrive
+  pipeline/     the ideal-customer profile (icp.md), the pipeline sheet (pipeline.md), and notes
+  out/          what the lanes produced: drafts, briefs, the ledger, the report — listed on ▧ Docs
+```
+
+A lane reads only its folder and `out/`; it never reads another lane's inbox. The lead reads
+everything.
+
+## With gbrain connected
+
+The team's Routine map turns gbrain on, and the money and pipeline rows turn it off for
+themselves — a ledger and a pipeline sheet gain nothing from the brain, and a session
+with no MCP at all is the cheaper birth. Where the machine has no brain the other lanes
+are simply born without it and use the folders — never a refusal, the birth receipt says
+so. When it is up:
+
+- **inbox triage** reads mail through the brain's mail integration and writes the triage
+  document exactly as before. It still never sends: a send is the owner's hand, or a
+  `propose-and-confirm` the owner answered in the tile.
+- **meeting prep** reads the calendar and, for every attendee, `search`es the brain for
+  who they are and what happened last time — the brain is a memory, not a thinker: the
+  synthesis is the lane's own, from search results.
+- **every lane** captures what the owner would want remembered — a decision, a contact, a
+  date — as a page in the brain, never a secret and never another session's unpublished
+  work. Working state stays in the work record.
+- **opening a new door** — a mail account, a calendar, a CRM — follows `sops:gbrain` §
+  integrations to the letter: name the door, the owner authorises, then and only then the
+  recipe runs. The chief of staff asks; a lane never opens a door on its own.
+
+## The lanes
+
+| Lane | Reads | Writes to `out/` | Macro |
+|---|---|---|---|
+| inbox triage | `inbox/` | `triage-&lt;date&gt;.md` — reply now · delegate · later · ignore, with a draft under each reply-now item | `+triage:` |
+| meeting prep | `calendar/`, `out/` | `prep-&lt;date&gt;-&lt;meeting&gt;.md` — one page: who, why now, last time, open threads, three questions | `+prep:` |
+| money and admin | `receipts/` | `ledger.md` kept current; `report-&lt;month&gt;.md` at month end; `admin.md` the recurring checklist | `+expenses:` |
+| pipeline research | `pipeline/` | `pipeline.md` kept honest; `touch-&lt;contact&gt;.md` one draft per contact worth touching | `+prospects:` |
+
+The lead's own output is `brief-&lt;date&gt;.md`: one page, from `+brief:`, every morning.
+
+## Handoffs
+
+- A lane hands work to another lane **through the lead**, never sideways: it names the item
+  in its output under *delegate* and the lead assigns it. The wipeboard is for collisions —
+  two lanes touching one thing — not for status.
+- The lead reads lanes through their work records (`tejun-brief`), not by asking them. A
+  lane that kept no record is reported as such in the brief, by name.
+- A new lane — recruiting, bug reports, a second inbox — is staffed by the lead as a new
+  specialist with its own folder and macro, on the same rules. Say what was staffed in the
+  brief.
+
+## Providers
+
+Every row of the cast can be born on a different provider and model; that is the point of
+running this shape here rather than inside one vendor's bot. As a default: triage and money
+are pattern work and run well on a cheap, fast model; meeting prep and pipeline research
+are judgement and deserve the strong one; the lead is the strong one. The owner sets
+this on each row of the New Team form, and the letter each Agent is born with says which
+it got.
+
+## The brief
+
+One page, every morning, in this order: what each lane finished yesterday (by document
+name), what is waiting on the owner (every pending yes, as a list they can answer in one
+word each), what is stuck and why, and what today's lanes will do. No narration. The owner
+should be able to read it on a phone in the time the kettle takes.
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>tools/tejun-brief  (executable)</h2>
+        <pre>#!/usr/bin/env bash
+# tejun-brief — every teammate's work record, read for the morning brief. Implements `team-brief`.
+#
+# Usage: tejun-brief [team]     no argument = the team this session is on
+# Prints, per member: name · 人 · dial · objective · the rung being worked (or &quot;no record&quot;).
+# Reads only. A member dialled 👤 user is reported as unreadable, not skipped in silence.
+# Exit 2 = no team named and this session is on none (or several — name one), 3 = no such team.
+set -u
+team=${1:-}
+if [ -z &quot;$team&quot; ]; then
+  tags=$(tmux display-message -p '#{@ronin-tags}' 2&gt;/dev/null || true)
+  tags=${tags//[[:space:]]/}
+  case $tags in
+    &quot;&quot;) echo &quot;NO-TEAM: this session is on no team; name one: tejun-brief &lt;team&gt;&quot; &gt;&amp;2; exit 2 ;;
+    *,*) echo &quot;WHICH-TEAM: this session is on several ($tags); name one: tejun-brief &lt;team&gt;&quot; &gt;&amp;2; exit 2 ;;
+  esac
+  team=$tags
+fi
+roster=$(tejun-team &quot;$team&quot; 2&gt;/dev/null) || { echo &quot;NO-TEAM: no such team '$team'&quot; &gt;&amp;2; exit 3; }
+printf 'BRIEF %s — %s\n' &quot;$team&quot; &quot;$(date +%F)&quot;
+while read -r name dial lead; do
+  [ -n &quot;$name&quot; ] || continue
+  mark=$([ &quot;$lead&quot; = &quot;人&quot; ] &amp;&amp; echo &quot;人&quot; || echo &quot;  &quot;)
+  if [ &quot;$dial&quot; = &quot;user&quot; ]; then
+    printf '%s %-22s  (owner-controlled: not read)\n' &quot;$mark&quot; &quot;$name&quot;
+    continue
+  fi
+  json=$(read_tegami --session &quot;$name&quot; --json 2&gt;/dev/null) || { printf '%s %-22s  no record\n' &quot;$mark&quot; &quot;$name&quot;; continue; }
+  printf '%s' &quot;$json&quot; | python3 -c &quot;$(cat &lt;&lt;'PY'
+import json, sys
+name = sys.argv[1]; mark = sys.argv[2]
+try:
+    d = json.load(sys.stdin)
+except Exception:
+    print(f&quot;{mark} {name:&lt;22}  no record&quot;); sys.exit(0)
+obj = (d.get(&quot;objective&quot;) or &quot;&quot;).strip() or &quot;(no objective)&quot;
+ladder = d.get(&quot;ladder&quot;) or []
+at = d.get(&quot;at&quot;) or {}
+def rungs():
+    for i, r in enumerate(ladder, 1):
+        yield f&quot;{i}&quot;, r.get(&quot;gate&quot;) or r.get(&quot;title&quot;) or &quot;&quot;, r.get(&quot;status&quot;) or &quot;&quot;
+        for j, l in enumerate(r.get(&quot;legs&quot;) or [], 1):
+            yield f&quot;{i}.{j}&quot;, l.get(&quot;title&quot;) or l.get(&quot;leg&quot;) or &quot;&quot;, l.get(&quot;status&quot;) or &quot;&quot;
+now = &quot;&quot;
+if isinstance(at, dict) and at.get(&quot;rung&quot;):
+    key = str(at.get(&quot;rung&quot;)) + (&quot;.&quot; + str(at.get(&quot;leg&quot;)) if at.get(&quot;leg&quot;) else &quot;&quot;)
+    for k, t, s in rungs():
+        if k == key:
+            now = f&quot;at {k} {t} [{s}]&quot;; break
+if not now:
+    for k, t, s in rungs():
+        if s.upper() == &quot;ACTIVE&quot;:
+            now = f&quot;at {k} {t} [ACTIVE]&quot;; break
+done = sum(1 for _, _, s in rungs() if s.upper() == &quot;DONE&quot;)
+total = sum(1 for _ in rungs())
+print(f&quot;{mark} {name:&lt;22}  {obj}&quot;)
+print(f&quot;     {now or 'no rung active'}  ·  {done}/{total} rungs done&quot;)
+PY
+)&quot; &quot;$name&quot; &quot;$mark&quot;
+done &lt;&lt;&lt; &quot;$roster&quot;
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>ACTIONS.md · team-brief</h2>
+        <pre>## team-brief — every teammate's record, read for the morning brief
+`action_kind: mechanical` — run it, don't deliberate.
+&gt; Tool: `tejun-brief [team]` → one block per member: name, 人, objective, the rung being worked, rungs done
+The lead reads its lanes through their work records, never by asking them in their tiles
+and never from a pane. One call; a member with no record is named as such, and that line
+goes in the brief as written.</pre>
+      </section>
+
+      <section class="part">
+        <h2>MACROS.md · brief</h2>
+        <pre>## brief
+- **class:** session_macro.workflow
+- **label:** +brief:
+- **blurb:** The chief of staff's morning page: what each lane finished, what is waiting on you, what is stuck, and what today holds — read from the team's own records.
+Owner-invoked, and the lead's alone. The book is `sops:chief_of_staff` § The brief: one
+page, four parts, in that order, no narration. Read the lanes through their records, not
+their tiles; a lane that kept no record is named as such.
+
+Params: none. `+brief:` is today.
+
+| # | Action | With |
+|---|---|---|
+| 1 | team-brief | `tejun-brief` — every lane's objective and current rung |
+| 2 | read-work-record | each lane's latest document under `out/` — what actually finished |
+| 3 | list-doc | write `out/brief-&lt;date&gt;.md` in the book's four parts and list it |
+| 4 | report-outcome | one line: how many yeses are waiting on the owner, and where the page is |</pre>
+      </section>
+
+      <section class="part">
+        <h2>MACROS.md · expenses</h2>
+        <pre>## expenses
+- **class:** session_macro.workflow
+- **label:** +expenses:
+- **blurb:** Turn the receipts folder into a categorised ledger, flag what is missing or odd, and at month end write the report the accountant would ask for.
+The money-and-admin lane's procedure; the book is `sops:chief_of_staff`. Read `receipts/`
+only. Categories are the ledger's existing ones; a receipt that fits none is flagged, not
+guessed into one. You move no money and file nothing anywhere but `out/`.
+
+Params: `month` (optional — `2026-08` closes that month with a report; bare `+expenses:` brings the ledger current).
+
+| # | Action | With |
+|---|---|---|
+| 1 | read-work-record | `out/ledger.md` as it stands — the last entry is where you start |
+| 2 | list-doc | update `out/ledger.md`; with a month named, write `out/report-&lt;month&gt;.md` and list it |
+| 3 | propose-and-confirm | any correction to an existing ledger line — show it, wait for the yes |
+| 4 | report-outcome | entries added, entries flagged, and whether a report was written |</pre>
+      </section>
+
+      <section class="part">
+        <h2>MACROS.md · prep</h2>
+        <pre>## prep
+- **class:** session_macro.workflow
+- **label:** +prep:
+- **blurb:** One page per upcoming meeting — who, why now, last time, open threads, three questions worth asking.
+The meeting-prep lane's procedure; the book is `sops:chief_of_staff`. Read `calendar/`
+and `out/`; last time's notes and the open threads come from what other lanes wrote, not
+from memory. One page per meeting, never longer.
+
+Params: `meeting` (optional — one meeting by name; bare `+prep:` is every meeting in the next working day).
+
+| # | Action | With |
+|---|---|---|
+| 1 | read-work-record | earlier `out/prep-*` and `out/triage-*` documents that mention the people involved |
+| 2 | list-doc | write `out/prep-&lt;date&gt;-&lt;meeting&gt;.md` per meeting and list each |
+| 3 | report-outcome | the meetings prepared, one line each, and where the pages are |</pre>
+      </section>
+
+      <section class="part">
+        <h2>MACROS.md · prospects</h2>
+        <pre>## prospects
+- **class:** session_macro.workflow
+- **label:** +prospects:
+- **blurb:** Score the pipeline against the ideal-customer profile, draft one first-touch message per contact worth touching, and keep the pipeline sheet honest.
+The pipeline-research lane's procedure; the book is `sops:chief_of_staff`. Read
+`pipeline/` — `icp.md` is the profile, `pipeline.md` the sheet. A score is a number with
+the two reasons behind it. A draft is a document; it goes to the lead, and the lead to the
+owner. You never send and you never contact anyone.
+
+Params: `account` (optional — one account by name; bare `+prospects:` is every account not scored this week).
+
+| # | Action | With |
+|---|---|---|
+| 1 | read-work-record | `pipeline/icp.md` and `pipeline/pipeline.md` as they stand |
+| 2 | list-doc | update `pipeline/pipeline.md` (stage, score, last contact) and write `out/touch-&lt;contact&gt;.md` per draft; list them |
+| 3 | propose-and-confirm | each draft, to the lead — shown in full, nothing sent |
+| 4 | report-outcome | accounts scored, drafts written, and which wait on a yes |</pre>
+      </section>
+
+      <section class="part">
+        <h2>MACROS.md · triage</h2>
+        <pre>## triage
+- **class:** session_macro.workflow
+- **label:** +triage:
+- **blurb:** Sort what landed in the inbox folder into reply now, delegate, later and ignore, with a draft under every reply — nothing sent.
+The inbox lane's procedure; the book is `sops:chief_of_staff`. Read only `inbox/` and
+`out/`. Every reply is a draft in the document; you send nothing and you never open a mail
+client. An item for another lane goes under *delegate*, by name, for the lead.
+
+Params: `since` (optional — a date; bare `+triage:` is everything not yet in a triage document).
+
+| # | Action | With |
+|---|---|---|
+| 1 | read-work-record | the last `out/triage-*.md`, so nothing is sorted twice |
+| 2 | list-doc | write `out/triage-&lt;date&gt;.md`: reply now (draft under each) · delegate · later · ignore |
+| 3 | propose-and-confirm | anything that must go out today — show the draft in the tile and wait for the yes |
+| 4 | report-outcome | counts per pile, and how many drafts wait on the owner |</pre>
+      </section>
+
+      <section class="part">
+        <h2>TOOLS.md · tejun-brief</h2>
+        <pre>| `tejun-brief` | team-brief | `tejun-brief [team]` → `BRIEF &lt;team&gt; — &lt;date&gt;`, then per member: name, 人, objective, the rung being worked, rungs done; a 👤 member is reported as not read. No argument = this session's team. Exit 2 = no or several teams (name one), 3 = no such team. Installed by the Chief of Staff bundle into your tools store. |</pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin · a coworkspace that runs on your machine</span>
+      <a href="../../../index.html">ronincowork.com</a>
+    </footer>
+  </body>
+</html>

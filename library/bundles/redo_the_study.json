@@ -1,0 +1,19 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "redo_the_study",
+  "label": "Redo the Study",
+  "art": "🪑",
+  "blurb": "Fabric, finish, fittings — and a budget that holds.",
+  "kinds": [
+    "household"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/redo_the_study.md",
+      "text": "# Redo the Study\n- **label:** Redo the Study\n- **art:** 🪑\n- **blurb:** Fabric, finish, fittings — and a budget that holds.\n- **order:** 80\n- **kinds:** household\n- **objective:** Fabric, finish and fittings, against a budget that holds. Measure twice.\n- **behaviours:** sops:data\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### hold the plan\n- **team_lead:** yes\n- **instructions:** Hold the plan and the budget; every choice lands in it before it is bought.\n- **mandate:** plan · nobody · a plan\n\n### fabric and finish\n- **instructions:** Source the fabric, finish and fittings — choices found, priced and compared.\n- **mandate:** execute · nobody · ideas\n"
+    }
+  ],
+  "entries": []
+}

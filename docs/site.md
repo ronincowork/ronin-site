@@ -85,16 +85,21 @@ The identity direction is a kaki hexagon containing **人**, the human/person ch
 `library/` is the public shelf of **template bundles** (2026-09-03): a team template with copies
 of everything it names — agent templates, SOPs, ways, Routines and their macros, actions and
 tools — as one JSON document (`ronin-bundle/1`) the installed Cowork app installs into the
-owner's own stores. The page `library/index.html` is written by hand like every other page;
-the machine index `library/index.json` (`ronin-library/1`) and each `library/bundles/<name>.json`
-are **generated from `library/src/<name>/`** by `node scripts/pack-library.mjs --write` and
-committed. That is not a build step at deploy — the output is a static file like any other —
+owner's own stores. The shelf page `library/index.html`, one readable **view** page per
+bundle under `library/view/<name>/`, the machine index `library/index.json`
+(`ronin-library/1`) and each `library/bundles/<name>.json` are all **generated from
+`library/src/<name>/`** by `node scripts/pack-library.mjs --write` and committed — one source,
+four faces, and `library/library.css` is their one stylesheet. That is not a build step at deploy — the output is a static file like any other —
 and `scripts/check-site.mjs` fails when the committed output is stale, when a card's sha256
 does not match its file, or when the page does not link a bundle the index lists.
 
 The installed app reads the index and a bundle from its own server through its one
-allowlisted client, never from the browser, so no CORS header is needed here; a person can
-also download a bundle from the page and install it by hand (`bin/ronin-bundle install`).
+allowlisted client, never from the browser, so no CORS header is needed here. **The site
+shows and hands out nothing** (owner, 2026-09-03): a person sees what is there and reads a
+bundle on its view page; the word on the shelf is *View*, never *Download*, because the one
+door for a template is inside Ronin — *Templates → Check the library* — and there is no
+door for dropping a JSON file into the app. `check-site` fails any page that links a bundle
+file. A handful of templates ship inside Ronin; the library is where the rest live.
 The format and the install rules are the app's (`docs/templates.md` there); the source
 layout is `library/src/README.md` here.
 

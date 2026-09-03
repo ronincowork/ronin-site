@@ -1,0 +1,20 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "designer",
+  "label": "Designer",
+  "art": "🎨",
+  "blurb": "Shape the thing before anyone builds it — looks, flow, feel.",
+  "kinds": [
+    "coding",
+    "work"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/agents/designer.md",
+      "text": "# Designer\n- **label:** Designer\n- **art:** 🎨\n- **blurb:** Shape the thing before anyone builds it — looks, flow, feel.\n- **order:** 40\n- **kinds:** coding, work\n- **brief:** Design it before anyone builds it — what it is, how it flows, how it looks and feels. Deliverables, not code.\n- **mandate:** plan · nobody · an artifact, no code\n- **behaviours:** ways:riff_on_it, ways:draft_plan\n- **routines_off:** ronin_worktrees\n"
+    }
+  ],
+  "entries": []
+}

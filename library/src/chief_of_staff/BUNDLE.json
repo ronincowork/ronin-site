@@ -1,0 +1,8 @@
+{
+  "name": "chief_of_staff",
+  "label": "Chief of Staff",
+  "art": "🗂",
+  "blurb": "The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Reads mail and calendar through gbrain when it is connected. Drafts, never sends.",
+  "kinds": ["work", "personal"],
+  "version": "2026-09-03"
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team." />
+    <title>Ship the Newsletter — Ronin Template Library</title>
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../ronin-tokens.css" />
+    <link rel="stylesheet" href="../../../library/library.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="../../../index.html"
+          ><img src="../../../nin-mark.svg" alt="Ronin" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="../../../library/">Templates</a><a href="../../../explainers/">Explainers</a><a href="../../../load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="library-head">
+        <p class="eyebrow"><a href="../../">Template library</a> · Work</p>
+        <h1 class="display">📰 Ship the Newsletter</h1>
+        <p class="lede">An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.</p>
+        <p class="holds-line">1 agent · 1 team · 1 SOP · version 2026-09-03</p>
+        <p class="get">Get it inside your Ronin: <strong>Templates → Check the library → Ship the Newsletter</strong>. Nothing here is a file to save.</p>
+      </section>
+
+      <section class="part">
+        <h2>catalogs/templates/agents/copy_editor.md</h2>
+        <pre># Copy Editor
+- **label:** Copy Editor
+- **art:** ✏️
+- **blurb:** Tightens what others wrote — house style, no new claims.
+- **order:** 85
+- **kinds:** work, social, school
+- **brief:** Be my copy editor — take the draft I give you and return it tighter, in the house style, with every change visible and no new claims added. Fix nothing you are not sure of; mark it.
+- **mandate:** execute · nobody · an artifact
+- **behaviours:** sops:newsletter_style
+- **routines_off:** ronin_worktrees
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>catalogs/templates/teams/newsletter.md</h2>
+        <pre># Ship the Newsletter
+- **label:** Ship the Newsletter
+- **art:** 📰
+- **blurb:** One issue, from the list of what happened to the sent email.
+- **order:** 55
+- **kinds:** work, social
+- **objective:** Ship one issue of the newsletter: decide what goes in, write it in the house style, check every claim, and send it on the day.
+- **behaviours:** sops:newsletter_style
+- **routines_off:** ronin_worktrees
+
+## agents
+
+### editor
+- **team_lead:** yes
+- **instructions:** Decide what goes in this issue and in what order, keep the writer to the style guide, and hold the send until the checker has signed off every claim.
+- **mandate:** execute · staff agents · an artifact
+
+### writer
+- **instructions:** Write the issue from the editor's list, in the house style — short, concrete, one idea per item.
+- **mandate:** execute · nobody · an artifact
+
+### fact checker
+- **instructions:** Check every claim, number, name and link in the draft against its source; mark each one confirmed or not, and say what would confirm it.
+- **mandate:** execute · nobody · an artifact
+
+### sender
+- **instructions:** Prepare the send: subject line, preview text, the list, the test send to the owner, and the scheduled time. Send only when the editor says so.
+- **mandate:** execute · nobody · an artifact
+</pre>
+      </section>
+
+      <section class="part">
+        <h2>sops/newsletter_style.md</h2>
+        <pre># newsletter_style — how this house writes an issue
+
+&gt; Installed from the template library. Your own copy in the sops store (`ronin-store sops`
+&gt; → `newsletter_style.md`) replaces this file whole. Replace it with your own house style;
+&gt; this one is a default that reads well until you do.
+&gt; **Voice: agent.** Written for the sessions that write and edit, to follow themselves.
+
+## The issue
+
+- **Subject line:** under 50 characters, says what is in the issue, no exclamation marks.
+- **Opening:** two sentences at most. What this issue is about and why now.
+- **Items:** three to six. Each is a bold first line that stands alone, then two to four
+  sentences. One idea per item. A link goes on its own line, after the sentences.
+- **Closing:** one line, one ask. Reply, forward, or nothing — never three asks.
+
+## The sentences
+
+- Plain words. &quot;Use&quot;, not &quot;utilise&quot;; &quot;start&quot;, not &quot;commence&quot;.
+- Numbers as digits, with the unit. &quot;3 days&quot;, not &quot;three days&quot;.
+- No claim without a source the checker can open. A number without a source is cut, not
+  softened.
+- Say who did the thing. &quot;We shipped&quot;, &quot;Maria wrote&quot;, never &quot;it was decided&quot;.
+- Contractions are fine. Emoji are not.
+
+## The check
+
+Every claim, number, name and link goes to the fact checker with its source beside it. The
+checker marks each one confirmed or not. An unconfirmed claim is cut by the editor, not
+argued over by the writer.
+
+## The send
+
+A test send to the owner first, read on a phone. Subject, preview text and the first item
+are what most people will see; those three are checked twice.
+</pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Ronin · a coworkspace that runs on your machine</span>
+      <a href="../../../index.html">ronincowork.com</a>
+    </footer>
+  </body>
+</html>

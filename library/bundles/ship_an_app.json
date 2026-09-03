@@ -1,0 +1,19 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "ship_an_app",
+  "label": "Ship an App",
+  "art": "🏗",
+  "blurb": "Build a thing that does not exist yet, end to end.",
+  "kinds": [
+    "coding"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/teams/ship_an_app.md",
+      "text": "# Ship an App\n- **label:** Ship an App\n- **art:** 🏗\n- **blurb:** Build a thing that does not exist yet, end to end.\n- **order:** 10\n- **kinds:** coding\n- **objective:** Build the thing end to end, from nothing to something people can use.\n- **behaviours:** sops:github, sops:ronin_methodology, sops:teams, sops:deploy\n- **routines_on:** ronin_worktrees\n\nYour own reading belongs on the line above: save a style guide or an architecture page\nas an SOP in your own store, shadow this file, and add the book (docs/templates.md).\n\n## agents\n\n### lead\n- **team_lead:** yes\n- **instructions:** Hold the objective, dispatch the work, unblock the others, keep the gaps closed.\n- **mandate:** execute · staff agents · open\n\n### build the core\n- **instructions:** Build the application's working heart — the data, the logic, the doors.\n- **mandate:** execute · nobody · code\n\n### build the surface\n- **instructions:** Build what people see and touch, against the core as it lands.\n- **mandate:** execute · nobody · code\n\n### review and test\n- **instructions:** Check the work against the objective; find what is wrong before a user does.\n- **mandate:** execute · nobody · an artifact\n\n### write the docs\n- **instructions:** Say what the thing is and how it works, for a reader who was not in the room.\n- **mandate:** execute · nobody · an artifact\n"
+    }
+  ],
+  "entries": []
+}

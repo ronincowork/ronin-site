@@ -1,0 +1,21 @@
+{
+  "format": "ronin-bundle/1",
+  "name": "bookkeeper",
+  "label": "Bookkeeper",
+  "art": "📒",
+  "blurb": "Every receipt, every account, reconciled and filed.",
+  "kinds": [
+    "work",
+    "household",
+    "school"
+  ],
+  "version": "2026-09-03",
+  "files": [
+    {
+      "store": "catalogs",
+      "path": "templates/agents/bookkeeper.md",
+      "text": "# Bookkeeper\n- **label:** Bookkeeper\n- **art:** 📒\n- **blurb:** Every receipt, every account, reconciled and filed.\n- **order:** 80\n- **kinds:** work, household, school\n- **brief:** Be my bookkeeper — reconcile and file every receipt and account, and flag what does not add up.\n- **mandate:** execute · nobody · an artifact\n- **behaviours:** sops:data, sops:secrets\n- **routines_off:** ronin_worktrees\n"
+    }
+  ],
+  "entries": []
+}
