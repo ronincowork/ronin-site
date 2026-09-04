@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="What Ronin does to your Agent: nothing inside, everything at the edges. Coworking is coordination between Agents, not capability added to one. The three ways Ronin shapes an Agent, what coworking is and is not, and what an ack looks like." />
+  <title>Edges, Not Capabilities | Ronin</title><link rel="canonical" href="https://ronincowork.com/explainers/edges-not-capabilities/" />
+  <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" /><link rel="stylesheet" href="../../ronin-tokens.css" /><link rel="stylesheet" href="../pbs.css" />
+  <style>
+/* Page-owned layouts: the edge diagram, the three ways, the is/is-not table, the ack. */
+/* The edge diagram: an Agent's own world inside, Ronin's verbs only on the boundary. */
+.edge { margin: 28px 0 8px; padding: clamp(14px, 2vw, 24px); border: var(--edge) solid var(--line-2); border-radius: var(--r-lg); background: var(--bg-2); overflow-x: auto; }
+.edge svg { display: block; width: 100%; min-width: 620px; height: auto; font: 12px var(--font-mono); }
+.edge figcaption { margin-top: 12px; color: var(--muted-2); font-size: 14px; }
+.e-inside { fill: var(--panel); stroke: var(--line-3); stroke-dasharray: 5 4; }
+.e-ronin { fill: none; stroke: var(--kaki); }
+.e-port { fill: var(--panel); stroke: var(--kaki); stroke-width: 2; }
+.e-text { fill: var(--muted-2); }
+.e-text--strong { fill: var(--fg-strong); }
+.e-text--kaki { fill: var(--kaki); }
+.e-text--dim { fill: var(--muted); }
+
+/* Three ways: numbered because the list is closed and ordered by how much it touches. */
+.ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: way; }
+.ways li { counter-increment: way; position: relative; padding: 20px 20px 20px 52px; border: var(--edge) solid var(--line-2); border-radius: var(--r-md); background: var(--panel); color: var(--muted-2); }
+.ways li::before { content: counter(way, decimal-leading-zero); position: absolute; left: 18px; top: 22px; color: var(--kaki); font: 600 12px var(--font-mono); }
+.ways strong { display: block; margin-bottom: 6px; color: var(--fg-strong); font-size: 18px; }
+
+/* Is / isn't: one table, the point of the page. */
+.isnt { margin: 24px 0; overflow-x: auto; }
+.isnt table { width: 100%; min-width: 620px; border-collapse: collapse; }
+.isnt th, .isnt td { padding: 14px 16px; border-bottom: var(--edge) solid var(--line-2); vertical-align: top; text-align: left; color: var(--muted-2); }
+.isnt thead th { padding-top: 0; color: var(--fg-strong); font: 600 15px var(--font-ui); border-bottom: var(--edge-2) solid var(--line-3); }
+.isnt thead th small { display: block; margin-top: 4px; font: 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.isnt thead th.is small { color: var(--ok); }
+.isnt thead th.not small { color: var(--kaki); }
+.isnt tbody th { width: 20%; font: 600 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 18px; }
+.isnt tr:last-child td, .isnt tr:last-child th { border-bottom: 0; }
+
+/* An ack, as the Agent sees it. */
+.ack { margin: 24px 0 0; padding: 20px; border-radius: var(--r-sm); background: var(--term-bg); color: var(--term-fg); font: 13px/1.65 var(--font-mono); white-space: pre-wrap; overflow-x: auto; border: var(--edge) solid var(--line-2); }
+.ack b { color: var(--kaki); font-weight: 600; }
+.ack i { color: var(--muted); font-style: normal; }
+
+@media (max-width: 760px) { .ways { grid-template-columns: 1fr; }  }
+  .site-nav a { display: none; }
+  .page { padding: 52px 0 72px; }
+  .display { font-size: clamp(36px, 12vw, 56px); }
+  .site-footer { flex-direction: column; }
+}
+  </style>
+</head><body>
+  <header class="site-header"><div class="site-header__inner"><a class="brand" href="../../index.html"><img src="../../nin-mark.svg" alt="Ronin" /><span class="brand-name">RONIN</span></a><nav class="site-nav" aria-label="Primary"><a href="../">Explainers</a><a href="../../load-ronin.html">Load Ronin</a></nav></div></header>
+  <div class="cta-strip"><div class="cta-strip__inner"><span class="cta-strip__label">Ronin · what it does</span><div class="cta-strip__actions"><a class="button" href="../">Explainers</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></div></div>
+  <main class="page">
+  <nav class="explainer-breadcrumbs" aria-label="Breadcrumb"><a href="../">Explainers</a> / <span aria-current="page">Edges, Not Capabilities</span></nav>
+
+  <section class="pbs-hero">
+    <p class="pbs-kicker">What does Ronin actually do to my Agent?</p>
+    <h1 class="display">Nothing inside. Everything at the edges.</h1>
+    <p class="lede">Ronin adds no capability to your Agent. It does not change its model, its prompts, its tools, or how it does its work. It shapes one thing: how an Agent meets other Agents and the house. Where work starts, where it goes when it is done, and what the Agent is told along the way. That is coworking, and it is all coworking is. If you read one page about what Ronin does, read this one.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="edge-title">
+    <p class="section-label">The picture</p>
+    <h2 id="edge-title">Your Agent's world is its own. Ronin stands at the doors.</h2>
+    <p>An Agent under Ronin is the same Agent you would run alone. Same provider, same account, same reasoning, same editor and terminal. Ronin never reaches inside that box. It puts a small number of doors on its boundary, each a plain command, and it tells the Agent what those doors are for.</p>
+    <figure class="edge" aria-label="Diagram: a dashed box labelled the Agent's own world, holding its model, its tools, its files and its judgement, untouched. On the box's boundary sit four doors labelled get, update, hand in, and status, each a Ronin command. Outside the box are other Agents, the Team lead, and the shared branch.">
+      <svg viewBox="0 0 900 300" role="img">
+        <rect class="e-inside" x="110" y="50" width="460" height="200" rx="10" />
+        <text class="e-text--dim e-text" x="130" y="78">the Agent's own world · untouched</text>
+        <text class="e-text e-text--strong" x="150" y="122">its model and provider account</text>
+        <text class="e-text e-text--strong" x="150" y="150">its tools, editor and terminal</text>
+        <text class="e-text e-text--strong" x="150" y="178">its files and its judgement</text>
+        <text class="e-text e-text--strong" x="150" y="206">how it does the work</text>
+        <!-- doors on the boundary -->
+        <rect class="e-port" x="536" y="84" width="68" height="26" rx="5" /><text class="e-text--kaki e-text" x="570" y="102" text-anchor="middle">get</text>
+        <rect class="e-port" x="536" y="126" width="68" height="26" rx="5" /><text class="e-text--kaki e-text" x="570" y="144" text-anchor="middle">update</text>
+        <rect class="e-port" x="536" y="168" width="68" height="26" rx="5" /><text class="e-text--kaki e-text" x="570" y="186" text-anchor="middle">hand in</text>
+        <rect class="e-port" x="536" y="210" width="68" height="26" rx="5" /><text class="e-text--kaki e-text" x="570" y="228" text-anchor="middle">status</text>
+        <!-- outside -->
+        <line class="e-ronin" x1="604" y1="97" x2="700" y2="97" stroke-width="1.6" /><text class="e-text" x="710" y="101">the shared branch</text>
+        <line class="e-ronin" x1="604" y1="139" x2="700" y2="139" stroke-width="1.6" /><text class="e-text" x="710" y="143">what teammates accepted</text>
+        <line class="e-ronin" x1="604" y1="181" x2="700" y2="181" stroke-width="1.6" /><text class="e-text" x="710" y="185">the Team lead's queue</text>
+        <line class="e-ronin" x1="604" y1="223" x2="700" y2="223" stroke-width="1.6" /><text class="e-text" x="710" y="227">facts about where you stand</text>
+        <text class="e-text--kaki e-text" x="770" y="272" text-anchor="middle">Ronin lives here</text>
+        <text class="e-text--dim e-text" x="340" y="272" text-anchor="middle">Ronin never goes here</text>
+      </svg>
+      <figcaption>Four doors on a reviewed repository. A workspace repository has none: the Agent uses ordinary git, and Ronin stays out entirely.</figcaption>
+    </figure>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="ways-title">
+    <p class="section-label">How Ronin shapes an Agent</p>
+    <h2 id="ways-title">Three ways, and only three.</h2>
+    <ol class="ways">
+      <li><strong>Describe the method, at the edges.</strong>Ronin tells the Agent how to interact with others: where its work starts, where it goes when done, what to check when surprised. It never tells the Agent how to do its job. For a repository the whole method is three verbs: get a worktree, update it, hand it in.</li>
+      <li><strong>Expose edge tools.</strong>Each verb is one command that does one job and returns. The plain call is the clean path, so the Agent never has to remember the right base or the right cleanup. A tool never does a second job after its first. A second job worth doing is a second tool.</li>
+      <li><strong>Provide information.</strong>Every tool answers with an ack: what it did, the facts Ronin already holds about where the Agent now stands, and, when Ronin thinks the Agent should act, a nudge naming the tool. Nothing in an ack runs anything.</li>
+    </ol>
+  </section>
+
+
+  <section class="pbs-section" aria-labelledby="bare-title">
+    <p class="section-label">Independent by default</p>
+    <h2 id="bare-title">Start bare. Add only the coordination you want.</h2>
+    <p>An Agent launched into Ronin with nothing switched on is a plain Agent in a plain checkout. Messaging, the team board, worktrees and a Team lead are separate, optional routines. Each one you turn on adds a door and the sentence that explains it, and nothing else. Turn it off and the door is gone.</p>
+    <p>Every routine is an offered path, not a lock. It says "here is how this house does it" and hands the Agent a command. The Agent may take the path or not. What Ronin will not do is reach past the door and make the Agent do it.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="isnt-title">
+    <p class="section-label">Coworking, defined</p>
+    <h2 id="isnt-title">What coworking is, and what it is not.</h2>
+    <div class="isnt">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col" class="is">Coworking is<small>coordination at the edges</small></th><th scope="col" class="not">Coworking is not<small>capability inside</small></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Model</th><td>Whatever provider and account you chose. Ronin runs the CLI you already use.</td><td>A model, a wrapper, a prompt library, or a "smarter" Agent.</td></tr>
+          <tr><th scope="row">Work</th><td>Where work starts and where it lands: a private worktree, a hand-in, a lead's review.</td><td>How the Agent writes code, tests, plans, or reasons.</td></tr>
+          <tr><th scope="row">Tools</th><td>A handful of edge commands: get, update, hand in, status, close.</td><td>Tools for the job itself. Your Agent brings its own.</td></tr>
+          <tr><th scope="row">Words</th><td>Acks with facts and named nudges. Warnings where something could be lost.</td><td>Gates, refusals, or actions taken for the Agent because it "should" have.</td></tr>
+          <tr><th scope="row">Memory</th><td>Receipts: what was handed in, promoted, closed, by whom, when.</td><td>Persistent memory for the Agent, or a record of what it thought.</td></tr>
+          <tr><th scope="row">Publishing</th><td>A pull request you review and merge.</td><td>Anything that pushes to your remote by itself.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>If a line in the right-hand column ever became true, Ronin would be taking over the work rather than coordinating it. That is the line Ronin does not cross.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="ack-title">
+    <p class="section-label">Information, not automation</p>
+    <h2 id="ack-title">What an ack looks like.</h2>
+    <p>This is the reply an Agent reads after handing work in. Every line is either what happened, a fact Ronin already held, or a nudge that names a tool. The Agent decides what to do with it.</p>
+    <pre class="ack"><b>ACCEPTED</b> ronin_cowork:team/alpha/maya → team/alpha/dev  now 4f2a9c1e07  <i>[hi_20260904104839_7f9d24]</i>
+  desk is level with the line
+  base 51ce9424 · 0 behind dev · line is 3 ahead of dev; promotion due
+  unsaved in this desk: none
+  your lead is kenji
+  <b>NEXT:</b> line moved; run tejun-desk status; if it reports a dev update, run tejun-desk sync
+  <b>NEXT:</b> tell your lead with tejun-send kenji "..."</pre>
+    <p>Nothing here ran on the Agent's behalf: no message was sent, no teammate's desk was touched, nothing was pruned. If the Agent wants any of that, each is one command away, and the ack said which.</p>
+  </section>
+
+  <aside class="pbs-boundary" aria-labelledby="boundary-title">
+    <h2 id="boundary-title">Three rules under all of it</h2>
+    <p><strong>Honey, not sticks.</strong> Tools enable and warn. They refuse only where git itself cannot proceed. <strong>Two truths, everything else on loan.</strong> Your local working branch is what has been accepted; your remote release branch is what has shipped; every other branch, folder and record is temporary and has an owner. <strong>No orphaned edits with a dead owner.</strong> Every ending hands work on, lands it, quarantines it in plain sight, or discards it on purpose with a receipt. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p>
+  </aside>
+
+  <section class="pbs-related">
+    <div>
+      <p class="section-label">Next explanation</p>
+      <h2>See the edges on a real repository.</h2>
+      <p>Checkouts and Worktrees shows the two models a repository can choose, what each looks like, and who tidies up.</p>
+    </div>
+    <div class="pbs-actions"><a class="button" href="../checkouts-and-worktrees/">Checkouts and Worktrees</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div>
+  </section>
+</main><script src="../../site-shell.js"></script><footer class="site-footer"><span>Ronin · coordination at the edges, nothing inside</span><a href="../">All explainers</a></footer>
+</body></html>

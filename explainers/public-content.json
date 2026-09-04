@@ -2,6 +2,28 @@
   "version": 1,
   "entries": [
     {
+      "id": "edges-not-capabilities",
+      "readme_headline": null,
+      "readme_anchor": null,
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/edges-not-capabilities/",
+      "question": "What does Ronin actually do to my Agent?",
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
+      "evidence_authorities": [
+        "ronin-cowork/ronin_sops/ronin_methodology.md",
+        "ronin-cowork/docs/worktrees.md",
+        "ronin-cowork/docs/routines.md"
+      ],
+      "alt_text": "A dashed box holding the Agent's own model, tools, files and judgement, untouched; four Ronin doors on its boundary labelled get, update, hand in and status; outside, the shared branch, teammates' accepted work, the Team lead's queue and facts about where the Agent stands.",
+      "capture_source_id": null,
+      "asset_checksum": null,
+      "review_trigger": "The three-axis doctrine (method at the edges, edge tools, acks), the routines model, or the coworking boundary changes",
+      "status": "public"
+    },
+    {
       "id": "workbench",
       "readme_headline": "Claude and Codex, side by side",
       "readme_anchor": "work-side-by-side",
