@@ -91,7 +91,7 @@
   <section class="pbs-hero">
     <p class="pbs-kicker">How should Agents work in this repository?</p>
     <h1 class="display">Two ways to work. Choose one per repository.</h1>
-    <p class="lede">A repository under Ronin is either a <strong>checkout</strong>, where everyone works in one folder, on whatever branches they like but only one at a time, or it uses <strong>Ronin Worktrees</strong>, where each Agent gets a private folder and branch and finished work is patched back together through a review step. The choice is made once per repository, both are first-class, and one Agent can hold both at the same time in different repositories.</p>
+    <p class="lede">A repository is either a <strong>checkout</strong>, one folder everyone works in, or it uses <strong>Ronin Worktrees</strong>, a private folder per Agent with finished work patched back together through review. Choose once per repository. Both are first-class, and one Agent can hold both in different repositories.</p>
   </section>
 
 
@@ -123,9 +123,9 @@
           </svg>
         </figure>
         <ul>
-          <li><strong>Work</strong> happens in the checkout itself. Commit on the branch as you go; that is the line moving.</li>
-          <li><strong>Ronin stays out.</strong> No hand-in, no lead, no records. Ordinary Git, yours to run how you like.</li>
-          <li><strong>Collisions are yours to avoid.</strong> A folder can have only one branch checked out at a time. Three Agents on three branches in one folder still collide: each switch swaps the files out from under the others. Branches alone do not isolate anyone.</li>
+          <li><strong>Work</strong> happens in the checkout. Commit on the branch as you go.</li>
+          <li><strong>Ronin stays out.</strong> No hand-in, no lead, no records. Ordinary Git, run how you like.</li>
+          <li><strong>Collisions are yours to avoid.</strong> A folder shows one branch at a time. Three Agents on three branches in one folder still collide: each switch swaps the files out from under the others.</li>
         </ul>
         <p class="fit">Fits a workspace: notes, plans, a scratch repository, anything without a release.</p>
       </article>
@@ -162,21 +162,21 @@
           </svg>
         </figure>
         <ul>
-          <li><strong>Work</strong> happens in a private folder on a private branch, cut from the local working line.</li>
-          <li><strong>The team is the choke point.</strong> Every worktree belongs to a team. Updates flow down from the working line to any worktree freely; nothing flows back up except through that team's line and its lead's promotion. Every step leaves a receipt.</li>
-          <li><strong>Collisions cannot happen.</strong> A worktree is a branch with its own folder, so each Agent's files are its own. Many Agents edit at once; nobody's switch or half-finished edit reaches anyone else until the work is accepted.</li>
+          <li><strong>Work</strong> happens in a private folder on a private branch, cut from the working line.</li>
+          <li><strong>The team is the choke point.</strong> Every worktree belongs to a team. Updates flow down from the working line freely; nothing flows back up except through the team's line and its lead's promotion.</li>
+          <li><strong>Collisions cannot happen.</strong> A worktree is a branch with its own folder. Many Agents edit at once, and nobody's half-finished work reaches anyone else until it is accepted.</li>
         </ul>
         <p class="fit">Fits a product: a codebase with a release, tests, and several Agents at once.</p>
       </article>
     </div>
-    <p>The line between the two is the folder, not the branch. Git lets you make as many branches as you like, but one checkout can only show one of them, so "just make your own branch" is still everyone sharing one set of files. A worktree gives a branch its own folder. That is what lets several Agents work at once, and it is why the worktrees model needs the hand-in and the lead's look: the pieces were made apart and have to be patched back together on purpose. The checkout model puts nothing there, because in a workspace nothing needs to be there.</p>
+    <p>The difference is the folder, not the branch. Git gives you as many branches as you like, but one checkout shows one of them, so "just make your own branch" is still everyone sharing one set of files. A worktree gives a branch its own folder. That is what lets Agents work apart, and why their work has to be patched back together on purpose: the hand-in and the lead's look. A workspace needs neither.</p>
   </section>
 
 
   <section class="pbs-section" aria-labelledby="teams-title">
     <p class="section-label">Inside the worktrees model</p>
     <h2 id="teams-title">Every team is a choke point. Many teams promote to one working line.</h2>
-    <p>This is the part a single-team picture hides. An Agent's worktree is cut from the working line, and it can pull the working line's newest accepted work whenever it likes. But it cannot put anything back. Its only way home is a hand-in to its team's line, and that line reaches the working line only when the Team lead promotes it. The line is the team's queue; the lead is its gate.</p>
+    <p>A worktree is cut from the working line and can pull its newest accepted work whenever it likes. It cannot put anything back. Its only way home is a hand-in to its team's line, and that line reaches the working line only when the Team lead promotes it. The line is the team's queue; the lead is its gate.</p>
     <figure class="rails" aria-label="Diagram: three teams side by side under one local working line. Each team's worktrees are cut from the working line and hand in to that team's line; each team's lead promotes its line back onto the working line at its own moment; the working line reaches the remote release branch by pull request.">
       <svg viewBox="0 0 900 250" role="img">
         <line class="rail-master" x1="40" y1="24" x2="860" y2="24" stroke-width="2.2" stroke-dasharray="6 5" />
@@ -227,69 +227,68 @@
             <text class="rail-text" x="804" y="56" text-anchor="middle">lead promotes</text>
         <text class="rail-text" x="450" y="240" text-anchor="middle">each team's line is its queue · each team's lead is its gate · promotions land on dev one at a time</text>
       </svg>
-      <figcaption>Three teams, eight worktrees, one working line. Agents work in parallel everywhere; landing is serialized at each team's gate and then on the working line itself.</figcaption>
+      <figcaption>Three teams, eight worktrees, one working line. Work is parallel everywhere; landing is serialized at each team's gate.</figcaption>
     </figure>
-    <p>That shape is what makes the model safe at scale. A team can be mid-flight for a week without touching anyone else's base, because its line is the only thing that has moved. When its lead promotes, the working line takes the whole team's reviewed work as one step, and every other team's worktrees see it on their next update. Two leads promoting at the same moment do not collide: the working line advances by compare-and-swap, so the second promotion simply rebuilds on the first.</p>
+    <p>A team can be mid-flight for a week without touching anyone else's base. When its lead promotes, the working line takes the team's reviewed work as one step, and every other team sees it on its next update. Two leads promoting at once do not collide: the working line advances by compare-and-swap, and the second simply rebuilds on the first.</p>
   </section>
 
   <section class="pbs-section" aria-labelledby="truths-title">
-    <p class="section-label">Inside the worktrees model</p>
+    <p class="section-label">The branches</p>
     <h2 id="truths-title">Two branches are the truth. Everything else is on loan.</h2>
-    <p>A repository declares its arrangement once, in a small file at its root: which branch is the working line, which is the stable line, and whether Agents get worktrees. From then on every tool reads that file, and nothing is decided by whichever branch happens to be checked out. In the worktrees model that file names two branches that matter and, by omission, everything that does not.</p>
+    <p>A small file at the repository root names its working line and its stable line. Every tool reads that file; nothing is decided by whichever branch happens to be checked out.</p>
     <ul class="truths">
-      <li class="is-anchor"><span class="ref">local · working line</span><strong>Accepted work</strong><p>Usually <code>dev</code>. Nobody edits it in place. Work reaches it by promotion, and every new worktree is cut from it. This is the branch that means "what we have agreed on".</p></li>
-      <li class="is-release"><span class="ref">remote · stable line</span><strong>Released work</strong><p>Usually <code>master</code> or <code>main</code> on GitHub. It moves only by a pull request from the working line, which you review and merge yourself. Between releases it is your final gate.</p></li>
-      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>One line per team, a private worktree branch per Agent, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. When its work has been accepted or its owner is gone, it has expired.</p></li>
+      <li class="is-anchor"><span class="ref">local · working line</span><strong>Accepted work</strong><p>Usually <code>dev</code>. Nobody edits it in place. Work reaches it by promotion, and every worktree is cut from it.</p></li>
+      <li class="is-release"><span class="ref">remote · stable line</span><strong>Released work</strong><p>Usually <code>master</code> or <code>main</code> on GitHub. It moves only by a pull request from the working line, which you review and merge yourself.</p></li>
+      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>One line per team, a worktree branch per Agent, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. Once its work is accepted or its owner is gone, it has expired.</p></li>
     </ul>
   </section>
 
   <section class="pbs-section" aria-labelledby="modes-title">
     <p class="section-label">Side by side</p>
     <h2 id="modes-title">The same five verbs, in both models.</h2>
-    <p>Each repository chooses once. An Agent can hold both at the same time, one per repository, and its brief says which is which.</p>
+    <p>Read down a column for one model's whole day. Read across a row for the same verb in both.</p>
     <div class="modes">
       <table>
         <thead><tr><th scope="col">The verb</th><th scope="col">Use Ronin Worktrees<small>reviewed repositories</small></th><th scope="col">Use the checkout<small>workspaces</small></th></tr></thead>
         <tbody>
-          <tr><th scope="row">Get</th><td>A private branch and folder, cut from the local working line at that moment. The starting commit is recorded.</td><td>The checkout itself. Nothing is created.</td></tr>
-          <tr><th scope="row">Update</th><td>Pull in what has been accepted since. Falling behind is ordinary; catching up is one command, and the status line says how far behind you are.</td><td>Ordinary Git. Pull, or nothing: you are already on the line.</td></tr>
-          <tr><th scope="row">Hand in</th><td>Give committed work to your team's line. The Team lead reviews it and promotes it to the working branch. No other way up exists.</td><td>Commit on the branch, as you go. That is the line moving.</td></tr>
+          <tr><th scope="row">Get</th><td>A private branch and folder, cut from the working line. The starting commit is recorded.</td><td>The checkout itself. Nothing is created.</td></tr>
+          <tr><th scope="row">Update</th><td>Pull in what has been accepted since. Falling behind is ordinary; catching up is one command, and status says how far behind you are.</td><td>Ordinary Git. Pull, or nothing: you are already on the line.</td></tr>
+          <tr><th scope="row">Hand in</th><td>Give committed work to your team's line. The Team lead reviews and promotes it. No other way up exists.</td><td>Commit on the branch, as you go. That is the line moving.</td></tr>
           <tr><th scope="row">Truth</th><td>The local working line. The release is a pull request from it to the remote stable line.</td><td>The one branch, usually <code>main</code>. The remote copy is a backup.</td></tr>
-          <tr><th scope="row">Tidy</th><td><strong>Ronin's job.</strong> Expired branches, folders and records are cleared at promotion and when a team closes.</td><td><strong>Yours.</strong> Ronin never touches your Git state here. Ask, and it will show you what it sees.</td></tr>
+          <tr><th scope="row">Tidy</th><td><strong>Ronin's job.</strong> Expired branches, folders and records go at promotion and when a team closes.</td><td><strong>Yours.</strong> Ronin never touches your Git state here. Ask, and it shows you what it sees.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Read down either column and you have that model's whole working day. Read across a row and you have the same verb in both.</p>
   </section>
 
   <section class="pbs-section" aria-labelledby="verbs-title">
     <p class="section-label">What an Agent is told</p>
     <h2 id="verbs-title">Get a worktree. Update it. Hand it in.</h2>
-    <p>That is the whole contract an Agent carries into a reviewed repository. Three verbs, each one command. Birth, retirement, ledgers and audits are Ronin's business and never appear in an Agent's brief beyond one line: hand in or close before you go.</p>
+    <p>That is the whole contract, three verbs and three commands. Birth, retirement, ledgers and audits are Ronin's business and reach an Agent's brief as one line: hand in or close before you go.</p>
     <ol class="verbs">
-      <li><strong>Get</strong>A private folder on a private branch, cut from the local working line. An Agent born into a Team gets one before its first prompt. Cutting from the working line, never from a team's queue, is what makes a stale starting point impossible.<code>tejun-desk open</code></li>
-      <li><strong>Update</strong>Merge in what the working line has accepted since. The status line shows commits ahead and behind, so the Agent decides when to catch up. Nothing forces it and nothing blocks it.<code>tejun-desk sync</code></li>
-      <li><strong>Hand in</strong>Commit, then hand the committed range to your team's line. Admission is mechanical and leaves a receipt. Your Team lead reviews the line and promotes it to the working branch. That gate is the only way up.<code>tejun-desk hand-in</code></li>
+      <li><strong>Get</strong>A private folder on a private branch, cut from the working line. An Agent born into a Team gets one before its first prompt. Cut from the working line, never from a team's queue, so a stale start is impossible.<code>tejun-desk open</code></li>
+      <li><strong>Update</strong>Merge in what the working line has accepted since. Status shows ahead and behind; the Agent decides when. Nothing forces it and nothing blocks it.<code>tejun-desk sync</code></li>
+      <li><strong>Hand in</strong>Commit, then hand the range to your team's line. Admission is mechanical and leaves a receipt. The Team lead reviews and promotes. That gate is the only way up.<code>tejun-desk hand-in</code></li>
     </ol>
   </section>
 
   <section class="pbs-section" aria-labelledby="house-title">
     <p class="section-label">Who cleans up</p>
     <h2 id="house-title">The house tidies, and it tidies on its own schedule.</h2>
-    <p>Ask an agent whether the tree is clean and it will look at its own folder, see no unsaved files, and say yes. It answered the question it could answer. The question you meant, whether anything exists that should not, needs a definition and a command, not a conversation. Ronin owns both.</p>
+    <p>Ask an agent whether the tree is clean and it looks at its own folder, sees no unsaved files, and says yes. The question you meant, whether anything exists that should not, needs a definition and a command. Ronin owns both.</p>
     <ul class="duties">
-      <li><strong>At every promotion,</strong> the team's line is reset to the newly accepted working line, every private branch whose work is now accepted is deleted along with its folder and record, and the throwaway candidate folders go with them. A team line is never more than one promotion behind.</li>
+      <li><strong>At every promotion,</strong> the team's line is reset to the working line, every branch whose work is now accepted goes with its folder and record, and so do the candidate folders. A team line is never more than one promotion behind.</li>
       <li><strong>When a team closes,</strong> its line, its remaining worktrees and its records are cleared. Receipts stay: they are the history.</li>
-      <li><strong>When a session ends,</strong> a worktree with no living owner is called out in red, with the three ways out: hand off, hand in, or close. The ending is never refused, only warned.</li>
-      <li><strong>On a schedule,</strong> an audit checks that Ronin's records, Git's worktree list and the folders on disk agree; that every branch is accounted for; and that the working line is not quietly running ahead of the release. It reports on the Team board and exits non-zero when something is off.</li>
-      <li><strong>Anything with work in it is never deleted quietly.</strong> A branch carrying commits the working line does not have is listed for you, with the commits, and removed only when you say so. Age and naming are never grounds for deletion.</li>
+      <li><strong>When a session ends,</strong> a worktree with no living owner is called out in red with the three ways out: hand off, hand in, or close. Never refused, only warned.</li>
+      <li><strong>On a schedule,</strong> an audit checks that Ronin's records, Git's worktree list and the folders on disk agree, that every branch is accounted for, and that the working line is not quietly running ahead of the release. It reports on the Team board.</li>
+      <li><strong>Anything with work in it is never deleted quietly.</strong> A branch carrying commits the working line lacks is listed for you, with the commits, and removed only when you say so.</li>
     </ul>
-    <p>Junk is expected. Sessions die mid-turn, folders get removed by hand, records go stale. The system is built to find that state and settle it, not to depend on nobody ever making it.</p>
+    <p>Junk is expected. Sessions die mid-turn, folders get removed by hand, records go stale. The system finds that state and settles it rather than depending on nobody making it.</p>
   </section>
 
   <aside class="pbs-boundary" aria-labelledby="boundary-title">
     <h2 id="boundary-title">Tools, not a straitjacket</h2>
-    <p>None of this corrals an Agent. The plain invocation of each tool is the clean path, so the stale base and the leftover branch are things the tools stop producing, not things a gate catches. Where a check remains, it tells and does not block: how far behind, which line is due for promotion, whose worktree has no owner. The Agent decides. Git commands stay Git commands. Nothing an Agent does pushes to your remote; publishing beyond the machine is a person's deliberate act. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p>
+    <p>None of this corrals an Agent. The plain invocation of each tool is the clean path, so the stale base and the leftover branch are things the tools stop producing, not things a gate catches. Where a check remains it tells and does not block. Git commands stay Git commands, and nothing an Agent does pushes to your remote. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p>
   </aside>
 
   <section class="pbs-related">
