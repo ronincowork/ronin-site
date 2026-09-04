@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en"><head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Two ways for Agents to work in a repository: a shared checkout, or Ronin Worktrees with a private folder per Agent. What each looks like, the same five verbs in both, and who tidies up." />
+  <meta name="description" content="Two ways for Agents to work in a repository: a shared checkout, or Ronin Worktrees with a private folder per Agent and one choke point per team. What each looks like, the same five verbs in both, and who tidies up." />
   <title>Checkouts and Worktrees | Ronin</title><link rel="canonical" href="https://ronincowork.com/explainers/checkouts-and-worktrees/" />
   <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" /><link rel="stylesheet" href="../../ronin-tokens.css" /><link rel="stylesheet" href="../pbs.css" />
   <style>
-/* Page-owned layouts: the two-model choice, the truths, the verb table, the loop, the duties. */
+/* Page-owned layouts: the two-model choice, the team funnels, the truths, the verb table, the loop, the duties. */
 /* The choice: two models side by side, each with its own picture. */
 .choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 28px 0 8px; }
 .model { padding: 20px; border: var(--edge) solid var(--line-2); border-radius: var(--r-lg); background: var(--panel); display: flex; flex-direction: column; gap: 14px; }
@@ -42,6 +42,7 @@
 .rail-dev { stroke: var(--kaki); }
 .rail-master { stroke: var(--accent-2); }
 .rail-lease { stroke: var(--line-3); }
+.rail-team { stroke: var(--accent); }
 .rail-dot { fill: var(--panel); stroke-width: 2; }
 .rail-text { fill: var(--muted-2); }
 .rail-text--strong { fill: var(--fg-strong); }
@@ -130,43 +131,105 @@
       </article>
       <article class="model model--worktrees" aria-labelledby="m-worktrees">
         <span class="ref">Use Ronin Worktrees</span>
-        <h3 id="m-worktrees">A private folder per Agent, patched back together through review.</h3>
-        <figure aria-label="Diagram: three Agents each in their own worktree branch cut from the local working line; they hand in to a team line; the Team lead promotes the team line back onto the working line; a pull request carries the working line to the remote release branch.">
-          <svg viewBox="0 0 440 190" role="img">
+        <h3 id="m-worktrees">A private folder per Agent. One choke point per team.</h3>
+        <figure aria-label="Diagram: one team. Three Agent worktrees are cut from the local working line and hand in to the team's line, the team's choke point; the Team lead promotes that line back onto the working line; a pull request carries the working line to the remote release branch.">
+          <svg viewBox="0 0 440 236" role="img">
             <line class="rail-master" x1="30" y1="24" x2="410" y2="24" stroke-width="2" stroke-dasharray="6 5" />
             <text class="rail-text rail-text--blue" x="30" y="12">remote master · released</text>
             <line class="rail-dev" x1="30" y1="70" x2="410" y2="70" stroke-width="3" />
-            <text class="rail-text rail-text--kaki" x="30" y="58">local dev · accepted</text>
-            <path class="rail-master" d="M350 70 C 372 70, 372 24, 394 24" fill="none" stroke-width="2" />
-            <text class="rail-text" x="316" y="46" text-anchor="end">pull request</text>
-            <path class="rail-lease" d="M80 70 C 95 70, 95 108, 110 108 L 235 108 C 250 108, 250 70, 265 70" fill="none" stroke-width="2" />
-            <text class="rail-text" x="150" y="100">team line</text>
-            <path class="rail-lease" d="M110 108 C 120 108, 120 136, 130 136 L 200 136 C 210 136, 210 108, 220 108" fill="none" stroke-width="1.6" />
-            <path class="rail-lease" d="M110 108 C 120 108, 120 156, 130 156 L 200 156 C 210 156, 210 108, 220 108" fill="none" stroke-width="1.6" opacity=".75" />
-            <path class="rail-lease" d="M110 108 C 120 108, 120 176, 130 176 L 200 176 C 210 176, 210 108, 220 108" fill="none" stroke-width="1.6" opacity=".5" />
-            <rect class="rail-folder" x="126" y="127" width="78" height="18" rx="4" />
-            <rect class="rail-folder" x="126" y="147" width="78" height="18" rx="4" />
-            <rect class="rail-folder" x="126" y="167" width="78" height="18" rx="4" />
-            <text class="rail-text" x="212" y="140">Agent A · own folder</text>
-            <text class="rail-text" x="212" y="160">Agent B · own folder</text>
-            <text class="rail-text" x="212" y="180">Agent C · own folder</text>
-            <circle class="rail-dot rail-dev" cx="80" cy="70" r="5" />
-            <circle class="rail-dot rail-dev" cx="265" cy="70" r="5" />
-            <circle class="rail-dot rail-dev" cx="350" cy="70" r="5" />
-            <text class="rail-text" x="44" y="88">cut here</text>
-            <text class="rail-text" x="252" y="88">promoted by the lead</text>
-            <text class="rail-text" x="228" y="123" text-anchor="end">hand in</text>
+            <text class="rail-text rail-text--kaki" x="30" y="60">local dev · accepted</text>
+            <path class="rail-master" d="M366 70 C 384 70, 384 24, 402 24" fill="none" stroke-width="2" />
+            <text class="rail-text" x="360" y="46" text-anchor="end">pull request</text>
+            <path class="rail-team" d="M76 70 C 94 70, 94 132, 112 132 L 228 132 C 246 132, 246 70, 264 70" fill="none" stroke-width="2.2" />
+            <path class="rail-lease" d="M116 70 C 126 70, 126 166, 136 166 L 180 166 C 190 166, 190 132, 200 132" fill="none" stroke-width="1.6" opacity="1.00" />
+            <circle class="rail-dot rail-dev" cx="116" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="200" cy="132" r="3.5" />
+            <path class="rail-lease" d="M138 70 C 148 70, 148 190, 158 190 L 194 190 C 204 190, 204 132, 214 132" fill="none" stroke-width="1.6" opacity="0.78" />
+            <circle class="rail-dot rail-dev" cx="138" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="214" cy="132" r="3.5" />
+            <path class="rail-lease" d="M160 70 C 170 70, 170 214, 180 214 L 208 214 C 218 214, 218 132, 228 132" fill="none" stroke-width="1.6" opacity="0.56" />
+            <circle class="rail-dot rail-dev" cx="160" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="228" cy="132" r="3.5" />
+            <circle class="rail-dot rail-dev" cx="76" cy="70" r="5" />
+            <circle class="rail-dot rail-dev" cx="264" cy="70" r="5" />
+            <text class="rail-text rail-text--strong" x="170" y="124" text-anchor="middle">one team · its line is the choke point</text>
+            <text class="rail-text" x="264" y="56" text-anchor="middle">lead promotes</text>
+            <text class="rail-text" x="76" y="56" text-anchor="middle">cut from dev</text>
+            <text class="rail-text" x="270" y="176">hand in</text>
+            <text class="rail-text" x="110" y="176">Agent A</text>
+            <text class="rail-text" x="132" y="200">Agent B</text>
+            <text class="rail-text" x="154" y="224">Agent C</text>
           </svg>
         </figure>
         <ul>
           <li><strong>Work</strong> happens in a private folder on a private branch, cut from the local working line.</li>
-          <li><strong>Ronin runs the loop.</strong> Commit, hand in to the team's line, the Team lead reviews and promotes. Every step leaves a receipt.</li>
+          <li><strong>The team is the choke point.</strong> Every worktree belongs to a team. Updates flow down from the working line to any worktree freely; nothing flows back up except through that team's line and its lead's promotion. Every step leaves a receipt.</li>
           <li><strong>Collisions cannot happen.</strong> A worktree is a branch with its own folder, so each Agent's files are its own. Many Agents edit at once; nobody's switch or half-finished edit reaches anyone else until the work is accepted.</li>
         </ul>
         <p class="fit">Fits a product: a codebase with a release, tests, and several Agents at once.</p>
       </article>
     </div>
     <p>The line between the two is the folder, not the branch. Git lets you make as many branches as you like, but one checkout can only show one of them, so "just make your own branch" is still everyone sharing one set of files. A worktree gives a branch its own folder. That is what lets several Agents work at once, and it is why the worktrees model needs the hand-in and the lead's look: the pieces were made apart and have to be patched back together on purpose. The checkout model puts nothing there, because in a workspace nothing needs to be there.</p>
+  </section>
+
+
+  <section class="pbs-section" aria-labelledby="teams-title">
+    <p class="section-label">Inside the worktrees model</p>
+    <h2 id="teams-title">Every team is a choke point. Many teams promote to one working line.</h2>
+    <p>This is the part a single-team picture hides. An Agent's worktree is cut from the working line, and it can pull the working line's newest accepted work whenever it likes. But it cannot put anything back. Its only way home is a hand-in to its team's line, and that line reaches the working line only when the Team lead promotes it. The line is the team's queue; the lead is its gate.</p>
+    <figure class="rails" aria-label="Diagram: three teams side by side under one local working line. Each team's worktrees are cut from the working line and hand in to that team's line; each team's lead promotes its line back onto the working line at its own moment; the working line reaches the remote release branch by pull request.">
+      <svg viewBox="0 0 900 250" role="img">
+        <line class="rail-master" x1="40" y1="24" x2="860" y2="24" stroke-width="2.2" stroke-dasharray="6 5" />
+        <text class="rail-text rail-text--blue" x="40" y="12">remote master · released</text>
+        <line class="rail-dev" x1="40" y1="70" x2="860" y2="70" stroke-width="3" />
+        <text class="rail-text rail-text--kaki" x="40" y="60">local dev · accepted · one line for the whole house</text>
+        <path class="rail-master" d="M836 70 C 848 70, 848 24, 860 24" fill="none" stroke-width="2.2" />
+        <text class="rail-text" x="828" y="46" text-anchor="end">pull request</text>
+        <path class="rail-team" d="M76 70 C 94 70, 94 132, 112 132 L 228 132 C 246 132, 246 70, 264 70" fill="none" stroke-width="2.2" />
+            <path class="rail-lease" d="M116 70 C 126 70, 126 166, 136 166 L 180 166 C 190 166, 190 132, 200 132" fill="none" stroke-width="1.6" opacity="1.00" />
+            <circle class="rail-dot rail-dev" cx="116" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="200" cy="132" r="3.5" />
+            <path class="rail-lease" d="M138 70 C 148 70, 148 190, 158 190 L 194 190 C 204 190, 204 132, 214 132" fill="none" stroke-width="1.6" opacity="0.78" />
+            <circle class="rail-dot rail-dev" cx="138" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="214" cy="132" r="3.5" />
+            <path class="rail-lease" d="M160 70 C 170 70, 170 214, 180 214 L 208 214 C 218 214, 218 132, 228 132" fill="none" stroke-width="1.6" opacity="0.56" />
+            <circle class="rail-dot rail-dev" cx="160" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="228" cy="132" r="3.5" />
+            <circle class="rail-dot rail-dev" cx="76" cy="70" r="5" />
+            <circle class="rail-dot rail-dev" cx="264" cy="70" r="5" />
+            <text class="rail-text rail-text--strong" x="170" y="124" text-anchor="middle">team A</text>
+            <text class="rail-text" x="264" y="56" text-anchor="middle">lead promotes</text>
+            <text class="rail-text" x="76" y="56" text-anchor="middle">cut from dev</text>
+            <path class="rail-team" d="M346 70 C 364 70, 364 132, 382 132 L 498 132 C 516 132, 516 70, 534 70" fill="none" stroke-width="2.2" />
+            <path class="rail-lease" d="M386 70 C 396 70, 396 166, 406 166 L 450 166 C 460 166, 460 132, 470 132" fill="none" stroke-width="1.6" opacity="1.00" />
+            <circle class="rail-dot rail-dev" cx="386" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="470" cy="132" r="3.5" />
+            <path class="rail-lease" d="M408 70 C 418 70, 418 190, 428 190 L 464 190 C 474 190, 474 132, 484 132" fill="none" stroke-width="1.6" opacity="0.78" />
+            <circle class="rail-dot rail-dev" cx="408" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="484" cy="132" r="3.5" />
+            <circle class="rail-dot rail-dev" cx="346" cy="70" r="5" />
+            <circle class="rail-dot rail-dev" cx="534" cy="70" r="5" />
+            <text class="rail-text rail-text--strong" x="440" y="124" text-anchor="middle">team B</text>
+            <text class="rail-text" x="534" y="56" text-anchor="middle">lead promotes</text>
+            <path class="rail-team" d="M616 70 C 634 70, 634 132, 652 132 L 768 132 C 786 132, 786 70, 804 70" fill="none" stroke-width="2.2" />
+            <path class="rail-lease" d="M656 70 C 666 70, 666 166, 676 166 L 720 166 C 730 166, 730 132, 740 132" fill="none" stroke-width="1.6" opacity="1.00" />
+            <circle class="rail-dot rail-dev" cx="656" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="740" cy="132" r="3.5" />
+            <path class="rail-lease" d="M678 70 C 688 70, 688 190, 698 190 L 734 190 C 744 190, 744 132, 754 132" fill="none" stroke-width="1.6" opacity="0.78" />
+            <circle class="rail-dot rail-dev" cx="678" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="754" cy="132" r="3.5" />
+            <path class="rail-lease" d="M700 70 C 710 70, 710 214, 720 214 L 748 214 C 758 214, 758 132, 768 132" fill="none" stroke-width="1.6" opacity="0.56" />
+            <circle class="rail-dot rail-dev" cx="700" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="768" cy="132" r="3.5" />
+            <circle class="rail-dot rail-dev" cx="616" cy="70" r="5" />
+            <circle class="rail-dot rail-dev" cx="804" cy="70" r="5" />
+            <text class="rail-text rail-text--strong" x="710" y="124" text-anchor="middle">team C</text>
+            <text class="rail-text" x="804" y="56" text-anchor="middle">lead promotes</text>
+        <text class="rail-text" x="450" y="240" text-anchor="middle">each team's line is its queue · each team's lead is its gate · promotions land on dev one at a time</text>
+      </svg>
+      <figcaption>Three teams, eight worktrees, one working line. Agents work in parallel everywhere; landing is serialized at each team's gate and then on the working line itself.</figcaption>
+    </figure>
+    <p>That shape is what makes the model safe at scale. A team can be mid-flight for a week without touching anyone else's base, because its line is the only thing that has moved. When its lead promotes, the working line takes the whole team's reviewed work as one step, and every other team's worktrees see it on their next update. Two leads promoting at the same moment do not collide: the working line advances by compare-and-swap, so the second promotion simply rebuilds on the first.</p>
   </section>
 
   <section class="pbs-section" aria-labelledby="truths-title">
@@ -176,7 +239,7 @@
     <ul class="truths">
       <li class="is-anchor"><span class="ref">local · working line</span><strong>Accepted work</strong><p>Usually <code>dev</code>. Nobody edits it in place. Work reaches it by promotion, and every new worktree is cut from it. This is the branch that means "what we have agreed on".</p></li>
       <li class="is-release"><span class="ref">remote · stable line</span><strong>Released work</strong><p>Usually <code>master</code> or <code>main</code> on GitHub. It moves only by a pull request from the working line, which you review and merge yourself. Between releases it is your final gate.</p></li>
-      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>Team lines, private worktree branches, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. When its work has been accepted or its owner is gone, it has expired.</p></li>
+      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>One line per team, a private worktree branch per Agent, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. When its work has been accepted or its owner is gone, it has expired.</p></li>
     </ul>
   </section>
 
@@ -190,7 +253,7 @@
         <tbody>
           <tr><th scope="row">Get</th><td>A private branch and folder, cut from the local working line at that moment. The starting commit is recorded.</td><td>The checkout itself. Nothing is created.</td></tr>
           <tr><th scope="row">Update</th><td>Pull in what has been accepted since. Falling behind is ordinary; catching up is one command, and the status line says how far behind you are.</td><td>Ordinary Git. Pull, or nothing: you are already on the line.</td></tr>
-          <tr><th scope="row">Hand in</th><td>Give committed work to the Team lead, who reviews the team's line and promotes it to the working branch.</td><td>Commit on the branch, as you go. That is the line moving.</td></tr>
+          <tr><th scope="row">Hand in</th><td>Give committed work to your team's line. The Team lead reviews it and promotes it to the working branch. No other way up exists.</td><td>Commit on the branch, as you go. That is the line moving.</td></tr>
           <tr><th scope="row">Truth</th><td>The local working line. The release is a pull request from it to the remote stable line.</td><td>The one branch, usually <code>main</code>. The remote copy is a backup.</td></tr>
           <tr><th scope="row">Tidy</th><td><strong>Ronin's job.</strong> Expired branches, folders and records are cleared at promotion and when a team closes.</td><td><strong>Yours.</strong> Ronin never touches your Git state here. Ask, and it will show you what it sees.</td></tr>
         </tbody>
@@ -206,7 +269,7 @@
     <ol class="verbs">
       <li><strong>Get</strong>A private folder on a private branch, cut from the local working line. An Agent born into a Team gets one before its first prompt. Cutting from the working line, never from a team's queue, is what makes a stale starting point impossible.<code>tejun-desk open</code></li>
       <li><strong>Update</strong>Merge in what the working line has accepted since. The status line shows commits ahead and behind, so the Agent decides when to catch up. Nothing forces it and nothing blocks it.<code>tejun-desk sync</code></li>
-      <li><strong>Hand in</strong>Commit, then hand the committed range to the team's line. Admission is mechanical and leaves a receipt. The Team lead reviews the line and promotes it to the working branch.<code>tejun-desk hand-in</code></li>
+      <li><strong>Hand in</strong>Commit, then hand the committed range to your team's line. Admission is mechanical and leaves a receipt. Your Team lead reviews the line and promotes it to the working branch. That gate is the only way up.<code>tejun-desk hand-in</code></li>
     </ol>
   </section>
 
