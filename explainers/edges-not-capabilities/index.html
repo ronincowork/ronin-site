@@ -56,14 +56,14 @@
   <section class="pbs-hero">
     <p class="pbs-kicker">What does Ronin actually do to my Agent?</p>
     <h1 class="display">Nothing inside. Everything at the edges.</h1>
-    <p class="lede">Ronin does not alter your Agent's own capabilities. The LLM it runs on, the prompts it receives, the tools it carries, and how it does its work stay exactly as you set them. It shapes one thing: how an Agent meets other Agents and the house. Where work starts, where it goes when it is done, and what the Agent is told along the way. That is coworking, and it is all coworking is. If you read one page about what Ronin does, read this one.</p>
+    <p class="lede">Ronin does not alter your Agent's own capabilities. It shapes one thing: how an Agent meets other Agents and the house. Where work starts, where it goes when done, what the Agent is told along the way. That is coworking. If you read one page about what Ronin does, read this one.</p>
   </section>
 
   <section class="pbs-section" aria-labelledby="edge-title">
     <p class="section-label">The picture</p>
     <h2 id="edge-title">Your Agent's world is its own. Ronin stands at the doors.</h2>
-    <p>An Agent under Ronin is the same Agent you would run alone. Same provider, same account, same reasoning, same editor and terminal. Ronin never reaches inside that box. It puts a small number of doors on its boundary, each a plain command, and it tells the Agent what those doors are for.</p>
-    <figure class="edge" aria-label="Diagram: a dashed box labelled the Agent's own world, holding its model, its tools, its files and its judgement, untouched. On the box's boundary sit four doors labelled get, update, hand in, and status, each a Ronin command. Outside the box are other Agents, the Team lead, and the shared branch.">
+    <p>An Agent under Ronin is the Agent you would run alone: same LLM, account, editor and terminal. Ronin never reaches inside. It puts a few doors on the boundary, each a plain command, and says what they are for.</p>
+    <figure class="edge" aria-label="Diagram: a dashed box labelled the Agent's own world, holding its LLM, its tools, its files and its judgement, untouched. On the box's boundary sit four doors labelled get, update, hand in, and status, each a Ronin command. Outside the box are other Agents, the Team lead, and the shared branch.">
       <svg viewBox="0 0 900 300" role="img">
         <rect class="e-inside" x="110" y="50" width="460" height="200" rx="10" />
         <text class="e-text--dim e-text" x="130" y="78">the Agent's own world · untouched</text>
@@ -92,9 +92,9 @@
     <p class="section-label">How Ronin shapes an Agent</p>
     <h2 id="ways-title">Three ways, and only three.</h2>
     <ol class="ways">
-      <li><strong>Describe the method, at the edges.</strong>Ronin tells the Agent how to interact with others: where its work starts, where it goes when done, what to check when surprised. It never tells the Agent how to do its job. For a repository the whole method is three verbs: get a worktree, update it, hand it in.</li>
-      <li><strong>Expose edge tools.</strong>Each verb is one command that does one job and returns. The plain call is the clean path, so the Agent never has to remember the right base or the right cleanup. A tool never does a second job after its first. A second job worth doing is a second tool.</li>
-      <li><strong>Provide information.</strong>Every tool answers with an ack: what it did, the facts Ronin already holds about where the Agent now stands, and, when Ronin thinks the Agent should act, a nudge naming the tool. Nothing in an ack runs anything.</li>
+      <li><strong>Describe the method, at the edges.</strong>Where work starts, where it goes when done, what to check when surprised. Never how to do the job. For a repository the whole method is three verbs: get a worktree, update it, hand it in.</li>
+      <li><strong>Expose edge tools.</strong>One verb, one command, one job. The plain call is the clean path. A tool never does a second job after its first; a second job worth doing is a second tool.</li>
+      <li><strong>Provide information.</strong>Every tool answers with an ack: what it did, the facts Ronin already holds, and, when the Agent should act, a nudge naming the tool. Nothing in an ack runs anything.</li>
     </ol>
   </section>
 
@@ -102,8 +102,8 @@
   <section class="pbs-section" aria-labelledby="bare-title">
     <p class="section-label">Independent by default</p>
     <h2 id="bare-title">Start bare. Add only the coordination you want.</h2>
-    <p>An Agent launched into Ronin with nothing switched on is a plain Agent in a plain checkout. Messaging, the team board, worktrees and a Team lead are separate, optional routines. Each one you turn on adds a door and the sentence that explains it, and nothing else. Turn it off and the door is gone.</p>
-    <p>Every routine is an offered path, not a lock. It says "here is how this house does it" and hands the Agent a command. The Agent may take the path or not. What Ronin will not do is reach past the door and make the Agent do it.</p>
+    <p>With nothing switched on, an Agent is a plain Agent in a plain checkout. Messaging, the team board, worktrees and a Team lead are separate routines. Each adds one door and the sentence that explains it. Turn it off and the door is gone.</p>
+    <p>A routine is an offered path, not a lock. Ronin hands the Agent a command; it does not reach past the door and make it do anything.</p>
   </section>
 
   <section class="pbs-section" aria-labelledby="isnt-title">
@@ -122,13 +122,13 @@
         </tbody>
       </table>
     </div>
-    <p>If a line in the right-hand column ever became true, Ronin would be taking over the work rather than coordinating it. That is the line Ronin does not cross.</p>
+    <p>If anything in the right-hand column became true, Ronin would be doing the work instead of coordinating it.</p>
   </section>
 
   <section class="pbs-section" aria-labelledby="ack-title">
     <p class="section-label">Information, not automation</p>
     <h2 id="ack-title">What an ack looks like.</h2>
-    <p>This is the reply an Agent reads after handing work in. Every line is either what happened, a fact Ronin already held, or a nudge that names a tool. The Agent decides what to do with it.</p>
+    <p>The reply after a hand-in. Each line is what happened, a fact Ronin already held, or a nudge naming a tool.</p>
     <pre class="ack"><b>ACCEPTED</b> ronin_cowork:team/alpha/maya → team/alpha/dev  now 4f2a9c1e07  <i>[hi_20260904104839_7f9d24]</i>
   desk is level with the line
   base 51ce9424 · 0 behind dev · line is 3 ahead of dev; promotion due
@@ -136,7 +136,7 @@
   your lead is kenji
   <b>NEXT:</b> line moved; run tejun-desk status; if it reports a dev update, run tejun-desk sync
   <b>NEXT:</b> tell your lead with tejun-send kenji "..."</pre>
-    <p>Nothing here ran on the Agent's behalf: no message was sent, no teammate's desk was touched, nothing was pruned. If the Agent wants any of that, each is one command away, and the ack said which.</p>
+    <p>Nothing ran on the Agent's behalf. Each follow-on is one command away, and the ack said which.</p>
   </section>
 
   <aside class="pbs-boundary" aria-labelledby="boundary-title">
@@ -148,7 +148,7 @@
     <div>
       <p class="section-label">Next explanation</p>
       <h2>See the edges on a real repository.</h2>
-      <p>Checkouts and Worktrees shows the two models a repository can choose, what each looks like, and who tidies up.</p>
+      <p>Checkouts and Worktrees shows the two ways a repository can work, what each looks like, and who tidies up.</p>
     </div>
     <div class="pbs-actions"><a class="button" href="../checkouts-and-worktrees/">Checkouts and Worktrees</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div>
   </section>
