@@ -165,6 +165,28 @@
       "asset_checksum": null,
       "review_trigger": "Worktrees resolution, hand-in, promotion, or Project Root profile contracts change",
       "status": "public"
+    },
+    {
+      "id": "checkouts-and-worktrees",
+      "readme_headline": null,
+      "readme_anchor": null,
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/checkouts-and-worktrees/",
+      "question": "How should Agents work in this repository: one shared checkout, or a worktree each?",
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
+      "evidence_authorities": [
+        "ronin-cowork/docs/worktrees.md",
+        "ronin-cowork/docs/desks.md",
+        "ronin-cowork/docs/team-promotion.md"
+      ],
+      "alt_text": "Two diagrams side by side: a single checkout folder with one branch checked out at a time, and three Agent worktrees cut from the local working line, handed in to a team line, promoted by the lead, and released by pull request.",
+      "capture_source_id": null,
+      "asset_checksum": null,
+      "review_trigger": "Repository work modes, desk lifecycle, settle/audit tooling, or the two-truths branch model change",
+      "status": "public"
     }
   ]
 }
