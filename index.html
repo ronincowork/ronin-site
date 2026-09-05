@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Ronin is a lightweight, locally run coworkspace around the AI Agents, accounts, tools, and documents you already use."
+      content="Launch the AI Agents you already use, then add persistent coworkspace and team coordination only when the work calls for them."
     />
     <title>Ronin Cowork</title>
     <link rel="canonical" href="https://www.ronincowork.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Ronin Cowork" />
-    <meta property="og:title" content="Ronin — Your Agents. Your tools. Your working method." />
-    <meta property="og:description" content="A lightweight, locally run coworkspace around the AI Agents, accounts, tools, and documents you already use." />
+    <meta property="og:title" content="Ronin — Launch and go. Manage the edges." />
+    <meta property="og:description" content="Launch provider Agents with their own accounts, then add persistent coworkspace and optional team coordination." />
     <meta property="og:url" content="https://www.ronincowork.com/" />
     <meta property="og:image" content="https://www.ronincowork.com/social/ronin-agent-team.png" />
     <meta property="og:image:type" content="image/png" />
@@ -81,6 +81,12 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         border-top: var(--edge) solid var(--line);
+      }
+      .feature-list--two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .feature-list--two .feature:nth-child(2) {
+        border-right: 0;
       }
       .feature {
         min-height: 220px;
@@ -373,9 +379,10 @@
       <section class="hero">
         <div>
           <p class="eyebrow">Ronin Cowork</p>
-          <h1 class="display">
-            Your Agents. Your tools. Your working method.
-          </h1>
+          <h1 class="display">Launch and go. Manage the edges.</h1>
+          <p class="provider-line">
+            Your provider Agents and accounts. Ronin around the work.
+          </p>
           <div class="hero-actions">
             <a class="button button--primary" href="load-ronin.html"
               >Load Ronin</a
@@ -387,66 +394,33 @@
 
       <section class="section" id="cowork">
         <div class="section-head">
-          <p class="section-label">What is Ronin Cowork?</p>
+          <p class="section-label">Two jobs</p>
           <div>
-            <blockquote>A coworkspace around the Agents you already use.</blockquote>
+            <blockquote>Use the Agent you chose. Add the operating layer you need.</blockquote>
             <p class="intro">
-              Ronin puts live terminal sessions in one browser surface on a
-              machine you control. Claude, Codex, Gemini, and other provider
-              CLIs keep their own accounts, tools, reasoning, and normal way of
-              working. Ronin adds the coworkspace around them.
+              Ronin starts provider CLIs on a machine you control. Claude,
+              Codex, Gemini, and other Agents keep their own accounts, tools,
+              reasoning, and conversations. Ronin does not insert a
+              proprietary conversation between you and the Agent.
             </p>
           </div>
         </div>
-        <div class="feature-list">
+        <div class="feature-list feature-list--two">
           <article class="feature">
             <span class="num">01</span>
-            <h3>Agents side by side</h3>
+            <h3>Launch and go</h3>
             <p>
-              Run different provider CLIs beside one another and use each one
-              through the account you already have.
+              Choose a provider Agent, use the account you already have, and
+              start working in its native terminal conversation.
             </p>
           </article>
           <article class="feature">
             <span class="num">02</span>
-            <h3>Always-on sessions</h3>
+            <h3>Manage the edges</h3>
             <p>
-              Each Agent runs in a real tmux terminal. Close the browser and
-              the session keeps working on the machine.
-            </p>
-          </article>
-          <article class="feature">
-            <span class="num">03</span>
-            <h3 class="house-term">Workbench</h3>
-            <p>
-              Arrange terminal tiles and shared surfaces in independent
-              workspaces. Each workspace keeps its own tabs and scroll.
-            </p>
-          </article>
-          <article class="feature">
-            <span class="num">04</span>
-            <h3>Coordinate when useful</h3>
-            <p>
-              Keep Agents independent, or add direct messages, a team
-              <span class="house-term">wipeboard</span>, shared documents, and
-              selected Routines when the work benefits from them.
-            </p>
-          </article>
-          <article class="feature">
-            <span class="num">05</span>
-            <h3>Parallel file work</h3>
-            <p>
-              When selected for a reviewed repository, managed worktrees give
-              Agents separate desks, hand-in, lead integration, and Git safeguards.
-            </p>
-          </article>
-          <article class="feature">
-            <span class="num">06</span>
-            <h3>Make it yours</h3>
-            <p>
-              Choose and customize the reading, SOPs, Macros, Actions, tools,
-              connections, and Routines offered to new Agents. Your versions
-              live outside the repositories Ronin updates.
+              Keep sessions and workspaces persistent. When coordination helps,
+              add direct messages, a team wipeboard, shared documents, and
+              reviewed file handoffs.
             </p>
           </article>
         </div>
@@ -633,6 +607,12 @@
                 The browser reconnects to those same sessions. It does not start
                 a replacement session in the browser and it does not move the
                 terminal to a Ronin server.
+              </p>
+              <p>
+                Ronin is reachable only while its host is on and an address to
+                that host is reachable. A desktop must stay on, a laptop must
+                stay awake, and a continuously running server or virtual machine
+                provides continuous availability.
               </p>
               <p><a class="term" href="tmux_serve/">How tmux keeps sessions running →</a></p>
             </div>
