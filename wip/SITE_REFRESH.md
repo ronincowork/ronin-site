@@ -7,6 +7,9 @@ while preserving the useful core of **Launch and go / Manage the edges**. Treat 
 landing-page commit as workshop material, not an approved design. Keep this release independent
 of Setup and stage every material choice for Glen before implementation or promotion.
 
+- Owner preview: `http://100.101.235.17:8099/site-refresh.html`
+- Preview artifact: `/home/glen3/dohyo/ronin-lab/concepts/site-refresh.html`
+
 ## Current constraints
 
 - Work only in `ronin-site`, on the managed `team/site-refresh/site_refresh_lead` desk.
@@ -126,7 +129,7 @@ present but competes with several taxonomic paths.
 
 ### Primary journey hypothesis for discussion
 
-The clearest first-time route appears to be:
+The clearest first-time route appears to be: glen: this is awesome! yes we need to present this discovery journey!!!!
 
 1. **Recognition:** I can use Claude, Codex, Gemini, or another terminal Agent through my own
    account.
@@ -145,9 +148,9 @@ question naturally arises, rather than each becoming an equal first-level journe
 
 The landing page should answer one story rather than present the product taxonomy: use the AI
 Agents and accounts you already chose; work across providers in one persistent coworkspace; add
-coordination only where work crosses their boundaries.
+coordination only where work crosses their boundaries. glen: agreed
 
-### Three-leg proposition
+### Three-leg proposition glen: agreed.
 
 > **Launch and go. Work across providers. Manage the edges.**
 
@@ -160,11 +163,11 @@ coordination only where work crosses their boundaries.
 “Work across providers” is preferable to “run multiple model providers side by side”: it is
 shorter, describes the owner's benefit, and leaves the concrete mechanism to the supporting line.
 The page must nevertheless say plainly what it means rather than asking the slogan to carry the
-claim alone.
+claim alone. glen: ok.
 
 ### Answer the central objection early
 
-The page should directly acknowledge that individual provider products already run Agents well:
+The page should directly acknowledge that individual provider products already run Agents well: glen: YES the agents need to be free to flex the full muscle they inhert from the model providers.
 
 > Claude and Codex can each run Agents on their own. Ronin is for the work that crosses those
 > boundaries — different providers, persistent sessions, shared projects, and coordination you
@@ -198,7 +201,7 @@ A compact supporting line can carry all three:
 > Use the Agent that fits the task. Keep working when providers or limits change. Build a visible
 > Team you can direct yourself.
 
-### Concrete landing-page change
+### Concrete landing-page change glen: agreed.
 
 Reshape the page into this order:
 
