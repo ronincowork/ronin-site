@@ -195,3 +195,88 @@ button, input { font: inherit; }
     --term-fg: #2e302c;
   }
 }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f2ec;
+  --bg-2: #eae7df;
+  --panel: #ffffff;
+  --raise: #f1efe8;
+  --raise-2: #e6e2d8;
+  --well: #f7f5ef;
+  --line: #d9d4c8;
+  --line-2: #c8c2b2;
+  --line-3: #a9a191;
+  --fg-strong: #14161c;
+  --fg: #2c2e36;
+  --muted: #6d7284;
+  --muted-2: #5a617a;
+  --muted-3: #6d7284;
+  --dim: #b0aca0;
+  --accent: #a06b1a;
+  --accent-2: #3f6a95;
+  --ok: #5c7a1d;
+  --warn: #9a7b00;
+  --bad: #b04343;
+  --action: #1f5fc9;
+  --term-bg: #faf8f2;
+  --term-fg: #2e302c;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0e14;
+  --bg-2: #0f131c;
+  --panel: #131826;
+  --raise: #1a2233;
+  --raise-2: #263047;
+  --well: #0d1220;
+  --line: #1f2738;
+  --line-2: #2a3247;
+  --line-3: #3a4560;
+  --fg-strong: #d7e3f7;
+  --fg: #c5c8c6;
+  --muted: #6b7488;
+  --muted-2: #8fa3c8;
+  --muted-3: #6f80a0;
+  --dim: #454d61;
+  --accent: #e0af68;
+  --accent-2: #81a2be;
+  --ok: #b5bd68;
+  --warn: #f0c674;
+  --bad: #cc6666;
+  --action: #2f6fd0;
+  --term-bg: #0b0e14;
+  --term-fg: #c5c8c6;
+}
+
+.theme-switch {
+  width: 42px;
+  height: 24px;
+  padding: 4px;
+  border: var(--edge) solid var(--line-3);
+  border-radius: var(--radius-pill);
+  background: var(--well);
+  cursor: pointer;
+}
+.theme-switch:hover { border-color: var(--kaki); }
+.theme-switch__track {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: 14px;
+  background: radial-gradient(circle, var(--muted) 1.5px, transparent 2px) 0 50% / 16px 14px repeat-x;
+}
+.theme-switch__track i {
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--kaki);
+  box-shadow: 0 0 0 2px var(--well);
+  transition: transform var(--motion-settle) var(--ease-out);
+}
+.theme-switch[data-theme-choice="light"] .theme-switch__track i { transform: translateX(-12px); }
+.theme-switch[data-theme-choice="dark"] .theme-switch__track i { transform: translateX(12px); }

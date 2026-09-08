@@ -100,6 +100,7 @@ const holdsWords = (holds) => Object.entries(holds).map(([k, n]) => `${n} ${({ t
 const HEAD = (title, description, depth) => `<!doctype html>
 <html lang="en">
   <head>
+    <script src="/theme.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="${esc(description)}" />
