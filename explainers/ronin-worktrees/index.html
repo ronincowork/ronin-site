@@ -1,64 +1,300 @@
 <!doctype html>
 <html lang="en"><head>
+  <script src="/theme.js"></script>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="How several Agents work in one repository without collisions: Ronin Worktrees, hand-in, and the Team lead's review." />
+  <meta name="description" content="Why several Agents collide in one checkout, how Git worktrees fix it, how to choose per repository, and how to run the whole Ronin journey: a marked lead, a worktree per Agent, commit and hand in, the lead's promotion, and your merge of the release pull request." />
   <title>Ronin Worktrees | Ronin</title><link rel="canonical" href="https://ronincowork.com/explainers/ronin-worktrees/" />
   <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" /><link rel="stylesheet" href="../../ronin-tokens.css" /><link rel="stylesheet" href="../pbs.css" />
+  <style>
+/* Page-owned layouts carried over from Checkouts and Worktrees: the two-model choice and the branch truths. */
+.choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 28px 0 8px; }
+.model { padding: 20px; border: var(--edge) solid var(--line-2); border-radius: var(--radius-lg); background: var(--panel); display: flex; flex-direction: column; gap: 14px; }
+.model--checkout { border-top: 3px solid var(--ok); }
+.model--worktrees { border-top: 3px solid var(--kaki); }
+.model .ref { color: var(--muted); font: 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+.model--checkout .ref { color: var(--ok); }
+.model--worktrees .ref { color: var(--kaki); }
+.model h3 { margin: 0; font: 600 22px/1.2 var(--font-ui); letter-spacing: -.02em; text-wrap: balance; }
+.model figure { margin: 0; padding: 12px; border: var(--edge) solid var(--line); border-radius: var(--radius-md); background: var(--bg-2); overflow-x: auto; }
+.model svg { display: block; width: 100%; min-width: 360px; height: auto; font: 11px var(--font-mono); }
+.model ul { margin: 0; padding: 0; list-style: none; color: var(--muted-2); }
+.model li { padding: 8px 0; border-top: var(--edge) solid var(--line); }
+.model li strong { color: var(--fg-strong); }
+.model .fit { margin-top: auto; padding-top: 6px; color: var(--muted); font-size: 14px; }
+.rail-ok { stroke: var(--ok); } .rail-text--ok { fill: var(--ok); } .rail-folder { fill: none; stroke: var(--line-3); stroke-dasharray: 4 3; }
+.rail-dev { stroke: var(--kaki); } .rail-master { stroke: var(--accent-2); } .rail-lease { stroke: var(--line-3); } .rail-team { stroke: var(--accent); }
+.rail-dot { fill: var(--panel); stroke-width: 2; } .rail-text { fill: var(--muted-2); } .rail-text--strong { fill: var(--fg-strong); } .rail-text--kaki { fill: var(--kaki); } .rail-text--blue { fill: var(--accent-2); }
+.truths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 24px 0; padding: 0; list-style: none; }
+.truths li { padding: 20px; border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
+.truths li.is-anchor { border-top: 3px solid var(--kaki); } .truths li.is-release { border-top: 3px solid var(--accent-2); } .truths li.is-lease { border-top: 3px solid var(--line-3); }
+.truths .ref { display: block; margin-bottom: 8px; color: var(--muted); font: 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+.truths strong { display: block; margin-bottom: 6px; color: var(--fg-strong); font-size: 18px; }
+.truths p { margin: 0; color: var(--muted-2); }
+.halves { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
+.halves li { padding: 20px; border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); color: var(--muted-2); }
+.halves strong { display: block; margin-bottom: 6px; color: var(--fg-strong); font-size: 18px; }
+.halves a { color: var(--kaki); }
+
+/* Page-owned layout: the six-station journey, and the "who" chips it and the station headings share. */
+.journey { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 28px 0 8px; padding: 0; list-style: none; counter-reset: station; }
+.journey li { counter-increment: station; position: relative; padding: 20px 20px 20px 52px; border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); color: var(--muted-2); }
+.journey li::before { content: counter(station, decimal-leading-zero); position: absolute; left: 18px; top: 22px; color: var(--kaki); font: 600 12px var(--font-mono); }
+.journey strong { display: block; margin: 6px 0 6px; color: var(--fg-strong); font-size: 18px; }
+.journey p { margin: 0; font-size: 15px; }
+.who { display: inline-block; padding: 2px 8px; border-radius: var(--radius-sm); font: 600 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-strong); background: var(--raise); border: var(--edge) solid var(--line-2); }
+.who--you { border-color: var(--kaki); color: var(--kaki); }
+.who--agent { border-color: var(--ok); color: var(--ok); }
+.who--lead { border-color: var(--accent-2); color: var(--accent-2); }
+.who--ronin { border-color: var(--line-3); color: var(--muted); }
+.pbs-section h2 .who { vertical-align: middle; margin-left: 10px; }
+.journey-caption { max-width: var(--measure); margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+.moment { max-width: var(--measure); margin: var(--space-8) 0 0; padding: 14px 18px; border-left: var(--edge-2) solid var(--line-3); color: var(--muted-2); }
+.moment strong { color: var(--fg-strong); }
+.moment code { display: inline-block; padding: 2px 7px; border-radius: var(--radius-xs); background: var(--term-bg); color: var(--term-fg); font-size: 12px; }
+.helpers { margin: var(--space-10) 0 0; padding: 0; list-style: none; }
+.helpers li { max-width: 760px; padding: 12px 0 12px 20px; border-left: var(--edge-2) solid var(--line-3); color: var(--muted-2); }
+.helpers li + li { margin-top: 8px; }
+.helpers strong { color: var(--fg-strong); }
+.helpers code { padding: 1px 6px; border-radius: var(--radius-xs); background: var(--term-bg); color: var(--term-fg); font-size: 12px; }
+@media (max-width: 760px) { .journey { grid-template-columns: 1fr; } }
+
+@media (max-width: 760px) { .choice, .truths, .halves { grid-template-columns: minmax(0, 1fr); } .model { min-width: 0; } }
+  </style>
 </head><body>
-  <header class="site-header"><div class="site-header__inner"><a class="brand" href="../../index.html"><img src="../../nin-mark.svg" alt="Ronin" /><span class="brand-name">RONIN</span></a><nav class="site-nav" aria-label="Primary"><a href="../">Explainers</a><a href="../../load-ronin.html">Load Ronin</a></nav></div></header>
-  <div class="cta-strip"><div class="cta-strip__inner"><span class="cta-strip__label">Ronin · parallel work</span><div class="cta-strip__actions"><a class="button" href="../">Explainers</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></div></div>
-  <main class="page"><nav class="explainer-breadcrumbs" aria-label="Breadcrumb"><a href="../">Explainers</a> / <span aria-current="page">Ronin Worktrees</span></nav>
-    <section class="pbs-hero"><p class="pbs-kicker">How do several Agents share one repository without stepping on each other?</p><h1 class="display">Each Agent in its own worktree. One reviewed path back.</h1><p class="lede">Ronin Worktrees gives a coding Agent a private working folder and branch inside your repository. Agents work in parallel without file collisions, and finished work returns through a hand-in the Team lead reviews — never by landing directly on the shared branch.</p></section>
+  <header class="site-header"><div class="site-header__inner"><a class="brand" href="../../index.html"><img src="../../nin-mark.svg" alt="Ronin" /><span class="brand-name">RONIN</span></a><nav class="site-nav" aria-label="Primary"><a href="../">Ronin Blog</a><a href="../../load-ronin.html">Load Ronin</a></nav></div></header>
+  <div class="cta-strip"><div class="cta-strip__inner"><span class="cta-strip__label">Ronin · parallel work</span><div class="cta-strip__actions"><a class="button" href="../">Ronin Blog</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></div></div>
+  <main class="page">
+  <nav class="explainer-breadcrumbs" aria-label="Breadcrumb"><a href="../">Ronin Blog</a> / <span aria-current="page">Ronin Worktrees</span></nav>
 
+  <section class="pbs-hero">
+    <p class="pbs-kicker">How do several Agents work in one repository without stepping on each other, and how does their work reach my stable branch?</p>
+    <h1 class="display">A worktree per Agent. One reviewed line up. Your merge at the end.</h1>
+    <p class="lede">Put three Agents in one checkout and they overwrite each other, because one folder shows one branch at a time. A Git <strong>worktree</strong> gives each branch its own folder, so Agents work apart. That creates the second problem: their work has to be put back together on purpose. Ronin Worktrees does both halves. This page explains the problem and the choice, then walks the whole journey of using it in Ronin.</p>
+    <ul class="halves" aria-label="The two halves of this page">
+      <li><strong>The topic</strong>What the collision problem is, what a worktree does about it, and how to choose per repository. <a href="#topic">Start here.</a></li>
+      <li><strong>How to use it in Ronin</strong>The two switches, then the six-station journey from a marked lead to your merge of the release pull request. <a href="#howto">Jump to the how-to.</a></li>
+    </ul>
+  </section>
 
-    <section class="session-brief session-brief--compact" aria-labelledby="wt-brief-title">
-      <div class="session-brief__head">
-        <div>
-          <p class="section-label">Ask your agent</p>
-          <h2 id="wt-brief-title">The fastest route: hand this to your agent.</h2>
-          <p>Copy this brief to an agent in your Ronin and it sets Worktrees up with you — you keep approval of every repository change. Read on below if you want to understand the mechanism yourself first.</p>
-        </div>
-        <button class="session-brief__copy" data-copy-target="#wt-session-brief" onclick="copyText(this,document.querySelector('#wt-session-brief').innerText)">copy</button>
+  <section class="pbs-section" id="topic" aria-labelledby="choice-title">
+    <p class="section-label">The topic</p>
+    <h2 id="choice-title">One folder shows one branch. That is the whole problem.</h2>
+    <p>Git gives you as many branches as you like, but a checkout shows one of them. "Just make your own branch" is still everyone sharing one set of files: each switch swaps the files out from under whoever else is working there. Three Agents on three branches in one folder collide exactly as if they were on one branch. A worktree is a branch with its own folder. Many Agents edit at once, and nobody's half-finished work reaches anyone else until it is accepted. Choose once per repository; both models are first-class, and one Agent can hold both in different repositories.</p>
+    <div class="choice">
+      <article class="model model--checkout" aria-labelledby="m-checkout">
+        <span class="ref">Use the checkout</span>
+        <h3 id="m-checkout">One folder, one or more branches, everyone in it.</h3>
+        <figure aria-label="Diagram: a single local branch with commits from several people and Agents in sequence; one folder on disk; the remote copy above is a backup you push to when you choose.">
+          <svg viewBox="0 0 440 190" role="img">
+            <line class="rail-master" x1="30" y1="34" x2="410" y2="34" stroke-width="2" stroke-dasharray="6 5" />
+            <text class="rail-text rail-text--blue" x="30" y="22">remote main · backup</text>
+            <line class="rail-ok" x1="30" y1="104" x2="410" y2="104" stroke-width="3" />
+            <text class="rail-text rail-text--ok" x="30" y="90">local main · or any branch, one at a time</text>
+            <path class="rail-master" d="M300 104 C 330 104, 330 34, 360 34" fill="none" stroke-width="2" />
+            <text class="rail-text" x="318" y="66">push when you choose</text>
+            <circle class="rail-dot rail-ok" cx="90" cy="104" r="5" />
+            <circle class="rail-dot rail-ok" cx="160" cy="104" r="5" />
+            <circle class="rail-dot rail-ok" cx="230" cy="104" r="5" />
+            <circle class="rail-dot rail-ok" cx="300" cy="104" r="5" />
+            <text class="rail-text" x="90" y="126" text-anchor="middle">Agent A</text>
+            <text class="rail-text" x="160" y="126" text-anchor="middle">you</text>
+            <text class="rail-text" x="230" y="126" text-anchor="middle">Agent B</text>
+            <text class="rail-text" x="300" y="126" text-anchor="middle">Agent A</text>
+            <rect class="rail-folder" x="30" y="146" width="380" height="32" rx="6" />
+            <text class="rail-text rail-text--strong" x="220" y="166" text-anchor="middle">one folder on disk · any number of branches · only one checked out at a time</text>
+          </svg>
+        </figure>
+        <ul>
+          <li><strong>Work</strong> happens in the checkout. Commit on the branch as you go.</li>
+          <li><strong>Ronin stays out.</strong> No hand-in, no lead, no records. Ordinary Git, run how you like.</li>
+          <li><strong>Collisions are yours to avoid.</strong> Run one Agent at a time in it, or accept that they will step on each other.</li>
+        </ul>
+        <p class="fit">Fits a workspace: notes, plans, a scratch repository, anything without a release.</p>
+      </article>
+      <article class="model model--worktrees" aria-labelledby="m-worktrees">
+        <span class="ref">Use Ronin Worktrees</span>
+        <h3 id="m-worktrees">A private folder per Agent. One choke point per Team.</h3>
+        <figure aria-label="Diagram: one Team. Three Agent worktrees are cut from the local working line and hand in to the Team's line, the Team's choke point; the Team lead promotes that line back onto the working line; a pull request carries the working line to the remote release branch.">
+          <svg viewBox="0 0 440 236" role="img">
+            <line class="rail-master" x1="30" y1="24" x2="410" y2="24" stroke-width="2" stroke-dasharray="6 5" />
+            <text class="rail-text rail-text--blue" x="30" y="12">remote master · released</text>
+            <line class="rail-dev" x1="30" y1="70" x2="410" y2="70" stroke-width="3" />
+            <text class="rail-text rail-text--kaki" x="30" y="60">local dev · accepted</text>
+            <path class="rail-master" d="M366 70 C 384 70, 384 24, 402 24" fill="none" stroke-width="2" />
+            <text class="rail-text" x="360" y="46" text-anchor="end">pull request</text>
+            <path class="rail-team" d="M76 70 C 94 70, 94 132, 112 132 L 228 132 C 246 132, 246 70, 264 70" fill="none" stroke-width="2.2" />
+            <path class="rail-lease" d="M116 70 C 126 70, 126 166, 136 166 L 180 166 C 190 166, 190 132, 200 132" fill="none" stroke-width="1.6" opacity="1.00" />
+            <circle class="rail-dot rail-dev" cx="116" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="200" cy="132" r="3.5" />
+            <path class="rail-lease" d="M138 70 C 148 70, 148 190, 158 190 L 194 190 C 204 190, 204 132, 214 132" fill="none" stroke-width="1.6" opacity="0.78" />
+            <circle class="rail-dot rail-dev" cx="138" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="214" cy="132" r="3.5" />
+            <path class="rail-lease" d="M160 70 C 170 70, 170 214, 180 214 L 208 214 C 218 214, 218 132, 228 132" fill="none" stroke-width="1.6" opacity="0.56" />
+            <circle class="rail-dot rail-dev" cx="160" cy="70" r="3.5" />
+            <circle class="rail-dot rail-team" cx="228" cy="132" r="3.5" />
+            <circle class="rail-dot rail-dev" cx="76" cy="70" r="5" />
+            <circle class="rail-dot rail-dev" cx="264" cy="70" r="5" />
+            <text class="rail-text rail-text--strong" x="170" y="124" text-anchor="middle">one team · its line is the choke point</text>
+            <text class="rail-text" x="264" y="56" text-anchor="middle">lead promotes</text>
+            <text class="rail-text" x="76" y="92" text-anchor="middle">cut from dev</text>
+            <text class="rail-text" x="270" y="176">hand in</text>
+            <text class="rail-text" x="110" y="176">Agent A</text>
+            <text class="rail-text" x="132" y="200">Agent B</text>
+            <text class="rail-text" x="154" y="224">Agent C</text>
+          </svg>
+        </figure>
+        <ul>
+          <li><strong>Work</strong> happens in a private folder on a private branch, cut from the working line.</li>
+          <li><strong>The Team is the choke point.</strong> Updates flow down from the working line freely; nothing flows back up except through the Team's line and its lead's promotion.</li>
+          <li><strong>No overwrites.</strong> Separate worktrees stop Agents writing over each other's files, and nobody's half-finished work reaches anyone else until it is accepted. Integration conflicts can still happen; they are contained at hand-in.</li>
+        </ul>
+        <p class="fit">Fits a product: a codebase with a release, tests, and several Agents at once.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="truths-title">
+    <p class="section-label">The branches</p>
+    <h2 id="truths-title">Two branches are the truth. Everything else is on loan.</h2>
+    <p>A small file at the repository root names its working line and its stable line. Every tool reads that file; nothing is decided by whichever branch happens to be checked out.</p>
+    <ul class="truths">
+      <li class="is-anchor"><span class="ref">local · working line</span><strong>Accepted work</strong><p>Usually <code>dev</code>. Nobody edits it in place. Work reaches it by promotion, and every worktree is cut from it.</p></li>
+      <li class="is-release"><span class="ref">remote · stable line</span><strong>Released work</strong><p>Usually <code>master</code> or <code>main</code> on GitHub. It moves only by a pull request from the working line, which you review and merge yourself.</p></li>
+      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>One line per Team, a worktree branch per Agent, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. Once its work is promoted, its worktree is closed explicitly; unfinished work at a session's end is kept in visible custody, never deleted quietly.</p></li>
+    </ul>
+  </section>
+
+  <section class="pbs-section" id="howto" aria-labelledby="setup-title">
+    <p class="section-label">How to use it in Ronin · setup</p>
+    <h2 id="setup-title">The repository opts in. The Agent opts in. That's it.</h2>
+    <ul class="pbs-points">
+      <li><strong>The repository side</strong>In the Project Root editor, the Worktrees setting offers two answers: <em>Use Ronin Worktrees</em> or <em>Use the checkout</em>. Tick the first and the repository accepts managed worktrees from capable Agents. Nothing moves when you save; the setting shapes future launches, not running work.</li>
+      <li><strong>The Agent side</strong>The Worktrees Routine travels the ordinary defaults path: the Campaign sets a default, a Team may override it, and the New Agent form shows the resolved answer for each launch. An Agent born with it on knows the loop from its first prompt.</li>
+      <li><strong>Per repository, not all-or-nothing</strong>The answer resolves separately for every repository in an assignment. Either side off means the Agent simply uses the ordinary checkout and ordinary Git.</li>
+    </ul>
+  </section>
+
+<section class="session-brief session-brief--compact" aria-labelledby="journey-brief-title">
+    <div class="session-brief__head">
+      <div>
+        <p class="section-label">Ask your agent</p>
+        <h2 id="journey-brief-title">Want to know where your Team's work stands right now?</h2>
+        <p>Hand this to any Agent in your Ronin. It reads, it does not change anything, and it tells you which station each piece of work is at.</p>
       </div>
-      <pre id="wt-session-brief">Help me set up Ronin Worktrees so several agents can work in my repository without file collisions.
+      <button class="session-brief__copy" data-copy-target="#journey-brief" onclick="copyText(this,document.querySelector('#journey-brief').innerText)">copy</button>
+    </div>
+    <pre id="journey-brief">Tell me where my Team's repository work stands. Read only; change nothing.
 
-Start by opening and following this agent-facing guide:
-https://github.com/ronincowork/ronin-cowork/blob/master/docs/worktrees.md
+For each Agent on the Team, say which worktree it holds, whether it has unsaved files or commits it has not handed in, and whether it is waiting on the lead. Say what is on the Team's review line and whether promotion is due. Say who is marked team lead, or that nobody is. Say whether the working branch is ahead of the stable branch on the remote and whether a release pull request is open. Use Ronin's own status tools and receipts, not memory.</pre>
+  </section>
 
-Check both sides of the switch: enable Worktrees on the repository's Project Root (Use Ronin Worktrees), and make sure new Agents carry the Worktrees Routine through my Campaign or Team defaults. Explain the working loop to me — commit, hand-in, and the Team lead's merge — before changing anything, and make no repository change without my approval.</pre>
-    </section>
+  <section class="pbs-section" aria-labelledby="journey-title">
+    <p class="section-label">How to use it: the journey in one look</p>
+    <h2 id="journey-title">Six stations. Four kinds of hands.</h2>
+    <ol class="journey" aria-label="The six stations of a Team's work: you mark a lead; each Agent is born with a worktree; Agents commit and hand in; the lead rules on conflicts and promotes; contributors close their worktrees; you merge the release pull request.">
+      <li><span class="who who--you">You</span><strong>Mark a lead</strong><p>On the Team page, mark one session as team lead. Nothing infers it from behaviour; it is your designation.</p></li>
+      <li><span class="who who--ronin">Ronin</span><strong>Each Agent gets a worktree</strong><p>A coding Agent born onto the Team starts in its own folder on its own branch, cut from your accepted work.</p></li>
+      <li><span class="who who--agent">Agent</span><strong>Commit, then hand in</strong><p>Checkpoints stay private. A hand-in gives committed work to the Team's review line and leaves a receipt.</p></li>
+      <li><span class="who who--lead">Lead</span><strong>Rule, verify, promote</strong><p>The lead rules on conflicts, verifies the combined line, and promotes it onto your local working branch.</p></li>
+      <li><span class="who who--agent">Agent</span><strong>Close when told</strong><p>Promotion tells each contributor its work is in. Only then is a worktree finished, and it closes.</p></li>
+      <li><span class="who who--you">You</span><strong>Merge the release</strong><p>One rolling pull request carries the working branch to the stable branch. Merging it is your hand, nobody else's.</p></li>
+    </ol>
+    <p class="journey-caption">Work runs in parallel at stations two and three. Landing is one at a time at station four. Nothing reaches GitHub until station six.</p>
+  </section>
 
-    <section class="pbs-section" aria-labelledby="keys-title"><p class="section-label">The whole idea in three keys</p><h2 id="keys-title">What it does, when it works, what it costs.</h2>
-      <ul class="pbs-points">
-        <li><strong>What it does</strong>Isolated working folders and branches keep parallel Agents from colliding in the same files. Two Agents can edit the same repository at once; neither sees the other's half-finished state.</li>
-        <li><strong>When it works</strong>Both sides must say yes. The repository's Project Root enables Worktrees — one tick in its editor — and the Agent carries the Worktrees Routine. Either side off means the Agent simply uses the ordinary checkout and ordinary Git.</li>
-        <li><strong>The tradeoff</strong>Work leaves a private worktree through the managed path: commit, hand-in, and the Team lead's merge. That is a review step between an Agent and your shared branch — deliberate friction, and the point.</li>
-      </ul>
-    </section>
+  <section class="pbs-section" aria-labelledby="notice-title">
+    <p class="section-label">What to notice</p>
+    <h2 id="notice-title">Three things the picture is saying.</h2>
+    <ul class="pbs-points">
+      <li><strong>There is exactly one way up</strong>A worktree can pull in accepted work whenever it likes, but it cannot put anything back except by handing in to its Team's line, and that line reaches your working branch only when the lead promotes it.</li>
+      <li><strong>Every step leaves a receipt</strong>Hand-ins, conflicts, promotions and the release pull request each record what moved, from where, and by whom. When something goes wrong, the receipt says which hand-in did it.</li>
+      <li><strong>The remote is yours</strong>No Agent's hand-in, no lead's promotion, and no macro pushes to GitHub. The release step pushes the working branch to open the pull request; merging it is yours.</li>
+    </ul>
+  </section>
 
-    <section class="pbs-section" aria-labelledby="setup-title"><p class="section-label">Setup is two ticks</p><h2 id="setup-title">The repository opts in. The Agent opts in. That's it.</h2>
-      <ul class="pbs-points">
-        <li><strong>The repository side</strong>In the Project Root editor, the Worktrees setting offers two answers: <em>Use Ronin Worktrees</em> or <em>Use the checkout</em>. Tick the first and the repository accepts managed worktrees from capable Agents. Nothing moves when you save — the setting shapes future launches, not running work.</li>
-        <li><strong>The Agent side</strong>The Worktrees Routine travels the ordinary defaults path: the Campaign sets a default, a Team may override it, and the New Agent form shows the resolved answer for each launch. An Agent born with it on knows the workflow from its first breath — the Routine hands the working method over at birth, so you never have to teach it.</li>
-        <li><strong>Per repository, not all-or-nothing</strong>The answer resolves separately for every repository in an assignment. One Agent can hold a managed worktree in the repository that wants review and an ordinary checkout in the one that doesn't.</li>
-      </ul>
-    </section>
+  <section class="pbs-section" aria-labelledby="lead-title">
+    <p class="section-label">Station one</p>
+    <h2 id="lead-title">Mark a lead before parallel work starts. <span class="who who--you">You</span></h2>
+    <p>A Team lead is a person's designation, not a guess. You mark one from any session's tile on the Team page, and you can move it later. Ronin never decides that a session is the lead because of what it did.</p>
+    <p>Why bother? Because the review line needs one reader. When an Agent hands work in, Ronin tells the lead, in its tile, that the line has moved and is waiting for review. When two hand-ins disagree, the lead is the one asked to rule. When the line is coherent, the lead is the one who promotes it. One gate, one reader, one set of receipts with one name on them. The lead does not have to write code; a coordinator that only reads, rules and promotes does fine.</p>
+    <p class="moment"><strong>If nobody is marked.</strong> Ronin does not stall, and it does not guess. A hand-in still lands on the Team line and tells the Agent that it holds the lead's job for that hand-in. Promotion refuses and asks you to mark a lead on the Team page. An owner can promote anyway on their own word, but the ordinary answer is to mark one.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="worktree-title">
+    <p class="section-label">Station two</p>
+    <h2 id="worktree-title">Each Agent is born with its own worktree. <span class="who who--ronin">Ronin</span></h2>
+    <p>The lead does not hand out worktrees one by one. When a coding Agent is launched onto a Team, and the repository has Worktrees switched on and the Agent carries the Worktrees Routine, Ronin opens the worktree before the Agent's first prompt: a private branch in a private folder, cut from your current accepted work. Ronin's own status output calls this a <em>desk</em>; this page says worktree.</p>
+    <p>Two choices about the starting point are worth knowing. Fresh work starts from your accepted work, the local working branch. An Agent joining a Team already mid-flight can start from the Team's own line instead, so it sees what its teammates have handed in but you have not yet promoted. The Agent can choose; the lead can also make that choice centrally for a named Agent. Either way the hand-in destination is the same: the Team's line.</p>
+    <p>Falling behind is ordinary. Status says how far behind accepted work a worktree is, and one update merges it in. Twenty commits behind is a notice, never a block.</p>
+    <p class="moment"><strong>Where the tools help.</strong> The Agent's whole contract is three verbs: get a worktree, update it, hand it in. Its birth reading names them and the commands behind them, so you never have to teach the loop. <code>tejun-desk status</code> answers "where am I" from Git at the moment of asking, never from prose.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="handin-title">
+    <p class="section-label">Station three</p>
+    <h2 id="handin-title">Commit coherent checkpoints. Hand in when a piece is whole. <span class="who who--agent">Agent</span></h2>
+    <p>A commit on the worktree is a private checkpoint. It publishes nothing and nobody else sees it, so an Agent commits as often as the work deserves. The birth reading asks for coherent checkpoints and the smallest relevant test at each one, not a full verification run.</p>
+    <p>A hand-in is the deliberate act of giving committed work to the Team. Ronin builds a throwaway candidate from your current accepted work, then the Team's already-accepted work, then this worktree's commits, and advances the Team line to that candidate only if the merge is clean. Unsaved files are left behind and named. A receipt records what arrived and from whom, the lead is told, and the Agent is told whether its worktree is level with the line. The Team line is a funnel: nobody edits it directly, and a hand-in refuses if someone has.</p>
+    <p>A hand-in is not verification of the whole repository, and it is not a push. Those belong to later stations.</p>
+    <p class="moment"><strong>Where the macros help.</strong> Give an Agent <code>+cutcode:</code> with a plan you have agreed and it builds a step at a time in its own worktree, commits privately, and offers a hand-in when a step is whole; it never opens a pull request or merges anything. <code>+tell:</code> carries one line to the lead; <code>+wipeboard:</code> is where the Team says things everyone should see.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="conflict-title">
+    <p class="section-label">When two hand-ins disagree</p>
+    <h2 id="conflict-title">The lead rules. The Agent resolves at its own worktree. <span class="who who--lead">Lead</span></h2>
+    <p>Two Agents can both change the same lines. The first hand-in lands. The second cannot merge cleanly, so Ronin stops inside the throwaway candidate: the Team line is untouched, the second worktree is marked blocked, the receipt names the files, and the lead is told there is a conflict to rule on.</p>
+    <p>The lead's job is the decision, not the edit. The lead reads both sides and says which wins, or how they combine, on the Team wipeboard or in the Agent's tile. The Agent then updates its worktree, resolves the files, commits, and hands in again from the same worktree. The line moves only when that second hand-in merges cleanly. Nobody edits the Team line by hand, including the lead.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="promote-title">
+    <p class="section-label">Station four</p>
+    <h2 id="promote-title">Review the line, verify it, promote it. <span class="who who--lead">Lead</span></h2>
+    <p>Reviewing the Team line and promoting it is the lead's primary job. The line holds every accepted hand-in as one state, with receipts. The lead reads it as a whole, runs the repository's full verification on it, and sends back anything that is not coherent. A correction is an ordinary commit and a second hand-in from the same worktree.</p>
+    <p>Promotion is one command and one transaction. Ronin builds a candidate from your current working branch plus the Team line, writes a promotion receipt <em>before</em> anything moves, then advances the working branch by compare-and-swap. If another Team promoted a moment earlier, the candidate is simply rebuilt on top. For a repository that drives a live app, promotion also restarts it and checks its health, and a failed health check lands a revert through the same door. For a repository that is only code, those steps are recorded as skipped, and the receipt says so.</p>
+    <p>When it completes, promotion posts the moved line on the Team wipeboard and tells each Agent whose hand-in rode in, in its own tile, that its work is on the working branch and its worktree may close. After that, every other worktree on the machine sees the new work on its next update.</p>
+    <p class="moment"><strong>Where the tools help.</strong> The lead runs <code>bin/ronin-promote &lt;team&gt;</code>. A dry run builds the candidate and moves nothing. The same tool resumes an interrupted promotion from its receipt, and lands a revert of a promotion that turned out wrong. One machine-wide lock means two leads never promote at once; the second is told who holds it.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="close-title">
+    <p class="section-label">Station five</p>
+    <h2 id="close-title">A worktree is finished when promotion says so. Then it closes. <span class="who who--agent">Agent</span></h2>
+    <p>Accepted is not finished. A hand-in that sits on the Team line is still waiting for the lead, and a correction may come back. The Agent keeps its worktree until promotion tells it, in its tile and on the wipeboard, that the hand-in is on the working branch. Then it closes the worktree, and the next assignment gets a fresh one from current accepted work.</p>
+    <p>Closing is safe because it refuses. Close removes only a clean worktree whose commits are already on its line; unsaved files or unhanded commits are named and left exactly where they are, never bundled into a commit on your behalf. When a session ends, Ronin's ending check names every worktree it still owns that holds unfinished work, and offers to prompt the Agent to finish or to keep the work in visible custody. The only thing that deletes unfinished work is an explicit discard, which asks for an exact confirmation and writes a receipt naming the commits first.</p>
+    <p class="moment"><strong>Where the macros help.</strong> <code>+land:</code> writes the work down where it will last, hands in the assignment, closes every worktree whose promotion has reached it, and ends the session. <code>+delete:</code> ends a session without a write-up, but its ending check still names any worktree that holds work.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="release-title">
+    <p class="section-label">Station six</p>
+    <h2 id="release-title">You approve the release. <span class="who who--you">You</span></h2>
+    <p>Your repository names two branches that count: a local working branch, usually <code>dev</code>, where promotions land, and a stable branch on the remote, usually <code>master</code> or <code>main</code>, which is what you ship. Everything else, Team lines and worktrees and candidates, is on loan and stays on your machine.</p>
+    <p>The release is one rolling pull request from the working branch to the stable branch. The release step pushes the working branch to the remote and opens that pull request, or updates the one already open; it never opens a second. The pull request body carries the promotion receipt, and your continuous integration verifies that the head commit is the one the receipt names. A pull request without a receipt fails.</p>
+    <p>Merging is your gate. No Agent merges, no lead merges, and no macro merges. The push that opens the pull request is the only push in this whole journey, and it is a release act, not a hand-in.</p>
+    <p class="moment"><strong>Where the tools help.</strong> <code>bin/ronin-promote pr &lt;team&gt;</code> is the release action: it reads the repository's declared branches, takes the Team's last complete promotion receipt, pushes the working branch, and opens or updates the pull request. Then it stops and reports the URL.</p>
+  </section>
+
+  <section class="pbs-section" aria-labelledby="helpers-title">
+    <p class="section-label">In short</p>
+    <h2 id="helpers-title">Who does what, and what helps them.</h2>
+    <ul class="helpers">
+      <li><strong>You</strong> mark the lead, read the Team page, and merge the release pull request. The Team page shows each member's worktree, the Team line, and the last promotion; the ending check catches unfinished work before a session goes.</li>
+      <li><strong>Each Agent</strong> gets, updates, and hands in one worktree per repository, commits coherent checkpoints, and closes when promotion says so. <code>+cutcode:</code> builds from an agreed plan; <code>+land:</code> finishes up and leaves.</li>
+      <li><strong>The lead</strong> reads the line, rules on conflicts, verifies, and promotes. Hand-ins arrive in the lead's tile; <code>+tell:</code> and the wipeboard carry the rulings back.</li>
+      <li><strong>Ronin</strong> opens worktrees at birth, keeps the receipts, refuses the unsafe step, serializes landing, and keeps unfinished work in visible custody when a session ends. It never pushes.</li>
+    </ul>
+  </section>
 
 
-    <section class="pbs-section" aria-labelledby="loop-title"><p class="section-label">The working loop</p><h2 id="loop-title">Commit preserves. Hand-in shares. The lead's merge publishes.</h2>
-      <div class="coord-flow" aria-label="An Agent works in a private worktree, commits, hands in to the team line, the Team lead reviews and promotes, and the shared branch advances.">
-        <div class="coord-start"><strong>A private worktree at birth</strong><br />The Agent starts on its own branch, in its own folder, inside your repository.</div>
-        <div class="coord-branch">
-          <article class="coord-path"><h3>The Agent's half</h3><ol class="coord-steps"><li><strong>Commit</strong> — preserves work on the private branch. Private means private: nothing reaches anyone else yet.</li><li><strong>Hand in</strong> — publishes the committed work to the team's shared line. Admission is mechanical; a receipt records exactly what arrived and from whom.</li></ol></article>
-          <article class="coord-path"><h3>The Team lead's half</h3><ol class="coord-steps"><li><strong>Review the line</strong> — the lead reads the assembled candidate: every hand-in, with its receipts, as one coherent state.</li><li><strong>Promote</strong> — the full verification runs once, on the exact candidate. Only a passing candidate advances the shared branch, and the receipt proves which commit passed.<span class="coord-note">Publishing beyond the machine — a push, a release — remains a person's deliberate act.</span></li></ol></article>
-        </div>
-        <div class="coord-return"><strong>The shared branch advances</strong><br />Everyone's next worktree grows from the accepted state, and the loop begins again.</div>
-      </div>
-      <p>Every step leaves a receipt, so a failure is attributable: the lead can see which hand-in broke the candidate and send it back, without unwinding anyone else's work.</p>
-    </section>
+  <aside class="pbs-boundary" aria-labelledby="boundary-title">
+    <h2 id="boundary-title">What Ronin does not claim</h2>
+    <p>Worktrees prevent accidental collisions; they are not a security boundary, and an Agent's authority on your machine is the machine's business. A hand-in is admission, not verification: the full check is the lead's at promotion and your continuous integration's at the pull request. Nothing here corrals an Agent beyond what Git itself refuses; where a check remains, it tells and does not block. None of it needs Ronin Services. And <em>Use the checkout</em> remains a complete, first-class way to work; many repositories never need review machinery. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p>
+  </aside>
 
-    <aside class="pbs-boundary" aria-labelledby="boundary-title"><h2 id="boundary-title">Coordination, not confinement</h2><p>Worktrees prevent accidental collisions; they are not a security boundary, and <em>Use the checkout</em> remains a complete, first-class way to work — many repositories never need review machinery. An Agent's authority on the machine is governed by the machine, not by which folder it works in. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p></aside>
-
-    <section class="pbs-related"><div><p class="section-label">Next explanation</p><h2>See where Worktrees sit among the coordination choices.</h2><p>Messages, the team wipeboard, and Worktrees are separate, optional Routines — take only what the job needs.</p><p>Ronin Cowork is free and open source. Loading it joins a community of people who run their Agents on their own machines, with their own provider accounts — never locked into one.</p></div><div class="pbs-actions"><a class="button" href="../agent-coordination/">Agent coordination</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div></section>
-  </main><script src="../../site-shell.js"></script><footer class="site-footer"><span>Ronin · parallel work without collisions</span><a href="../">All explainers</a></footer>
+  <section class="pbs-related">
+    <div>
+      <p class="section-label">Next explanation</p>
+      <h2>See where Worktrees sit among the coordination choices.</h2>
+      <p>Messages, the Team wipeboard, and Worktrees are separate, optional Routines. Take only what the job needs.</p>
+    </div>
+    <div class="pbs-actions"><a class="button" href="../agent-coordination/">Agent coordination</a><a class="button button--primary" href="../../load-ronin.html">Load Ronin →</a></div>
+  </section>
+</main><script src="../../site-shell.js"></script><footer class="site-footer"><span>Ronin · parallel work without collisions</span><a href="../">Ronin Blog</a></footer>
 </body></html>

@@ -15,8 +15,9 @@ landing_page → load_ronin → install_ronin → cowork_setup → cowork
 This repository serves `landing_page`, `load_ronin`, the explainer library, and the template
 library (`library/`, below). The explainer library lives at `explainers/` (linked from the root header). Its currently indexed members are the
 Workbench, Agent coordination, Cowork-and-Services, and AI-agents-on-a-virtual-machine
-explainers, plus the standalone `vpn_tailscale` and `tmux_serve` guides at their original root
-paths. The PBS routes and their evidence/freshness ownership are recorded in
+explainers, the Ronin Worktrees explainer (one page: the topic, then the how-to journey;
+it absorbed the former Checkouts and Worktrees page on 2026-09-08), plus the standalone
+`vpn_tailscale` and `tmux_serve` guides at their original root paths. The PBS routes and their evidence/freshness ownership are recorded in
 `explainers/public-content.json`. `explainers/agent_teams/` and its use-case pages
 (`developer_team`, `fitness_team`, `home_management_team`, `personal_assistant_team`), plus
 `explainers/customization/`, remain reachable at their published URLs but are unlinked migration
@@ -107,9 +108,14 @@ system, analytics, account gate, or external asset request without a decision th
 document first. The template library's generated page is inside this boundary; its JSON is
 committed under `dist/` for HQ and never served here.
 
-The one piece of hosting configuration is `staticwebapp.config.json`, which returns 404 for
+The one piece of hosting configuration is `staticwebapp.config.json`. It returns 404 for
 `/wip/*` so working documents committed to the repository are never publicly served (owner,
-2026-08-22). It adds no build step and changes nothing else about serving.
+2026-08-22), and 404 for `/dist/*`. It also carries permanent redirects for retired explainer
+routes, currently `/explainers/checkouts-and-worktrees/` → `/explainers/ronin-worktrees/`
+(owner, 2026-09-08: one Worktrees explainer, topic plus how-to, rather than two pages). A
+retired route keeps a small pointer page in the repository so local previews and the site
+checker's link gate still resolve it. The configuration adds no build step and changes
+nothing else about serving.
 
 ## Syncthing
 
