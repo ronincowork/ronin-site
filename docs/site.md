@@ -14,7 +14,7 @@ landing_page → load_ronin → install_ronin → cowork_setup → cowork
 
 This repository serves `landing_page`, `load_ronin`, the explainer library, and the template
 library (`library/`, below). The explainer library lives at `explainers/` (linked from the root header). Its currently indexed members are the
-Workbench, Agent coordination, Cowork-and-Services, and AI-agents-on-a-virtual-machine
+Workbench, Agent coordination, Cowork-and-Services, the Agent personality discussion, and AI-agents-on-a-virtual-machine
 explainers, the Ronin Worktrees explainer (one page: the topic, then the how-to journey;
 it absorbed the former Checkouts and Worktrees page on 2026-09-08), plus the standalone
 `vpn_tailscale` and `tmux_serve` guides at their original root paths. The PBS routes and their evidence/freshness ownership are recorded in
