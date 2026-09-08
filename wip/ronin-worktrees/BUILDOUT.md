@@ -1,23 +1,54 @@
-# Ronin Blog how-to: the managed Worktrees team journey
+# Ronin Blog: one Worktrees explainer, topic plus how-to
 
-Editorial buildout for one new public explainer. Owner: `worktrees_explainer_fable`
-(site-refresh team, desk `team/site-refresh/worktrees_explainer_fable`). Status: **draft
-for Glen's review**. Nothing here is public; `/wip/*` answers 404 in production.
+Editorial buildout for consolidating the site's worktree explainers into one page. Owner:
+`worktrees_explainer_fable` (site-refresh team, desk
+`team/site-refresh/worktrees_explainer_fable`). Status: **draft for Glen's review**.
+Nothing here is public; `/wip/*` answers 404 in production.
 
-- Draft page: `wip/worktrees-journey/index.html` (open it locally beside the live
-  explainers; it uses the shared tokens and the explainer stylesheet by relative path).
-- Proposed public route, if approved: `explainers/worktrees-team-journey/` with the
-  title **From worktree to release**. Route and title are Glen's call.
+- Draft page: `wip/ronin-worktrees/index.html`.
+- Proposed public route: **replace** `explainers/ronin-worktrees/` with this page and
+  **absorb** `explainers/checkouts-and-worktrees/` into it. The checkouts URL stays alive
+  (site contract: keep published URLs stable) as a one-paragraph pointer to the
+  consolidated page, or as a hosting redirect if Glen prefers one; either way the index
+  and the landing quilt list one worktrees entry, not two.
 
-## The job of the article
+## Glen's direction (2026-09-08)
 
-The two existing worktree explainers answer *what* (Ronin Worktrees: the two switches and
-the loop) and *which* (Checkouts and Worktrees: choose a model per repository). Neither
-walks a person through the whole journey as a sequence of people and moments: the owner
-marks a lead, Agents are born with worktrees, they commit and hand in, the lead rules on
-conflicts and promotes, contributors close, the owner merges the release. This page is
-that walk, in plain language, for someone who has just watched a Team work on their
-repository and wants to know where the work is and who decides what next.
+The blog needs two kinds of explainer: a **topical** piece, and a **drill-down with
+instructions** where the topic has a procedure. Worktrees should not be split across a
+"worktrees in general" page and a "how we deal with it" page, and the team journey is a
+component of the worktrees explainer, not a page of its own. This draft follows that: one
+page, two halves, with in-page anchors `#topic` and `#howto` so the index and the landing
+quilt can point at either half.
+
+## Page shape
+
+1. **Hero**: the two questions in one kicker, a lede that states the problem and both
+   halves, and a two-card pointer to the halves.
+2. **The topic**: one folder shows one branch (the collision problem); the two models side
+   by side with their diagrams, chosen once per repository; the two branches that are the
+   truth and everything else on loan. Carried over from Checkouts and Worktrees, tightened.
+3. **How to use it in Ronin · setup**: the two switches, per repository. Carried over from
+   Ronin Worktrees.
+4. **How to use it · the journey**: the read-only "where does my Team's work stand" brief,
+   the six-station strip, what to notice, then one section per station (mark a lead;
+   worktree at birth; commit and hand in; when two hand-ins disagree; review, verify,
+   promote; close when told; you approve the release), each with a short "where the tools
+   or macros help" note, and an "in short" who-does-what list.
+5. **Boundary** and **next explanation** (Agent coordination).
+
+Dropped from the two existing pages, deliberately: the three-Teams rails diagram, the
+five-verbs comparison table, the separate "who cleans up" section (its substance is one
+sentence in the branches section and one in the close station), and the repeated
+setup-and-loop summary. They were the overlap Glen pointed at.
+
+## The job of the how-to half
+
+The two existing pages answer *what* (the two switches and the loop) and *which* (choose
+a model per repository). Neither walks a person through the whole journey as a sequence
+of people and moments. The how-to half is that walk, in plain language, for someone who
+has just watched a Team work on their repository and wants to know where the work is and
+who decides what next.
 
 Question the page answers: **Several Agents just worked on my repository. How does their
 work reach my stable branch, and who decides what along the way?**
@@ -123,23 +154,31 @@ Two smaller wording points: the Team's review line is local, as the brief says; 
   overflow in either capture. Keyboard order and dark theme were not exercised in a real
   browser yet; that stays on the publication list.
 - Every public claim above is traced to a file in the evidence map.
+- Two defects found in the carried-over diagram markup and fixed here: at phone width the
+  two model cards overflowed the viewport (the one-column grid used `1fr`, whose minimum
+  is the diagram's 360px), and the "cut from dev" label sat on top of "local dev ·
+  accepted". The live Checkouts and Worktrees page has the same two defects; absorbing it
+  into this page retires them.
 
 ## Left for publication, if Glen approves
 
-1. Settle route and title; move the page to `explainers/<route>/index.html`, change the
-   stylesheet paths to `../../ronin-tokens.css` and `../pbs.css`, add the canonical URL
-   and a description.
-2. Add an entry to `explainers/public-content.json` (evidence authorities as in the map
-   above; review trigger: hand-in, promotion, lead designation, or release-PR contracts
-   change).
-3. Add the page to `explainers/index.html` and the landing quilt, in whatever position
-   the site-refresh journey gives the worktree pages.
+1. Replace `explainers/ronin-worktrees/index.html` with this page; change the stylesheet
+   paths to `../../ronin-tokens.css` and `../pbs.css`; keep the existing canonical URL.
+2. Turn `explainers/checkouts-and-worktrees/index.html` into a short pointer page (or add
+   a redirect route in `staticwebapp.config.json`, Glen's call), and merge its manifest
+   entry into the `ronin-worktrees` entry in `explainers/public-content.json`, adding the
+   lead-designation and release-PR contracts to the review trigger.
+3. Collapse the two worktree entries in `explainers/index.html` and the landing quilt
+   into one, in whatever position the site-refresh journey gives it.
 4. Check keyboard order and the dark theme in a real browser at both widths.
 5. Rerun `node scripts/check-site.mjs`, then hand in on this desk for the lead's review.
 
 ## Open questions for Glen
 
-- Route and title (proposal above).
+- Confirm the route: replace `ronin-worktrees` and absorb `checkouts-and-worktrees`, with
+  the old URL kept as a pointer or redirect.
+- Whether the same topic-plus-how-to shape should become the pattern for other Ronin Blog
+  pages that carry a procedure (the tmux and Tailscale guides already are).
 - Whether the page should print any commands at all, or leave every command to the
   Checkouts page and the docs and stay purely narrative.
 - Whether the "when nobody is marked lead" paragraph belongs on a public page or reads as
@@ -150,4 +189,7 @@ Two smaller wording points: the Team's review line is local, as the brief says; 
 - 2026-09-08 · read packet, desk status, wipeboard, both worktree explainers, coordination
   explainers, site contract, template, checker, `worktrees.md`, `desks.md`,
   `team-promotion.md`, `desk-state.md`, catalog rows, promotion CLI and PR source.
-- 2026-09-08 · wrote this buildout and the draft page; checked; committed on the desk.
+- 2026-09-08 · wrote the buildout and a standalone journey draft; checked; committed.
+- 2026-09-08 · Glen: one worktrees explainer, topic plus how-to, journey as a component.
+  Consolidated both public pages and the journey into `wip/ronin-worktrees/index.html`;
+  removed the standalone journey draft; checked; committed.
