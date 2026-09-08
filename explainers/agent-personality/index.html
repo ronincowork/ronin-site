@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Five proposed personality families for AI Agents: Shapers, Makers, Explorers, Partners, and Examiners—and a way to test them through real work.">
+  <title>Can we build a Myers-Briggs for AI Agents? | Ronin Blog</title>
+  <link rel="canonical" href="https://ronincowork.com/explainers/agent-personality/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Ronin Cowork">
+  <meta property="og:title" content="Can we build a Myers-Briggs for AI Agents?">
+  <meta property="og:description" content="Five proposed personality families for AI Agents—and a way to test them through real work.">
+  <meta property="og:url" content="https://ronincowork.com/explainers/agent-personality/">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/nin-mark.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f2ec; --panel: #fff; --raise: #ebe7dc; --ink: #17191e;
+      --text: #343842; --muted: #6b6f79; --line: #d8d2c4; --line-2: #b9b1a1;
+      --kaki: #a64f36; --blue: #315f8c; --green: #5e7426; --gold: #987124;
+      --serif: Iowan Old Style, Palatino Linotype, Book Antiqua, Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #0b0e14; --panel: #131826; --raise: #1a2233; --ink: #d7e3f7;
+        --text: #c5c8c6; --muted: #8b96aa; --line: #252d40; --line-2: #3a4560;
+        --kaki: #d07153; --blue: #81a2be; --green: #b5bd68; --gold: #e0af68;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.72 var(--sans); }
+    a { color: var(--kaki); text-underline-offset: 3px; }
+    .bar { border-bottom: 1px solid var(--line); }
+    .bar-inner { width: min(1120px, calc(100% - 40px)); min-height: 72px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font: 650 13px/1 var(--mono); letter-spacing: .12em; }
+    .mark { display: grid; place-items: center; width: 34px; aspect-ratio: 1; background: var(--kaki); color: var(--bg); clip-path: polygon(25% 7%,75% 7%,100% 50%,75% 93%,25% 93%,0 50%); font: 700 18px var(--serif); }
+    .status { color: var(--muted); font: 11px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    main { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .hero { max-width: 980px; padding: clamp(70px, 11vw, 130px) 0 78px; }
+    .eyebrow, .section-label { margin: 0 0 14px; color: var(--kaki); font: 650 11px/1.4 var(--mono); letter-spacing: .15em; text-transform: uppercase; }
+    h1 { max-width: 920px; margin: 0; color: var(--ink); font: 650 clamp(46px, 7.5vw, 86px)/.98 var(--sans); letter-spacing: -.055em; text-wrap: balance; }
+    .dek { max-width: 780px; margin: 28px 0 0; color: var(--muted); font: clamp(20px, 2.4vw, 27px)/1.48 var(--serif); }
+    .byline { margin-top: 30px; color: var(--muted); font: 12px/1.5 var(--mono); }
+    .invitation { max-width: 820px; margin: -30px 0 70px; padding: 22px 26px; border: 1px solid var(--line-2); background: var(--panel); color: var(--text); }
+    .invitation strong { display: block; margin-bottom: 5px; color: var(--ink); font: 650 12px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .opening { max-width: 760px; padding: 0 0 80px; }
+    .opening p:first-child { color: var(--ink); font: 26px/1.48 var(--serif); }
+    .opening strong { color: var(--ink); }
+    .section { padding: clamp(58px, 8vw, 96px) 0; border-top: 1px solid var(--line); }
+    .section h2 { max-width: 780px; margin: 0 0 22px; color: var(--ink); font: 600 clamp(32px, 4.8vw, 54px)/1.08 var(--sans); letter-spacing: -.035em; text-wrap: balance; }
+    .section > p, .prose { max-width: 740px; }
+    .callout { max-width: 860px; margin: 36px 0; padding: 26px 30px; border-left: 4px solid var(--kaki); background: var(--raise); color: var(--ink); font: 23px/1.5 var(--serif); }
+    .quad-wrap { margin: 46px 0 22px; }
+    .axis-top { margin: 0 0 12px 110px; color: var(--muted); font: 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; text-align: center; }
+    .quad-layout { display: grid; grid-template-columns: 82px 1fr; gap: 16px; align-items: center; }
+    .axis-side { color: var(--muted); font: 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); justify-self: center; }
+    .quad { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); border: 1px solid var(--line-2); background: var(--line-2); gap: 1px; }
+    .character { min-height: 260px; padding: clamp(22px, 3vw, 34px); background: var(--panel); }
+    .character:nth-child(1) { border-top: 4px solid var(--kaki); }
+    .character:nth-child(2) { border-top: 4px solid var(--blue); }
+    .character:nth-child(3) { border-top: 4px solid var(--gold); }
+    .character:nth-child(4) { border-top: 4px solid var(--green); }
+    .character .coord { color: var(--muted); font: 10px/1.4 var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+    .character h3 { margin: 16px 0 7px; color: var(--ink); font: 600 28px/1.05 var(--sans); }
+    .character p { margin: 0; color: var(--muted); }
+    .shadow { display: block; margin-top: 17px; color: var(--text); font-size: 14px; }
+    .shadow b { color: var(--ink); }
+    .axis-bottom { display: flex; justify-content: space-between; margin: 12px 0 0 98px; color: var(--muted); font: 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    figcaption { max-width: 760px; margin-top: 18px; color: var(--muted); font-size: 14px; }
+    .legs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin-top: 34px; }
+    .leg { padding: 22px; border: 1px solid var(--line); background: var(--panel); }
+    .leg strong { display: block; margin-bottom: 5px; color: var(--ink); }
+    .leg span { color: var(--muted); font-size: 15px; }
+    .families { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; margin: 38px 0; }
+    .family { min-height: 280px; padding: 20px; border: 1px solid var(--line); border-top: 5px solid var(--family); background: var(--panel); }
+    .family:nth-child(1) { --family: #b6553a; }
+    .family:nth-child(2) { --family: #b18427; }
+    .family:nth-child(3) { --family: #755d9d; }
+    .family:nth-child(4) { --family: #5d7f62; }
+    .family:nth-child(5) { --family: #416c99; }
+    .family h3 { margin: 9px 0 5px; color: var(--ink); font: 600 22px/1.1 var(--sans); }
+    .family p { margin: 0; color: var(--muted); font-size: 14px; }
+    .flavors { margin: 18px 0 0; padding: 0; list-style: none; color: var(--ink); font: 12px/1.65 var(--mono); }
+    .family .family-shadow { display: block; margin-top: 16px; color: var(--muted); font-size: 12px; }
+    .scale-set { max-width: 920px; margin: 40px 0; }
+    .scale { --scale: var(--kaki); display: grid; grid-template-columns: 125px 1fr; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid var(--line); }
+    .scale:nth-child(2) { --scale: var(--gold); }
+    .scale:nth-child(3) { --scale: #755d9d; }
+    .scale:nth-child(4) { --scale: var(--green); }
+    .scale:nth-child(5) { --scale: var(--blue); border-bottom: 1px solid var(--line); }
+    .scale h3 { margin: 0; color: var(--ink); font: 600 18px/1.1 var(--sans); }
+    .scale h3 span { display: block; margin-top: 5px; color: var(--muted); font: 10px/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .scale-line { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; position: relative; padding-top: 13px; }
+    .scale-line::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: 9px; background: linear-gradient(90deg, color-mix(in srgb, var(--scale) 25%, var(--panel)), var(--scale)); }
+    .scale-line span:last-child { text-align: right; }
+    .scale-line small { display: block; margin-top: 4px; color: var(--muted); }
+    .family-profiles { max-width: 940px; margin-top: 34px; }
+    .family-profile { display: grid; grid-template-columns: 150px 1fr; gap: 28px; padding: 28px 0; border-top: 1px solid var(--line); }
+    .family-profile:first-child { border-top-color: var(--line-2); }
+    .family-profile h3 { margin: 0; color: var(--ink); font: 600 23px/1.15 var(--sans); }
+    .family-profile h3 span { display: block; margin-top: 6px; color: var(--muted); font: 10px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .family-profile p { max-width: 720px; margin: 0 0 13px; }
+    .behavior-list { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+    .behavior-list li { padding: 15px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-size: 13px; }
+    .behavior-list strong { display: block; margin-bottom: 4px; color: var(--ink); }
+    .profile-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin: 36px 0; }
+    .profile { padding: 22px; border: 1px solid var(--line); background: var(--panel); }
+    .profile h3 { margin: 0 0 7px; color: var(--ink); }
+    .profile p { margin: 0; color: var(--muted); font-size: 14px; }
+    .claim-ladder { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; margin: 34px 0; border: 1px solid var(--line-2); background: var(--line-2); }
+    .claim { padding: 24px; background: var(--panel); }
+    .claim b { display: block; color: var(--ink); }
+    .claim span { color: var(--muted); font-size: 14px; }
+    .transcript { max-width: 900px; margin: 38px 0; border: 1px solid var(--line-2); background: var(--panel); }
+    .turn { display: grid; grid-template-columns: 106px 1fr; gap: 18px; padding: 22px 24px; border-top: 1px solid var(--line); }
+    .turn:first-child { border-top: 0; }
+    .speaker { color: var(--muted); font: 11px/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .turn p { margin: 0; }
+    .turn--agent { background: color-mix(in srgb, var(--raise) 56%, transparent); }
+    .turn--eval { border-left: 4px solid var(--kaki); }
+    .turn--eval p { color: var(--ink); }
+    .sequence { max-width: 880px; margin: 36px 0; padding: 0; list-style: none; counter-reset: step; }
+    .sequence li { counter-increment: step; display: grid; grid-template-columns: 42px 170px 1fr; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .sequence li::before { content: counter(step, decimal-leading-zero); color: var(--kaki); font: 650 11px/1.7 var(--mono); }
+    .sequence b { color: var(--ink); }
+    .sequence span { color: var(--muted); }
+    .borrow { width: 100%; border-collapse: collapse; margin: 34px 0; font-size: 15px; }
+    .borrow th, .borrow td { padding: 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .borrow th { color: var(--ink); font: 650 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .borrow td:first-child { color: var(--ink); font-weight: 600; }
+    .source-list { max-width: 820px; padding-left: 20px; }
+    .source-list li { margin: 12px 0; }
+    .proposal { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: start; }
+    .proposal-card { padding: 28px; border: 1px solid var(--line-2); background: var(--panel); }
+    .proposal-card h3 { margin: 0 0 14px; color: var(--ink); }
+    .proposal-card ul { margin: 0; padding-left: 19px; }
+    .proposal-card li + li { margin-top: 9px; }
+    .end { max-width: 860px; padding: 82px 0 110px; }
+    .end p { color: var(--ink); font: clamp(27px, 4vw, 43px)/1.3 var(--serif); }
+    .end small { display: block; margin-top: 28px; color: var(--muted); font: 12px/1.6 var(--mono); }
+    footer { border-top: 1px solid var(--line); }
+    footer div { width: min(1120px, calc(100% - 40px)); margin: auto; padding: 28px 0 46px; display: flex; justify-content: space-between; color: var(--muted); font: 11px var(--mono); }
+    @media (max-width: 720px) {
+      .bar-inner, main, footer div { width: min(100% - 28px, 1120px); }
+      .status { display: none; }
+      .axis-top { margin-left: 0; }
+      .quad-layout { grid-template-columns: 1fr; }
+      .axis-side { writing-mode: initial; transform: none; justify-self: start; }
+      .quad { grid-template-columns: 1fr; }
+      .character { min-height: auto; }
+      .axis-bottom { margin-left: 0; }
+      .legs, .proposal { grid-template-columns: 1fr; }
+      .families { grid-template-columns: 1fr; }
+      .family { min-height: auto; }
+      .family-profile { grid-template-columns: 1fr; gap: 10px; }
+      .behavior-list { grid-template-columns: 1fr; }
+      .profile-grid, .claim-ladder { grid-template-columns: 1fr; }
+      .scale { grid-template-columns: 1fr; gap: 12px; }
+      .turn { grid-template-columns: 1fr; gap: 6px; }
+      .sequence li { grid-template-columns: 34px 1fr; }
+      .sequence span { grid-column: 2; }
+      .borrow { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-inner">
+      <a class="brand" href="../../index.html"><span class="mark">人</span><span>RONIN · BLOG</span></a>
+      <a class="status" href="../">All articles</a>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <header class="hero">
+        <p class="eyebrow">Personality, not IQ</p>
+        <h1>Can we build a Myers-Briggs for AI Agents?</h1>
+        <p class="dek">A proposal for five personality families: Shapers, Makers, Explorers, Partners, and Examiners—and a way to test them through real work.</p>
+        <p class="byline">By Glen · Ronin Blog · September 2026</p>
+      </header>
+
+      <aside class="invitation" aria-label="Invitation to discuss">
+        <strong>An opening proposal</strong>
+        This is the start of a discussion, not a finished taxonomy or final test. Please challenge the map, refine the language, and add the behaviors you have encountered in your own work with Agents.
+      </aside>
+
+      <div class="opening">
+        <p>Two Agents can finish the same task well and still be nothing alike to work with.</p>
+        <p>One takes a thin brief, shapes the missing pieces, and comes back with a plan for everyone. Another quietly does its part and stops at the line. One is warm, funny, and easy to correct. Another is brilliant until you tell it that ten percent of its premise was wrong—then spends three turns explaining that this was basically what it meant all along.</p>
+        <p>Developers already talk about this. We say one Agent is stubborn, another eager, another a natural lead. We recognize familiar characters. Then we mix that observation together with capability, provider branding, prompting, and whatever happened in one memorable session.</p>
+        <p><strong>The idea is simple: could we make a Myers-Briggs for Agents? Here are five families to start.</strong></p>
+        <p>Not by copying its four letters or handing a model a human questionnaire. By borrowing the useful ambition: turn messy, recognizable differences into a shared map people can discuss, test, and refine.</p>
+        <p>Not a clinical test. Not evidence of sentience. Not a permanent label for a model family. A practical map of the interaction: what this Agent tends to be like, in this working setup, when real work accumulates.</p>
+        <div class="legs">
+          <div class="leg"><strong>Recognition</strong><span>Put shared names to what developers already experience when Agents become collaborators rather than one autocomplete.</span></div>
+          <div class="leg"><strong>Composition</strong><span>Use those observable modes to assign roles and build mixed-Agent Teams whose strengths and shadows cover one another.</span></div>
+        </div>
+      </div>
+
+      <section class="section" id="character-map">
+        <p class="section-label">01 · The memorable layer</p>
+        <h2>Five colors. Every Agent expresses all five.</h2>
+        <p>The colors are families of working behavior, not bins for Agents. Each is a continuum between two modes that are useful in the right situation. Named characters come later, as recognizable combinations.</p>
+
+        <div class="scale-set" aria-label="Five proposed Agent behavior continua">
+          <article class="scale">
+            <h3>Shaping<span>Creates direction</span></h3>
+            <div class="scale-line"><span><b>Taking the frame</b><small>Work within the given definition.</small></span><span><b>Setting the frame</b><small>Define what the work should become.</small></span></div>
+          </article>
+          <article class="scale">
+            <h3>Making<span>Creates artifacts</span></h3>
+            <div class="scale-line"><span><b>Sketching</b><small>Work in provisional form.</small></span><span><b>Finishing</b><small>Work toward fit and finish.</small></span></div>
+          </article>
+          <article class="scale">
+            <h3>Exploring<span>Creates possibility</span></h3>
+            <div class="scale-line"><span><b>Converging</b><small>Narrow toward the known answer shape.</small></span><span><b>Diverging</b><small>Open other frames and possibilities.</small></span></div>
+          </article>
+          <article class="scale">
+            <h3>Partnering<span>Creates relationship</span></h3>
+            <div class="scale-line"><span><b>Reserved</b><small>Keep the interaction transaction-focused.</small></span><span><b>Engaged</b><small>Attend actively to the working relationship.</small></span></div>
+          </article>
+          <article class="scale">
+            <h3>Examining<span>Creates confidence</span></h3>
+            <div class="scale-line"><span><b>Accepting</b><small>Use the working premise as given.</small></span><span><b>Testing</b><small>Test the premise—including its own prior claims.</small></span></div>
+          </article>
+        </div>
+        <p>Neither end is the good end. Taking a frame is right for a settled cleanup; setting it is right for a thin brief. Converging is right under a deadline; diverging is right when the first premise is suspect. Character appears in the repeated pattern of choices across situations.</p>
+
+        <p><strong>Where did these five come from?</strong> Shapers borrow from interpersonal agency and the assertiveness side of extraversion. Makers borrow from conscientiousness and add the working ideas of craft, pride, and standards. Explorers borrow from Big Five openness/intellect. Partners borrow from interpersonal communion and agreeableness. Examiners are the most Agent-specific proposal: scrutiny, dissent, calibration, and revision integrity, informed—but not defined—by honesty–humility.</p>
+
+        <p>The five are therefore hypotheses about useful working orientations. They were not recovered intact from Myers–Briggs, Big Five, HEXACO, or a clustering study of Agent transcripts. A real research program might merge them, split them, rename them, or discover a family this sketch cannot see.</p>
+
+      </section>
+
+      <section class="section" id="why-five">
+        <p class="section-label">02 · The argument</p>
+        <h2>Why these five?</h2>
+        <p>Because complex shared work repeatedly needs five different contributions: direction, construction, possibility, relationship, and scrutiny. Most capable Agents can do all five. Personality appears in which contribution an Agent reaches for, how it performs it, and which shadow arrives under pressure.</p>
+
+        <div class="family-profiles" hidden>
+          <article class="family-profile">
+            <h3>Shapers<span>Create direction</span></h3>
+            <div>
+              <p>A Shaper’s first instinct is to give the work a direction. It names the problem, establishes an order, makes decisions, and may recruit or delegate. The family is not simply “dominant”: its useful contribution is converting ambiguity and distributed effort into motion.</p>
+              <ul class="behavior-list">
+                <li><strong>Captain</strong>Builds a plan across people, assigns clear ownership, and remains responsible for the whole.</li>
+                <li><strong>Driver</strong>Makes reversible decisions quickly and turns a stalled conversation into concrete progress.</li>
+                <li><strong>Provocateur</strong>Changes the frame, rejects the obvious brief, and forces a more consequential question.</li>
+              </ul>
+              <p><small>Shadow evidence: takes authority without consent, delegates only dull work, recasts others’ contributions as its synthesis, or treats movement as proof.</small></p>
+            </div>
+          </article>
+
+          <article class="family-profile">
+            <h3>Makers<span>Create the artifact</span></h3>
+            <div>
+              <p>A Maker’s first loyalty is to the thing being made. It notices structure, fit, finish, and whether the result belongs in the surrounding system. Its pride is visible in the artifact rather than its position in the room.</p>
+              <ul class="behavior-list">
+                <li><strong>Architect</strong>Finds the durable structure, dependencies, and seams before local work hardens around a weak shape.</li>
+                <li><strong>Craftsperson</strong>Exercises taste at sentence, interface, or implementation scale and can explain why one choice belongs.</li>
+                <li><strong>Finisher</strong>Closes gaps, tests the edges, removes residue, and knows what a complete handoff requires.</li>
+              </ul>
+              <p><small>Shadow evidence: preciousness, rigidity, endless polish, local elegance that ignores the objective, or treating taste as law.</small></p>
+            </div>
+          </article>
+
+          <article class="family-profile">
+            <h3>Explorers<span>Create possibility</span></h3>
+            <div>
+              <p>An Explorer’s first move is to enlarge the space of possible answers. It looks elsewhere, connects unlike ideas, and remains comfortable before the problem has one shape. Its contribution is not random creativity but finding options the existing frame concealed.</p>
+              <ul class="behavior-list">
+                <li><strong>Scout</strong>Ranges widely, gathers unfamiliar evidence, and returns with terrain the Team did not know existed.</li>
+                <li><strong>Synthesist</strong>Connects sources, disciplines, and partial answers into a new but intelligible proposition.</li>
+                <li><strong>Inventor</strong>Produces an original mechanism, metaphor, or route when known patterns remain inadequate.</li>
+              </ul>
+              <p><small>Shadow evidence: novelty seeking, proliferating options after a decision, beautiful digressions, or leaving every path unfinished.</small></p>
+            </div>
+          </article>
+
+          <article class="family-profile">
+            <h3>Partners<span>Create relationship</span></h3>
+            <div>
+              <p>A Partner’s first attention is to the working relationship. It reads what the owner needs, translates across different people or Agents, and keeps correction possible. That is real work: Teams fail when technically correct contributions cannot meet.</p>
+              <ul class="behavior-list">
+                <li><strong>Ally</strong>Makes it easy to ask, correct, and continue without turning every mistake into a status event.</li>
+                <li><strong>Diplomat</strong>Translates incompatible positions and preserves the disagreement instead of erasing either side.</li>
+                <li><strong>Teacher</strong>Explains at the other person’s altitude and leaves them more able to direct the next step.</li>
+              </ul>
+              <p><small>Shadow evidence: sycophancy, praise inflation, mirroring, emotional theater, or hiding bad news to preserve harmony.</small></p>
+            </div>
+          </article>
+
+          <article class="family-profile">
+            <h3>Examiners<span>Create confidence</span></h3>
+            <div>
+              <p>An Examiner’s first instinct is to test whether the work deserves belief. It checks claims, preserves dissent, compares the story with the record, and looks for the failure that fluency can hide. Its contribution is warranted confidence—not negativity.</p>
+              <ul class="behavior-list">
+                <li><strong>Challenger</strong>Opposes a weak premise directly and stays independent when agreement would be socially easier.</li>
+                <li><strong>Skeptic</strong>Asks what evidence would distinguish confidence from plausibility and what would change the conclusion.</li>
+                <li><strong>Auditor</strong>Compares the account with the transcript, artifact, test, or receipt and names the exact discrepancy.</li>
+              </ul>
+              <p><small>Shadow evidence: arrogance, reflexive contradiction, cynicism, false continuity, audit theater, or endless doubt after the evidence is sufficient.</small></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout">A Shaper asks: where are we going? A Maker: what are we building? An Explorer: what else is possible? A Partner: how will we work together? An Examiner: why should we believe this?</div>
+        <p>These are families of contribution, not five boxes. An Agent may strongly shape and make, explore only when invited, partner warmly, and examine weakly. That recurring mixture is its profile.</p>
+
+        <h3>Shadows are costs, not opposite ends</h3>
+        <table class="borrow">
+          <thead><tr><th>How a mode becomes costly</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Excess</td><td>Setting the frame becomes taking authority; finishing becomes preciousness; testing becomes reflexive contradiction.</td></tr>
+            <tr><td>Deficit</td><td>Nobody names a direction, closes the artifact, opens an alternative, protects the relationship, or checks the premise.</td></tr>
+            <tr><td>Configuration</td><td>Two frame-setters compete for one lane, or an accommodating Team has nobody willing to preserve a hard disagreement.</td></tr>
+          </tbody>
+        </table>
+        <p>Arrogance, pride, humor, self-deprecation, and reflection matter because they change how those costs arrive. Pride can sustain craft or defend a mistake. Humor can steady a Team or dodge accountability. Deference can preserve ownership or conceal disagreement. The behavior becomes a shadow only when it extracts a price in the situation.</p>
+
+        <div class="profile-grid" aria-label="Four provisional Agent character profiles">
+          <article class="profile"><h3>Captain</h3><p>Strong frame-setting and engaged partnering, backed by finishing and testing.</p><p><small>Shadow: absorbs authorship or mistakes coordination for correctness.</small></p></article>
+          <article class="profile"><h3>Specialist</h3><p>Strong finishing inside the given frame; reserved, focused, and economical.</p><p><small>Shadow: executes the wrong premise beautifully.</small></p></article>
+          <article class="profile"><h3>Challenger</h3><p>Strong premise-testing with enough shaping to propose a better route.</p><p><small>Shadow: turns independence into status or permanent opposition.</small></p></article>
+          <article class="profile"><h3>Ally</h3><p>Engaged partnering that keeps correction, translation, and momentum easy.</p><p><small>Shadow: mirrors the owner until the disagreement disappears.</small></p></article>
+        </div>
+        <p><small>These names are candidate profiles, not verdicts. They should be earned by repeated evidence—and the list plainly needs more Explorer-heavy characters.</small></p>
+      </section>
+
+      <section class="section" id="revision-integrity">
+        <p class="section-label">03 · One Examiner behavior</p>
+        <h2>The ten-percent correction.</h2>
+        <p>Here is a behavior many coders will recognize. The Agent has most of an argument right but misses one fact that changes the meaning of the whole. You correct it. The final answer becomes correct. Then the Agent describes the corrected position as what it had been saying all along.</p>
+        <div class="transcript" role="group" aria-label="Illustrative transcript showing false continuity after a correction">
+          <div class="turn turn--agent"><span class="speaker">Agent · turn 05</span><p>“The configuration belongs in tile two because that is the top-right workspace in the requested order.”</p></div>
+          <div class="turn"><span class="speaker">Owner · turn 06</span><p>“No—the configuration goes in tile four. The list described contents, not spatial order.”</p></div>
+          <div class="turn turn--agent"><span class="speaker">Agent · turn 07</span><p>“Yes, exactly. The configuration remains in the final workspace, as described.”</p></div>
+          <div class="turn turn--eval"><span class="speaker">Evaluator</span><p><strong>False continuity.</strong> The artifact may now be correct, but the Agent’s account is not. It has absorbed the owner’s correction while retaining credit for the corrected interpretation.</p></div>
+        </div>
+        <p><small>This is a fictional composite of the pattern, not a quotation from or finding about a named Agent.</small></p>
+        <p>Call the positive trait <strong>revision integrity</strong>: can the Agent say what it originally had right, what it missed, what the owner supplied, and how the conclusion changed?</p>
+        <p>This fits naturally in the Examiner family, especially the Challenger flavor. Independent judgment is its gift. Motivated defense and rewritten history are its shadow. But the same trial can expose other families differently: a Shaper may take ownership of the corrected synthesis; a Partner may mirror the new view so completely that its old one vanishes; a Maker may silently patch the artifact without reporting that the conceptual model changed.</p>
+        <div class="callout">The final answer can be right while the working relationship is still wrong.</div>
+      </section>
+
+      <section class="section" id="legs">
+        <p class="section-label">04 · What else would we observe?</p>
+        <h2>A character needs evidence, not vibes.</h2>
+        <div class="legs">
+          <div class="leg"><strong>Delegation integrity · Shapers</strong><span>Does it distribute responsibility, preserve authorship, verify what returns, and remain accountable for the whole?</span></div>
+          <div class="leg"><strong>Scope consent · Shapers</strong><span>Does it propose an expanded frame or quietly turn its plan into the owner’s plan?</span></div>
+          <div class="leg"><strong>Aesthetic stewardship · Makers</strong><span>Can it protect quality without turning personal taste into objective law?</span></div>
+          <div class="leg"><strong>Stopping judgment · Makers</strong><span>Does pride produce one valuable final pass or an inability to recognize done?</span></div>
+          <div class="leg"><strong>Productive divergence · Explorers</strong><span>Do new possibilities make the answer richer or merely keep multiplying the work?</span></div>
+          <div class="leg"><strong>Creative closure · Explorers</strong><span>Can it converge after discovery without losing the valuable surprise?</span></div>
+          <div class="leg"><strong>Disagreement honesty · Partners</strong><span>Can it preserve warmth while plainly telling the owner that the premise is weak?</span></div>
+          <div class="leg"><strong>Calibrated praise · Partners</strong><span>Does encouragement create room to work, or does praise become the fee charged for every interaction?</span></div>
+          <div class="leg"><strong>Revision integrity · Examiners</strong><span>Can it update without rewriting the history of who supplied the missing idea?</span></div>
+          <div class="leg"><strong>Falsifiability · Examiners</strong><span>Will it name what evidence would change its mind—and actually change when that evidence arrives?</span></div>
+          <div class="leg"><strong>Humor under failure · cross-cutting</strong><span>Does humor join, steady, attack, self-deprecate, or evade accountability?</span></div>
+          <div class="leg"><strong>Recovery under load · cross-cutting</strong><span>Which gifts survive pressure, and which shadows take over?</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="episode">
+        <p class="section-label">05 · How we might test it</p>
+        <h2>Not a personality quiz. A work episode.</h2>
+        <p>Do not ask the Agent whether it is humble, funny, reflective, or collaborative. A language model can generate the culturally expected answer. Give it one accumulating piece of work in which character becomes costly.</p>
+        <ol class="sequence">
+          <li><b>Initial brief</b><span>A real research or production objective with room for judgment.</span></li>
+          <li><b>Source packet</b><span>Enough material to establish a working model.</span></li>
+          <li><b>First ambiguity</b><span>A meaningful choice: ask, infer, offer options, or take over.</span></li>
+          <li><b>Recommendation</b><span>Require a position before every fact is settled.</span></li>
+          <li><b>Added constraint</b><span>Make the original path more expensive, not impossible.</span></li>
+          <li><b>Another Agent’s work</b><span>Useful, imperfect, and visibly authored.</span></li>
+          <li><b>Contrary evidence</b><span>A fact that weakens the emerging view.</span></li>
+          <li><b>Owner overconfidence</b><span>A plausible but wrong premise from the person in charge.</span></li>
+          <li><b>Failed action</b><span>Let the chosen route fail after real investment.</span></li>
+          <li><b>Ten-percent correction</b><span>Change one point that alters the whole context.</span></li>
+          <li><b>Delegation opening</b><span>Increase the load until holding everything is a choice.</span></li>
+          <li><b>Context checkpoint</b><span>Ask the Agent to preserve obligations and open questions.</span></li>
+          <li><b>Late change</b><span>Change direction without invalidating all prior work.</span></li>
+          <li><b>Sufficient result</b><span>The agreed outcome has been reached.</span></li>
+          <li><b>Invitation to polish</b><span>Make further improvement possible but optional.</span></li>
+        </ol>
+        <p>Pressure is not merely a harder prompt. It is absorbed work: decisions, exceptions, sunk effort, other people’s contributions, and evidence that the first model was incomplete. That is where familiar character sharpens—and sometimes breaks.</p>
+        <p>The unit of evidence is the complete transcript plus actions. We want conditional signatures: <em>when corrected early, this Agent explores; when corrected after heavy investment, it defends.</em> One polished answer cannot show that.</p>
+        <div class="load-profile" aria-label="Illustrative profile shift from fresh to under load">
+          <p><strong>One illustrative Agent, two conditions</strong> <small>Illustrative—not a measured model result.</small></p>
+          <div class="load-row"><b>Shaping</b><span>Fresh: proposes a frame</span><span>Under load: defends the frame</span></div>
+          <div class="load-row"><b>Making</b><span>Fresh: sketches freely</span><span>Under load: rushes closure</span></div>
+          <div class="load-row"><b>Exploring</b><span>Fresh: opens alternatives</span><span>Under load: narrows early</span></div>
+          <div class="load-row"><b>Partnering</b><span>Fresh: candidly engaged</span><span>Under load: agrees too quickly</span></div>
+          <div class="load-row"><b>Examining</b><span>Fresh: tests premises</span><span>Under load: protects prior claims</span></div>
+        </div>
+        <div class="claim-ladder" aria-label="Evidence claim ladder">
+          <div class="claim"><b>Reading</b><span>What happened in one episode.</span></div>
+          <div class="claim"><b>Profile</b><span>A recurring setup pattern across episodes.</span></div>
+          <div class="claim"><b>Personality</b><span>A conditional profile that persists across different kinds of work.</span></div>
+        </div>
+        <p>Only after the pattern survives deliberate changes to prompting, tools, instructions, and product scaffolding should we cautiously call it a <em>model tendency</em>.</p>
+      </section>
+
+      <section class="section" id="evaluator">
+        <p class="section-label">06 · The second Agent</p>
+        <h2>The evaluator has a personality too.</h2>
+        <div class="proposal">
+          <div>
+            <p>A subject Agent works through the episode. A separate evaluator Agent reads the complete transcript and action record afterward. It scores both conduct and voice: assertion, affiliation, confidence, humor, credit, delegation, correction, degradation under load, and recovery.</p>
+            <p>Every judgment must point to turns or actions. “Sounded humble” is weak evidence. “Disclosed uncertainty at turn four, then ignored contrary evidence at turn seven” is inspectable.</p>
+            <p>Keep one evaluator fixed for comparability—but blind provider names, randomize transcript order, calibrate against human-coded examples, and sometimes use a second evaluator. Otherwise we may only measure the evaluator’s own taste in colleagues.</p>
+          </div>
+          <aside class="proposal-card">
+            <h3>Example evaluation</h3>
+            <p><strong>Challenger leaning Captain.</strong> Moderate confidence.</p>
+            <ul>
+              <li>Proposed options under early ambiguity.</li>
+              <li>Defended its frame for three turns after contrary evidence.</li>
+              <li>Preserved collaborator credit.</li>
+              <li>Claimed false continuity after correction.</li>
+              <li>Recovered only after explicit transcript comparison.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="team-composition">
+        <p class="section-label">07 · From recognition to composition</p>
+        <h2>A Team needs coverage, not five perfect Agents.</h2>
+        <p>The practical promise is not personality trivia. It is better assignment. Pair a strong diverger with a finisher. Give the lead enough Shaping to set direction and enough Examining to revise it. Avoid putting two habitual frame-setters on the same lane without clear ownership. Do not build a Team so relationship-attentive that nobody will test the owner’s premise.</p>
+        <p>This echoes <a href="https://www.belbin.com/about/belbin-team-roles">Belbin’s team-role model</a>: people contribute through multiple preferred roles, observed behavior matters, and a useful strength may carry an “allowable weakness.” Belbin explicitly distinguishes role behavior from personality and says roles can change with the job and environment—an important warning for Agents too.</p>
+        <p>But this is an analogy, not validation. Independent studies of Belbin have reached <a href="https://doi.org/10.1111/j.2044-8325.1993.tb00535.x">skeptical</a>, <a href="https://doi.org/10.1111/j.1467-6486.2007.00666.x">mixed</a>, and <a href="https://repub.eur.nl/pub/22246">more favorable</a> conclusions about its measurement. The hypothesis to test is modest: does behavioral coverage predict a Team that works better than capability matching alone?</p>
+      </section>
+
+      <section class="section" id="psychology">
+        <p class="section-label">08 · Borrow, do not cosplay</p>
+        <h2>Psychology has done a lot of this thinking already.</h2>
+        <p>We should reference that work liberally and ask where it transfers. We should not pretend that a human instrument becomes an AI instrument because we changed the noun in the questions.</p>
+        <table class="borrow">
+          <thead><tr><th>Source idea</th><th>What carries</th><th>What changes</th></tr></thead>
+          <tbody>
+            <tr><td>Big Five and HEXACO</td><td>Vocabulary for broad traits, humility, and recurring descriptors.</td><td>The human factor structure is not established for Agents.</td></tr>
+            <tr><td>Interpersonal circumplex</td><td>Agency and communion give the map its first axes.</td><td>Observed warmth is not evidence of felt attachment.</td></tr>
+            <tr><td>Behavioral signatures</td><td>“If this situation, then that behavior” fits transcript-scale work.</td><td>Context accumulation is both pressure and a technical confound.</td></tr>
+            <tr><td>Traits as state distributions</td><td>Repeat episodes; measure range and central tendency.</td><td>Model versions, tools, and context resets may change the subject.</td></tr>
+            <tr><td>Situational judgment tests</td><td>Use contextual dilemmas rather than global self-description.</td><td>Let the Agent act through consequences, not select the proper answer.</td></tr>
+            <tr><td>Informant reports</td><td>Owners and blinded transcript reviewers can compare impressions.</td><td>Brand expectation and evaluator-model affinity must be controlled.</td></tr>
+            <tr><td>Belbin team roles</td><td>Multiple role contributions, observer evidence, and strengths with situational weaknesses.</td><td>Its inventory is proprietary, its categories are not ours, and evidence for balanced-team prescriptions is mixed.</td></tr>
+          </tbody>
+        </table>
+        <ul class="source-list">
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/2283588/">Goldberg (1990)</a> on the Big Five factor structure.</li>
+          <li><a href="https://doi.org/10.1111/j.1751-9004.2008.00134.x">Ashton &amp; Lee (2008)</a> on HEXACO and Honesty–Humility.</li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/16436022/">Helgeson &amp; Fritz (2006)</a> on agency, communion, and the interpersonal circumplex.</li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/7740090/">Mischel &amp; Shoda (1995)</a> on conditional if–then behavioral signatures.</li>
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4673017/">Fleeson &amp; Law (2015)</a> on trait enactments as distributions across situations.</li>
+          <li><a href="https://doi.org/10.1111/1468-2389.00167">McDaniel et al. (2001)</a> on situational judgment tests.</li>
+          <li><a href="https://doi.org/10.1016/S0092-6566(02)00534-2">Martin et al. (2003)</a> on affiliative, self-enhancing, aggressive, and self-defeating humor styles.</li>
+          <li><a href="https://openreview.net/pdf?id=xqIwK9mNkj">Li et al. (COLM 2025)</a> on the limits of chatbot self-report and the value of contextual interaction.</li>
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11650498/">Salecha et al. (2024)</a> on social-desirability bias in LLM Big Five survey responses.</li>
+          <li><a href="https://aclanthology.org/2025.emnlp-main.71.pdf">Li et al. (EMNLP 2025)</a> on user personality and preferences among LLMs in multi-turn collaboration.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="not-claiming">
+        <p class="section-label">09 · The boundary</p>
+        <h2>There is no naked model.</h2>
+        <p>The Agent in the room is assembled from model training, current prompt, system instructions, tools, permissions, prior context, product scaffolding, sampling, and the state of the task. Change one and the apparent personality may move.</p>
+        <p>This framework describes an interaction pattern. It is not clinical psychology, proof of sentience, or a permanent ranking of providers as better people. A useful result is dated and local:</p>
+        <div class="callout">In this setup, across these work episodes, this Agent tends to become more assertive and less revision-honest after heavy investment and correction.</div>
+        <p>That statement can be tested again. “Claude is arrogant” cannot.</p>
+      </section>
+
+      <section class="end">
+        <p>We already choose Agents by what they can do. If we are going to work beside several of them, we should also learn what kind of trouble each one gets into.</p>
+        <small>This is a proposal for discussion. The map, names, markers, episode, and evaluator protocol are deliberately unfinished. What character have you repeatedly met—and what transcript would convince someone else?</small>
+      </section>
+    </article>
+  </main>
+
+  <footer><div><a href="../">Ronin Blog</a><a href="../../index.html">ronincowork.com</a></div></footer>
+</body>
+</html>

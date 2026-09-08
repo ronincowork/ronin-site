@@ -2,6 +2,27 @@
   "version": 1,
   "entries": [
     {
+      "id": "agent-personality",
+      "readme_headline": null,
+      "readme_anchor": null,
+      "readme_asset_path": null,
+      "public_url": "https://ronincowork.com/explainers/agent-personality/",
+      "question": "Can we describe what different AI Agents are like to work with, apart from capability?",
+      "audience": [
+        "person",
+        "outside-agent"
+      ],
+      "evidence_authorities": [
+        "ronin-lab/blog-research/agent-personality/README.md",
+        "ronin-lab/blog-research/agent-personality/CASES.md"
+      ],
+      "alt_text": "Five colored behavioral continua for AI Agents: Shaping, Making, Exploring, Partnering, and Examining.",
+      "capture_source_id": null,
+      "asset_checksum": null,
+      "review_trigger": "The five-family framework, its case evidence, or the evaluation protocol changes",
+      "status": "public"
+    },
+    {
       "id": "edges-not-capabilities",
       "readme_headline": null,
       "readme_anchor": null,
