@@ -1,39 +1,907 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Run the AI Agents you already use in one persistent coworkspace. Work across providers and keep the team visible.">
-<title>Ronin Cowork</title>
-<link rel="canonical" href="https://www.ronincowork.com/">
-<link rel="icon" href="nin-mark.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Ronin Cowork">
-<meta property="og:title" content="Ronin Cowork | Work across providers">
-<meta property="og:description" content="Launch and go. Work across providers. Manage the edges.">
-<meta property="og:url" content="https://www.ronincowork.com/">
-<meta property="og:image" content="https://www.ronincowork.com/social/ronin-agent-team.png">
-<meta name="twitter:card" content="summary_large_image">
-<style>
-:root{color-scheme:light;--bg:#f4f2ec;--panel:#fff;--raise:#eae7df;--line:#d9d4c8;--line2:#a9a191;--ink:#14161c;--text:#4e566d;--muted:#72798c;--kaki:#c46243;--blue:#274a78;--shadow:rgba(44,35,24,.13);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55}a{color:inherit}a:focus-visible{outline:2px solid var(--kaki);outline-offset:3px}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.study{padding:8px 20px;background:var(--raise);border-bottom:1px solid var(--line);text-align:center;color:var(--muted);font:11px/1.4 ui-monospace,monospace}.header{border-bottom:1px solid var(--line)}.header .wrap{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 13px ui-monospace,monospace;letter-spacing:.08em}.mark{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--kaki);color:#fff;font-size:19px}.brand i{font-style:normal;color:var(--kaki)}nav{display:flex;align-items:center;gap:22px;font:12px ui-monospace,monospace}nav a{text-decoration:none}.button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 17px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;font:700 13px ui-monospace,monospace}.primary{border-color:var(--kaki);background:var(--kaki);color:#fff}.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center;min-height:630px;padding:62px 0 84px}.eyebrow,.label{margin:0 0 12px;color:var(--kaki);font:700 11px ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase}h1{max-width:720px;margin:0;font-size:clamp(48px,6.5vw,76px);line-height:.98;letter-spacing:-.055em}h1 span{display:block}.lead{max-width:620px;margin:25px 0 0;color:var(--text);font-size:clamp(18px,2vw,23px);line-height:1.45}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.workbench{padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--panel);box-shadow:0 28px 70px var(--shadow)}.bar{display:flex;align-items:center;justify-content:space-between;padding:2px 3px 12px;color:var(--muted);font:10px ui-monospace,monospace}.dots{letter-spacing:3px;color:var(--kaki)}.floor{display:grid;grid-template-columns:90px 1fr;gap:8px;height:330px}.roster,.tile{border:1px solid var(--line);border-radius:6px;background:var(--bg)}.roster{padding:8px}.person{margin-bottom:7px;padding:9px 7px;border:1px solid var(--line);border-radius:4px;background:var(--panel);font:9px ui-monospace,monospace}.person b{display:block;margin-bottom:3px;color:var(--kaki)}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tile{display:flex;flex-direction:column;overflow:hidden}.tile-head{padding:8px;border-bottom:1px solid var(--line);color:var(--text);font:9px ui-monospace,monospace}.terminal{flex:1;padding:12px;background:#0b0e14;color:#aeb9ce;font:9px/1.65 ui-monospace,monospace}.terminal b{color:#d69b65}.composer{padding:8px;border-top:1px solid #273044;color:#68758d;font:9px/1.65 ui-monospace,monospace}.caption{margin:10px 2px 0;color:var(--muted);font-size:12px}.section{padding:80px 0;border-top:1px solid var(--line)}.answer{max-width:920px;margin:auto;padding:64px clamp(26px,6vw,68px);border:1px solid var(--line);border-radius:10px;background:var(--panel)}.answer strong{font-size:clamp(25px,3.5vw,40px);line-height:1.25;letter-spacing:-.025em}.answer p{margin:22px 0 0;color:var(--text)}.head{display:grid;grid-template-columns:180px minmax(0,720px);gap:24px;margin-bottom:38px}.head h2{margin:0;font-size:clamp(31px,4vw,48px);line-height:1.08;letter-spacing:-.04em}.intro{margin:15px 0 0;color:var(--text);font-size:18px}.cards{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.card{min-height:220px;padding:25px;border-right:1px solid var(--line)}.card:last-child{border:0}.num{color:var(--kaki);font:11px ui-monospace,monospace}.card h3{margin:54px 0 9px;font-size:20px}.card p{margin:0;color:var(--text);font-size:15px}.edges{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;padding:1px;background:var(--line)}.edge{padding:29px;background:var(--bg)}.edge h3{margin:0 0 8px;font-size:18px}.edge p{margin:0;color:var(--text);font-size:15px}.trust{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding:44px;border-left:4px solid var(--kaki);background:var(--raise)}.trust h2{margin:0;font-size:clamp(30px,4vw,45px);line-height:1.08;letter-spacing:-.04em}.trust p{margin:0;color:var(--text);font-size:17px}.lower{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}.box{padding:32px;border:1px solid var(--line);border-radius:8px}.box:first-child{background:var(--panel)}.box h3{margin:0 0 12px;font-size:23px}.box p{margin:0 0 22px;color:var(--text)}.box ul{margin:0;padding-left:20px;color:var(--text)}.box li+li{margin-top:7px}.final{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;padding:90px 0 45px;border-top:1px solid var(--line)}.final h2{max-width:680px;margin:0;font-size:clamp(36px,5vw,59px);line-height:1.04;letter-spacing:-.05em}.final p{max-width:620px;color:var(--text)}footer{display:flex;justify-content:space-between;gap:20px;padding:25px 0 45px;border-top:1px solid var(--line);color:var(--muted);font:11px ui-monospace,monospace}
-@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0b0e14;--panel:#131826;--raise:#1a2233;--line:#273044;--line2:#3a4560;--ink:#d7e3f7;--text:#9cabc4;--muted:#6f7b91;--kaki:#c46243;--shadow:rgba(0,0,0,.28)}}
-.hero{gap:82px;min-height:calc(100vh - 104px);padding:72px 0}.lead{margin-top:32px;line-height:1.45}.actions{margin-top:38px}.workbench{padding:16px}.floor,.tiles{gap:10px}.person{margin-bottom:9px;padding:10px 7px}.terminal{padding:15px;line-height:1.65}.section{min-height:100vh;padding:96px 0;display:flex;flex-direction:column;justify-content:center}.answer{padding:78px clamp(30px,7vw,82px)}.answer p{margin-top:32px}.head{gap:34px;margin-bottom:54px}.intro{margin-top:24px}.card{min-height:250px;padding:32px}.card h3{margin-top:68px}.card p,.edge p{margin-top:14px}.edge{padding:38px}.trust{gap:68px;padding:58px}.trust p{line-height:1.55}.lower{gap:30px}.box{padding:40px}.box p{margin-top:18px}.quilt{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:175px;gap:14px}.story{position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding:26px;border:1px solid var(--line);border-radius:9px;background:var(--panel);text-decoration:none}.story:hover{border-color:var(--kaki)}.story:after{content:"↗";position:absolute;right:22px;bottom:18px;color:var(--kaki);font:17px ui-monospace,monospace}.story.wide{grid-column:span 2}.story.tall{grid-row:span 2}.story.featured{grid-column:span 2;grid-row:span 2;background:var(--blue);color:#f3f5f8}.story small{color:var(--kaki);font:10px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}.story h3{max-width:85%;margin:18px 0 0;font-size:clamp(18px,2vw,27px);line-height:1.15}.story p{max-width:88%;margin:14px 0 24px;color:var(--text);font-size:14px}.story.featured p{color:#c5d0df}.blog-link{align-self:flex-start;margin-top:32px}.final{min-height:calc(100vh - 90px);gap:42px;padding:96px 0}
-@media(max-width:760px){.wrap{width:min(100% - 28px,1120px)}nav a:not(.primary){display:none}.hero,.head,.trust,.lower,.final{grid-template-columns:1fr}.hero{min-height:0;gap:56px;padding:64px 0 90px}h1{font-size:clamp(44px,13vw,61px)}.floor{height:280px}.cards{grid-template-columns:1fr}.card{min-height:0;border-right:0;border-bottom:1px solid var(--line)}.card h3{margin-top:30px}.edges{grid-template-columns:1fr}.trust{gap:26px;padding:38px 28px}.quilt{grid-template-columns:1fr;grid-auto-rows:auto}.story,.story.wide,.story.tall,.story.featured{grid-column:auto;grid-row:auto;min-height:230px}.section,.final{min-height:0;padding:90px 0}.final .button{justify-self:start}footer{flex-direction:column}}
-</style>
-</head>
-<body>
-<header class="header"><div class="wrap"><a class="brand" href="index.html"><span class="mark">人</span><span>RONIN <i>COWORK</i></span></a><nav><a href="#how">See how it works</a><a href="#examples">Explore examples</a><a class="button primary" href="load-ronin.html">Load Ronin</a></nav></div></header>
-<main class="wrap">
-<section class="hero"><div><p class="eyebrow">Ronin Cowork</p><h1><span>Launch and go.</span><span>Work across providers.</span><span>Manage the edges.</span></h1><p class="lead">Run the AI Agents you already use in one persistent coworkspace. Pick the right one for the work. Keep the team visible.</p><div class="actions"><a class="button primary" href="load-ronin.html">Load Ronin</a><a class="button" href="#how">See how it works</a></div></div><figure class="workbench" aria-label="A simplified view of the Ronin workbench"><div class="bar"><span>YOUR TEAM</span><span class="dots">● ● ●</span></div><div class="floor"><div class="roster"><div class="person"><b>●</b>TEAM</div><div class="person"><b>●</b>CODEX</div><div class="person"><b>●</b>CLAUDE</div></div><div class="tiles"><div class="tile"><div class="tile-head">CODEX · TEAM LEAD</div><div class="terminal"><b>›</b> Break this into three tracks.<br><br>Team raised. I will review each result.</div><div class="composer">Message Codex...</div></div><div class="tile"><div class="tile-head">CLAUDE · CODEBASE</div><div class="terminal"><b>›</b> Work through the migration.<br><br>I found two callers that need to move together.</div><div class="composer">Message Claude...</div></div></div></div><figcaption class="caption">Separate Agents. One place to work with them.</figcaption></figure></section>
-<section class="section" id="how"><div class="answer"><strong>Claude and Codex can each run Agents on their own. Ronin is for the work that crosses those boundaries.</strong><p>Different providers. Persistent sessions. Shared projects. Coordination you control.</p></div></section>
-<section class="section"><div class="head"><p class="label">Why side by side?</p><div><h2>One provider does not have to do every job.</h2><p class="intro">Models differ. Limits happen. Better ones arrive.</p></div></div><div class="cards"><article class="card"><span class="num">01</span><h3>Choose by strength</h3><p>Give each job to the Agent that fits it. Change your mind when the models change.</p></article><article class="card"><span class="num">02</span><h3>Keep working</h3><p>Move work when a provider is down or one subscription hits its limit.</p></article><article class="card"><span class="num">03</span><h3>See the team</h3><p>Open every Agent yourself. Talk to it directly. See what it is doing.</p></article></div></section>
-<section class="section"><div class="head"><p class="label">Manage the edges</p><div><h2>Let the Agents stay themselves.</h2><p class="intro">Ronin handles the parts between them.</p></div></div><div class="edges"><article class="edge"><h3>Persistent sessions</h3><p>Close the browser. Come back to the same work.</p></article><article class="edge"><h3>Visible Teams</h3><p>Each Agent has its own session, work record, and conversation.</p></article><article class="edge"><h3>Shared coordination</h3><p>Use messages, shared documents, and a team thread when they help.</p></article><article class="edge"><h3>Safer file work</h3><p>Give Agents separate worktrees and review what gets handed in.</p></article></div></section>
-<section class="section"><div class="trust"><h2>Your Agents. Your accounts. Your machine.</h2><p>Claude, Codex, Gemini, and other supported Agents keep their own tools and conversations. Your files stay in ordinary folders and repositories. Ronin does not resell model access or put itself between you and the provider.</p></div></section>
-<section class="section" id="examples"><div class="head"><p class="label">Start with real work</p><div><h2>Open one Agent. Add a Team when you need one.</h2></div></div><div class="lower"><article class="box"><h3>One codebase, several points of view</h3><p>Ask one Agent to assess the code, another to make the change, and a third to review it. Keep each session open and talk to any of them directly.</p><a class="button" href="library/">Explore Teams and Agents</a></article><aside class="box"><h3>Services are optional</h3><p>Ronin Cowork works without them. Add Services when you want more.</p><ul><li>Live work records</li><li>Readable transcripts</li><li>Stats and voice</li><li>More templates and connections</li></ul></aside></div></section>
-<section class="section" id="blog"><div class="head"><p class="label">Ronin Blog</p><div><h2>The detailed parts, one at a time.</h2><p class="intro">Start with the question you have.</p></div></div><div class="quilt"><a class="story featured" href="explainers/edges-not-capabilities/"><small>How Ronin works</small><div><h3>Edges, not capabilities</h3><p>Why Ronin coordinates Agents without taking over their reasoning or tools.</p></div></a><a class="story tall" href="explainers/workbench/"><small>Across providers</small><div><h3>Claude and Codex side by side</h3><p>One workbench. Separate Agents and accounts.</p></div></a><a class="story" href="explainers/agent-coordination/"><small>Agent Teams</small><h3>Coordinate when it helps</h3></a><a class="story" href="tmux_serve/"><small>Persistent work</small><h3>The browser can close</h3></a><a class="story wide" href="explainers/no-platform-lock-in/"><small>Keeping work yours</small><h3>Your work does not belong to an Agent platform</h3></a><a class="story" href="explainers/cowork-and-services/"><small>Choose your layer</small><h3>Cowork and Services</h3></a><a class="story" href="explainers/no-behavioral-takeover/"><small>Agent freedom</small><h3>No behavioral takeover</h3></a><a class="story wide" href="explainers/editable-coordination/"><small>Make it yours</small><h3>Coordination you can read and change</h3></a><a class="story" href="vpn_tailscale/"><small>Private access</small><h3>Reach Ronin with Tailscale</h3></a><a class="story tall" href="explainers/ai-agents-virtual-machine/"><small>Always available</small><div><h3>Run an Agent Team on a virtual machine</h3><p>A practical host for persistent work.</p></div></a><a class="story" href="explainers/ronin-worktrees/"><small>Parallel files</small><h3>Work without collisions</h3></a><a class="story wide" href="explainers/checkouts-and-worktrees/"><small>Git choices</small><h3>Checkouts and Worktrees</h3></a></div><a class="button blog-link" href="explainers/">Open the full Ronin Blog</a></section>
-<section class="final" id="load"><div><p class="eyebrow">Run it where the Agents work</p><h2>Try Ronin on a machine you control.</h2><p>Use a laptop, home server, or virtual machine. Start with one Agent. The rest can wait.</p></div><a class="button primary" href="load-ronin.html">Load Ronin</a></section>
-</main>
-<footer class="wrap"><span>Ronin Cowork · open source · runs on your machine</span><a href="explainers/">Ronin Blog</a></footer>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Launch the AI Agents you already use, then add persistent coworkspace and team coordination only when the work calls for them."
+    />
+    <title>Ronin Cowork</title>
+    <link rel="canonical" href="https://www.ronincowork.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ronin Cowork" />
+    <meta property="og:title" content="Ronin | Launch and go. Work across providers. Manage the edges." />
+    <meta property="og:description" content="Launch provider Agents with their own accounts, then add persistent coworkspace and optional team coordination." />
+    <meta property="og:url" content="https://www.ronincowork.com/" />
+    <meta property="og:image" content="https://www.ronincowork.com/social/ronin-agent-team.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1730" />
+    <meta property="og:image:height" content="909" />
+    <meta property="og:image:alt" content="Three connected AI agent terminal workspaces" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/nin-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="ronin-tokens.css" />
+    <style>
+      .site-header {
+        position: relative;
+        z-index: 2;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.45fr 0.55fr;
+        gap: 8vw;
+        align-items: center;
+        min-height: calc(86vh - var(--header-height));
+        padding: 70px 0;
+      }
+      .hero-mark {
+        width: min(230px, 100%);
+        justify-self: end;
+      }
+      .hero .display {
+        max-width: 820px;
+        font-size: clamp(38px, 5vw, 62px);
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-6);
+        margin-top: var(--space-10);
+      }
+      .provider-line {
+        margin-top: 46px;
+        color: var(--muted);
+        font: var(--text-3) var(--font-mono);
+        word-spacing: var(--space-4);
+      }
+      .section {
+        padding: 100px 0;
+        border-top: var(--edge) solid var(--line);
+      }
+      .section-head {
+        display: grid;
+        grid-template-columns: 0.7fr 2fr;
+        gap: 8vw;
+        margin-bottom: 52px;
+      }
+      .section-head h2 {
+        max-width: 700px;
+        margin: 0;
+        font: 500 clamp(34px, 5vw, 58px) / 1.02 var(--font-ui);
+        letter-spacing: -0.045em;
+      }
+      .section-head .intro {
+        max-width: 670px;
+        margin: var(--space-8) 0 0;
+        color: var(--muted-2);
+        font-size: var(--text-8);
+      }
+      .feature-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: var(--edge) solid var(--line);
+      }
+      .feature-list--two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .feature-list--two .feature:nth-child(2) {
+        border-right: 0;
+      }
+      .feature {
+        min-height: 220px;
+        padding: var(--space-9);
+        border-right: var(--edge) solid var(--line);
+        border-bottom: var(--edge) solid var(--line);
+      }
+      .feature:nth-child(3n) {
+        border-right: 0;
+      }
+      .feature .num {
+        color: var(--kaki);
+        font: var(--text-2) var(--font-mono);
+      }
+      .feature h3 {
+        margin: 42px 0 var(--space-5);
+        font: 500 var(--text-9) var(--font-ui);
+      }
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: var(--text-7);
+      }
+      .principle {
+        display: grid;
+        grid-template-columns: 0.7fr 2fr;
+        gap: 8vw;
+        padding: 70px 0;
+      }
+      .principle blockquote,
+      .section-head blockquote {
+        margin: 0;
+        font: 500 clamp(32px, 4.6vw, 56px) / 1.08 var(--font-ui);
+        letter-spacing: -0.04em;
+      }
+      .principle p {
+        max-width: 650px;
+        margin: var(--space-8) 0 0;
+        color: var(--muted-2);
+      }
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-7);
+      }
+      .trust {
+        padding: var(--space-9);
+        border: var(--edge) solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--panel);
+      }
+      .trust h3 {
+        margin: 0 0 var(--space-6);
+        font: 500 var(--text-9) var(--font-ui);
+      }
+      .trust p {
+        margin: 0;
+        color: var(--muted-2);
+      }
+      .services {
+        background: var(--bg-2);
+        margin-inline: calc(50% - 50vw);
+        padding-inline: max(20px, calc((100vw - var(--page)) / 2));
+      }
+      .services-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-6);
+      }
+      .service {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: var(--space-6);
+        padding: var(--space-8);
+        border-top: var(--edge) solid var(--line);
+      }
+      .service .num {
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      .service h3 {
+        margin: 0 0 var(--space-3);
+        font: 500 var(--text-9) var(--font-ui);
+      }
+      .service p {
+        margin: 0;
+        color: var(--muted);
+        font-size: var(--text-7);
+      }
+      .service p + p {
+        margin-top: var(--space-4);
+      }
+      .house-term {
+        color: var(--kaki);
+      }
+      .roadmap {
+        display: grid;
+        grid-template-columns: 0.7fr 2fr;
+        gap: 8vw;
+      }
+      .roadmap-copy > p {
+        max-width: 720px;
+        color: var(--muted-2);
+        font-size: var(--text-8);
+      }
+      .roadmap-items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-7);
+        margin-top: 38px;
+      }
+      .roadmap-item {
+        padding: var(--space-8);
+        border-left: var(--edge-2) solid var(--kaki);
+        background: var(--raise);
+      }
+      .roadmap-item b {
+        display: block;
+        margin-bottom: var(--space-4);
+        font: var(--text-4) var(--font-mono);
+      }
+      .roadmap-item p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .tech-intro {
+        max-width: 760px;
+        color: var(--muted-2);
+        font-size: var(--text-8);
+      }
+      .tech-stack {
+        margin-top: 42px;
+        border-top: var(--edge) solid var(--line);
+      }
+      details {
+        border-bottom: var(--edge) solid var(--line);
+      }
+      summary {
+        display: grid;
+        grid-template-columns: 52px 1fr auto;
+        align-items: center;
+        gap: var(--space-6);
+        padding: var(--space-8) 0;
+        cursor: pointer;
+        list-style: none;
+        font: 500 var(--text-8) var(--font-ui);
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary .num {
+        color: var(--kaki);
+        font: var(--text-3) var(--font-mono);
+      }
+      summary::after {
+        content: "＋";
+        color: var(--muted);
+        font-family: var(--font-mono);
+      }
+      details[open] summary::after {
+        content: "−";
+      }
+      .tech-body {
+        max-width: 820px;
+        margin-left: calc(52px + var(--space-6));
+        padding: 0 0 var(--space-10);
+        color: var(--muted-2);
+      }
+      .tech-body p {
+        margin: 0 0 var(--space-7);
+      }
+      .tech-body ul {
+        padding-left: 20px;
+      }
+      .tech-body li + li {
+        margin-top: var(--space-4);
+      }
+      .blog-quilt {
+        padding: 110px 0;
+        border-top: var(--edge) solid var(--line);
+      }
+      .quilt {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 170px;
+        gap: var(--space-7);
+        margin-top: 46px;
+      }
+      .story {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        padding: var(--space-10);
+        border: var(--edge) solid var(--line-2);
+        border-radius: var(--radius-md);
+        background: var(--panel);
+        text-decoration: none;
+      }
+      .story:hover { border-color: var(--kaki); }
+      .story::after {
+        content: "↗";
+        position: absolute;
+        right: var(--space-9);
+        bottom: var(--space-8);
+        color: var(--kaki);
+        font-family: var(--font-mono);
+      }
+      .story--wide { grid-column: span 2; }
+      .story--tall { grid-row: span 2; }
+      .story--featured {
+        grid-column: span 2;
+        grid-row: span 2;
+        background: var(--aiiro);
+      }
+      .story small {
+        color: var(--kaki);
+        font: var(--text-1) var(--font-mono);
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      .story h3 {
+        max-width: 85%;
+        margin: var(--space-8) 0 0;
+        font-size: clamp(var(--text-8), 2vw, var(--text-10));
+        line-height: 1.15;
+      }
+      .story p {
+        max-width: 88%;
+        margin: var(--space-7) 0 var(--space-9);
+        color: var(--muted-2);
+        font-size: var(--text-4);
+      }
+      .story--featured p { color: var(--fg); }
+      .blog-quilt .button { margin-top: var(--space-10); }
+      .final {
+        display: grid;
+        grid-template-columns: 1.5fr 0.5fr;
+        gap: 8vw;
+        align-items: end;
+        padding: 110px 0 80px;
+        border-top: var(--edge) solid var(--line);
+      }
+      .final h2 {
+        margin: 0;
+        font: 500 clamp(40px, 6vw, 70px) / 1 var(--font-ui);
+        letter-spacing: -0.05em;
+      }
+      .final p {
+        max-width: 650px;
+        color: var(--muted-2);
+        font-size: var(--text-8);
+      }
+      .final .button {
+        justify-self: end;
+      }
+      @media (max-width: 820px) {
+        .hero,
+        .section-head,
+        .principle,
+        .roadmap,
+        .final {
+          grid-template-columns: 1fr;
+        }
+        .hero-mark {
+          display: none;
+        }
+        .feature-list {
+          grid-template-columns: 1fr 1fr;
+        }
+        .feature:nth-child(3n) {
+          border-right: var(--edge) solid var(--line);
+        }
+        .feature:nth-child(2n) {
+          border-right: 0;
+        }
+        .services-list,
+        .roadmap-items {
+          grid-template-columns: 1fr;
+        }
+        .quilt { grid-template-columns: repeat(2, 1fr); }
+        .final .button {
+          justify-self: start;
+        }
+      }
+      @media (max-width: 540px) {
+        .hero {
+          min-height: auto;
+          padding: 76px 0 90px;
+        }
+        .hero .display {
+          font-size: clamp(36px, 10vw, 46px);
+        }
+        .section {
+          padding: 72px 0;
+        }
+        .feature-list,
+        .trust-grid {
+          grid-template-columns: 1fr;
+        }
+        .quilt { grid-template-columns: 1fr; grid-auto-rows: auto; }
+        .story,
+        .story--wide,
+        .story--tall,
+        .story--featured { grid-column: auto; grid-row: auto; min-height: 220px; }
+        .feature,
+        .feature:nth-child(3n) {
+          min-height: 0;
+          border-right: 0;
+        }
+        .feature h3 {
+          margin-top: var(--space-9);
+        }
+        .principle {
+          padding: 52px 0;
+        }
+        .services {
+          padding-inline: 14px;
+        }
+        .service {
+          grid-template-columns: 32px 1fr;
+          padding-inline: var(--space-4);
+        }
+        summary {
+          grid-template-columns: 36px 1fr auto;
+        }
+        .tech-body {
+          margin-left: calc(36px + var(--space-6));
+        }
+        .final {
+          padding: 80px 0 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html"
+          ><img src="nin-mark.svg" alt="Ronin Cowork" /><span class="brand-name"
+            ><span>RONIN</span><span class="brand-cowork">COWORK</span></span
+          ></a
+        >
+        <nav class="site-nav">
+          <a href="#cowork">Ronin Cowork</a><a href="#services">Services</a
+          ><a href="#tech">Tech Talk</a
+          ><a href="library/">Templates</a
+          ><a class="button" href="explainers/">Ronin Blog</a
+          ><a class="button button--primary" href="load-ronin.html">Load Ronin</a>
+        </nav>
+      </div>
+    </header>
+    <main class="page">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Ronin Cowork</p>
+          <h1 class="display">Launch and go. Work across providers. Manage the edges.</h1>
+          <p class="provider-line">
+            Your Agents and accounts. One coworkspace around the work.
+          </p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="load-ronin.html"
+              >Load Ronin</a
+            ><a class="button" href="#cowork">What is Ronin Cowork?</a>
+          </div>
+        </div>
+        <img class="hero-mark" src="nin-mark.svg" alt="" />
+      </section>
+
+      <section class="section" id="cowork">
+        <div class="section-head">
+          <p class="section-label">Three jobs</p>
+          <div>
+            <blockquote>Use the Agent you chose. Switch when the work calls for it. Add coordination when it helps.</blockquote>
+            <p class="intro">
+              Ronin starts provider CLIs on a machine you control. Claude,
+              Codex, Gemini, and other Agents keep their own accounts, tools,
+              reasoning, and conversations. Ronin does not insert a
+              proprietary conversation between you and the Agent.
+            </p>
+          </div>
+        </div>
+        <div class="feature-list">
+          <article class="feature">
+            <span class="num">01</span>
+            <h3>Launch and go</h3>
+            <p>
+              Choose a provider Agent, use the account you already have, and
+              start working in its native terminal conversation.
+            </p>
+          </article>
+          <article class="feature">
+            <span class="num">02</span>
+            <h3>Work across providers</h3>
+            <p>
+              Keep different provider Agents side by side. Choose by strength,
+              switch when limits or outages get in the way, and try new models
+              without rebuilding the coworkspace.
+            </p>
+          </article>
+          <article class="feature">
+            <span class="num">03</span>
+            <h3>Manage the edges</h3>
+            <p>
+              Keep sessions and workspaces persistent. When coordination helps,
+              add direct messages, a team wipeboard, shared documents, and
+              reviewed file handoffs.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="principle" aria-labelledby="across-providers-title">
+        <p class="section-label">Why not just Claude or Codex?</p>
+        <div>
+          <blockquote id="across-providers-title">
+            They each run Agents well. Ronin is for the work that crosses those boundaries.
+          </blockquote>
+          <p>
+            Use different Agents for different strengths. Shift work when a
+            provider is down or one subscription hits its limit. Try a new
+            model without rebuilding the place where the work happens.
+          </p>
+          <p>
+            Ronin keeps each Team member visible. Open any Agent, talk to it
+            directly, and see what it is doing. Ronin handles the persistence,
+            coordination, and file handoffs between them.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="section-head">
+          <p class="section-label">Why Ronin Cowork?</p>
+          <div><h2>Why Ronin?</h2></div>
+        </div>
+        <div class="trust-grid">
+          <article class="trust">
+            <h3>Your machine</h3>
+            <p>
+              It runs on your computer, home server, or virtual machine. If the
+              machine is remote, you reach it through your own VPN, such as
+              Tailscale.
+            </p>
+          </article>
+          <article class="trust">
+            <h3>Open source</h3>
+            <p>
+              Ronin Cowork is open source. View the code, change it, and use it
+              for free.
+            </p>
+          </article>
+          <article class="trust">
+            <h3>Your accounts</h3>
+            <p>
+              Keep your accounts directly with the model companies and use your
+              own subscriptions or API keys. Ronin does not resell model access
+              and does not place itself between you and the provider.
+            </p>
+          </article>
+          <article class="trust">
+            <h3>Your work stays yours</h3>
+            <p>
+              Code and documents stay in ordinary repositories and files on
+              your machine. Ronin does not relay Agent traffic or upload your
+              code and conversations to a Ronin cloud.
+            </p>
+          </article>
+          <article class="trust">
+            <h3>Coordination without control</h3>
+            <p>
+              Ronin offers tools at the edges of cooperation. It does not
+              become an Agent prompt engine, prescribe how an Agent reasons, or
+              turn a working convention into a security boundary.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section services" id="services">
+        <div class="section-head">
+          <p class="section-label">Ronin Services · Beta</p>
+          <div>
+            <h2>
+              Ronin Services are in beta today.
+            </h2>
+            <p class="intro">
+              Ronin Cowork works fully without them. Services are a separate,
+              optional layer, and it is early days for this side.
+            </p>
+          </div>
+        </div>
+        <div class="services-list">
+          <article class="service">
+            <span class="num">01</span>
+            <div>
+              <h3>Live work records</h3>
+              <p>
+                See what a session is doing, its progress, its repositories,
+                and the documents it has listed without interrupting its work.
+              </p>
+            </div>
+          </article>
+          <article class="service">
+            <span class="num">02</span>
+            <div>
+              <h3>Readable transcripts</h3>
+              <p>
+                Readable transcripts are in development. They will turn
+                terminal output into text for independent scrolling, mobile
+                use, and session history.
+              </p>
+            </div>
+          </article>
+          <article class="service">
+            <span class="num">03</span>
+            <div>
+              <h3>Stats</h3>
+              <p>
+                See operating counts such as sessions, active days, Macros, and
+                Agent minutes. Stats exclude code, prompts, terminal output,
+                paths, filenames, and other free text.
+              </p>
+            </div>
+          </article>
+          <article class="service">
+            <span class="num">04</span>
+            <div>
+              <h3>Voice</h3>
+              <p>
+                Dictate into a terminal tile with your own Hotwords attached.
+                Spoken summaries back are planned, not part of the current
+                capability.
+              </p>
+            </div>
+          </article>
+          <article class="service">
+            <span class="num">05</span>
+            <div>
+              <h3>gbrain</h3>
+              <p>
+                Connect supported Agents to gbrain when you want its external
+                memory. The connection remains an explicit launch choice.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="roadmap">
+          <p class="section-label">Where Ronin fits</p>
+          <div class="roadmap-copy">
+            <h2>Keep the stack you chose. Add only the layer you need.</h2>
+            <p>
+              Ronin does not resell model access or replace your Agent, provider
+              account, machine, repositories, or working method. It supplies the
+              locally run coworkspace around them.
+            </p>
+            <div class="roadmap-items">
+              <article class="roadmap-item">
+                <p>
+                  Start with a bare Agent in an always-on terminal. Add the
+                  Cowork floor, Ronin Base, or managed file coordination only
+                  when those tools help.
+                </p>
+              </article>
+              <article class="roadmap-item">
+                <p>
+                  Explore beta Services separately as live work records,
+                  readable transcripts, Stats, Voice, and supported
+                  integrations become ready.
+                </p>
+              </article>
+            </div>
+            <p>
+              Removing Ronin does not require an export or migration. Your
+              provider accounts still work, and your repositories and documents
+              remain ordinary files where you put them.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="tech">
+        <p class="eyebrow">Tech Talk</p>
+        <h2 class="display">Terminal CLIs on your machine.</h2>
+        <p class="tech-intro">
+          Ronin runs Agent applications as terminal CLIs on your machine.
+          Claude Code, Codex, Gemini, and other Agents remain their own programs
+          and communicate directly with their model providers under your
+          account. Ronin is the coworking layer around those programs, not
+          another model runtime.
+        </p>
+        <div class="tech-stack">
+          <details open>
+            <summary>
+              <span class="num">01</span
+              ><span>The sessions stay on the machine</span>
+            </summary>
+            <div class="tech-body">
+              <p>
+                Each agent runs inside a tmux session. tmux owns the
+                long-running terminal process, not the browser. Closing the
+                browser disconnects the view; it does not close the agent. As
+                long as the Ronin machine and its tmux server remain running,
+                the sessions continue there.
+              </p>
+              <p>
+                The browser reconnects to those same sessions. It does not start
+                a replacement session in the browser and it does not move the
+                terminal to a Ronin server.
+              </p>
+              <p>
+                Ronin is reachable only while its host is on and an address to
+                that host is reachable. A desktop must stay on, a laptop must
+                stay awake, and a continuously running server or virtual machine
+                provides continuous availability.
+              </p>
+              <p><a class="term" href="tmux_serve/">How tmux keeps sessions running →</a></p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <span class="num">02</span
+              ><span>A virtual machine keeps the team available</span>
+            </summary>
+            <div class="tech-body">
+              <p>
+                A cloud virtual machine gives terminal agents an always-on Linux
+                host for their repositories, tools, and persistent sessions. The
+                agent models still run with their own providers, so a normal x86
+                VM with enough RAM is usually more useful than a GPU server.
+              </p>
+              <p>
+                You can use Hetzner, DigitalOcean, Akamai Cloud, Vultr, or another
+                provider. The practical questions are how much memory the team
+                needs, how you connect privately, and how the sessions survive
+                after your laptop closes.
+              </p>
+              <p><a class="term" href="explainers/ai-agents-virtual-machine/">How to run an AI agent team on a VM →</a></p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <span class="num">03</span
+              ><span>The VPN is the security wall</span>
+            </summary>
+            <div class="tech-body">
+              <p>
+                By default Ronin binds to the machine's Tailscale address. If
+                Tailscale is absent, it falls back to the local machine only. It
+                does not expose Ronin Cowork to the public internet by default.
+              </p>
+              <p>
+                Tailscale is the security wall. You can open Ronin Cowork from any
+                device on your Tailscale network without exposing it to the
+                public internet or adding another Ronin login. If you choose to
+                expose Ronin more broadly, it requires a password or passkey.
+              </p>
+              <p><a class="term" href="vpn_tailscale/">Set up Tailscale →</a></p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <span class="num">04</span
+              ><span>Locked mode is the live terminal</span>
+            </summary>
+            <div class="tech-body">
+              <p>
+                Locked mode is the default and comes standard with Ronin Cowork.
+              </p>
+              <p>
+                In locked mode, the browser tile is attached directly to the
+                tmux terminal through a WebSocket. Terminal output is rendered
+                by the terminal emulator, and keyboard, pointer, and scroll
+                input are sent back to that live terminal.
+              </p>
+              <p>
+                That directness has a consequence people do not expect: terminal
+                scroll is terminal input. Scrolling from a phone or laptop
+                changes the live terminal's screen and scrollback on the remote
+                machine. The browser is operating a terminal that may be a
+                thousand miles away; it is not independently scrolling a web
+                document.
+              </p>
+              <p>
+                Because locked mode repaints a live remote terminal, it can feel
+                noticeably laggy on a slower connection.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <span class="num">05</span
+              ><span>Unlocked mode is a recorded text view</span>
+            </summary>
+            <div class="tech-body">
+              <p>
+                Unlocked mode is a beta Ronin Services capability and is not
+                generally available yet.
+              </p>
+              <p>
+                Unlocked mode does not attach a second terminal client. Ronin's
+                record service reads the session tape, reconstructs the settled
+                output into a scroll, and renders that stream to a plain
+                scrollable browser view. Input still goes back to the active
+                tmux pane, but reading and scrolling no longer drive the
+                terminal's own viewport.
+              </p>
+              <p>
+                This makes the recorded view behave more like people expect a
+                browser to behave:
+              </p>
+              <ul>
+                <li>
+                  Scroll through earlier output without moving the live terminal
+                  screen.
+                </li>
+                <li>
+                  Read over a higher-latency connection without repainting a
+                  remote terminal for every movement.
+                </li>
+                <li>Use the session more comfortably on a phone.</li>
+                <li>
+                  Preserve a transcript beyond the terminal's current visible
+                  scrollback.
+                </li>
+                <li>
+                  Keep readable terminal history beyond the current scrollback.
+                </li>
+              </ul>
+              <p>
+                The unlocked transcript is reconstructed from terminal output.
+                Terminal applications can repaint and overwrite their screen, so
+                the recorded view folds those updates into readable text rather
+                than claiming to be a pixel-perfect recording of every
+                historical screen.
+              </p>
+              <p>
+                If the record service is not installed or available, the
+                unlocked view is off and Ronin Cowork falls back to the locked live
+                terminal.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <span class="num">06</span><span>What leaves the machine</span>
+            </summary>
+            <div class="tech-body">
+              <p>
+                Ronin Cowork does not send the project workspace to an external
+                Ronin surface. The agent CLIs still communicate with their own
+                model providers, just as they do when run without Ronin.
+              </p>
+              <p>
+                If you opt into Ronin Services, you may choose to share
+                anonymous operating measurements through Ronin's single
+                outbound channel. The file and receipt stay on your machine.
+                It excludes project files, code, prompts, terminal output, and
+                transcripts. Declining sends nothing.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="blog-quilt" id="blog">
+        <p class="section-label">Ronin Blog</p>
+        <h2 class="display">The detailed parts, one at a time.</h2>
+        <div class="quilt">
+          <a class="story story--featured" href="explainers/edges-not-capabilities/"><small>How Ronin works</small><div><h3>Edges, not capabilities</h3><p>Why Ronin coordinates Agents without taking over their reasoning or tools.</p></div></a>
+          <a class="story story--tall" href="explainers/workbench/"><small>Across providers</small><div><h3>Claude and Codex side by side</h3><p>One workbench. Separate Agents and accounts.</p></div></a>
+          <a class="story" href="explainers/agent-coordination/"><small>Agent Teams</small><h3>Coordinate when it helps</h3></a>
+          <a class="story" href="tmux_serve/"><small>Persistent work</small><h3>The browser can close</h3></a>
+          <a class="story story--wide" href="explainers/no-platform-lock-in/"><small>Keeping work yours</small><h3>Your work does not belong to an Agent platform</h3></a>
+          <a class="story" href="explainers/cowork-and-services/"><small>Choose your layer</small><h3>Cowork and Services</h3></a>
+          <a class="story" href="explainers/no-behavioral-takeover/"><small>Agent freedom</small><h3>No behavioral takeover</h3></a>
+          <a class="story story--wide" href="explainers/editable-coordination/"><small>Make it yours</small><h3>Coordination you can read and change</h3></a>
+          <a class="story" href="vpn_tailscale/"><small>Private access</small><h3>Reach Ronin with Tailscale</h3></a>
+          <a class="story story--tall" href="explainers/ai-agents-virtual-machine/"><small>Always available</small><div><h3>Run an Agent Team on a virtual machine</h3><p>A practical host for persistent work.</p></div></a>
+          <a class="story" href="explainers/ronin-worktrees/"><small>Parallel files</small><h3>Work without collisions</h3></a>
+          <a class="story story--wide" href="explainers/checkouts-and-worktrees/"><small>Git choices</small><h3>Checkouts and Worktrees</h3></a>
+        </div>
+        <a class="button" href="explainers/">Open the Ronin Blog</a>
+      </section>
+
+      <section class="final">
+        <div>
+          <p class="eyebrow">Start with Ronin Cowork</p>
+          <h2>Put Ronin where your Agents work.</h2>
+          <p>
+            Install Ronin on the machine that will host the Agent sessions. Run
+            one command yourself or hand the step-by-step installation guide to
+            an Agent already running on that machine.
+          </p>
+          <p>
+            Use a laptop, home server, or virtual machine you control. If it is
+            remote, keep the coworkspace on a private route such as an SSH
+            tunnel or your Tailscale network.
+          </p>
+          <p>
+            Download Ronin and join a community of people who want to keep
+            their choice of Agent provider.
+          </p>
+        </div>
+        <a class="button button--primary" href="load-ronin.html"
+          >Load Ronin →</a
+        >
+      </section>
+    </main>
+    <footer class="site-footer">
+      <span>Ronin Cowork · open source · runs on your machine</span>
+    </footer>
+  </body>
 </html>
