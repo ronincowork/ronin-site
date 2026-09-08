@@ -56,7 +56,7 @@
 .helpers strong { color: var(--fg-strong); }
 .helpers code { padding: 1px 6px; border-radius: var(--radius-xs); background: var(--term-bg); color: var(--term-fg); font-size: 12px; }
 @media (max-width: 760px) { .journey { grid-template-columns: 1fr; } }
-  
+
 @media (max-width: 760px) { .choice, .truths, .halves { grid-template-columns: minmax(0, 1fr); } .model { min-width: 0; } }
   </style>
 </head><body>
@@ -145,7 +145,7 @@
         <ul>
           <li><strong>Work</strong> happens in a private folder on a private branch, cut from the working line.</li>
           <li><strong>The Team is the choke point.</strong> Updates flow down from the working line freely; nothing flows back up except through the Team's line and its lead's promotion.</li>
-          <li><strong>Collisions cannot happen.</strong> Nobody's half-finished work reaches anyone else until it is accepted.</li>
+          <li><strong>No overwrites.</strong> Separate worktrees stop Agents writing over each other's files, and nobody's half-finished work reaches anyone else until it is accepted. Integration conflicts can still happen; they are contained at hand-in.</li>
         </ul>
         <p class="fit">Fits a product: a codebase with a release, tests, and several Agents at once.</p>
       </article>
@@ -159,7 +159,7 @@
     <ul class="truths">
       <li class="is-anchor"><span class="ref">local · working line</span><strong>Accepted work</strong><p>Usually <code>dev</code>. Nobody edits it in place. Work reaches it by promotion, and every worktree is cut from it.</p></li>
       <li class="is-release"><span class="ref">remote · stable line</span><strong>Released work</strong><p>Usually <code>master</code> or <code>main</code> on GitHub. It moves only by a pull request from the working line, which you review and merge yourself.</p></li>
-      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>One line per Team, a worktree branch per Agent, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. Once its work is accepted or its owner is gone, it has expired, and Ronin tidies it.</p></li>
+      <li class="is-lease"><span class="ref">everything else</span><strong>On loan</strong><p>One line per Team, a worktree branch per Agent, candidate folders. Each has an owner, a recorded starting point, and a place it hands in to. Once its work is promoted, its worktree is closed explicitly; unfinished work at a session's end is kept in visible custody, never deleted quietly.</p></li>
     </ul>
   </section>
 
@@ -194,7 +194,7 @@ For each Agent on the Team, say which worktree it holds, whether it has unsaved 
       <li><span class="who who--you">You</span><strong>Mark a lead</strong><p>On the Team page, mark one session as team lead. Nothing infers it from behaviour; it is your designation.</p></li>
       <li><span class="who who--ronin">Ronin</span><strong>Each Agent gets a worktree</strong><p>A coding Agent born onto the Team starts in its own folder on its own branch, cut from your accepted work.</p></li>
       <li><span class="who who--agent">Agent</span><strong>Commit, then hand in</strong><p>Checkpoints stay private. A hand-in gives committed work to the Team's review line and leaves a receipt.</p></li>
-      <li><span class="who who--lead">Lead</span><strong>Rule, verify, promote</strong><p>The lead settles conflicts, verifies the combined line, and promotes it onto your local working branch.</p></li>
+      <li><span class="who who--lead">Lead</span><strong>Rule, verify, promote</strong><p>The lead rules on conflicts, verifies the combined line, and promotes it onto your local working branch.</p></li>
       <li><span class="who who--agent">Agent</span><strong>Close when told</strong><p>Promotion tells each contributor its work is in. Only then is a worktree finished, and it closes.</p></li>
       <li><span class="who who--you">You</span><strong>Merge the release</strong><p>One rolling pull request carries the working branch to the stable branch. Merging it is your hand, nobody else's.</p></li>
     </ol>
@@ -277,11 +277,11 @@ For each Agent on the Team, say which worktree it holds, whether it has unsaved 
       <li><strong>You</strong> mark the lead, read the Team page, and merge the release pull request. The Team page shows each member's worktree, the Team line, and the last promotion; the ending check catches unfinished work before a session goes.</li>
       <li><strong>Each Agent</strong> gets, updates, and hands in one worktree per repository, commits coherent checkpoints, and closes when promotion says so. <code>+cutcode:</code> builds from an agreed plan; <code>+land:</code> finishes up and leaves.</li>
       <li><strong>The lead</strong> reads the line, rules on conflicts, verifies, and promotes. Hand-ins arrive in the lead's tile; <code>+tell:</code> and the wipeboard carry the rulings back.</li>
-      <li><strong>Ronin</strong> opens worktrees at birth, keeps the receipts, refuses the unsafe step, serializes landing, and tidies expired lines and folders on its own schedule. It never pushes.</li>
+      <li><strong>Ronin</strong> opens worktrees at birth, keeps the receipts, refuses the unsafe step, serializes landing, and keeps unfinished work in visible custody when a session ends. It never pushes.</li>
     </ul>
   </section>
 
-  
+
   <aside class="pbs-boundary" aria-labelledby="boundary-title">
     <h2 id="boundary-title">What Ronin does not claim</h2>
     <p>Worktrees prevent accidental collisions; they are not a security boundary, and an Agent's authority on your machine is the machine's business. A hand-in is admission, not verification: the full check is the lead's at promotion and your continuous integration's at the pull request. Nothing here corrals an Agent beyond what Git itself refuses; where a check remains, it tells and does not block. None of it needs Ronin Services. And <em>Use the checkout</em> remains a complete, first-class way to work; many repositories never need review machinery. <a href="../no-behavioral-takeover/">Read the no-behavioral-takeover promise.</a></p>
