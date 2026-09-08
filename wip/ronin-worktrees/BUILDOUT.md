@@ -2,11 +2,11 @@
 
 Editorial buildout for consolidating the site's worktree explainers into one page. Owner:
 `worktrees_explainer_fable` (site-refresh team, desk
-`team/site-refresh/worktrees_explainer_fable`). Status: **draft for Glen's review**.
-Nothing here is public; `/wip/*` answers 404 in production.
+`team/site-refresh/worktrees_explainer_fable`). Status: **approved by Glen 2026-09-08 and staged on the desk**; the page now lives at
+`explainers/ronin-worktrees/index.html` and this document is the record until promotion.
 
-- Draft page: `wip/ronin-worktrees/index.html`.
-- Proposed public route: **replace** `explainers/ronin-worktrees/` with this page and
+- Public page: `explainers/ronin-worktrees/index.html`.
+- Route, as approved: **replace** `explainers/ronin-worktrees/` with this page and
   **absorb** `explainers/checkouts-and-worktrees/` into it. The checkouts URL stays alive
   (site contract: keep published URLs stable) as a one-paragraph pointer to the
   consolidated page, or as a hosting redirect if Glen prefers one; either way the index
@@ -160,23 +160,27 @@ Two smaller wording points: the Team's review line is local, as the brief says; 
   accepted". The live Checkouts and Worktrees page has the same two defects; absorbing it
   into this page retires them.
 
-## Left for publication, if Glen approves
+## Done for publication (2026-09-08, on the desk)
 
-1. Replace `explainers/ronin-worktrees/index.html` with this page; change the stylesheet
-   paths to `../../ronin-tokens.css` and `../pbs.css`; keep the existing canonical URL.
-2. Turn `explainers/checkouts-and-worktrees/index.html` into a short pointer page (or add
-   a redirect route in `staticwebapp.config.json`, Glen's call), and merge its manifest
-   entry into the `ronin-worktrees` entry in `explainers/public-content.json`, adding the
-   lead-designation and release-PR contracts to the review trigger.
-3. Collapse the two worktree entries in `explainers/index.html` and the landing quilt
-   into one, in whatever position the site-refresh journey gives it.
-4. Check keyboard order and the dark theme in a real browser at both widths.
-5. Rerun `node scripts/check-site.mjs`, then hand in on this desk for the lead's review.
+1. `explainers/ronin-worktrees/index.html` replaced with the consolidated page; canonical
+   URL kept; stylesheet paths corrected for the public route.
+2. `explainers/checkouts-and-worktrees/index.html` is a noindex pointer page with a meta
+   refresh to the new page's topic anchor; `staticwebapp.config.json` carries a 301 for the
+   old route with and without a trailing slash and for anything beneath it.
+3. `explainers/public-content.json`: the checkouts entry is merged into the
+   `ronin-worktrees` entry (question, evidence, alt text, review trigger, absorbed route).
+4. `explainers/index.html`: entries 11 and 12 collapsed into one.
+5. `explainers/edges-not-capabilities/index.html`: its related-page link now points at the
+   consolidated page's topic anchor.
+6. `docs/site.md`: the hosting-configuration and explainer-list sentences updated.
+7. **Not done here, for the site refresh lead:** the landing quilt in `index.html` (and the
+   lead's `wip/site-refresh/index.html`) still shows two worktree stones. Collapse them into
+   one: `<a class="story wide" href="explainers/ronin-worktrees/"><small>Parallel work</small>
+   <h3>Worktrees: the problem, and how to use them in Ronin</h3></a>`. That file is in the
+   lead's pending candidate, so it is edited there rather than on this desk.
 
 ## Open questions for Glen
 
-- Confirm the route: replace `ronin-worktrees` and absorb `checkouts-and-worktrees`, with
-  the old URL kept as a pointer or redirect.
 - Whether the same topic-plus-how-to shape should become the pattern for other Ronin Blog
   pages that carry a procedure (the tmux and Tailscale guides already are).
 - Whether the page should print any commands at all, or leave every command to the
@@ -190,6 +194,8 @@ Two smaller wording points: the Team's review line is local, as the brief says; 
   explainers, site contract, template, checker, `worktrees.md`, `desks.md`,
   `team-promotion.md`, `desk-state.md`, catalog rows, promotion CLI and PR source.
 - 2026-09-08 · wrote the buildout and a standalone journey draft; checked; committed.
+- 2026-09-08 · Glen approved: replace, absorb, redirect. Published onto the route on the
+  desk, handed in to the team line for the lead's promotion alongside the landing work.
 - 2026-09-08 · Glen: one worktrees explainer, topic plus how-to, journey as a component.
   Consolidated both public pages and the journey into `wip/ronin-worktrees/index.html`;
   removed the standalone journey draft; checked; committed.
