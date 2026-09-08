@@ -1,6 +1,16 @@
 {
   "routes": [
     {
+      "route": "/explainers/checkouts-and-worktrees",
+      "redirect": "/explainers/ronin-worktrees/",
+      "statusCode": 301
+    },
+    {
+      "route": "/explainers/checkouts-and-worktrees/*",
+      "redirect": "/explainers/ronin-worktrees/",
+      "statusCode": 301
+    },
+    {
       "route": "/wip/*",
       "statusCode": 404
     },
