@@ -12,6 +12,7 @@
 .survey { max-width: 920px; }
 .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
 label, legend { color: var(--fg-strong); font: 600 var(--text-5)/1.45 var(--font-ui); }
+.optional { color: var(--muted); font: var(--text-2)/1 var(--font-mono); text-transform: uppercase; }
 label { display: block; margin-bottom: var(--space-9); }
 input:not([type="radio"]):not([type="checkbox"]), select, textarea { display: block; width: 100%; margin-top: var(--space-5); padding: var(--space-7) var(--space-8); border: var(--edge) solid var(--line-3); border-radius: var(--radius-sm); background: var(--well); color: var(--fg-strong); font: var(--text-6)/1.5 var(--font-ui); }
 textarea { min-height: 128px; resize: vertical; }
