@@ -42,8 +42,24 @@ function renderSpecialist() {
   document.querySelector('#specialistQuestions').innerHTML = questions.map(([name, question]) => textarea(name, question)).join('');
 }
 
-function draft() { const data = {}; new FormData(form).forEach((value, key) => { data[key] = value; }); localStorage.setItem(draftKey, JSON.stringify(data)); }
-function restore() { const data = JSON.parse(localStorage.getItem(draftKey) || '{}'); Object.entries(data).forEach(([name, value]) => { const field = form.elements[name]; if (!field) return; if (field instanceof RadioNodeList) { [...field].forEach(input => { input.checked = input.value === value; }); } else if (field.type === 'checkbox') field.checked = value === 'on'; else field.value = value; }); }
+function draft() {
+  try {
+    const data = {};
+    new FormData(form).forEach((value, key) => { data[key] = value; });
+    localStorage.setItem(draftKey, JSON.stringify(data));
+  } catch (_) {
+    // Draft persistence is optional; the survey must still submit without storage.
+  }
+}
+function restore() {
+  let data;
+  try {
+    data = JSON.parse(localStorage.getItem(draftKey) || '{}');
+  } catch (_) {
+    return;
+  }
+  Object.entries(data).forEach(([name, value]) => { const field = form.elements[name]; if (!field) return; if (field instanceof RadioNodeList) { [...field].forEach(input => { input.checked = input.value === value; }); } else if (field.type === 'checkbox') field.checked = value === 'on'; else field.value = value; });
+}
 renderSpecialist(); restore(); renderSpecialist(); restore();
 form.addEventListener('input', draft);
 form.addEventListener('change', event => { draft(); if (event.target.name === 'cohort') { renderSpecialist(); restore(); } });
