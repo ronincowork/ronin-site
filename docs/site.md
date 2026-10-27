@@ -117,6 +117,11 @@ retired route keeps a small pointer page in the repository so local previews and
 checker's link gate still resolve it. The configuration adds no build step and changes
 nothing else about serving.
 
+`developer_survey/` is the public, bounded first-use research route. It follows the public
+site shell and tokens. Draft answers stay in the participant's browser and the completed
+response downloads as Markdown for return with their recording; the route adds no form
+backend, analytics, account gate, or external service.
+
 ## Syncthing
 
 The dohyo checkout at `/home/glen3/dohyo/ronin-site` is a configured Syncthing send/receive

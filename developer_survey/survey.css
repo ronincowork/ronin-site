@@ -1,0 +1,33 @@
+.study-hero { max-width: 960px; margin-bottom: 72px; }
+.study-section, .survey-section { max-width: 920px; padding: clamp(34px, 6vw, 64px) 0; border-top: var(--edge) solid var(--line); }
+.study-section h2, .survey-section h2 { margin: var(--space-4) 0 var(--space-9); font: 500 clamp(var(--text-10), 4vw, 34px)/1.2 var(--font-ui); }
+.section-intro { max-width: var(--measure); margin: calc(-1 * var(--space-4)) 0 var(--space-10); color: var(--muted-2); }
+.instruction-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
+.instruction { padding: var(--space-9); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
+.instruction > span { color: var(--kaki); font: 600 var(--text-3)/1 var(--font-mono); }
+.instruction h3 { margin: var(--space-8) 0 var(--space-5); font-size: var(--text-9); }
+.instruction p, .instruction ol { margin: 0; color: var(--muted-2); }
+.study-note { margin-top: var(--space-9); padding: var(--space-8) var(--space-9); border-left: 3px solid var(--kaki); background: var(--raise); color: var(--muted-2); }
+.study-note strong { color: var(--fg-strong); }
+.survey { max-width: 920px; }
+.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
+label, legend { color: var(--fg-strong); font: 600 var(--text-5)/1.45 var(--font-ui); }
+label { display: block; margin-bottom: var(--space-9); }
+input:not([type="radio"]):not([type="checkbox"]), select, textarea { display: block; width: 100%; margin-top: var(--space-5); padding: var(--space-7) var(--space-8); border: var(--edge) solid var(--line-3); border-radius: var(--radius-sm); background: var(--well); color: var(--fg-strong); font: var(--text-6)/1.5 var(--font-ui); }
+textarea { min-height: 128px; resize: vertical; }
+input::placeholder, textarea::placeholder { color: var(--muted); }
+fieldset { margin: 0 0 var(--space-9); padding: 0; border: 0; }
+.choice-row { display: flex; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-5); }
+.choice-row label { margin: 0; padding: var(--space-6) var(--space-8); border: var(--edge) solid var(--line-3); border-radius: var(--radius-sm); background: var(--panel); font-weight: 500; cursor: pointer; }
+.choice-row input { margin-right: var(--space-4); accent-color: var(--kaki); }
+.rating { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: var(--space-8); align-items: center; padding: var(--space-7) 0; border-top: var(--edge) solid var(--line); }
+.rating:first-child { border-top: 0; }
+.rating legend { max-width: 520px; }
+.rating .choice-row { flex-wrap: nowrap; }
+.rating .choice-row label { min-width: 42px; padding: var(--space-5); text-align: center; }
+.survey-finish p { color: var(--muted-2); }
+.survey-finish .button { margin: var(--space-6) var(--space-5) 0 0; }
+.consent { max-width: var(--measure); padding: var(--space-8); border: var(--edge) solid var(--line-2); border-radius: var(--radius-sm); background: var(--panel); font-weight: 500; }
+.consent input { margin-right: var(--space-5); accent-color: var(--kaki); }
+.form-status { min-height: 1.6em; font: var(--text-4)/1.6 var(--font-mono); }
+@media (max-width: 720px) { .instruction-grid, .field-grid { grid-template-columns: 1fr; } .rating { grid-template-columns: 1fr; } .rating .choice-row { overflow-x: auto; padding-bottom: var(--space-4); } }
