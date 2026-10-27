@@ -66,7 +66,7 @@ form.addEventListener('change', event => { draft(); if (event.target.name === 'c
 
 function markdown() {
   const data = new FormData(form); let output = '# Ronin first-use study response\n\n';
-  output += `- **Name:** ${data.get('name')}\n- **Upwork name:** ${data.get('upwork_name')}\n- **Loom:** ${data.get('loom_url')}\n- **OS:** ${data.get('os')}\n- **Perspective:** ${data.get('cohort')}\n- **Coding-Agent experience:** ${data.get('agent_experience')}\n`;
+  output += `- **Name:** ${data.get('name')}\n- **Email:** ${data.get('email')}\n- **Upwork profile or ID:** ${data.get('upwork_id')}\n- **Upwork display name:** ${data.get('upwork_name')}\n- **Loom:** ${data.get('loom_url')}\n- **OS:** ${data.get('os')}\n- **Perspective:** ${data.get('cohort')}\n- **Coding-Agent experience:** ${data.get('agent_experience')}\n`;
   const sections = [['The first run', journey], ['Look closer', details]];
   sections.forEach(([title, questions]) => { output += `\n## ${title}\n`; questions.forEach(([name, question]) => { output += `\n### ${question}\n\n${data.get(name) || '—'}\n`; }); });
   output += '\n## Clarity ratings\n\n'; ratingItems.forEach((item, index) => { output += `- ${item}: ${data.get(`rating_${index + 1}`) || '—'}\n`; });
