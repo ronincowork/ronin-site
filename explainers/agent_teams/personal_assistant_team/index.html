@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="The personal assistant team in Ronin Cowork: an assistant powered by gbrain that searches its memory before answering, captures what you ask it to keep, and works for you — not a codebase."
+      content="The personal assistant team in Ronin Cowork: an assistant that reads its notes before answering, keeps what you ask it to keep, and works for you — not a codebase."
     />
     <meta
       name="keywords"
-      content="AI personal assistant, gbrain, agent memory, AI assistant with memory, personal AI agent"
+      content="AI personal assistant, agent memory, AI assistant with memory, personal AI agent"
     />
     <title>Ronin Personal Assistant</title>
     <link rel="canonical" href="https://www.ronincowork.com/explainers/agent_teams/personal_assistant_team/" />
@@ -229,19 +229,18 @@
         <h1 class="display">The personal assistant team.</h1>
         <p class="lede">
           A deliberately narrow team: one assistant that works for you — your
-          questions, your facts, your day. What makes it worth a seat is the
-          brain behind it: gbrain remembers what you tell it, across every
+          questions, your facts, your day. What makes it worth a seat is that
+          it keeps what you tell it, in files on your machine, across every
           session, so you never start from zero.
         </p>
       </section>
 
       <section class="composition" aria-label="The composition">
         <p class="pair"><b>family role:</b> Assistant — the seats that answer rather than build</p>
-        <p class="pair"><b>session task:</b> personal assistant — powered by gbrain</p>
+        <p class="pair"><b>session task:</b> personal assistant</p>
         <p>
-          Both ship with Ronin Cowork. The memory comes from
-          <a href="https://github.com/garrytan/gbrain">gbrain</a>, Garry Tan's
-          open-source agent brain, connected through Ronin Services.
+          Both ship with Ronin Cowork. The memory is plain files in the
+          assistant's own folder, yours to read, edit and keep.
         </p>
       </section>
 
@@ -268,33 +267,28 @@
         <article class="explainer">
           <span class="num">02</span>
           <div>
-            <h2>The integration: gbrain is the memory</h2>
+            <h2>Its memory is files you own</h2>
             <p>
-              An assistant without memory is a search box. This one works
-              brain-first, against gbrain — an open-source agent brain that
-              stores what you choose to keep and hands it back to any connected
-              session:
+              An assistant without memory is a search box. This one writes down
+              what you choose to keep and reads it back before it answers:
             </p>
-            <div class="terms" aria-label="How the brain is used">
+            <div class="terms" aria-label="How the memory is used">
               <div class="term-card">
-                <strong>search first</strong>
-                <span>Before answering, it searches gbrain — your facts beat its guesses.</span>
+                <strong>read first</strong>
+                <span>Before answering, it checks its notes — your facts beat its guesses.</span>
               </div>
               <div class="term-card">
-                <strong>capture on request</strong>
-                <span>"Remember this" stores it. Never secrets, credentials, or others' work.</span>
+                <strong>keep on request</strong>
+                <span>"Remember this" writes it down. Never secrets, credentials, or others' work.</span>
               </div>
               <div class="term-card">
                 <strong>outlives sessions</strong>
-                <span>Sessions are mortal; the brain is not. Tomorrow's assistant knows what you told today's.</span>
+                <span>Sessions are mortal; the files are not. Tomorrow's assistant knows what you told today's.</span>
               </div>
             </div>
             <p>
-              The seat is born connected to its brain — an assistant defined by
-              its memory is never launched with the door to it closed. Anything
-              that opens an outside connection happens one confirmed step at a
-              time, and if gbrain is unreachable it says so plainly and carries
-              on as a plain assistant.
+              The notes live in the assistant's folder on your machine, as
+              plain documents you can open on its tile, edit, or delete.
             </p>
           </div>
         </article>
@@ -302,52 +296,14 @@
         <article class="explainer">
           <span class="num">03</span>
           <div>
-            <h2>Where the brain gets its information</h2>
+            <h2>Where else it can look</h2>
             <p>
-              In Ronin you talk to the brain through your agent — every recall
-              and every capture goes via the session. The brain itself is
-              filled from the sides: gbrain ships connection recipes for the
-              places your life already writes itself down, each set up on the
-              brain with your own accounts and keys. Start with none, and add
-              the ones you actually use:
-            </p>
-            <div class="sources" aria-label="gbrain information sources">
-              <div class="source-card">
-                <strong>what you tell it</strong>
-                <span>"Remember this" in any connected session files it straight into the brain. Works from day one, no setup.</span>
-              </div>
-              <div class="source-card">
-                <strong>your notes</strong>
-                <span>Markdown you already have — bulk-import a folder of notes and the brain indexes it.</span>
-              </div>
-              <div class="source-card">
-                <strong>Gmail</strong>
-                <span>Email flows into brain pages, so the assistant recalls who wrote what and what is still open.</span>
-              </div>
-              <div class="source-card">
-                <strong>Google Calendar</strong>
-                <span>Events become searchable pages — attendees, locations, and meeting-prep context by day.</span>
-              </div>
-              <div class="source-card source-card--soon">
-                <strong>meeting transcripts</strong>
-                <span>Circleback meeting notes auto-import, with attendee detection built in.</span>
-                <span class="soon-tag">a gbrain capability · not yet wired into Ronin</span>
-              </div>
-              <div class="source-card">
-                <strong>X (Twitter)</strong>
-                <span>Timeline, mentions, and keyword monitoring flow into the brain as pages.</span>
-              </div>
-              <div class="source-card source-card--soon">
-                <strong>voice</strong>
-                <span>Talk to the brain out loud — conversations land as pages it can recall later.</span>
-                <span class="soon-tag">a gbrain capability · not yet wired into Ronin</span>
-              </div>
-            </div>
-            <p>
-              The recipes live in gbrain's own library and are documented
-              there — see
-              <a href="https://github.com/garrytan/gbrain">the gbrain
-              repository</a> for the full, current list.
+              Start with nothing but what you tell it. When you want it to see
+              more, drop files into its folder (exported mail, a calendar, a
+              folder of notes), or connect an outside service as an MCP server
+              and the assistant reaches it through Ronin, with your keys staying
+              with Ronin. Anything that opens an outside connection happens one
+              confirmed step at a time.
             </p>
           </div>
         </article>
@@ -383,7 +339,7 @@
       <section class="finish">
         <div>
           <h2>Give your assistant a memory.</h2>
-          <p>Install Ronin Cowork, and connect gbrain through Ronin Services.</p>
+          <p>Install Ronin Cowork and launch the Personal Assistant preset.</p>
         </div>
         <div class="finish-actions"><a class="button" href="../../../index.html">Tell me more about Ronin</a><a class="button button--primary" href="../../../load-ronin.html">Load Ronin →</a></div>
       </section>
@@ -391,7 +347,6 @@
 
     <footer class="site-footer">
       <span>Ronin Cowork · open source · runs on your machine</span>
-      <a href="https://github.com/garrytan/gbrain">gbrain on GitHub</a>
     </footer>
   </body>
 </html>

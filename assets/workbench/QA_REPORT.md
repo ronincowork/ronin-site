@@ -45,7 +45,7 @@ action).
 - The adapter does not request or capture real `/api/` data. It blocks animation, waits
   for fonts and two stable frames, fixes locale/timezone/theme/reduced motion, and records
   source/export SHA-256 values.
-- No Services-only work record contents, recordings, Stats, Voice, gbrain, or house-agent
+- No Services-only work record contents, recordings, Stats, Voice, or house-agent
   behavior is claimed. The visible “View Work Record” control is inert base UI chrome and
   no work-record content is shown.
 - The still proves only visible coexistence/layout and the displayed separate worktree

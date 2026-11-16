@@ -9,13 +9,9 @@ This is the "chief of staff on top, a specialist per lane" shape that always-on 
 made fashionable, kept honest about what an Agent on this machine can do. Two facts shape
 everything below:
 
-- **A lane reads through gbrain when it is connected, and from folders the owner owns
-  when it is not — and produces documents either way.** gbrain (`sops:gbrain`) is the
-  house's brain: the owner's people, projects and meetings, and, once the owner has
-  authorised an integration recipe, the door to mail and calendar. Where the brain reaches,
-  a lane reads there first. Where it does not, what the owner drops into the project root
-  is the input. What a lane writes back is a document; a draft stays a document until the
-  owner sends it themselves.
+- **A lane reads from folders the owner owns, and produces documents.** What the owner
+  drops into the project root is the input. What a lane writes back is a document; a
+  draft stays a document until the owner sends it themselves.
 - **Nothing leaves the house without the owner's yes.** A reply, a message, an invoice, a
   payment, a calendar change that other people see — every one is a `propose-and-confirm`,
   in the tile, and the owner's word in the tile is the only yes that counts.
@@ -36,27 +32,6 @@ not there, and says so in the brief:
 
 A lane reads only its folder and `out/`; it never reads another lane's inbox. The lead reads
 everything.
-
-## With gbrain connected
-
-The team's Routine map turns gbrain on, and the money and pipeline rows turn it off for
-themselves — a ledger and a pipeline sheet gain nothing from the brain, and a session
-with no MCP at all is the cheaper birth. Where the machine has no brain the other lanes
-are simply born without it and use the folders — never a refusal, the birth receipt says
-so. When it is up:
-
-- **inbox triage** reads mail through the brain's mail integration and writes the triage
-  document exactly as before. It still never sends: a send is the owner's hand, or a
-  `propose-and-confirm` the owner answered in the tile.
-- **meeting prep** reads the calendar and, for every attendee, `search`es the brain for
-  who they are and what happened last time — the brain is a memory, not a thinker: the
-  synthesis is the lane's own, from search results.
-- **every lane** captures what the owner would want remembered — a decision, a contact, a
-  date — as a page in the brain, never a secret and never another session's unpublished
-  work. Working state stays in the work record.
-- **opening a new door** — a mail account, a calendar, a CRM — follows `sops:gbrain` §
-  integrations to the letter: name the door, the owner authorises, then and only then the
-  recipe runs. The chief of staff asks; a lane never opens a door on its own.
 
 ## The lanes
 
