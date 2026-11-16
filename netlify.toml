@@ -1,0 +1,29 @@
+# Netlify: the site as it is, no build. The same rules as staticwebapp.config.json (Azure),
+# which stays until Azure is taken down.
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/explainers/checkouts-and-worktrees"
+  to = "/explainers/ronin-worktrees/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/explainers/checkouts-and-worktrees/*"
+  to = "/explainers/ronin-worktrees/"
+  status = 301
+  force = true
+
+# Working files ship with the repo but are never served.
+[[redirects]]
+  from = "/wip/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/dist/*"
+  to = "/404.html"
+  status = 404
+  force = true

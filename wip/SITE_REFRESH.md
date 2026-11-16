@@ -71,7 +71,7 @@ The recovered landing now reads, in order:
 2. Two jobs: launch a provider Agent; add persistence and coordination around it.
 3. Reasons to trust the model: owner machine, open source, existing accounts, owned work,
    coordination without control.
-4. Services beta: work records, transcripts, Stats, voice, and gbrain.
+4. Services beta: work records, transcripts, Stats, and voice.
 5. Stack placement: what Ronin does and does not replace.
 6. Technical proof: terminal CLIs, tmux persistence, host reachability, remote access, and
    supported-provider facts.

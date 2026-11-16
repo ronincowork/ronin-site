@@ -8,7 +8,7 @@ The demonstration answers one question: **what does it look like to place a Clau
 and a Codex Agent side by side in one Workbench?** It may show only base Cowork behavior:
 the shared Workbench frame, its discovery column, two independently rendered workspaces,
 and two plainly labeled terminal tiles. It must not show or imply Services-only work
-records, recordings, Stats, Voice, gbrain, or house-agent behavior.
+records, recordings, Stats, Voice, or house-agent behavior.
 
 The still must make only these visible facts understandable without animation:
 

@@ -26,7 +26,7 @@ not only the capture page.
 | Check | Pass condition | Evidence to record |
 |---|---|---|
 | Current implementation | Capture uses the canonical current Workbench, not a stale route or visual mockup. | source commit and route |
-| Base boundary | No Services-only work record, recording, Stats, Voice, gbrain, or house-agent capability is visible or implied. | capability inventory |
+| Base boundary | No Services-only work record, recording, Stats, Voice, or house-agent capability is visible or implied. | capability inventory |
 | Provider distinction | Claude and Codex are plainly labeled and occupy separate workspaces. | desktop and narrow review |
 | Still evidence boundary | The still claims only visible coexistence/layout: two labeled providers, two numbered workspaces, one current Workbench frame. | claim review |
 | Independence/non-mutation | Any such claim is supported by current tested contract evidence or an approved motion sequence; the still alone is not cited. | test reference and/or motion review |
