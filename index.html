@@ -17,10 +17,10 @@
     section{padding:94px 0}.intro{display:grid;grid-template-columns:.65fr 1.35fr;gap:50px;margin-bottom:46px}.intro h2{margin:0;font:500 clamp(38px,5vw,66px)/1 Georgia,serif;letter-spacing:-.035em}.intro p{margin:0;font-size:19px;color:var(--muted);max-width:620px}.usp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.usp{position:relative;min-height:260px;padding:30px;background:var(--card);border:1px solid var(--line);overflow:hidden}.usp em{position:absolute;right:20px;top:-28px;font:italic 100px Georgia,serif;color:rgba(211,68,45,.10)}.usp h3{margin:34px 0 12px;font:500 30px Georgia,serif}.usp p{max-width:480px;color:var(--muted);font-size:16px}.usp strong{color:var(--ink)}
     .dark{background:#1f1d1a;color:#f4efe6}.dark .section-label{color:#ef765f}.dark .intro p{color:#bcb4aa}.modes{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#514a42;border:1px solid #514a42}.mode{background:#282521;padding:38px}.mode small{color:#ef765f;font-weight:800;letter-spacing:.13em}.mode h3{font:500 34px Georgia,serif;margin:15px 0}.mode p{color:#c9c1b7}.mode ul{padding-left:18px;color:#c9c1b7}
     .credits{background:var(--red);color:white}.credits-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}.credits h2{font:500 clamp(40px,6vw,76px)/1 Georgia,serif;margin:0}.credits p{font-size:18px}.credits .button{border-color:white;color:white}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.chip{border:1px solid rgba(255,255,255,.45);padding:9px 12px;font-size:12px}
-    .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.use{padding:26px;border-top:3px solid var(--red);background:var(--card)}.use h3{font:500 24px Georgia,serif}.use p{color:var(--muted)}
+    .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.use{padding:26px;border-top:3px solid var(--red);background:var(--card)}.use h3{font:500 24px Georgia,serif}.use p{color:var(--muted)}.integrations{margin-top:20px;padding:32px;background:var(--ink);color:white;display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:center}.integrations h3{font:500 30px Georgia,serif;margin:0 0 8px}.integrations p{margin:0;color:#cfc7bc}.integration-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}.integration-list span{border:1px solid #686158;padding:10px 13px;font-size:12px;letter-spacing:.08em}
     .control{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}.control h2{font:500 clamp(40px,5vw,68px)/1 Georgia,serif;margin:8px 0 20px}.facts{border-top:1px solid var(--line)}.fact{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}.fact b{font-size:13px}.fact span{font-size:14px;color:var(--muted)}
     .final{padding:100px 0;text-align:center;background:#e9dfd0}.final h2{font:500 clamp(42px,6vw,80px)/1 Georgia,serif;margin:0 auto 22px;max-width:850px}.final p{font-size:19px;color:var(--muted)}footer{background:var(--ink);color:#cfc7bc;padding:28px 0}.footer{display:flex;justify-content:space-between;gap:20px;font-size:12px}.footer a{color:white}
-    @media(max-width:850px){.links>a:not(.button){display:none}.hero-grid,.credits-grid,.control{grid-template-columns:1fr}.machine{transform:none}.proof-grid,.use-grid{grid-template-columns:1fr 1fr}.proof article:nth-child(2){border-right:0}.intro{grid-template-columns:1fr}.usp-grid{grid-template-columns:1fr}.hero{padding-top:54px}.screen{min-height:400px}}
+    @media(max-width:850px){.links>a:not(.button){display:none}.hero-grid,.credits-grid,.control,.integrations{grid-template-columns:1fr}.integration-list{justify-content:flex-start}.machine{transform:none}.proof-grid,.use-grid{grid-template-columns:1fr 1fr}.proof article:nth-child(2){border-right:0}.intro{grid-template-columns:1fr}.usp-grid{grid-template-columns:1fr}.hero{padding-top:54px}.screen{min-height:400px}}
     @media(max-width:560px){.wrap{width:min(100% - 26px,1180px)}.proof-grid,.use-grid,.modes{grid-template-columns:1fr}.proof article{border-right:0;border-bottom:1px solid var(--line)}.screenbody{grid-template-columns:88px 1fr}.rail{padding:14px 9px}.workspace{padding:13px}.fact{grid-template-columns:1fr;gap:5px}section{padding:68px 0}.nav{height:66px}.brand span{font-size:12px}}
   </style>
 </head>
@@ -30,7 +30,7 @@
     <div class="wrap nav">
       <a class="brand" href="#top"><img src="/nin-mark.svg" alt="" /><span>RONIN HOSTED</span></a>
       <nav class="links" aria-label="Primary">
-        <a href="#why">Why Ronin</a><a href="#work">How you work</a><a href="#control">Your VM</a>
+        <a href="#why">Why Ronin</a><a href="#work">How you work</a><a href="#your-work">Your Work</a>
         <a class="button" href="https://hq.roninhosted.com/">Sign in</a>
         <a class="button button--red" href="https://hq.roninhosted.com/">Get Ronin Hosted</a>
       </nav>
@@ -89,38 +89,29 @@
         <div class="intro"><div><div class="section-label">Two ways to work</div><h2>Direct when you want. Managed when you don't.</h2></div><p>Ronin does not hide your agents behind another agent. You can speak to the person doing the work or follow the work itself.</p></div>
         <div class="modes">
           <article class="mode"><small>DIRECT</small><h3>Talk to the responsible agent.</h3><p>Open the session, ask a question, change direction or keep working together in the native conversation.</p><ul><li>Visible, separate agents</li><li>Claude, Codex and others</li><li>Your provider accounts</li></ul></article>
-          <article class="mode"><small>PROJECT MANAGED</small><h3>Manage through work items.</h3><p>See what is in progress, handed in or waiting without interrupting every agent for a status report.</p><ul><li>Jira work items</li><li>Roster and work records</li><li>Reviewed handoffs</li></ul></article>
+          <article class="mode"><small>PROJECT MANAGED</small><h3>Manage through work items.</h3><p>See what is in progress, handed in or waiting without interrupting every agent for a status report.</p><ul><li>Project Work Items</li><li>Optional Jira application integration</li><li>Roster, work records and reviewed handoffs</li></ul></article>
         </div>
       </div>
     </section>
 
     <section class="credits">
       <div class="wrap credits-grid">
-        <h2>Start now. Bring your subscriptions later.</h2>
+        <h2>Start now. Add your subscriptions later.</h2>
         <div><p>Ronin starter credits let the first agents work when you arrive. Add your own provider subscriptions when you are ready.</p><div class="chips"><span class="chip">CLAUDE</span><span class="chip">CODEX</span><span class="chip">OTHER AGENTS</span></div></div>
       </div>
     </section>
 
-    <section>
+    <section id="your-work">
       <div class="wrap">
-        <div class="intro"><div><div class="section-label">Use your VM</div><h2>One machine. Your work.</h2></div><p>Keep the tools and people for each body of work together without turning Ronin Hosted into a restricted agent sandbox.</p></div>
+        <div class="intro"><div><div class="section-label">Your Work</div><h2>Continue. Start. Work together.</h2></div><p>Use Ronin Hosted for the project already under way, the one you are starting now, or a private workspace shared with a partner or client.</p></div>
         <div class="use-grid">
           <article class="use"><h3>Continue a project</h3><p>Bring an existing project and keep control of its code, files and deployment.</p></article>
           <article class="use"><h3>Start from scratch</h3><p>Develop a new project in a VM already prepared for working with agents.</p></article>
           <article class="use"><h3>Work with partners</h3><p>Stand up separate VMs for partners or clients, with private workspaces and deliberate collaborator access.</p></article>
         </div>
-      </div>
-    </section>
-
-    <section id="control">
-      <div class="wrap control">
-        <div><div class="section-label">A real virtual machine</div><h2>Use your tools. Keep your way out.</h2><p class="lede">Connect the integrations you already use for your work. Install what you need with sudo and SSH. Export is the way out.</p><div class="chips"><span class="chip">NETLIFY</span><span class="chip">JIRA</span><span class="chip">SUPABASE</span><span class="chip">YOUR TOOLS</span></div></div>
-        <div class="facts">
-          <div class="fact"><b>Storage</b><span>Your VM has its own persistent disk, not shared customer storage.</span></div>
-          <div class="fact"><b>Access</b><span>Authenticated browser login. You may also install your own Tailscale inside the VM.</span></div>
-          <div class="fact"><b>Control</b><span>Sudo and SSH inside the VM. Ronin's kill switch remains outside it.</span></div>
-          <div class="fact"><b>Lifecycle</b><span>Paid runs. Unpaid stops. A stopped unpaid disk is kept for 30 days.</span></div>
-          <div class="fact"><b>Leaving</b><span>Export your work and use the open-source Ronin to self-host.</span></div>
+        <div class="integrations">
+          <div><h3>Connect the tools your work already uses.</h3><p>Integrations remain available to Ronin and your agents while the VM runs.</p></div>
+          <div class="integration-list"><span>NETLIFY</span><span>JIRA</span><span>SUPABASE</span><span>MCP SERVERS</span><span>AND MORE</span></div>
         </div>
       </div>
     </section>
