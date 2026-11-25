@@ -12,8 +12,7 @@ The complete owner journey is discussed as five named surfaces:
 landing_page → load_ronin → install_ronin → cowork_setup → cowork
 ```
 
-This repository serves `landing_page`, `load_ronin`, the explainer library, and the template
-library (`library/`, below). The explainer library lives at `explainers/` (linked from the root header). Its currently indexed members are the
+This repository serves `landing_page`, `load_ronin` and the explainer library. The explainer library lives at `explainers/` (linked from the root header). Its currently indexed members are the
 Workbench, Agent coordination, Cowork-and-Services, the Agent personality discussion, and AI-agents-on-a-virtual-machine
 explainers, the Ronin Worktrees explainer (one page: the topic, then the how-to journey;
 it absorbed the former Checkouts and Worktrees page on 2026-09-08), plus the standalone
@@ -81,36 +80,15 @@ terminal jargon or decorative command-line chrome.
 The identity direction is a kaki hexagon containing **人**, the human/person character from
 `浪人`. Latin `nin` lettering and the full `浪人` word are not the mark.
 
-## The template library
-
-`library/` is the public shop window for the **template library** — the shelf of template
-bundles Ronin keeps and grows, a **Ronin Services** feature (owner, 2026-09-03). The page
-`library/index.html` shows descriptions only: one row per bundle with its art, name, what
-it holds and its kinds, under the app's kind and Teams/Agents chips; a dozen lines of
-inline script filter it and every row shows with scripts off. Nothing on the page is a
-link to a document.
-
-**The documents are HQ's.** `library/src/<name>/` is the one source we maintain; `node
-scripts/pack-library.mjs --write` writes the page, and `dist/library/index.json`
-(`ronin-library/1`) plus `dist/library/bundles/<name>.json` (`ronin-bundle/1`) — committed
-here so the library is cultivated in one repository, served to an entitled box by Ronin HQ,
-and answered 404 by this site (`staticwebapp.config.json`). The installed app reads them
-through its one allowlisted client with the Services token and shows everything a bundle
-holds before installing. `scripts/check-site.mjs` fails when the committed output is stale,
-when a card's sha256 does not match its file, when the page does not show a listed bundle,
-or when any page links a bundle file. The format and the install rules are the app's
-(`docs/templates.md` there); the source layout is `library/src/README.md` here.
-
 ## Static-site boundary
 
 Keep production static and inspectable: HTML, CSS, and local assets. Add no framework, build
 system, analytics, account gate, or external asset request without a decision that changes this
-document first. The template library's generated page is inside this boundary; its JSON is
-committed under `dist/` for HQ and never served here.
+document first.
 
 The one piece of hosting configuration is `staticwebapp.config.json`. It returns 404 for
 `/wip/*` so working documents committed to the repository are never publicly served (owner,
-2026-08-22), and 404 for `/dist/*`. It also carries permanent redirects for retired explainer
+2026-08-22). It also carries permanent redirects for retired explainer
 routes, currently `/explainers/checkouts-and-worktrees/` → `/explainers/ronin-worktrees/`
 (owner, 2026-09-08: one Worktrees explainer, topic plus how-to, rather than two pages). A
 retired route keeps a small pointer page in the repository so local previews and the site

@@ -29,7 +29,7 @@ of Setup and stage every material choice for Glen before implementation or promo
 - Trace the likely first-time visitor journey from landing through proof, installation, and
   deeper explanation.
 - Record the current information hierarchy and visual hierarchy, including responsive behavior.
-- Separate the deployable public site from the template-library payload and installed-product UI.
+- Separate the deployable public site from the installed-product UI.
 
 ### Recovered landing delta
 
@@ -52,15 +52,13 @@ The deployable site has four distinct public jobs:
    command, hand the install to an Agent, or prepare a Hetzner VM first.
 3. **Investigate a question** — the explainer index leads to product-model, coordination,
    persistence, remote-access, VM, and Git-worktree explanations.
-4. **Browse ready-made work** — the template library shows Teams and Agents available through
-   Services and explains how they enter an installed Ronin.
 
 The documented owner journey is broader than this repository:
 
 `landing page → Load Ronin → installer → cowork setup → coworkspace`
 
-The public repository owns only the first two surfaces plus optional supporting explanations and
-the template shop window. Installation and product setup must remain outside the site refresh.
+The public repository owns only the first two surfaces plus optional supporting explanations.
+Installation and product setup must remain outside the site refresh.
 
 ### Current landing journey
 
@@ -87,8 +85,6 @@ present but competes with several taxonomic paths.
 - **Load Ronin** has a clear single job and should remain the main conversion destination.
 - **Explainers** are useful question-led proof, but the index presents eleven peers. It needs a
   clearer first path than a flat catalogue if it participates in the primary journey.
-- **Templates** demonstrates concrete uses, but its Teams/Agents and project/people axes are not
-  introduced by the landing page before the visitor reaches the catalogue.
 - **tmux**, **Tailscale**, and **VM** pages are supporting answers, not required setup steps; the
   site contract explicitly protects that distinction.
 - Several legacy use-case/customization URLs remain intentionally unlinked because their old role
@@ -141,7 +137,7 @@ The clearest first-time route appears to be: glen: this is awesome! yes we need 
 5. **Proof or action:** see the coworkspace and a concrete working loop, or go straight to
    **Load Ronin**.
 
-Services, templates, and technical explainers should support this route at the moment their
+Services and technical explainers should support this route at the moment their
 question naturally arises, rather than each becoming an equal first-level journey.
 
 ## Recommended refresh direction
@@ -217,14 +213,13 @@ Reshape the page into this order:
 5. **Trust boundary:** accounts, native conversations, files, and machine remain the owner's;
    Ronin coordinates rather than replacing the Agents.
 6. **One working example:** show an intelligible multi-Agent job from launch through direct review
-   and handoff. Link onward to Templates as more examples of useful work.
+   and handoff.
 7. **Optional Services:** summarize the paid layer after the core product is understood. Do not
    make the Services catalogue part of the definition of Ronin.
 8. **Action:** one final **Load Ronin** conversion, with supporting technical questions routed to
    the explainer library.
 
-Reduce the header to three visitor decisions: **See how it works**, **Explore examples**, and
-**Load Ronin**. Move Services, tmux, host, Tailscale, VM, and detailed architecture into contextual
+Reduce the header to two visitor decisions: **See how it works** and **Load Ronin**. Move Services, tmux, host, Tailscale, VM, and detailed architecture into contextual
 links or the explainer library rather than giving them equal weight in the primary journey.
 
 ### Copy and terminology rules
@@ -280,7 +275,6 @@ No implementation begins until Glen resolves that synthesis.
 ## Verification
 
 - `node scripts/check-site.mjs`
-- `node scripts/pack-library.mjs --check`
 - `npm run verify` if the repository defines it at implementation time
 - Browser review at desktop and phone widths for navigation, content order, focus behavior,
   overflow, and visual hierarchy
