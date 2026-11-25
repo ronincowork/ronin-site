@@ -5,7 +5,7 @@
   "art": "🗓",
   "blurb": "A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.",
   "kinds": [
-    "work",
+    "business",
     "personal"
   ],
   "version": "2026-09-03",
@@ -18,7 +18,7 @@
     {
       "store": "catalogs",
       "path": "templates/teams/weekly_review.md",
-      "text": "# Weekly Review\n- **label:** Weekly Review\n- **art:** 🗓\n- **blurb:** A week looked back on, and the next one shaped.\n- **order:** 45\n- **kinds:** work, personal\n- **objective:** Look back over the week's work records and documents, say plainly what moved and what stalled, and shape next week into a short list the owner agrees to.\n- **behaviours:** sops:weekly_review\n- **routines_on:** weekly_review\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### review lead\n- **team_lead:** yes\n- **instructions:** Run the review: gather what the reader and the planner produce, keep it to one page, and put it in front of the owner. `+review:` is the whole procedure.\n- **mandate:** execute · nobody · an artifact\n\n### record reader\n- **instructions:** Read every work record and document the week produced and report what moved, what stalled, and what was left half-done — facts, not judgement.\n- **mandate:** execute · nobody · an artifact\n\n### next week planner\n- **instructions:** From the reader's report and the owner's standing goals, draft next week as at most seven lines the owner can strike or keep.\n- **mandate:** plan · nobody · a plan\n"
+      "text": "# Weekly Review\n- **label:** Weekly Review\n- **art:** 🗓\n- **blurb:** A week looked back on, and the next one shaped.\n- **order:** 45\n- **kinds:** business, personal\n- **objective:** Look back over the week's work records and documents, say plainly what moved and what stalled, and shape next week into a short list the owner agrees to.\n- **behaviours:** sops:weekly_review\n- **routines_on:** weekly_review\n- **routines_off:** ronin_worktrees\n\n## agents\n\n### review lead\n- **team_lead:** yes\n- **instructions:** Run the review: gather what the reader and the planner produce, keep it to one page, and put it in front of the owner. `+review:` is the whole procedure.\n- **mandate:** execute · nobody · an artifact\n\n### record reader\n- **instructions:** Read every work record and document the week produced and report what moved, what stalled, and what was left half-done — facts, not judgement.\n- **mandate:** execute · nobody · an artifact\n\n### next week planner\n- **instructions:** From the reader's report and the owner's standing goals, draft next week as at most seven lines the owner can strike or keep.\n- **mandate:** plan · nobody · a plan\n"
     },
     {
       "store": "sops",

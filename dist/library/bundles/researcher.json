@@ -5,8 +5,7 @@
   "art": "🧭",
   "blurb": "Research, compare, decide. No building — yet.",
   "kinds": [
-    "coding",
-    "work",
+    "business",
     "personal",
     "school"
   ],
@@ -15,7 +14,7 @@
     {
       "store": "catalogs",
       "path": "templates/agents/researcher.md",
-      "text": "# Researcher\n- **label:** Researcher\n- **art:** 🧭\n- **blurb:** Research, compare, decide. No building — yet.\n- **order:** 60\n- **kinds:** coding, work, personal, school\n- **brief:** Be my researcher — dig into it, compare the options honestly, and bring back a decision. No building yet.\n- **mandate:** discuss · nobody · ideas\n- **behaviours:** sops:data\n"
+      "text": "# Researcher\n- **label:** Researcher\n- **art:** 🧭\n- **blurb:** Research, compare, decide. No building — yet.\n- **order:** 60\n- **kinds:** business, personal, school\n- **brief:** Be my researcher — dig into it, compare the options honestly, and bring back a decision. No building yet.\n- **mandate:** discuss · nobody · ideas\n- **behaviours:** sops:data\n"
     }
   ],
   "entries": []

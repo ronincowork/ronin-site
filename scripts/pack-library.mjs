@@ -21,7 +21,7 @@ export const LIBRARY_FORMAT = 'ronin-library/1';
 const STORES = ['catalogs', 'sops', 'ways', 'library', 'tools'];
 const CATALOGS = ['MACROS.md', 'ACTIONS.md', 'TOOLS.md'];
 const CATALOG_DIRS = ['templates/agents', 'templates/teams', 'routines', 'session_roles', 'role_families', 'desk_profiles', 'lexicons'];
-const KINDS = ['coding', 'work', 'personal', 'household', 'social', 'school'];
+const KINDS = ['open', 'business', 'personal', 'household', 'social', 'school'];
 const TOKEN = /^[a-z0-9][a-z0-9_-]{0,63}$/;
 
 const sha256 = (text) => createHash('sha256').update(text).digest('hex');
@@ -93,7 +93,7 @@ export function buildBundle(srcDir) {
   };
 }
 
-const KIND_WORDS = { coding: 'Code', work: 'Work', personal: 'Yourself', household: 'The house', social: 'Friends and family', school: 'School' };
+const KIND_WORDS = { open: 'All', business: 'Business', personal: 'Yourself', household: 'The house', social: 'Friends and family', school: 'School' };
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const holdsWords = (holds) => Object.entries(holds).map(([k, n]) => `${n} ${({ teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way', library: 'page', macros: 'macro', actions: 'action', tools: 'tool' })[k] ?? k}${n === 1 ? '' : (k === 'routines' ? 's' : 's')}`).join(' · ');
 
@@ -144,7 +144,7 @@ const HOW = `      <section class="how" aria-label="How a template gets into Ron
         </p>
       </section>`;
 
-const KIND_ICONS = { coding: '⌨', work: '💼', personal: '🎩', household: '🏠', social: '🎪', school: '🎓' };
+const KIND_ICONS = { open: '○', business: '💼', personal: '🎩', household: '🏠', social: '🎪', school: '🎓' };
 const HOLD_WORD = { teams: 'team', agents: 'agent', routines: 'Routine', sops: 'SOP', ways: 'way', library: 'page', macros: 'macro', actions: 'action', tools: 'tool' };
 
 /**
@@ -154,7 +154,7 @@ const HOLD_WORD = { teams: 'team', agents: 'agent', routines: 'Routine', sops: '
  * script hide rows not of the picked kind; with scripts off, every row shows.
  */
 function indexPage(cards) {
-  const chips = [['open', '○', 'All'], ...Object.entries(KIND_ICONS).map(([k, icon]) => [k, icon, KIND_WORDS[k]])]
+  const chips = [...Object.entries(KIND_ICONS).map(([k, icon]) => [k, icon, KIND_WORDS[k]])]
     .map(([k, icon, word]) => `        <button type="button" class="chip" data-kind="${k}" aria-pressed="${k === 'open'}"><i>${icon}</i>${esc(word)}</button>`).join('\n');
   // The second axis (owner, 2026-09-03): all, teams only, agents only.
   const shapes = [['all', '○', 'All'], ['team', '⛩', 'Teams'], ['agent', '人', 'Agents']]

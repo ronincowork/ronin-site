@@ -25,14 +25,14 @@
       "art": "📒",
       "blurb": "Every receipt, every account, reconciled and filed.",
       "kinds": [
-        "work",
+        "business",
         "household",
         "school"
       ],
       "version": "2026-09-03",
       "url": "bundles/bookkeeper.json",
-      "sha256": "8c8aea97d8e7a0211268b16b14fe711f6303cecb3059d22d763225b65d4f36c9",
-      "bytes": 809,
+      "sha256": "1cf758ffdf1cdcda5b6ac1f5b6454b01576b1906375da873f720bc845facdd68",
+      "bytes": 817,
       "holds": {
         "agents": 1
       }
@@ -43,13 +43,13 @@
       "art": "🗂",
       "blurb": "The Grok Bot shape on your own machine and any provider: a coordinator who writes no code, one specialist per lane — inbox, meetings, money, pipeline — and a morning brief. Works from folders you own. Drafts, never sends.",
       "kinds": [
-        "work",
+        "business",
         "personal"
       ],
       "version": "2026-09-03",
       "url": "bundles/chief_of_staff.json",
-      "sha256": "8f5f56647a89570ef1170db43410cd1aff279de9fd8345d58acbabf6ae66ec27",
-      "bytes": 18010,
+      "sha256": "b1484953559e0f4d7d1d8291baf8f029f13984ef3defb229a5e569b80af41986",
+      "bytes": 18022,
       "holds": {
         "routines": 1,
         "agents": 1,
@@ -66,13 +66,12 @@
       "art": "🎨",
       "blurb": "Shape the thing before anyone builds it — looks, flow, feel.",
       "kinds": [
-        "coding",
-        "work"
+        "business"
       ],
       "version": "2026-09-03",
       "url": "bundles/designer.json",
-      "sha256": "2087dbc10b7a3b6e460f2cb879ea508e563a1bc3aef8324c8097a5efd80071da",
-      "bytes": 822,
+      "sha256": "64f5cba76f11cbfa4130886437a086520a8751f43d21c044ac568d5dd626b8ff",
+      "bytes": 808,
       "holds": {
         "agents": 1
       }
@@ -101,12 +100,12 @@
       "art": "🖥",
       "blurb": "Build the surface against an agreed design.",
       "kinds": [
-        "coding"
+        "business"
       ],
       "version": "2026-09-03",
       "url": "bundles/front_end.json",
-      "sha256": "ae4e7a484e7b434f7615da91b9bc400e41c96def9c6b7ba53ffc13de5ed0d47a",
-      "bytes": 740,
+      "sha256": "8c63170ab30a62bb2788a3d62875fa5d06e01b7e99d5ce90dcd7ecc29f5b08ed",
+      "bytes": 744,
       "holds": {
         "agents": 1
       }
@@ -117,13 +116,12 @@
       "art": "🩺",
       "blurb": "Runs your application's checks and tells you what moved.",
       "kinds": [
-        "coding",
-        "work"
+        "business"
       ],
       "version": "2026-09-03",
       "url": "bundles/health_checker.json",
-      "sha256": "88ffb9133a07915a4a58934b6ce926275be77258336d038df27c249d47eb63ff",
-      "bytes": 841,
+      "sha256": "9972c935ecff9cc4589bb76edc876aeaeb03df5dc89c4ca1b49efcc781d4a2ea",
+      "bytes": 827,
       "holds": {
         "agents": 1
       }
@@ -134,13 +132,12 @@
       "art": "📈",
       "blurb": "Your application's checks, run on a rhythm, judged, and reported.",
       "kinds": [
-        "coding",
-        "work"
+        "business"
       ],
       "version": "2026-09-03",
       "url": "bundles/health_checks.json",
-      "sha256": "a1bae9529aaaf63ab25ff3f7243008d6cfedd5a9e772500ff5ecd6292c923cb7",
-      "bytes": 1152,
+      "sha256": "b9253fb2b4b99db9cd6e5cf936781e3245da69c8d1383a62617afa0ca51589fe",
+      "bytes": 1138,
       "holds": {
         "teams": 1
       }
@@ -151,13 +148,13 @@
       "art": "📰",
       "blurb": "An editor, a writer, a fact checker and a sender, with the house style guide they all read and a copy editor you can add to any team.",
       "kinds": [
-        "work",
+        "business",
         "social"
       ],
       "version": "2026-09-03",
       "url": "bundles/newsletter.json",
-      "sha256": "d783ff2d49195426bafefc1e5ee13c69bfd0404b704361b754cd05a1ec9b5ee9",
-      "bytes": 4116,
+      "sha256": "90fcc07f2c549cfc1bb44aeed195903ea5d470bb22921d74ee2aef98b5eca8c1",
+      "bytes": 4128,
       "holds": {
         "agents": 1,
         "teams": 1,
@@ -186,12 +183,12 @@
       "art": "🛠",
       "blurb": "Work on what is already there. Faster, cleaner, fixed.",
       "kinds": [
-        "coding"
+        "business"
       ],
       "version": "2026-09-03",
       "url": "bundles/raid_my_codebase.json",
-      "sha256": "e51d6d09d9014100ba4cb3afdf320dccc063806c5206ae70a4ce2c926e7fa0a5",
-      "bytes": 1558,
+      "sha256": "326151dd067a58df3e52dedcf98f4b87ea3a6dc8dc73c7ceb9a13be1503cf46c",
+      "bytes": 1562,
       "holds": {
         "teams": 1
       }
@@ -218,15 +215,14 @@
       "art": "🧭",
       "blurb": "Research, compare, decide. No building — yet.",
       "kinds": [
-        "coding",
-        "work",
+        "business",
         "personal",
         "school"
       ],
       "version": "2026-09-03",
       "url": "bundles/researcher.json",
-      "sha256": "8502df7cf27cb52aa13bfed95a4004abc5befe267eae92594d9fdc037b47e76b",
-      "bytes": 774,
+      "sha256": "cb02fca4550b962f8c07feebf607b2e43f26f205597142287505637ed7a7d0f2",
+      "bytes": 760,
       "holds": {
         "agents": 1
       }
@@ -237,12 +233,12 @@
       "art": "🏗",
       "blurb": "Build a thing that does not exist yet, end to end.",
       "kinds": [
-        "coding"
+        "business"
       ],
       "version": "2026-09-03",
       "url": "bundles/ship_an_app.json",
-      "sha256": "07aea8dd11e5021ab25497a28ab629e55ec13f9421229c03db5cd8431210f414",
-      "bytes": 1751,
+      "sha256": "e8f23327a80bc9d7a23a2d87a1615d5dad70446ed2398702e148ebe411c695eb",
+      "bytes": 1755,
       "holds": {
         "teams": 1
       }
@@ -270,14 +266,13 @@
       "art": "📗",
       "blurb": "Says what the thing is, for someone who was not here.",
       "kinds": [
-        "coding",
-        "work",
+        "business",
         "school"
       ],
       "version": "2026-09-03",
       "url": "bundles/technical_writer.json",
-      "sha256": "ff66ff492762bede0e7338e87dd7b92c1da730b26e606be322f8183c13270bb2",
-      "bytes": 796,
+      "sha256": "afdc5d155392872da1f5a44ad05d03b11f4001deae738e60fe997c3fc592f07d",
+      "bytes": 782,
       "holds": {
         "agents": 1
       }
@@ -288,13 +283,13 @@
       "art": "🗓",
       "blurb": "A week looked back on, and the next one shaped — with the book, the macro and the tool it uses.",
       "kinds": [
-        "work",
+        "business",
         "personal"
       ],
       "version": "2026-09-03",
       "url": "bundles/weekly_review.json",
-      "sha256": "5f969ceba8f9dd72ed430bfd3db668bcfa6d4263767eec86401a862cb9154c38",
-      "bytes": 6256,
+      "sha256": "ce716fb04b6c26beac0820bea21d73aae510d5ddf92edcdbe38e4def91f5d150",
+      "bytes": 6264,
       "holds": {
         "routines": 1,
         "teams": 1,

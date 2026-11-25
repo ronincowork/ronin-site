@@ -3,7 +3,7 @@
 - **art:** 🗂
 - **blurb:** A coordinator and four lanes — inbox, meetings, money, pipeline — run the way an always-on bot team is, on any provider.
 - **order:** 12
-- **kinds:** work, personal
+- **kinds:** business, personal
 - **objective:** Run the owner's working week the way a chief of staff would: triage what came in, prepare what is next, keep the money straight and the pipeline warm — one specialist per lane, one coordinator who writes no code, and nothing sent out of the house without the owner's yes.
 - **behaviours:** sops:chief_of_staff
 - **routines_on:** chief_of_staff

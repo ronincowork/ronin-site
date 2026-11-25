@@ -3,7 +3,7 @@
 - **art:** 🏗
 - **blurb:** Build a thing that does not exist yet, end to end.
 - **order:** 10
-- **kinds:** coding
+- **kinds:** business
 - **objective:** Build the thing end to end, from nothing to something people can use.
 - **behaviours:** sops:github, sops:ronin_methodology, sops:teams, sops:deploy
 - **routines_on:** ronin_worktrees

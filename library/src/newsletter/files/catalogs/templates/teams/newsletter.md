@@ -3,7 +3,7 @@
 - **art:** 📰
 - **blurb:** One issue, from the list of what happened to the sent email.
 - **order:** 55
-- **kinds:** work, social
+- **kinds:** business, social
 - **objective:** Ship one issue of the newsletter: decide what goes in, write it in the house style, check every claim, and send it on the day.
 - **behaviours:** sops:newsletter_style
 - **routines_off:** ronin_worktrees

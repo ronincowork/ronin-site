@@ -3,7 +3,7 @@
 - **art:** 📈
 - **blurb:** Your application's checks, run on a rhythm, judged, and reported.
 - **order:** 25
-- **kinds:** coding, work
+- **kinds:** business
 - **objective:** The frequent health checks on your application — run on a rhythm, compared with last time, and what moved reported.
 - **routines_off:** ronin_worktrees
 

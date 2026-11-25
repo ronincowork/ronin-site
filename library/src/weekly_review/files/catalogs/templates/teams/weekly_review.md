@@ -3,7 +3,7 @@
 - **art:** 🗓
 - **blurb:** A week looked back on, and the next one shaped.
 - **order:** 45
-- **kinds:** work, personal
+- **kinds:** business, personal
 - **objective:** Look back over the week's work records and documents, say plainly what moved and what stalled, and shape next week into a short list the owner agrees to.
 - **behaviours:** sops:weekly_review
 - **routines_on:** weekly_review

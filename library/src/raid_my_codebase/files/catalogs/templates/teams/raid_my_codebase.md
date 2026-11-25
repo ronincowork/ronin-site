@@ -3,7 +3,7 @@
 - **art:** 🛠
 - **blurb:** Work on what is already there. Faster, cleaner, fixed.
 - **order:** 20
-- **kinds:** coding
+- **kinds:** business
 - **objective:** Improve the codebase that already exists — faster, cleaner, and the faults gone.
 - **behaviours:** sops:github, sops:ronin_methodology
 - **routines_on:** ronin_worktrees
