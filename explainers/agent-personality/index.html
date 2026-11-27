@@ -16,6 +16,7 @@
   <script src="/theme.js"></script>
   <link rel="stylesheet" href="/ronin-tokens.css">
   <link rel="stylesheet" href="/site-scale.css">
+  <link rel="stylesheet" href="/theme-switch.css">
   <style>
     :root { color-scheme: dark; }
     :root[data-theme='light'] { color-scheme: light; }
@@ -25,6 +26,7 @@
     a { color: var(--kaki-lift); text-underline-offset: 3px; }
     .bar { border-bottom: var(--edge) solid var(--line); }
     .bar-inner { width: min(1120px, calc(100% - 40px)); min-height: 72px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-subsection); }
+    .site-nav { display: flex; align-items: center; gap: var(--space-subsection); }
     .brand { display: flex; align-items: center; gap: var(--space-paragraph); color: var(--fg-strong); text-decoration: none; font: var(--weight-strong) var(--site-small)/var(--leading-none) var(--font-mono); letter-spacing: .12em; }
     .mark { display: grid; place-items: center; width: 34px; aspect-ratio: 1; background: var(--kaki-fill); color: var(--kaki-fill-ink); clip-path: polygon(25% 7%,75% 7%,100% 50%,75% 93%,25% 93%,0 50%); font: var(--weight-bold) var(--site-body) var(--font-ui); }
     .status { color: var(--muted); font: var(--site-label)/var(--leading-none) var(--font-mono); letter-spacing: .13em; text-transform: uppercase; }
@@ -148,7 +150,7 @@
   <header class="bar">
     <div class="bar-inner">
       <a class="brand" href="../../index.html"><span class="mark">人</span><span>RONIN · BLOG</span></a>
-      <a class="status" href="../">All articles</a>
+      <nav class="site-nav" aria-label="Primary"><a class="status" href="../">All articles</a></nav>
     </div>
   </header>
 
