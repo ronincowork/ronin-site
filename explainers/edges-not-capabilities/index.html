@@ -21,7 +21,7 @@
 
 /* Three ways: numbered because the list is closed and ordered by how much it touches. */
 .ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-inset); margin: var(--space-section) 0 0; padding: 0; list-style: none; counter-reset: way; }
-.ways li { counter-increment: way; position: relative; padding: var(--space-subsection) var(--space-subsection) var(--space-subsection) var(--site-space-block); border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); background: var(--surface); color: var(--muted); }
+.ways li { counter-increment: way; position: relative; padding: var(--space-subsection) var(--space-subsection) var(--space-subsection) var(--site-space-block); border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); color: var(--muted); }
 .ways li::before { content: counter(way, decimal-leading-zero); position: absolute; left: 18px; top: 22px; color: var(--kaki-lift); font: 600 var(--site-label) var(--font-mono); }
 .ways strong { display: block; margin-bottom: var(--space-row); color: var(--fg-strong); font-size: var(--site-body); }
 

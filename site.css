@@ -7,7 +7,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--surface); color: var(--fg-strong); font: var(--site-body)/var(--site-leading-body) var(--font-ui); }
+body { margin: 0; background: var(--site-paper); color: var(--fg-strong); font: var(--site-body)/var(--site-leading-body) var(--font-ui); }
 a { color: inherit; }
 button, input { font: inherit; }
 ::selection { background: var(--aiiro); color: var(--on-strong); }
@@ -30,7 +30,7 @@ button, input { font: inherit; }
 .button--primary { border-color: var(--kaki-fill); background: var(--kaki-fill); color: var(--kaki-fill-ink); }
 .button--primary:hover { border-color: var(--kaki-fill-hover); background: var(--kaki-fill-hover); color: var(--kaki-fill-ink); }
 .section-label { margin: 0; color: var(--muted); font: var(--site-label)/var(--leading-body) var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
-.session-brief { max-width: 920px; margin: 0 0 var(--site-space-block); padding: var(--space-section); border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); background: var(--surface); }
+.session-brief { max-width: 920px; margin: 0 0 var(--site-space-block); padding: var(--space-section); border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); }
 .session-brief__head { display: grid; grid-template-columns: 1fr auto; gap: var(--space-subsection); align-items: start; margin-bottom: var(--space-subsection); }
 .session-brief__head h2 { margin: var(--space-paragraph) 0 0; font: var(--weight-regular) var(--site-heading)/var(--leading-tight) var(--font-ui); }
 .session-brief__head p { max-width: var(--measure); margin: var(--space-inset) 0 0; color: var(--muted); }
@@ -51,7 +51,7 @@ button, input { font: inherit; }
 
 /* Compact sticky CTA strip on explainer pages: both cultural CTAs stay reachable
  * while scrolling. Sticky, so it pushes content rather than covering it. */
-.cta-strip { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: var(--edge) solid var(--line); }
+.cta-strip { position: sticky; top: 0; z-index: 5; background: var(--site-paper); border-bottom: var(--edge) solid var(--line); }
 .cta-strip__inner { width: min(var(--page), calc(100% - 40px)); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-inset); padding: var(--space-paragraph) 0; }
 .cta-strip__label { color: var(--muted); font: 600 var(--site-label)/var(--leading-body) var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
 .cta-strip__actions { display: flex; gap: var(--space-paragraph); }
@@ -75,7 +75,7 @@ button, input { font: inherit; }
 .explainer-section p, .explainer-section li { max-width: var(--measure); color: var(--muted); }
 .explainer-section p { margin: 0 0 var(--space-subsection); }
 .explainer-section li + li { margin-top: var(--space-inset); }
-.explainer-media { margin: var(--space-section) 0; border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); overflow: hidden; background: var(--surface); }
+.explainer-media { margin: var(--space-section) 0; border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); overflow: hidden; }
 .explainer-media img, .explainer-media video { display: block; width: 100%; height: auto; }
 .explainer-media figcaption { padding: var(--space-inset) var(--space-subsection); color: var(--muted); font-size: var(--site-small); }
 .explainer-boundary { max-width: 820px; padding: var(--space-subsection); border-left: 3px solid var(--kaki); background: var(--inset); }

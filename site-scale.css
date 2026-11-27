@@ -17,6 +17,12 @@
   --site-space-block: 48px;
   --site-space-page: 96px;
 
+  /* the page ground: white with a cotton-paper grain you sense but can't point at (averages
+     about #fafafa). Black grain, no hue; fibres run slightly long. Only the page ground and
+     the sticky bars over it wear it; cards sit on it, drawn by their hairline. */
+  --site-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85 .55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --site-paper: var(--site-grain) 0 0 / 300px 300px repeat, var(--surface);
+
   /* the dark band on the home page: solid ink in light, a lifted section in dark */
   --site-band-bg: var(--inset);
   --site-band-fg: var(--fg-strong);
@@ -26,6 +32,10 @@
   --page: 1120px;
   --measure: 680px;
   --header-height: 76px;
+}
+:root:not([data-theme='light']) {
+  /* dark: the same grain in white, fainter, on the dark ground */
+  --site-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85 .55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .025 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 :root[data-theme='light'] {
   --site-band-bg: var(--fg-strong);
