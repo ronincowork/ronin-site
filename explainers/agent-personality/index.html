@@ -49,10 +49,6 @@
     .axis-side { color: var(--muted); font: var(--site-label) var(--font-mono); letter-spacing: .12em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); justify-self: center; }
     .quad { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); border: var(--edge) solid var(--line-2); background: var(--line-2); gap: var(--edge); }
     .character { min-height: 260px; padding: var(--space-section); background: var(--surface); }
-    .character:nth-child(1) { border-top: 4px solid var(--kaki); }
-    .character:nth-child(2) { border-top: 4px solid var(--link); }
-    .character:nth-child(3) { border-top: 4px solid var(--warn); }
-    .character:nth-child(4) { border-top: 4px solid var(--ok); }
     .character .coord { color: var(--muted); font: var(--site-label)/var(--leading-body) var(--font-mono); letter-spacing: .11em; text-transform: uppercase; }
     .character h3 { margin: var(--space-subsection) 0 var(--space-paragraph); color: var(--fg-strong); font: var(--weight-strong) var(--site-heading)/var(--site-leading-display) var(--font-ui); }
     .character p { margin: 0; color: var(--muted); }
@@ -65,26 +61,18 @@
     .leg strong { display: block; margin-bottom: var(--space-row); color: var(--fg-strong); }
     .leg span { color: var(--muted); font-size: var(--site-small); }
     .families { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: var(--space-paragraph); margin: var(--site-space-block) 0; }
-    .family { min-height: 280px; padding: var(--space-subsection); border: var(--edge) solid var(--line); border-top: 5px solid var(--family); background: var(--surface); }
-    .family:nth-child(1) { --family: var(--kaki); }
-    .family:nth-child(2) { --family: var(--warn); }
-    .family:nth-child(3) { --family: var(--term-ansi-magenta); }
-    .family:nth-child(4) { --family: var(--ok); }
-    .family:nth-child(5) { --family: var(--link); }
+    .family { min-height: 280px; padding: var(--space-subsection); border: var(--edge) solid var(--line); background: var(--surface); }
     .family h3 { margin: var(--space-paragraph) 0 var(--space-row); color: var(--fg-strong); font: var(--weight-strong) var(--site-lede)/var(--site-leading-display) var(--font-ui); }
     .family p { margin: 0; color: var(--muted); font-size: var(--site-small); }
     .flavors { margin: var(--space-subsection) 0 0; padding: 0; list-style: none; color: var(--fg-strong); font: var(--site-label)/var(--site-leading-body) var(--font-mono); }
     .family .family-shadow { display: block; margin-top: var(--space-subsection); color: var(--muted); font-size: var(--site-label); }
     .scale-set { max-width: 920px; margin: var(--site-space-block) 0; }
-    .scale { --scale: var(--kaki); display: grid; grid-template-columns: 125px 1fr; gap: var(--space-section); align-items: center; padding: var(--space-section) 0; border-top: var(--edge) solid var(--line); }
-    .scale:nth-child(2) { --scale: var(--warn); }
-    .scale:nth-child(3) { --scale: var(--term-ansi-magenta); }
-    .scale:nth-child(4) { --scale: var(--ok); }
-    .scale:nth-child(5) { --scale: var(--link); border-bottom: var(--edge) solid var(--line); }
-    .scale h3 { margin: 0; color: var(--fg-strong); font: var(--weight-strong) var(--site-body)/var(--site-leading-display) var(--font-ui); }
+    .scale { display: grid; grid-template-columns: 125px 1fr; gap: var(--space-section); align-items: center; padding: var(--space-section) 0; border-top: var(--edge) solid var(--line); }
+    .scale:last-child { border-bottom: var(--edge) solid var(--line); }
+    .scale h3 { margin: 0; color: var(--muted); font: var(--weight-strong) var(--site-label)/var(--leading-body) var(--font-mono); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
     .scale h3 span { display: block; margin-top: var(--space-row); color: var(--muted); font: var(--site-label)/var(--leading-body) var(--font-mono); letter-spacing: .09em; text-transform: uppercase; }
     .scale-line { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-inset); position: relative; padding-top: var(--space-inset); }
-    .scale-line::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: var(--radius-large); background: linear-gradient(90deg, var(--line), var(--scale)); }
+    .scale-line::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: var(--radius-large); background: var(--line-2); }
     .scale-line span:last-child { text-align: right; }
     .scale-line small { display: block; margin-top: var(--space-row); color: var(--muted); }
     .family-profiles { max-width: 940px; margin-top: var(--space-section); }
@@ -193,8 +181,8 @@
 
       <section class="section" id="character-map">
         <p class="section-label">01 · The memorable layer</p>
-        <h2>Five colors. Every Agent expresses all five.</h2>
-        <p>The colors are families of working behavior, not bins for Agents. Each is a continuum between two modes that are useful in the right situation. Named characters come later, as recognizable combinations.</p>
+        <h2>Five families. Every Agent expresses all five.</h2>
+        <p>These are families of working behavior, not bins for Agents. Each is a continuum between two modes that are useful in the right situation. Named characters come later, as recognizable combinations.</p>
 
         <div class="scale-set" aria-label="Five proposed Agent behavior continua">
           <article class="scale">
