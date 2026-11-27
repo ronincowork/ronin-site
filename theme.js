@@ -7,10 +7,17 @@
     if (choices.indexOf(value) !== -1) saved = value;
   } catch (_) {}
 
+  // The palette (ronin-tokens.css) reads data-theme, as the office does: auto sets it from the device.
+  var device = window.matchMedia('(prefers-color-scheme: light)');
+  var chosen = saved;
+
   function apply(value) {
-    if (value === 'auto') document.documentElement.removeAttribute('data-theme');
-    else document.documentElement.setAttribute('data-theme', value);
+    chosen = value;
+    var theme = value === 'auto' ? (device.matches ? 'light' : 'dark') : value;
+    document.documentElement.setAttribute('data-theme', theme);
   }
+
+  device.addEventListener('change', function () { if (chosen === 'auto') apply('auto'); });
 
   function label(value) {
     return 'Theme: ' + value.charAt(0).toUpperCase() + value.slice(1);
@@ -19,7 +26,7 @@
   apply(saved);
 
   window.addEventListener('DOMContentLoaded', function () {
-    var nav = document.querySelector('.site-nav');
+    var nav = document.querySelector('.site-nav, .links'); // .links: the home page's nav
     if (!nav) return;
 
     var button = document.createElement('button');

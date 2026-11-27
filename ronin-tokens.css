@@ -1,282 +1,287 @@
-/* RONIN LANDING DOCUMENT TOKENS
- *
- * The concept pages use the same semantic roles and scales as Cowork's foundations
- * (`ronin-cowork/public/style.css`, governed by `docs/ui.md`). This file is a preview
- * dependency, not a second palette: values move when the product tokens move.
- *
- * Public pages use the spacious end of the scales and mostly the UI face. Mono marks
- * commands, small labels and identity. Shared tokens do not mean terminal cosplay.
- */
+/* COPY of ronin-cowork public/tokens.css (471146d6). Don't edit here: change it there, then copy it over this file. */
+/* This is Ronin's one palette. The website and the Business Lounge carry a copy of this file:
+   change it here, then copy it to them. */
+
+@layer vendor, base, ui, app;
+
+@layer base {
 :root {
-  color-scheme: dark;
-  --bg: #0b0e14;
-  --bg-2: #0f131c;
-  --panel: #131826;
-  --raise: #1a2233;
-  --raise-2: #263047;
-  --well: #0d1220;
-  --line: #1f2738;
-  --line-2: #2a3247;
-  --line-3: #3a4560;
+
+  /* TWO NEUTRAL SURFACES, and nothing else neutral paints a background (owner, cut 13: "if we
+     can't explain why a colour is there, don't do it"). --surface is the one base: the bar, the
+     gutters, the selector, cards, every tile in every view. --inset is set INSIDE it so it reads
+     as inside: an input, a code block, an open document, a nested panel. */
+  --surface: #0b0e14; /* dark: the near-black the terminals always used, so bar, selector, tiles and Commons match */
+  --inset: #131826;   /* one step lifted from it */
+  /* the main places keep their own token, defaulting to the base: change one place, or the base */
+  --bar-bg: var(--surface);        /* the top bar */
+  --workbench-bg: var(--surface);  /* the page behind the workspaces */
+  --selector-bg: var(--surface);   /* the selector column */
+  --tile-bg: var(--surface);       /* every agent tile, in every view */
+
+  /* A line has to be seen: hairline near 2:1 on the panel, edges near 3:1 or better. */
+  --line: #3d475c;
+  --line-2: #515e77;
+  --line-3: #62718e;
+
   --fg-strong: #d7e3f7;
   --fg: #c5c8c6;
-  --muted: #6b7488;
-  --muted-2: #8fa3c8;
-  --muted-3: #6f80a0;
-  --dim: #454d61;
-  --accent: #e0af68;
-  --accent-2: #81a2be;
-  --ok: #b5bd68;
-  --warn: #f0c674;
-  --bad: #cc6666;
-  --action: #2f6fd0;
-  --kaki: #c46243;
-  --aiiro: #274a78;
-  --on-accent: #000;
-  --term-bg: #0b0e14;
-  --term-fg: #c5c8c6;
+  /* Muted is for things that are muted: a state word, a connective. It still has to be
+     read, so it stays at 6:1 or better on the panel; dim, the placeholder grey, at 3.5:1. */
+  --muted: #949eb0;
 
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-  --radius-xl: 12px;
+  --accent: #e0af68;
+
+  --focus-ring: var(--kaki);
+  --accent-2: #81a2be;
+
+  --define-line: var(--accent-2);
+  --accent-deep: #d8a13a;
+
+  --ok: #b5bd68;
+  --ok-2: #7fd4a8;
+  --warn: #f0c674;
+  --status-red: #e0705f;
+
+  --bad: #cc6666;
+  --bad-soft: #e6a1a1;
+  --bad-deep: #a33c33;
+  --bad-ground: #3a1416;
+  --bad-fg: #f2d6d6;
+  --info: #6ea8fe;
+  /* Jira's own work-type colours, the same in every theme: the item island's kind symbols (js/tile-island.js). */
+  --jira-epic: #904ee2;
+  --jira-story: #63ba3c;
+  --jira-task: #4bade8;
+  --jira-bug: #e5493a;
+  --jira-feature: #65ba43;
+  --on-strong: #fff;
+  --chart-ink: rgb(11 14 20 / 82%);
+
+  --scrim: rgb(0 0 0 / 50%);
+  --shadow-menu: 0 8px 24px rgb(0 0 0 / 45%);
+  --shadow-sheet: 0 12px 34px rgb(0 0 0 / 50%);
+
+  --kaki: #c46243;
+  --kaki-lift: #e08163;
+  /* the one interaction fill: the row, stone or card you are on, have chosen, or are dropping onto */
+  --selected: color-mix(in srgb, var(--kaki) 9%, var(--surface));
+  --aiiro: #274a78;
+  --link: #8fb0dc; /* aiiro, lifted to read on the dark shell */
+
+  /* The kaki fill and its ink: the Setup step bar's answered mark and the Garden Canvas
+     button. Kaki on white fails at small sizes, so light fills with the deeper kaki-lift. */
+  --kaki-fill: var(--kaki);
+  --kaki-fill-ink: var(--surface);
+
+  --kaki-fill-hover: var(--kaki-lift);
+
+  /* The landscape lines drawn behind Home (the rice terraces) and the Garden Canvas. */
+  --ch-horizon-ink: var(--kaki);
+  --gc-motif-ink: var(--kaki);
+
+  /* THE TERMINAL'S COLOURS ARE THE DESIGNER'S, the 16 ANSI slots included. ui.md "Theme"
+     says what each slot must stay for agent CLIs to stay readable. */
+  --term-cube: standard;
+  --term-size: 13px; /* xterm, the tape and the composer: one size, glyph for glyph (js/theme.js) */
+  --term-bg: var(--tile-bg);
+  --term-fg: var(--fg);
+  --term-cursor: #e0af68;
+  --term-selection: #2a3145;
+  --term-ansi-black: #1d1f21;
+  --term-ansi-red: #cc6666;
+  --term-ansi-green: #b5bd68;
+  --term-ansi-yellow: #f0c674;
+  --term-ansi-blue: #81a2be;
+  --term-ansi-magenta: #b294bb;
+  --term-ansi-cyan: #8abeb7;
+  --term-ansi-white: var(--fg);
+  --term-ansi-br-black: #252d40; /* the band behind the person's messages: a dark neutral --term-fg reads on */
+  --term-ansi-br-red: #d54e53;
+  --term-ansi-br-green: #b9ca4a;
+  --term-ansi-br-yellow: #e7c547;
+  --term-ansi-br-blue: #7aa6da;
+  --term-ansi-br-magenta: #c397d8;
+  --term-ansi-br-cyan: #70c0b1;
+  --term-ansi-br-white: #eaeaea;
+  /* the terminal's surfaces READ the UI's, in both shells: one neutral family, no copies */
+  --term-tape-fg: var(--fg);
+  --term-tape-line: var(--line);
+  --term-tape-line-2: var(--line-2);
+  --term-tape-muted: var(--muted);
+  --term-tape-muted-2: var(--fg);
+  --term-panel-line: var(--line);
+  --term-input-line: var(--line);
+  --term-input-fg: var(--fg-strong);
+
+  /* ROLES, NOT RULERS (owner, cut 10): every token here names what it is FOR. Pick by meaning;
+     docs/architecture/ui.md has the role table. There is no numbered scale to reach for. */
+  --radius-hair: 1px;
+  --radius-small: 4px;   /* controls, chips, fields */
+  --radius-large: 8px;   /* panels, cards, sheets */
   --radius-pill: 999px;
   --radius-round: 50%;
 
-  --space-1: 2px;
-  --space-2: 4px;
-  --space-3: 6px;
-  --space-4: 8px;
-  --space-5: 10px;
-  --space-6: 12px;
-  --space-7: 14px;
-  --space-8: 16px;
-  --space-9: 20px;
-  --space-10: 24px;
-  --space-11: 28px;
-  --space-12: 34px;
+  /* vertical rhythm, by what it separates */
+  --space-row: 4px;          /* rows of a list or fact table */
+  --space-paragraph: 8px;    /* paragraphs; a heading and its text */
+  --space-subsection: 16px;  /* subsections */
+  --space-section: 24px;     /* sections */
+  /* horizontal and inside */
+  --space-inline: 8px;       /* things on one line */
+  --space-inset: 12px;       /* inside a panel or card */
+  --space-control: 10px;     /* inside a button or input */
 
-  --text-1: 9px;
-  --text-2: 11px;
-  --text-3: 12px;
-  --text-4: 13px;
-  --text-5: 14px;
-  --text-6: 15px;
-  --text-7: 16px;
-  --text-8: 18px;
-  --text-9: 20px;
-  --text-10: 26px;
-  --text-micro: 10px;
+  --workbench-head-font: var(--font-ui);
+  --workbench-head-size: var(--text-label);
+  --workbench-head-weight: var(--weight-bold);
+  --workbench-head-line: var(--leading-tight);
+
+  /* Two weights; bold is for headers only. */
+  --weight-regular: 400;
+  --weight-strong: 600;
+  --weight-bold: 700;
+
+  /* Line spacing inside one paragraph or label (never the space between blocks). */
+  --leading-none: 1;     /* a glyph's own box */
+  --leading-tight: 1.2;  /* a label, a heading */
+  --leading-body: 1.45;  /* running text */
+  --tracking-tight: -.01em;
+  --tracking-wide: .08em;
+
+  --text-small: 11px;    /* notes, ids, captions, meta */
+  --text-body: 12px;     /* running text, values, table cells */
+  --text-label: 14px;    /* names, keys, control text */
+  --text-heading: 16px;  /* a section's heading */
+  --text-display: 20px;  /* a page's title, a glyph */
+
+  /* a form's roles, read from the type roles */
+  --form-head: var(--text-label);
+  --form-key: var(--text-label);
+  --form-input: var(--text-body);
+  --form-note: var(--text-small);
 
   --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-term: Menlo, 'DejaVu Sans Mono', Consolas, monospace;
+
+  --bar-nav-bg: transparent;
+  --bar-nav-fg: var(--fg-strong);
+  --bar-nav-hover: var(--accent);
+  --bar-nav-focus: var(--focus-ring);
+  --bar-nav-size: var(--text-heading);
+  --bar-value-fg: var(--bar-nav-fg);
+  --bar-value-size: var(--bar-nav-size);
+  /* The dynamic island belongs to the application bar, not the Workbench below it. */
+  --bar-place-bg: #090a0c;
+  --bar-place-fg: var(--on-strong);
+
+  /* Header colours, one set per scope: admin (Setup, Home, Models, Workspaces, Settings) is
+     graphite, Teams is aiiro, a Team or Agent is kaki. The workbench switch reads these. */
+  --graphite: #3b3d42;
+  --head-admin-bg: color-mix(in srgb, var(--graphite) 24%, var(--surface));
+  --head-admin-fg: var(--fg-strong);
+  --head-admin-muted: var(--muted);
+  --head-admin-line: var(--graphite);
+  --head-admin-edge: var(--edge-2);
+  --head-teams-bg: color-mix(in srgb, var(--aiiro) 24%, var(--surface));
+  --head-teams-fg: var(--fg-strong);
+  --head-teams-muted: var(--muted);
+  --head-teams-line: var(--aiiro);
+  --head-teams-edge: var(--edge-2);
+  --head-team-bg: #6f300e;
+  --head-team-fg: var(--on-strong);
+  --head-team-muted: #d9b8ab;
+  --head-team-line: var(--define-line);
+  --head-team-edge: var(--edge);
+  --head-attention: #e0af68;
+
   --edge: 1px;
   --edge-2: 2px;
-  --page: 1120px;
-  --measure: 680px;
-  --header-height: 76px;
+
+  /* every button, input, select and menu item is one of two heights; every focus ring is one ring */
+  --control-height: 2.25rem;
+  --control-height-small: 28px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+
   --motion-quick: 120ms;
-  --motion-settle: 220ms;
-  --ease-out: cubic-bezier(.2,.8,.2,1);
+  --motion-settle: 250ms;
+  --motion-slow: 600ms;
+  --motion-hint: 900ms;
+  --ease: ease;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--fg-strong); font: var(--text-7)/1.65 var(--font-ui); }
-a { color: inherit; }
-button, input { font: inherit; }
-::selection { background: var(--aiiro); color: var(--fg-strong); }
-:focus-visible { outline: var(--edge-2) solid var(--accent); outline-offset: var(--space-2); }
-.site-header { min-height: var(--header-height); border-bottom: var(--edge) solid var(--line); }
-.site-header__inner { width: min(var(--page), calc(100% - 40px)); min-height: var(--header-height); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); }
-.brand { display: inline-flex; align-items: center; gap: var(--space-5); color: var(--fg-strong); text-decoration: none; font: 600 var(--text-5)/1 var(--font-mono); letter-spacing: .08em; }
-.brand img { display: block; width: 34px; height: auto; }
-.brand-name { display: inline-flex; gap: .12em; }
-.brand-cowork { color: var(--kaki); }
-.site-nav { display: flex; align-items: center; gap: var(--space-8); color: var(--muted-2); font: var(--text-3)/1 var(--font-mono); }
-.site-nav a { text-decoration: none; }
-.site-nav a:hover { color: var(--fg-strong); }
-.page { width: min(var(--page), calc(100% - 40px)); margin: auto; padding: 72px 0 96px; }
-.eyebrow { margin: 0 0 var(--space-6); color: var(--kaki); font: 600 var(--text-2)/1.4 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; }
-.display { max-width: 900px; margin: 0; font: 600 clamp(42px, 7vw, 76px)/.98 var(--font-ui); letter-spacing: -.055em; text-wrap: balance; }
-.lede { max-width: var(--measure); margin: var(--space-9) 0 0; color: var(--muted-2); font-size: clamp(var(--text-8), 2.2vw, var(--text-10)); line-height: 1.5; }
-.button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: var(--space-6) var(--space-9); border: var(--edge) solid var(--line-3); border-radius: var(--radius-sm); background: transparent; color: var(--fg-strong); font: 600 var(--text-5)/1 var(--font-mono); text-decoration: none; cursor: pointer; transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick); }
-.button:hover { border-color: var(--kaki); color: var(--kaki); }
-.button--primary { border-color: var(--kaki); background: var(--kaki); color: var(--bg); }
-.button--primary:hover { background: transparent; color: var(--kaki); }
-.section-label { margin: 0; color: var(--muted); font: var(--text-2)/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
-.session-brief { max-width: 920px; margin: 0 0 72px; padding: clamp(24px, 4vw, 40px); border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); background: var(--panel); }
-.session-brief__head { display: grid; grid-template-columns: 1fr auto; gap: var(--space-9); align-items: start; margin-bottom: var(--space-9); }
-.session-brief__head h2 { margin: var(--space-4) 0 0; font: 500 var(--text-10)/1.25 var(--font-ui); }
-.session-brief__head p { max-width: var(--measure); margin: var(--space-6) 0 0; color: var(--muted-2); }
-.session-brief__copy { min-width: 62px; border: var(--edge) solid var(--line-3); border-radius: var(--radius-xs); background: var(--raise); color: var(--fg-strong); padding: var(--space-5) var(--space-7); font: var(--text-2) var(--font-mono); cursor: pointer; }
-.session-brief__copy:hover { border-color: var(--kaki); color: var(--kaki); }
-.session-brief pre { max-height: 320px; margin: 0; padding: var(--space-9); border-radius: var(--radius-sm); background: var(--term-bg); color: var(--term-fg); font: var(--text-4)/1.65 var(--font-term); white-space: pre-wrap; overflow: auto; }
-.site-footer { width: min(var(--page), calc(100% - 40px)); margin: auto; padding: var(--space-10) 0 48px; border-top: var(--edge) solid var(--line); display: flex; justify-content: space-between; gap: var(--space-8); color: var(--muted); font: var(--text-2)/1.6 var(--font-mono); }
-@media (max-width: 640px) {
-  .site-header__inner, .page, .site-footer { width: min(100% - 28px, var(--page)); }
-  .brand img { display: block; }
-  .brand-name { display: none; }
-  .site-nav a:not(.button) { display: none; }
-  .page { padding: 52px 0 72px; }
-  .display { font-size: clamp(38px, 13vw, 58px); }
-  .session-brief__head { grid-template-columns: 1fr; }
-  .session-brief__copy { justify-self: start; }
-  .site-footer { flex-direction: column; }
-}
+:root[data-theme='light'] {
 
-/* Compact sticky CTA strip on explainer pages: both cultural CTAs stay reachable
- * while scrolling. Sticky, so it pushes content rather than covering it. */
-.cta-strip { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: var(--edge) solid var(--line); }
-.cta-strip__inner { width: min(var(--page), calc(100% - 40px)); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) 0; }
-.cta-strip__label { color: var(--muted); font: 600 var(--text-2)/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
-.cta-strip__actions { display: flex; gap: var(--space-5); }
-.cta-strip .button { min-height: 36px; padding: var(--space-4) var(--space-7); font-size: var(--text-3); }
-@media (max-width: 640px) {
-  .cta-strip__inner { width: min(100% - 28px, var(--page)); justify-content: center; }
-  .cta-strip__label { display: none; }
-}
-
-/* Command cards keep the action visible while only the command itself scrolls. */
-.door { min-width: 0; }
-.command { overflow: hidden; }
-.command code { display: block; overflow-x: auto; }
-
-/* Shared explainer structure. Individual pages own only the layouts their evidence needs. */
-.explainer-breadcrumbs { margin: 0 0 var(--space-8); color: var(--muted); font: var(--text-3)/1.5 var(--font-mono); }
-.explainer-breadcrumbs a { color: var(--muted-2); text-underline-offset: 3px; }
-.explainer-hero { max-width: 920px; margin-bottom: 64px; }
-.explainer-section { max-width: 920px; padding: clamp(32px, 5vw, 58px) 0; border-top: var(--edge) solid var(--line); }
-.explainer-section h2 { margin: 0 0 var(--space-8); font: 500 var(--text-10)/1.25 var(--font-ui); }
-.explainer-section p, .explainer-section li { max-width: var(--measure); color: var(--muted-2); }
-.explainer-section p { margin: 0 0 var(--space-8); }
-.explainer-section li + li { margin-top: var(--space-6); }
-.explainer-media { margin: var(--space-10) 0; border: var(--edge) solid var(--line-2); border-radius: var(--radius-md); overflow: hidden; background: var(--panel); }
-.explainer-media img, .explainer-media video { display: block; width: 100%; height: auto; }
-.explainer-media figcaption { padding: var(--space-7) var(--space-9); color: var(--muted-2); font-size: var(--text-5); }
-.explainer-boundary { max-width: 820px; padding: var(--space-9); border-left: 3px solid var(--kaki); background: var(--raise); }
-.explainer-boundary h2, .explainer-boundary p { margin: 0; }
-.explainer-boundary p { margin-top: var(--space-6); color: var(--muted-2); }
-.explainer-next { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-10); align-items: center; margin-top: 72px; padding: var(--space-10); border-radius: var(--radius-md); background: var(--raise); }
-.explainer-next h2, .explainer-next p { margin: 0; }
-.explainer-next p { margin-top: var(--space-5); color: var(--muted-2); }
-.explainer-actions { display: flex; flex-wrap: wrap; gap: var(--space-6); }
-@media (max-width: 640px) {
-  .explainer-next { grid-template-columns: 1fr; }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg: #f4f2ec;
-    --bg-2: #eae7df;
-    --panel: #ffffff;
-    --raise: #f1efe8;
-    --raise-2: #e6e2d8;
-    --well: #f7f5ef;
-    --line: #d9d4c8;
-    --line-2: #c8c2b2;
-    --line-3: #a9a191;
-    --fg-strong: #14161c;
-    --fg: #2c2e36;
-    --muted: #6d7284;
-    --muted-2: #5a617a;
-    --muted-3: #6d7284;
-    --dim: #b0aca0;
-    --accent: #a06b1a;
-    --accent-2: #3f6a95;
-    --ok: #5c7a1d;
-    --warn: #9a7b00;
-    --bad: #b04343;
-    --action: #1f5fc9;
-    --term-bg: #faf8f2;
-    --term-fg: #2e302c;
-  }
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
-  --bg: #f4f2ec;
-  --bg-2: #eae7df;
-  --panel: #ffffff;
-  --raise: #f1efe8;
-  --raise-2: #e6e2d8;
-  --well: #f7f5ef;
-  --line: #d9d4c8;
-  --line-2: #c8c2b2;
-  --line-3: #a9a191;
-  --fg-strong: #14161c;
-  --fg: #2c2e36;
-  --muted: #6d7284;
-  --muted-2: #5a617a;
-  --muted-3: #6d7284;
-  --dim: #b0aca0;
-  --accent: #a06b1a;
-  --accent-2: #3f6a95;
+  /* LIGHT IS PAPER, INK AND ONE KAKI (samurai_lab/design/STYLE.md). Every neutral is a pure
+     grey, so kaki is the only colour with a hue; kaki is solid or absent. */
+  --head-team-bg: var(--kaki-lift);
+  --head-team-fg: var(--on-strong);
+  --head-team-muted: color-mix(in srgb, var(--on-strong) 78%, transparent);
+  --head-attention: #fff0dc;
+  --surface: #ffffff;
+  --inset: #f4f4f4;
+  --line: #b3b3b3;
+  --line-2: #959595;
+  --line-3: #787878;
+  --fg-strong: #151515;
+  --fg: #2b2b2b;
+  --muted: #5c5c5c;
+  --selected: #ebebeb; /* a grey fill; the kaki edge the components draw says it is chosen */
+  --graphite: #3a3a3a;
+  --link: var(--aiiro);
+  --accent: var(--kaki-lift);
+  --accent-2: var(--aiiro);
+  --accent-deep: #84391f;
   --ok: #5c7a1d;
+  --ok-2: #1e7a4c;
   --warn: #9a7b00;
-  --bad: #b04343;
-  --action: #1f5fc9;
-  --term-bg: #faf8f2;
-  --term-fg: #2e302c;
-}
+  --status-red: var(--bad);
+  --bad: #b02a3c; /* crimson: wrong never reads as brand */
+  --bad-soft: #8c2f3b;
+  --bad-deep: #952335;
+  --bad-ground: #f8e4e6;
+  --bad-fg: #5e1a24;
+  --info: #1f5fc9;
+  --scrim: rgb(0 0 0 / 35%);
+  --shadow-menu: 0 8px 24px rgb(30 30 30 / 18%);
+  --shadow-sheet: 0 12px 34px rgb(30 30 30 / 22%);
+  --kaki-lift: #a34e2f;
+  --kaki-fill: var(--kaki-lift);
+  --kaki-fill-ink: var(--on-strong);
+  --kaki-fill-hover: color-mix(in srgb, var(--kaki-lift) 86%, #000);
+  /* kaki at low opacity on white is pink: the landscape lines are grey in light */
+  --ch-horizon-ink: var(--line-3);
+  --gc-motif-ink: var(--line-3);
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #0b0e14;
-  --bg-2: #0f131c;
-  --panel: #131826;
-  --raise: #1a2233;
-  --raise-2: #263047;
-  --well: #0d1220;
-  --line: #1f2738;
-  --line-2: #2a3247;
-  --line-3: #3a4560;
-  --fg-strong: #d7e3f7;
-  --fg: #c5c8c6;
-  --muted: #6b7488;
-  --muted-2: #8fa3c8;
-  --muted-3: #6f80a0;
-  --dim: #454d61;
-  --accent: #e0af68;
-  --accent-2: #81a2be;
-  --ok: #b5bd68;
-  --warn: #f0c674;
-  --bad: #cc6666;
-  --action: #2f6fd0;
-  --term-bg: #0b0e14;
-  --term-fg: #c5c8c6;
-}
+  /* Light mode uses the selected full-fill treatment for collection scopes. */
+  --head-admin-bg: var(--graphite);
+  --head-admin-fg: var(--on-strong);
+  --head-admin-muted: color-mix(in srgb, var(--on-strong) 78%, transparent);
+  --head-teams-bg: var(--aiiro);
+  --head-teams-fg: var(--on-strong);
+  --head-teams-muted: color-mix(in srgb, var(--on-strong) 78%, transparent);
 
-.theme-switch {
-  width: 42px;
-  height: 24px;
-  padding: 4px;
-  border: var(--edge) solid var(--line-3);
-  border-radius: var(--radius-pill);
-  background: var(--well);
-  cursor: pointer;
+  --term-cube: invert;
+  --term-cursor: var(--kaki-lift);
+  --term-selection: #d8e2f2;
+  --term-ansi-black: #1d1f21;
+  --term-ansi-red: #bc2f2f;
+  --term-ansi-green: #5c7a1d;
+  --term-ansi-yellow: #9a7b00;
+  --term-ansi-blue: #2f5f9e;
+  --term-ansi-magenta: #7a4d9c;
+  --term-ansi-cyan: #2c7a7a;
+  --term-ansi-white: var(--fg);
+
+  --term-ansi-br-black: #e8e8e8; /* the band behind the person's messages: a pure grey, no tint */
+  --term-ansi-br-red: #d13b3b;
+  --term-ansi-br-green: #6f8f28;
+  --term-ansi-br-yellow: #b08c00;
+  --term-ansi-br-blue: #3f79c0;
+  --term-ansi-br-magenta: #9060b8;
+  --term-ansi-br-cyan: #35908f;
+  --term-ansi-br-white: var(--fg-strong);
 }
-.theme-switch:hover { border-color: var(--kaki); }
-.theme-switch__track {
-  position: relative;
-  display: block;
-  width: 32px;
-  height: 14px;
-  background: radial-gradient(circle, var(--muted) 1.5px, transparent 2px) 0 50% / 16px 14px repeat-x;
 }
-.theme-switch__track i {
-  position: absolute;
-  top: 3px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--kaki);
-  box-shadow: 0 0 0 2px var(--well);
-  transition: transform var(--motion-settle) var(--ease-out);
-}
-.theme-switch[data-theme-choice="light"] .theme-switch__track i { transform: translateX(-12px); }
-.theme-switch[data-theme-choice="dark"] .theme-switch__track i { transform: translateX(12px); }
