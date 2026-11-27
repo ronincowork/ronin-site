@@ -8,43 +8,42 @@
   <style>
 /* Page-owned layouts: the edge diagram, the three ways, the is/is-not table, the ack. */
 /* The edge diagram: an Agent's own world inside, Ronin's verbs only on the boundary. */
-.edge { margin: 28px 0 8px; padding: clamp(14px, 2vw, 24px); border: var(--edge) solid var(--line-2); border-radius: var(--r-lg); background: var(--bg-2); overflow-x: auto; }
-.edge svg { display: block; width: 100%; min-width: 620px; height: auto; font: 12px var(--font-mono); }
-.edge figcaption { margin-top: 12px; color: var(--muted-2); font-size: 14px; }
-.e-inside { fill: var(--panel); stroke: var(--line-3); stroke-dasharray: 5 4; }
+.edge { margin: var(--space-section) 0 var(--space-paragraph); padding: var(--space-subsection); border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); background: var(--inset); overflow-x: auto; }
+.edge svg { display: block; width: 100%; min-width: 620px; height: auto; font: var(--site-label) var(--font-mono); }
+.edge figcaption { margin-top: var(--space-inset); color: var(--muted); font-size: var(--site-small); }
+.e-inside { fill: var(--surface); stroke: var(--line-3); stroke-dasharray: 5 4; }
 .e-ronin { fill: none; stroke: var(--kaki); }
-.e-port { fill: var(--panel); stroke: var(--kaki); stroke-width: 2; }
-.e-text { fill: var(--muted-2); }
+.e-port { fill: var(--surface); stroke: var(--kaki); stroke-width: 2; }
+.e-text { fill: var(--muted); }
 .e-text--strong { fill: var(--fg-strong); }
 .e-text--kaki { fill: var(--kaki); }
 .e-text--dim { fill: var(--muted); }
 
 /* Three ways: numbered because the list is closed and ordered by how much it touches. */
-.ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: way; }
-.ways li { counter-increment: way; position: relative; padding: 20px 20px 20px 52px; border: var(--edge) solid var(--line-2); border-radius: var(--r-md); background: var(--panel); color: var(--muted-2); }
-.ways li::before { content: counter(way, decimal-leading-zero); position: absolute; left: 18px; top: 22px; color: var(--kaki); font: 600 12px var(--font-mono); }
-.ways strong { display: block; margin-bottom: 6px; color: var(--fg-strong); font-size: 18px; }
+.ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-inset); margin: var(--space-section) 0 0; padding: 0; list-style: none; counter-reset: way; }
+.ways li { counter-increment: way; position: relative; padding: var(--space-subsection) var(--space-subsection) var(--space-subsection) var(--site-space-block); border: var(--edge) solid var(--line-2); border-radius: var(--radius-large); background: var(--surface); color: var(--muted); }
+.ways li::before { content: counter(way, decimal-leading-zero); position: absolute; left: 18px; top: 22px; color: var(--kaki-lift); font: 600 var(--site-label) var(--font-mono); }
+.ways strong { display: block; margin-bottom: var(--space-row); color: var(--fg-strong); font-size: var(--site-body); }
 
 /* Is / isn't: one table, the point of the page. */
-.isnt { margin: 24px 0; overflow-x: auto; }
+.isnt { margin: var(--space-section) 0; overflow-x: auto; }
 .isnt table { width: 100%; min-width: 620px; border-collapse: collapse; }
-.isnt th, .isnt td { padding: 14px 16px; border-bottom: var(--edge) solid var(--line-2); vertical-align: top; text-align: left; color: var(--muted-2); }
-.isnt thead th { padding-top: 0; color: var(--fg-strong); font: 600 15px var(--font-ui); border-bottom: var(--edge-2) solid var(--line-3); }
-.isnt thead th small { display: block; margin-top: 4px; font: 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.isnt th, .isnt td { padding: var(--space-inset) var(--space-subsection); border-bottom: var(--edge) solid var(--line-2); vertical-align: top; text-align: left; color: var(--muted); }
+.isnt thead th { padding-top: 0; color: var(--fg-strong); font: 600 var(--site-small) var(--font-ui); border-bottom: var(--edge-2) solid var(--line-3); }
+.isnt thead th small { display: block; margin-top: var(--space-row); font: var(--site-label) var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
 .isnt thead th.is small { color: var(--ok); }
 .isnt thead th.not small { color: var(--kaki); }
-.isnt tbody th { width: 20%; font: 600 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 18px; }
+.isnt tbody th { width: 20%; font: 600 var(--site-label) var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: var(--space-subsection); }
 .isnt tr:last-child td, .isnt tr:last-child th { border-bottom: 0; }
 
 /* An ack, as the Agent sees it. */
-.ack { margin: 24px 0 0; padding: 20px; border-radius: var(--r-sm); background: var(--term-bg); color: var(--term-fg); font: 13px/1.65 var(--font-mono); white-space: pre-wrap; overflow-x: auto; border: var(--edge) solid var(--line-2); }
+.ack { margin: var(--space-section) 0 0; padding: var(--space-subsection); border-radius: var(--radius-small); background: var(--inset); color: var(--fg); font: var(--site-small)/var(--site-leading-body) var(--font-mono); white-space: pre-wrap; overflow-x: auto; border: var(--edge) solid var(--line-2); }
 .ack b { color: var(--kaki); font-weight: 600; }
 .ack i { color: var(--muted); font-style: normal; }
 
 @media (max-width: 760px) { .ways { grid-template-columns: 1fr; }  }
   .site-nav a { display: none; }
-  .page { padding: 52px 0 72px; }
-  .display { font-size: clamp(36px, 12vw, 56px); }
+  .page { padding: var(--site-space-block) 0 var(--site-space-block); }
   .site-footer { flex-direction: column; }
 }
   </style>

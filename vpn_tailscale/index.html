@@ -26,7 +26,7 @@
     <style>
       .vpn-head {
         max-width: 860px;
-        margin-bottom: 72px;
+        margin-bottom: var(--site-space-block);
       }
       .vpn-head .display {
         max-width: 760px;
@@ -37,35 +37,35 @@
       .setup-step {
         display: grid;
         grid-template-columns: 56px minmax(0, 1fr);
-        gap: clamp(20px, 5vw, 64px);
-        padding: clamp(30px, 5vw, 56px) 0;
+        gap: var(--site-space-block);
+        padding: var(--site-space-block) 0;
         border-bottom: var(--edge) solid var(--line);
       }
       .setup-step .num {
-        padding-top: 5px;
+        padding-top: var(--space-row);
         color: var(--kaki);
-        font: var(--text-3) var(--font-mono);
+        font: var(--site-label) var(--font-mono);
       }
       .setup-step h2 {
-        margin: 0 0 var(--space-8);
-        font: 500 var(--text-10) / 1.25 var(--font-ui);
+        margin: 0 0 var(--space-subsection);
+        font: 500 var(--site-heading)/var(--leading-tight) var(--font-ui);
       }
       .setup-step p,
       .setup-step li {
         max-width: var(--measure);
-        color: var(--muted-2);
+        color: var(--muted);
       }
       .setup-step p {
-        margin: 0 0 var(--space-8);
+        margin: 0 0 var(--space-subsection);
       }
       .setup-step ol,
       .setup-step ul {
         max-width: var(--measure);
         margin: 0;
-        padding-left: 1.4em;
+        padding-left: var(--space-section);
       }
       .setup-step li + li {
-        margin-top: var(--space-6);
+        margin-top: var(--space-inset);
       }
       .setup-step a:not(.button) {
         color: var(--kaki);
@@ -74,25 +74,25 @@
       .finish {
         display: grid;
         grid-template-columns: 1fr auto;
-        gap: var(--space-10);
+        gap: var(--space-section);
         align-items: center;
-        margin-top: 72px;
-        padding: var(--space-10);
-        border-radius: var(--radius-md);
-        background: var(--raise);
+        margin-top: var(--site-space-block);
+        padding: var(--space-section);
+        border-radius: var(--radius-large);
+        background: var(--inset);
       }
       .finish h2,
       .finish p {
         margin: 0;
       }
       .finish p {
-        margin-top: var(--space-5);
-        color: var(--muted-2);
+        margin-top: var(--space-paragraph);
+        color: var(--muted);
       }
       @media (max-width: 640px) {
         .setup-step {
           grid-template-columns: 34px minmax(0, 1fr);
-          gap: var(--space-8);
+          gap: var(--space-subsection);
         }
         .finish {
           grid-template-columns: 1fr;
@@ -101,7 +101,7 @@
       .finish-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-6);
+        gap: var(--space-inset);
       }
     </style>
   </head>

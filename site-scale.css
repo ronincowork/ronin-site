@@ -1,0 +1,34 @@
+/* The public pages' own type and space roles. Colour comes only from ronin-tokens.css (the
+ * office's palette), and so do the spacing steps that mean the same thing there: row 4,
+ * paragraph 8, control 10, inset 12, subsection 16, section 24. */
+:root {
+  /* type */
+  --site-label: 11px;                       /* tags, mono labels, meta, captions */
+  --site-small: 14px;                       /* notes, card text, nav */
+  --site-body: 16px;                        /* running text */
+  --site-lede: 20px;                        /* a lede, a card's heading */
+  --site-heading: 26px;                     /* a section's heading */
+  --site-title: clamp(28px, 3.5vw, 40px);   /* a large section heading */
+  --site-display: clamp(44px, 6vw, 80px);   /* a page's title */
+  --site-leading-display: 1.05;
+  --site-leading-body: 1.6;
+
+  /* space between blocks of a page, beyond the office's section */
+  --site-space-block: 48px;
+  --site-space-page: 96px;
+
+  /* the dark band on the home page: solid ink in light, a lifted section in dark */
+  --site-band-bg: var(--inset);
+  --site-band-fg: var(--fg-strong);
+  --site-band-line: var(--line);
+
+  /* geometry */
+  --page: 1120px;
+  --measure: 680px;
+  --header-height: 76px;
+}
+:root[data-theme='light'] {
+  --site-band-bg: var(--fg-strong);
+  --site-band-fg: var(--surface);
+  --site-band-line: var(--fg-strong);
+}

@@ -69,8 +69,9 @@ The lab may contain rejected studies and private positioning arguments.
 ## Design system
 
 `ronin-tokens.css` is a copy of Cowork's `public/tokens.css`, Ronin's one palette: change it
-there, then copy the file over this one. `site.css` holds the site's own rules and reads only
-those tokens; no page carries its own palette. Every page loads `theme.js`, which sets
+there, then copy the file over this one. `site-scale.css` holds the public pages' own type and
+space roles (larger than the office's); `site.css` holds the site's own rules. Rules read only
+those two files' tokens: no page carries its own palette or hand-written sizes. Every page loads `theme.js`, which sets
 `data-theme` (light or dark, from the device unless the visitor chose) as the palette expects.
 The look is the designer's: `samurai_lab/design/STYLE.md`.
 

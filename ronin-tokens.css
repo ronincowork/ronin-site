@@ -1,4 +1,4 @@
-/* COPY of ronin-cowork public/tokens.css (9940fd86). Don't edit here: change it there, then copy it over this file. */
+/* COPY of ronin-cowork public/tokens.css (471146d6). Don't edit here: change it there, then copy it over this file. */
 /* This is Ronin's one palette. The website and the Business Lounge carry a copy of this file:
    change it here, then copy it to them. */
 
@@ -41,13 +41,11 @@
   --ok: #b5bd68;
   --ok-2: #7fd4a8;
   --warn: #f0c674;
-  --status-yellow: #e0c060;
   --status-red: #e0705f;
 
   --bad: #cc6666;
   --bad-soft: #e6a1a1;
   --bad-deep: #a33c33;
-  --bad-line: #5a3535;
   --bad-ground: #3a1416;
   --bad-fg: #f2d6d6;
   --info: #6ea8fe;
@@ -77,6 +75,10 @@
   --kaki-fill-ink: var(--surface);
 
   --kaki-fill-hover: var(--kaki-lift);
+
+  /* The landscape lines drawn behind Home (the rice terraces) and the Garden Canvas. */
+  --ch-horizon-ink: var(--kaki);
+  --gc-motif-ink: var(--kaki);
 
   /* THE TERMINAL'S COLOURS ARE THE DESIGNER'S, the 16 ANSI slots included. ui.md "Theme"
      says what each slot must stay for agent CLIs to stay readable. */
@@ -212,22 +214,22 @@
 
 :root[data-theme='light'] {
 
-  /* LIGHT IS PAPER, INK AND ONE KAKI (samurai_lab/design/STYLE.md). Neutrals carry a faint
-     warmth, hue about 38°, so nothing reads lilac beside kaki; kaki is solid or absent. */
+  /* LIGHT IS PAPER, INK AND ONE KAKI (samurai_lab/design/STYLE.md). Every neutral is a pure
+     grey, so kaki is the only colour with a hue; kaki is solid or absent. */
   --head-team-bg: var(--kaki-lift);
   --head-team-fg: var(--on-strong);
   --head-team-muted: color-mix(in srgb, var(--on-strong) 78%, transparent);
   --head-attention: #fff0dc;
   --surface: #ffffff;
-  --inset: #f4f2ee;
-  --line: #b8b3aa;
-  --line-2: #99938a;
-  --line-3: #7d776d;
-  --fg-strong: #161410;
-  --fg: #2e2b26;
-  --muted: #5e5850;
-  --selected: #ece6dc; /* a stone fill; the kaki edge the components draw says it is chosen */
-  --graphite: #3a3834;
+  --inset: #f4f4f4;
+  --line: #b3b3b3;
+  --line-2: #959595;
+  --line-3: #787878;
+  --fg-strong: #151515;
+  --fg: #2b2b2b;
+  --muted: #5c5c5c;
+  --selected: #ebebeb; /* a grey fill; the kaki edge the components draw says it is chosen */
+  --graphite: #3a3a3a;
   --link: var(--aiiro);
   --accent: var(--kaki-lift);
   --accent-2: var(--aiiro);
@@ -235,12 +237,10 @@
   --ok: #5c7a1d;
   --ok-2: #1e7a4c;
   --warn: #9a7b00;
-  --status-yellow: #c9a227;
   --status-red: var(--bad);
   --bad: #b02a3c; /* crimson: wrong never reads as brand */
   --bad-soft: #8c2f3b;
   --bad-deep: #952335;
-  --bad-line: #e0b4ba;
   --bad-ground: #f8e4e6;
   --bad-fg: #5e1a24;
   --info: #1f5fc9;
@@ -251,6 +251,9 @@
   --kaki-fill: var(--kaki-lift);
   --kaki-fill-ink: var(--on-strong);
   --kaki-fill-hover: color-mix(in srgb, var(--kaki-lift) 86%, #000);
+  /* kaki at low opacity on white is pink: the landscape lines are grey in light */
+  --ch-horizon-ink: var(--line-3);
+  --gc-motif-ink: var(--line-3);
 
   /* Light mode uses the selected full-fill treatment for collection scopes. */
   --head-admin-bg: var(--graphite);
@@ -272,7 +275,7 @@
   --term-ansi-cyan: #2c7a7a;
   --term-ansi-white: var(--fg);
 
-  --term-ansi-br-black: #ece8e1; /* the band behind the person's messages: warm stone, not lilac */
+  --term-ansi-br-black: #e8e8e8; /* the band behind the person's messages: a pure grey, no tint */
   --term-ansi-br-red: #d13b3b;
   --term-ansi-br-green: #6f8f28;
   --term-ansi-br-yellow: #b08c00;
