@@ -41,7 +41,7 @@ Copy its semantic structure into the approved public route; do not publish the s
 Every explainer follows the same reading order: the question, a short answer, the visual or
 demonstration, what to notice, an appropriately detailed explanation, an explicit boundary on
 what Ronin does not claim, one useful action, and one related explanation. The shared classes in
-`ronin-tokens.css` provide breadcrumbs, hero, sections, accessible media framing, claim boundary,
+`site.css` provide breadcrumbs, hero, sections, accessible media framing, claim boundary,
 actions, and related-next treatment. A page adds local CSS only for evidence-specific diagrams or
 layouts.
 
@@ -68,9 +68,11 @@ The lab may contain rejected studies and private positioning arguments.
 
 ## Design system
 
-The site uses the same semantic token pattern as Cowork's `docs/ui.md`: surfaces, edges, text,
-meaning, spacing, corners, type, and focus. It does not invent another palette or rename the
-same roles for the public site.
+`ronin-tokens.css` is a copy of Cowork's `public/tokens.css`, Ronin's one palette: change it
+there, then copy the file over this one. `site.css` holds the site's own rules and reads only
+those tokens; no page carries its own palette. Every page loads `theme.js`, which sets
+`data-theme` (light or dark, from the device unless the visitor chose) as the palette expects.
+The look is the designer's: `samurai_lab/design/STYLE.md`.
 
 Shared tokens do not mean terminal styling everywhere. Public pages use ordinary UI type for
 sentences, generous spacing, and mono only for commands, labels, and identity details. The
