@@ -26,7 +26,7 @@
   apply(saved);
 
   window.addEventListener('DOMContentLoaded', function () {
-    var nav = document.querySelector('.site-nav');
+    var nav = document.querySelector('.site-nav, .links'); // .links: the home page's nav
     if (!nav) return;
 
     var button = document.createElement('button');
