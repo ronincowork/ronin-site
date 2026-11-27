@@ -1,6 +1,7 @@
-/* COPY of ronin-cowork public/tokens.css (471146d6). Don't edit here: change it there, then copy it over this file. */
+/* COPY of ronin-cowork public/tokens.css (86e3c276). Don't edit here: change it there, then copy it over this file. */
 /* This is Ronin's one palette. The website and the Business Lounge carry a copy of this file:
-   change it here, then copy it to them. */
+   change it here, then copy it to them with: npm run tokens -- <checkout>... (each repo's team
+   commits its copies). */
 
 @layer vendor, base, ui, app;
 
