@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- The link-preview picture (social/ronin-hosted.png, 1200x630). Re-make it with:
+     node scripts/social-card.mjs   — words are the home page's own. -->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../ronin-tokens.css">
+<link rel="stylesheet" href="../site-scale.css">
+<style>
+  html,body{margin:0}
+  body{width:1200px;height:630px;box-sizing:border-box;padding:var(--site-space-block) var(--site-space-page);background:var(--site-paper);color:var(--fg-strong);font-family:var(--font-ui);display:flex;flex-direction:column;justify-content:space-between;border-top:16px solid var(--kaki-fill)}
+  .brand{display:flex;align-items:center;gap:var(--space-inset);font-weight:var(--weight-bold);letter-spacing:.16em;font-size:var(--site-heading)}
+  .brand svg{width:64px;height:56px}
+  .brand svg *{fill:var(--kaki-lift);stroke:var(--kaki-lift)}
+  .brand svg path:first-child{fill:none}
+  h1{margin:0;font-weight:var(--weight-regular);font-size:var(--site-display);line-height:var(--site-leading-display);max-width:960px}
+  p{margin:0;font-size:var(--site-heading);color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="brand"><svg viewBox="0 0 120 104" aria-hidden="true"><path stroke-width="8" stroke-linejoin="miter" d="M31 6h58l25 46-25 46H31L6 52z"/><path d="M52.3 21.8c3.9-4.3 10.4-4.1 14.5-.5l3.8 3.4c2 1.8 2.1 4.4.5 6.7-5.4 7.8-8.7 15.8-12.1 23.7-6.1 14.4-15.7 24.7-29.4 32.7-3.7 2.2-7.4 1.4-8.8-1.6-1.2-2.6.4-5 3.7-7.4 11.2-8.1 19.1-17.7 24-29.2 3.8-9 6.8-17.1 5.1-22.4l-1.8-3c-.5-.8-.3-1.7.5-2.4z"/><path d="M54.2 50c2.8-2.5 6.3-2.1 9.3 1.2 9.9 11.1 19.8 20 32.2 27.2 3.7 2.1 4.6 5 2.2 7.4-1.8 1.8-5 2.5-9.2 1.8-13.2-2.4-24.7-12.4-36.3-25.8-3.7-4.2-2.9-8.6 1.8-11.8z"/></svg><span>RONIN</span></div>
+  <h1>Your own virtual machine, with Ronin built in.</h1>
+  <p>www.roninhosted.com</p>
+</body>
+</html>
