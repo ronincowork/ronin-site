@@ -3,6 +3,19 @@
 [build]
   publish = "."
 
+# The old address: ronincowork.com and www send every visitor to the same page here, for good.
+[[redirects]]
+  from = "https://ronincowork.com/*"
+  to = "https://www.roninhosted.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.ronincowork.com/*"
+  to = "https://www.roninhosted.com/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/explainers/checkouts-and-worktrees"
   to = "/explainers/ronin-worktrees/"
