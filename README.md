@@ -1,6 +1,6 @@
 # Ronin Cowork site
 
-The public website for [ronincowork.com](https://ronincowork.com).
+The public website for [www.roninhosted.com](https://www.roninhosted.com).
 
 The site carries the public Ronin Cowork story, the installation handoff, and an explainer
 library (`explainers/`): how agent teams work with family roles and session tasks plus the

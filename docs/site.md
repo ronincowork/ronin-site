@@ -1,6 +1,6 @@
 # Site ownership and design contract
 
-This repository is the deployable public site for `ronincowork.com`. It owns what production
+This repository is the deployable public site for `www.roninhosted.com`. It owns what production
 serves. `ronin-lab/landing/` is the workshop: positioning, journey discussion, page concepts,
 identity studies, and alternatives stay there until the owner chooses one to ship.
 
